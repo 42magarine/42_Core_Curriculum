@@ -3,8 +3,7 @@ CFLAGS = -Wall -Wextra -Werror
 
 NAME = libftprintf.a
 
-SRCS = ft_printf.c ft_put.c \
-ft_toupper.c # remove
+SRCS = ft_printf.c ft_put.c
 
 OBJS = $(SRCS:.c=.o)
 
@@ -17,7 +16,7 @@ $(NAME): $(OBJS)
 	ar rcs $@ $^
 
 %.o: %.c ft_printf.h
-	$(CC) $(CFLAGS) -c $< -o $@
+	$(CC) $(CFLAGS) -I./libft -c $< -o $@
 
 clean:
 	rm -f $(OBJS)
@@ -28,6 +27,9 @@ fclean: clean
 	$(MAKE) fclean -C ./libft
 
 re: fclean all
+
+run:
+	cc -L./libft -lft -L. -lftprintf main.c
 
 .PHONY: all build_library clean fclean re
 

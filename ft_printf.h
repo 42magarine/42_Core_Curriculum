@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 17:18:41 by mott              #+#    #+#             */
-/*   Updated: 2023/10/20 15:52:23 by mott             ###   ########.fr       */
+/*   Updated: 2023/10/20 18:13:33 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <stdarg.h>
 # include <stdbool.h>
 
+# include "libft/libft.h"
 # include <stdio.h> // remove
 # include <limits.h> // remove
 # include <ctype.h> // remove
@@ -40,6 +41,6 @@ int	ft_putnbr(long n);
 int	ft_putnbr_base(unsigned long n, unsigned long base, bool lower);
 int	ft_putnbr_base16(unsigned long n, char xp);
 
-int	ft_toupper(int c); // remove
+// int	ft_toupper(int c); // remove
 
 #endif

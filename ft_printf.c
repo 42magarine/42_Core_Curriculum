@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 16:10:53 by mott              #+#    #+#             */
-/*   Updated: 2023/10/20 16:08:29 by mott             ###   ########.fr       */
+/*   Updated: 2023/10/20 17:48:24 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,36 +31,38 @@ int	ft_conversion_specifiers(const char *format, va_list *ap)
 	return (-1);
 }
 
-// int	ft_printf(const char *format, ...)
-// {
-// 	int		nbytes;
-// 	va_list	ap;
-
-	// nbytes = 0;
-	// va_start(ap, format);
-	// while (*format != '\0')
-	// {
-	// 	if (*format == '%')
-	// 	{
-	// 		format++;
-	// 		nbytes += ft_conversion_specifiers(format, &ap);
-	// 	}
-	// 	else
-	// 		nbytes += write(STDOUT_FILENO, format, 1);
-	// 	format++;
-	// }
-	// free(format);
-	// va_end(ap);
-	// return (nbytes);
-// }
-
 int	ft_printf(const char *format, ...)
 {
 	int		nbytes;
 	va_list	ap;
 
+	nbytes = 0;
 	va_start(ap, format);
-	nbytes = (vprintf(format, ap));
+	while (*format != '\0')
+	{
+		if (*format == '%')
+		{
+			format++;
+			int ret = ft_conversion_specifiers(format, &ap);
+			if (ret < 0)
+				return (-1);
+			nbytes += ret;
+		}
+		else
+			nbytes += write(STDOUT_FILENO, format, 1);
+		format++;
+	}
 	va_end(ap);
 	return (nbytes);
 }
+
+// int	ft_printf(const char *format, ...)
+// {
+// 	int		nbytes;
+// 	va_list	ap;
+
+// 	va_start(ap, format);
+// 	nbytes = (vprintf(format, ap));
+// 	va_end(ap);
+// 	return (nbytes);
+// }

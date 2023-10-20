@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 12:59:38 by mott              #+#    #+#             */
-/*   Updated: 2023/10/20 14:13:11 by mott             ###   ########.fr       */
+/*   Updated: 2023/10/20 18:18:06 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,11 @@ int	main(void)
 	// printf("integer: %s end\n", s);
 	// printf("string: %50.2-----s end\n", s);
 
-	// unsigned int c = (unsigned) INT_MAX + 1;
-	// printf("start %u end\n", (int)c);
-	// printf("start %u end\n", (int)c);
+	unsigned int c = UINT_MAX;
+	printf("start %u end\n", c);
+	ft_printf("start %u end\n", c);
+
+	ft_printf("start %X end\n", 0xabc);
 
 	// char *str;
 	// printf("start %p end\n", str);
