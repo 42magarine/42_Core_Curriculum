@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 12:59:38 by mott              #+#    #+#             */
-/*   Updated: 2023/10/20 18:18:06 by mott             ###   ########.fr       */
+/*   Updated: 2023/10/25 17:20:42 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,45 @@
 
 int	main(void)
 {
+	// char	c = 'm';
+	char	*str = "mathias";
+	// int		i = 42;
+
+	printf("printf:\n");
+	printf("%s\n", str);
+	printf("%8s\n", str);
+	printf("%-8s\n", str);
+	printf("%*s\n", 18, str);
+	printf("%.9s\n", str);
+	printf("%.4s\n", str);
+	printf("%.*s\n", 5, str);
+	printf("%*.*s\n", 12, 2, str);
+
+	ft_printf("ft_printf:\n");
+	ft_printf("%s\n", str);
+	ft_printf("%8s\n", str);
+	ft_printf("%-8s\n", str);
+	ft_printf("%*s\n", 18, str);
+	ft_printf("%.9s\n", str);
+	ft_printf("%.4s\n", str);
+	ft_printf("%.*s\n", 5, str);
+	ft_printf("%*.*s\n", 12, 2, str);
+
+	// printf("printf:\n");
+	// printf("%c\n", c);
+	// printf("%8c\n", c);
+	// printf("%-8c\n", c);
+	// printf("%*c\n", 8, c);
+
+	// ft_printf("ft_printf:\n");
+	// ft_printf("%c\n", c);
+	// ft_printf("%8c\n", c);
+	// ft_printf("%-8c\n", c);
+	// ft_printf("%*c\n", 8, c);
+
+	// ft_printf("ft_printf:\n");
+	// ft_printf("%8i\n", i);
+
 	// printf(" NULL %s NULL ", NULL);
 	// return printf("\001\002\007\v\010\f\r\n");
 	// return ft_printf("%%c");
@@ -45,11 +84,13 @@ int	main(void)
 	// printf("integer: %s end\n", s);
 	// printf("string: %50.2-----s end\n", s);
 
-	unsigned int c = UINT_MAX;
-	printf("start %u end\n", c);
-	ft_printf("start %u end\n", c);
+	// unsigned int c = UINT_MAX;
+	// printf("start %u end\n", c);
+	// ft_printf("start %u end\n", c);
 
-	ft_printf("start %X end\n", 0xabc);
+	// int	i = 0;
+	// i = ft_printf("start %+f-x end\n", 1883);
+	// printf("%d", i);
 
 	// char *str;
 	// printf("start %p end\n", str);

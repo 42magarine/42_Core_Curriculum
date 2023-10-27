@@ -6,18 +6,18 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 16:10:53 by mott              #+#    #+#             */
-/*   Updated: 2023/10/20 17:48:24 by mott             ###   ########.fr       */
+/*   Updated: 2023/10/25 16:04:08 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	ft_conversion_specifiers(const char *format, va_list *ap)
+int	ft_conversion_specifiers(va_list *ap, const char *format, t_flags *flags)
 {
 	if (*format == 'c')
-		return (ft_putchar(va_arg(*ap, int)));
+		return (prepare_c(va_arg(*ap, int), flags));
 	if (*format == 's')
-		return (ft_putstr(va_arg(*ap, char *)));
+		return (prepare_s(va_arg(*ap, char *), flags));
 	if (*format == 'd' || *format == 'i')
 		return (ft_putnbr(va_arg(*ap, int)));
 	if (*format == 'u')
@@ -34,19 +34,22 @@ int	ft_conversion_specifiers(const char *format, va_list *ap)
 int	ft_printf(const char *format, ...)
 {
 	int		nbytes;
+	int		n;
 	va_list	ap;
+	t_flags	flags;	// should i use malloc?
 
+	flags = (t_flags){0};	// This initializes all the fields to their default values (0 or false).
 	nbytes = 0;
 	va_start(ap, format);
 	while (*format != '\0')
 	{
 		if (*format == '%')
 		{
-			format++;
-			int ret = ft_conversion_specifiers(format, &ap);
-			if (ret < 0)
+			format = ft_flags(&ap, format, &flags);
+			n = ft_conversion_specifiers(&ap, format, &flags);
+			if (n == -1)
 				return (-1);
-			nbytes += ret;
+			nbytes += n;
 		}
 		else
 			nbytes += write(STDOUT_FILENO, format, 1);

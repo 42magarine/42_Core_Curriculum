@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 17:13:04 by mott              #+#    #+#             */
-/*   Updated: 2023/10/20 15:41:40 by mott             ###   ########.fr       */
+/*   Updated: 2023/10/25 16:55:11 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,16 +17,16 @@ int	ft_putchar(int c)
 	return (write(STDOUT_FILENO, &c, 1));
 }
 
-int	ft_putstr(char *s)
+int	ft_putstr(char *s, int str_len)
 {
 	int	i;
 
-	if (s == NULL)
-		s = "(null)";
+	// if (s == NULL)
+	// 	s = "(null)";
 	i = 0;
-	while (s[i] != '\0')
+	while (i < str_len)
 		ft_putchar(s[i++]);
-	return (i);
+	return (str_len);
 }
 
 int	ft_putnbr(long n)
@@ -74,7 +74,7 @@ int	ft_putnbr_base16(unsigned long n, char xp)
 
 	nbytes = 0;
 	if (xp == 'p')
-		nbytes += ft_putstr("0x");
+		nbytes += ft_putstr("0x", 2);
 	nbytes += ft_putnbr_base(n, 16, (xp == 'x' || xp == 'p'));
 	return (nbytes);
 }

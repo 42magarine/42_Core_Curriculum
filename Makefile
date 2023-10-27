@@ -3,11 +3,13 @@ CFLAGS = -Wall -Wextra -Werror
 
 NAME = libftprintf.a
 
-SRCS = ft_printf.c ft_put.c
+SRCS = ft_printf.c ft_put.c ft_toupper.c ft_printf_bonus.c
 
 OBJS = $(SRCS:.c=.o)
 
 all: build_library $(NAME)
+
+bonus: all
 
 build_library:
 	$(MAKE) -C ./libft
@@ -28,10 +30,10 @@ fclean: clean
 
 re: fclean all
 
-run:
-	cc -L./libft -lft -L. -lftprintf main.c
+# run:
+# 	cc -Wall -Wextra -Werror main.c ft_printf.c ft_put.c ft_toupper.c ft_printf_bonus.c
 
-.PHONY: all build_library clean fclean re
+.PHONY: all bonus build_library clean fclean re
 
 # $@ represents the target of the current rule.
 # $^ represents all the dependencies (prerequisites) of the current rule.
