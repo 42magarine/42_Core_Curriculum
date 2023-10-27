@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 16:15:05 by mott              #+#    #+#             */
-/*   Updated: 2023/10/16 18:53:52 by mott             ###   ########.fr       */
+/*   Updated: 2023/10/27 18:24:36 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,13 @@
 
 void	ft_lstclear(t_list **lst, void (*del)(void *))
 {
-	t_list	*current;
-	t_list	*next;
+	t_list	*temp;
 
-	current = *lst;
-	while (current != NULL)
+	while (*lst != NULL)
 	{
-		next = current->next;
-		ft_lstdelone(current, del);
-		current = next;
+		temp = (*lst)->next;
+		ft_lstdelone(*lst, del);
+		*lst = temp;
 	}
 	*lst = NULL;
 }

@@ -23,7 +23,7 @@ $(NAME): $(OBJ)
 	ar rcs $(NAME) $(OBJ)
 
 %.o: %.c libft.h
-	$(CC) $(CFLAGS) -c $<
+	$(CC) $(CFLAGS) -c $< -o $@
 
 bonus: $(OBJ_BONUS)
 	ar rcs $(NAME) $(OBJ_BONUS)
@@ -36,4 +36,8 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all clean fclean re
+.PHONY: all bonus clean fclean re
+
+# $@ represents the target of the current rule.
+# $^ represents all the dependencies (prerequisites) of the current rule.
+# $< represents only the first prerequisite of the current rule.

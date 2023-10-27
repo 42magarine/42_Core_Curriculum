@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 16:21:07 by mott              #+#    #+#             */
-/*   Updated: 2023/10/16 15:22:19 by mott             ###   ########.fr       */
+/*   Updated: 2023/10/27 18:58:16 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,23 @@
 
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 {
-	t_list	*newlst;
-	t_list	*newnode;
-	void	*newcontent;
+	t_list	*new_lst;
+	t_list	*new_node;
+	void	*new_content;
 
-	newlst = NULL;
+	new_lst = NULL;
 	while (lst != NULL)
 	{
-		newcontent = f(lst->content);
-		newnode = ft_lstnew(newcontent);
-		if (newnode == NULL)
+		new_content = f(lst->content);
+		new_node = ft_lstnew(new_content);
+		if (new_node == NULL)
 		{
-			ft_lstclear(&newlst, del);
-			del(newcontent);
+			ft_lstclear(&new_lst, del);
+			del(new_content);
 			return (NULL);
 		}
-		ft_lstadd_back(&newlst, newnode);
+		ft_lstadd_back(&new_lst, new_node);
 		lst = lst->next;
 	}
-	return (newlst);
+	return (new_lst);
 }

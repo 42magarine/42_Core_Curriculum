@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
+/*   By: magarine <magarine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 14:58:47 by mott              #+#    #+#             */
-/*   Updated: 2023/10/13 21:30:30 by mott             ###   ########.fr       */
+/*   Updated: 2023/10/23 18:27:06 by magarine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static size_t	ft_count_digits(int n)
 	}
 	while (n >= 10)
 	{
-		n = n / 10;
+		n /= 10;
 		digits++;
 	}
 	return (digits);
@@ -53,7 +53,7 @@ char	*ft_itoa(int n)
 	{
 		digits--;
 		str[digits] = n % 10 + '0';
-		n = n / 10;
+		n /= 10;
 	}
 	return (str);
 }

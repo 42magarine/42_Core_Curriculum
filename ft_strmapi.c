@@ -6,26 +6,26 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 15:00:25 by mott              #+#    #+#             */
-/*   Updated: 2023/10/16 17:22:47 by mott             ###   ########.fr       */
+/*   Updated: 2023/10/27 19:23:06 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strmapi(const char *s, char (*f)(unsigned int, char))
+char	*ft_strmapi(const char *str, char (*f)(unsigned int, char))
 {
+	char	*newstr;
 	size_t	i;
-	char	*str;
 
-	i = 0;
-	str = (char *)malloc(ft_strlen(s) + 1);
-	if (str == NULL)
+	newstr = (char *)malloc(ft_strlen(str) + 1);
+	if (newstr == NULL)
 		return (NULL);
-	while (s[i] != '\0')
+	i = 0;
+	while (str[i] != '\0')
 	{
-		str[i] = f(i, s[i]);
+		newstr[i] = f(i, str[i]);
 		i++;
 	}
-	str[i] = '\0';
-	return (str);
+	newstr[i] = '\0';
+	return (newstr);
 }
