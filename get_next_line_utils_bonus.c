@@ -6,20 +6,21 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/01 15:04:58 by mott              #+#    #+#             */
-/*   Updated: 2023/11/05 22:16:11 by mott             ###   ########.fr       */
+/*   Updated: 2023/11/17 13:33:10 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 size_t	ft_strlen(const char *str)
 {
 	size_t	i;
 
+	if (str == NULL)
+		return (0);
 	i = 0;
-	if (str != NULL)
-		while (str[i] != '\0')
-			i++;
+	while (str[i] != '\0')
+		i++;
 	return (i);
 }
 
@@ -38,7 +39,7 @@ char	*ft_strchr(const char *str, int c)
 	return (NULL);
 }
 
-char	*ft_strjoin(char *str1, const char *str2)
+char	*ft_strjoin(const char *str1, const char *str2)
 {
 	char	*newstr;
 	size_t	i;
@@ -63,24 +64,25 @@ char	*ft_strjoin(char *str1, const char *str2)
 		j++;
 	}
 	newstr[i + j] = '\0';
-	return (free(str1), newstr);
+	return (newstr);
 }
 
-char	*ft_strdup(const char *str)
+char	*ft_substr(const char *str, size_t start, size_t n)
 {
-	char	*newstr;
-	size_t	n;
+	char	*substr;
+	size_t	i;
 
-	n = ft_strlen(str);
-	newstr = (char *)malloc(n + 1);
-	if (newstr == NULL)
+	if (str == NULL)
 		return (NULL);
-	n = 0;
-	while (str[n] != '\0')
+	substr = (char *)malloc(n + 1);
+	if (substr == NULL)
+		return (NULL);
+	i = 0;
+	while (str[start] != '\0' && i < n)
 	{
-		newstr[n] = str[n];
-		n++;
+		substr[i] = str[start + i];
+		i++;
 	}
-	newstr[n] = '\0';
-	return (newstr);
+	substr[i] = '\0';
+	return (substr);
 }
