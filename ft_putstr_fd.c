@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 15:11:21 by mott              #+#    #+#             */
-/*   Updated: 2023/10/27 19:32:20 by mott             ###   ########.fr       */
+/*   Updated: 2024/01/22 17:57:22 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,8 @@
 
 void	ft_putstr_fd(char *str, int fd)
 {
-	size_t	i;
-
-	i = 0;
-	while (str[i] != '\0')
-	{
-		ft_putchar_fd(str[i], fd);
-		i++;
-	}
+	if (str == NULL)
+		return ;
+	while (*str != '\0')
+		ft_putchar_fd(*str++, fd);
 }
