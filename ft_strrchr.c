@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
+/*   By: mott <mott@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 12:47:50 by mott              #+#    #+#             */
-/*   Updated: 2023/10/27 19:11:55 by mott             ###   ########.fr       */
+/*   Updated: 2024/01/26 12:26:56 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,14 @@
 
 char	*ft_strrchr(const char *str, int c)
 {
-	unsigned char	chr;
+	unsigned char	a;
 	size_t			i;
 
-	chr = (unsigned char)c;
+	a = (unsigned char)c;
 	i = ft_strlen(str);
-	while (i > 0 && str[i] != chr)
+	while (i > 0 && str[i] != a)
 		i--;
-	if (str[i] == chr)
+	if (str[i] == a)
 		return ((char *)&str[i]);
 	return (NULL);
 }

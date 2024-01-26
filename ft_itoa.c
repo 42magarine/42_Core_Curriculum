@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
+/*   By: mott <mott@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 14:58:47 by mott              #+#    #+#             */
-/*   Updated: 2023/12/09 12:28:22 by mott             ###   ########.fr       */
+/*   Updated: 2024/01/25 16:10:30 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,45 +14,44 @@
 
 static size_t	ft_count_digits(int n)
 {
-	size_t	digits;
+	size_t	i;
 
-	digits = 1;
-	if (n < 0)
+	i = 0;
+	if (n <= 0)
+		i++;
+	while (n != 0)
 	{
-		n = -n;
-		digits++;
-	}
-	while (n >= 10)
-	{
+		i++;
 		n /= 10;
-		digits++;
 	}
-	return (digits);
+	return (i);
+}
+
+static int	ft_abs(int n)
+{
+	if (n < 0)
+		return (-n);
+	return (n);
 }
 
 char	*ft_itoa(int n)
 {
-	size_t	digits;
+	size_t	i;
 	char	*str;
 
-	if (n == -2147483648)
-		return (ft_strdup("-2147483648"));
-	if (n == 0)
-		return (ft_strdup("0"));
-	digits = ft_count_digits(n);
-	str = (char *)malloc(digits + 1);
+	i = ft_count_digits(n);
+	str = malloc(i + 1);
 	if (str == NULL)
 		return (NULL);
-	str[digits] = '\0';
+	str[i] = '\0';
 	if (n < 0)
-	{
-		n = -n;
 		str[0] = '-';
-	}
+	else if (n == 0)
+		str[0] = '0';
 	while (n != 0)
 	{
-		digits--;
-		str[digits] = n % 10 + '0';
+		i--;
+		str[i] = ft_abs(n % 10) + '0';
 		n /= 10;
 	}
 	return (str);
