@@ -6,7 +6,7 @@
 #    By: mott <mott@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/26 14:56:48 by mott              #+#    #+#              #
-#    Updated: 2024/01/27 15:17:15 by mott             ###   ########.fr        #
+#    Updated: 2024/01/28 17:43:37 by mott             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,12 @@ NAME = push_swap
 
 SRCS = ./src/push_swap.c \
        ./src/list.c \
-	   ./src/init.c
+       ./src/init.c \
+       ./src/op_one.c \
+       ./src/op_two.c \
+       ./src/op_three.c \
+       ./src/utils.c \
+       ./src/sort.c
 
 OBJS = $(SRCS:.c=.o)
 
