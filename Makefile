@@ -6,7 +6,7 @@
 #    By: mott <mott@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/26 14:56:48 by mott              #+#    #+#              #
-#    Updated: 2024/01/28 17:43:37 by mott             ###   ########.fr        #
+#    Updated: 2024/01/31 14:28:45 by mott             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,8 +15,8 @@ CFLAGS = -Wall -Wextra -Werror
 NAME = push_swap
 
 SRCS = ./src/push_swap.c \
-       ./src/list.c \
        ./src/init.c \
+       ./src/list.c \
        ./src/op_one.c \
        ./src/op_two.c \
        ./src/op_three.c \
@@ -32,25 +32,34 @@ LIBFT = ./Libft/libft.a
 all: $(NAME)
 
 $(NAME): $(OBJS) $(LIBFT)
-	$(CC) $(CFLAGS) -o $(NAME) $(OBJS) -L./Libft -lft
+	@echo "$(BLUE)$(CC) $(CFLAGS) -o $(NAME) $(OBJS) -L./Libft -lft  $@$(DEFAULT)"
+	@$(CC) $(CFLAGS) -o $(NAME) $(OBJS) -L./Libft -lft
 
 %.o: %.c $(HEADER) $(LIBFT)
-	$(CC) $(CFLAGS) -c $< -o $@
+	@echo "$(YELLOW)$(CC) $(CFLAGS) -c $< -o $@$(DEFAULT)"
+	@$(CC) $(CFLAGS) -c $< -o $@
 
 $(LIBFT):
 	@$(MAKE) -C ./Libft
 
 clean:
-	rm -f $(OBJS)
+	@echo "$(RED)rm -f $(OBJS) $@$(DEFAULT)"
+	@rm -f $(OBJS)
 	@$(MAKE) clean -C ./Libft
 
 fclean: clean
-	rm -f $(NAME)
+	@echo "$(RED)rm -f $(NAME) $@$(DEFAULT)"
+	@rm -f $(NAME)
 	@$(MAKE) fclean -C ./Libft
 
 re: fclean all
 
 .PHONY: all clean fclean re
+
+DEFAULT = \033[0m
+RED = \033[0;31m
+YELLOW = \033[0;33m
+BLUE = \033[0;34m
 
 # https://www.gnu.org/software/make/manual/make.html
 # $@ automatic variable that holds the name of the target

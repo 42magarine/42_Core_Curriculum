@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/27 12:13:07 by mott              #+#    #+#             */
-/*   Updated: 2024/01/28 15:59:23 by mott             ###   ########.fr       */
+/*   Updated: 2024/01/31 15:27:35 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ t_stack	*ps_lstnew(int num)
 	if (new_node == NULL)
 		return (NULL);
 	new_node->num = num;
+	new_node->movestotop = 0;
 	new_node->next = NULL;
 	return (new_node);
 }

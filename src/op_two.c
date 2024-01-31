@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/28 12:53:46 by mott              #+#    #+#             */
-/*   Updated: 2024/01/29 12:32:14 by mott             ###   ########.fr       */
+/*   Updated: 2024/01/31 16:15:01 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 // Shift up all elements of stack a by 1.
 // The first element becomes the last one.
-void	ps_rotate_a(t_stack **stack_a, int print)
+void	ps_rotate_a(t_stack **stack_a, bool print)
 {
 	t_stack	*temp;
 
@@ -24,13 +24,13 @@ void	ps_rotate_a(t_stack **stack_a, int print)
 	*stack_a = (*stack_a)->next;
 	temp->next = NULL;
 	ps_lstadd_back(stack_a, temp);
-	if (print == 1)
+	if (print == true)
 		ft_putstr_fd("ra\n", STDOUT_FILENO);
 }
 
 // Shift up all elements of stack b by 1.
 // The first element becomes the last one.
-void	ps_rotate_b(t_stack **stack_b, int print)
+void	ps_rotate_b(t_stack **stack_b, bool print)
 {
 	t_stack	*temp;
 
@@ -40,14 +40,14 @@ void	ps_rotate_b(t_stack **stack_b, int print)
 	*stack_b = (*stack_b)->next;
 	temp->next = NULL;
 	ps_lstadd_back(stack_b, temp);
-	if (print == 1)
+	if (print == true)
 		ft_putstr_fd("rb\n", STDOUT_FILENO);
 }
 
 // rotate_a and rotate_b at the same time.
 void	ps_rotate_ab(t_stack **stack_a, t_stack **stack_b)
 {
-	ps_rotate_a(stack_a, 0);
-	ps_rotate_b(stack_b, 0);
+	ps_rotate_a(stack_a, false);
+	ps_rotate_b(stack_b, false);
 	ft_putstr_fd("rr\n", STDOUT_FILENO);
 }

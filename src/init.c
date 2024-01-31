@@ -6,11 +6,40 @@
 /*   By: mott <mott@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/27 15:14:49 by mott              #+#    #+#             */
-/*   Updated: 2024/01/30 16:23:50 by mott             ###   ########.fr       */
+/*   Updated: 2024/01/31 16:07:47 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/push_swap.h"
+
+void	ps_init_stack(int argc, char **argv, t_stack **stack)
+{
+	t_stack	*new_node;
+	char	**temp;
+	long	num;
+	size_t	i;
+
+	if (argv[1][0] == '\0')
+		ps_error("Error\n", NULL, NULL);
+	temp = ps_parse_input(argc, argv);
+	i = 0;
+	while (temp[i] != NULL)
+	{
+		if (ps_valid_num(temp[i]) == false)
+			ps_error("Error\n", temp, *stack);
+		num = ps_atol(temp[i]);
+		if (num > INT_MAX || num < INT_MIN)
+			ps_error("Error\n", temp, *stack);
+		if (ps_isduplicate((int)num, *stack) == true)
+			ps_error("Error\n", temp, *stack);
+		new_node = ps_lstnew((int)num);
+		if (new_node == NULL)
+			ps_error("malloc\n", temp, *stack);
+		ps_lstadd_back(stack, new_node);
+		i++;
+	}
+	ps_free_strs(temp);
+}
 
 char	**ps_parse_input(int argc, char **argv)
 {
@@ -41,19 +70,20 @@ char	**ps_parse_input(int argc, char **argv)
 	return (temp);
 }
 
-int	ps_valid_num(char *str)
+// checks for invalid characters
+bool	ps_valid_num(char *str)
 {
 	if (*str == '+' || *str == '-')
 		str++;
 	while (ft_isdigit(*str++) == 1)
 	{
 		if (*str == '\0')
-			return (0);
+			return (true);
 	}
-	return (-1);
+	return (false);
 }
 
-long	ps_atoi(char *str)
+long	ps_atol(char *str)
 {
 	int		sign;
 	long	num;
@@ -66,26 +96,17 @@ long	ps_atoi(char *str)
 		str++;
 	while (*str != '\0')
 		num = num * 10 + *str++ - '0';
-	num *= sign;
-	return (num);
+	return (sign * num);
 }
 
-int	ps_minmaxint(long num)
-{
-	if (num > INT_MAX || num < INT_MIN)
-		return (-1);
-	return (0);
-}
-
-int	ps_isdup(int num, t_stack *stack)
+// checks for duplicate numbers
+bool	ps_isduplicate(int num, t_stack *stack)
 {
 	while (stack != NULL)
 	{
 		if (num == stack->num)
-		{
-			return (-1);
-		}
+			return (true);
 		stack = stack->next;
 	}
-	return (0);
+	return (false);
 }

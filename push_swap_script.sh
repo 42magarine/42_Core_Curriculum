@@ -71,10 +71,10 @@ checker="./checker_Mac"
 # for args in "${test_1[@]}"; do
 # for args in "${test_2[@]}"; do
 # for args in "${test_3[@]}"; do
-# for args in "${test_4[@]}"; do
-for args in "${test_100[@]}"; do
+for args in "${test_4[@]}"; do
+# for args in "${test_100[@]}"; do
 	echo "Testing: $args"
-	# $executable $args
-	$executable $args | $checker $args
+	$executable $args
+	# $executable $args | $checker $args
 	echo "---------------------"
 done

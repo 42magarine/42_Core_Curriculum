@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/28 12:54:03 by mott              #+#    #+#             */
-/*   Updated: 2024/01/29 12:33:50 by mott             ###   ########.fr       */
+/*   Updated: 2024/01/31 16:17:51 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 // Shift down all elements of stack a by 1.
 // The last element becomes the first one.
-void	ps_reverse_rotate_a(t_stack **stack_a, int print)
+void	ps_reverse_rotate_a(t_stack **stack_a, bool print)
 {
 	t_stack	*last;
 	t_stack	*last_before;
@@ -29,13 +29,13 @@ void	ps_reverse_rotate_a(t_stack **stack_a, int print)
 	}
 	last_before->next = NULL;
 	ps_lstadd_front(stack_a, last);
-	if (print == 1)
+	if (print == true)
 		ft_putstr_fd("rra\n", STDOUT_FILENO);
 }
 
 // Shift down all elements of stack b by 1.
 // The last element becomes the first one.
-void	ps_reverse_rotate_b(t_stack **stack_b, int print)
+void	ps_reverse_rotate_b(t_stack **stack_b, bool print)
 {
 	t_stack	*last;
 	t_stack	*last_before;
@@ -50,14 +50,14 @@ void	ps_reverse_rotate_b(t_stack **stack_b, int print)
 	}
 	last_before->next = NULL;
 	ps_lstadd_front(stack_b, last);
-	if (print == 1)
+	if (print == true)
 		ft_putstr_fd("rrb\n", STDOUT_FILENO);
 }
 
 // reverse_rotate_a and reverse_rotate_b at the same time.
 void	ps_reverse_rotate_ab(t_stack **stack_a, t_stack **stack_b)
 {
-	ps_reverse_rotate_a(stack_a, 0);
-	ps_reverse_rotate_b(stack_b, 0);
+	ps_reverse_rotate_a(stack_a, false);
+	ps_reverse_rotate_b(stack_b, false);
 	ft_putstr_fd("rrr\n", STDOUT_FILENO);
 }

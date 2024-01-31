@@ -6,106 +6,96 @@
 /*   By: mott <mott@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/28 15:52:46 by mott              #+#    #+#             */
-/*   Updated: 2024/01/30 17:24:29 by mott             ###   ########.fr       */
+/*   Updated: 2024/01/31 17:19:23 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/push_swap.h"
 
-// sorts the following cases:
-// 1 2 3 -> OK
-// 1 3 2 ->  sa -> 3 1 2 ->  ra -> 1 2 3 -> OK
-// 2 1 3 ->  sa -> 1 2 3 ->  OK
-// 2 3 1 -> rra -> 1 2 3 ->  OK
-// 3 1 2 ->  ra	-> 1 2 3 ->  OK
-// 3 2 1 ->  sa -> 2 3 1 -> rra -> 1 2 3 -> OK
-void	ps_sort_3(t_stack **stack)
+// sorts a stack of 3 elements in ascending order.
+// 3 1 2 ->  ra	-> 1 2 3 -> OK
+// 3 2 1 ->  ra -> 2 1 3 -> sa -> 1 2 3 -> OK
+// 1 3 2 -> rra -> 2 1 3 -> sa -> 1 2 3 -> OK
+// 2 3 1 -> rra -> 1 2 3 -> OK
+// 2 1 3 ->  sa -> 1 2 3 -> OK
+void	ps_sort_three(t_stack **stack)
 {
-	int	first;
-	int	second;
-	int	third;
+	t_stack	*biggest_node;
 
-	first = (*stack)->num;
-	second = (*stack)->next->num;
-	third = (*stack)->next->next->num;
-	if (first < second && first < third && second > third)
-	{
-		ps_swap_a(stack, 1);
-		ps_rotate_a(stack, 1);
-	}
-	if (first > second && first < third && second < third)
-		ps_swap_a(stack, 1);
-	if (first < second && first > third && second > third)
-		ps_reverse_rotate_a(stack, 1);
-	if (first > second && first > third && second < third)
-		ps_rotate_a(stack, 1);
-	if (first > second && first > third && second > third)
-	{
-		ps_swap_a(stack, 1);
-		ps_reverse_rotate_a(stack, 1);
-	}
+	biggest_node = ps_find_biggest(*stack);
+
+	if (biggest_node == *stack)
+		ps_rotate_a(stack, true);
+	else if (biggest_node == (*stack)->next)
+		ps_reverse_rotate_a(stack, true);
+	if ((*stack)->num > (*stack)->next->num)
+		ps_swap_a(stack, true);
 }
 
-void	ps_sort_5(t_stack **stack_a, t_stack **stack_b)
+// sorts a stack of more than 3 elements in ascending order.
+void	ps_sort(t_stack **stack_a, t_stack **stack_b, size_t lst_size)
 {
-	size_t	lst_size;
-	size_t	i;
-	// int		smallest;
-	size_t	position;
-
-	lst_size = ps_lstsize(*stack_a);
-	i = 3;
-	while (lst_size-- > i)
+	ps_push_b(stack_a, stack_b);
+	while (--lst_size > 3 && ps_issorted(*stack_a) == false)
 	{
-		// smallest = ps_find_smallest(*stack_a);
-		position = ps_find_smallest(*stack_a);
-		if ((lst_size / 2) >= position)
-		{
-			while (position-- > 0)
-				ps_rotate_a(stack_a, 1);
-		}
-		else
-		{
-			while (position++ <= lst_size)
-				ps_reverse_rotate_a(stack_a, 1);
-		}
-		// while ((*stack_a)->num != smallest)
-		// 	ps_rotate_a(stack_a, 1);
 		ps_push_b(stack_a, stack_b);
+		// find cheapest number to push to b
+		// push this number to b
+		// stack b should be sorted in descending order
 	}
-	ps_sort_3(stack_a);
+	ps_sort_three(stack_a);
 	lst_size = ps_lstsize(*stack_b);
 	while (lst_size-- > 0)
 		ps_push_a(stack_a, stack_b);
 }
 
-// t_stack	*ps_find_smallest(t_stack *stack)
-size_t	ps_find_smallest(t_stack *stack)
-{
-	int		smallest;
-	// t_stack	*smallest;
-	size_t	i;
-	size_t	position;
+// find cheapest number to push to b:
+// loop through a and find the right position in b
+// calculate how much it costs to bring both nodes to the top
+// cheapest = stack_a->movestotop + stack_b->movetotop
 
-	smallest = stack->num;
-	position = 0;
-	// smallest = stack;
-	i = 0;
+// push this number to b:
+// movetotop > 0 means ra (stack size / 2)
+// movetotop < 0 means rra (stack size / 2)
+// if both > 0 then rr
+// if both < 0 then rrr
+// else ra and rrb
+// else rra and rb
+
+t_stack	*ps_find_smallest(t_stack *stack)
+{
+	int		smallest_num;
+	t_stack	*smallest_node;
+
+	smallest_num = stack->num;
+	smallest_node = stack;
 	while (stack != NULL)
 	{
-		if (stack->num < smallest)
+		if (stack->num < smallest_num)
 		{
-			smallest = stack->num;
-			position = i;
+			smallest_num = stack->num;
+			smallest_node = stack;
 		}
 		stack = stack->next;
-		i++;
 	}
-	// return (smallest);
-	return (position);
+	return (smallest_node);
 }
 
-// void	ps_set_index(t_stack stack)
-// {
+t_stack	*ps_find_biggest(t_stack *stack)
+{
+	int		biggest_num;
+	t_stack	*biggest_node;
 
-// }
+	biggest_num = stack->num;
+	biggest_node = stack;
+	while (stack != NULL)
+	{
+		if (stack->num > biggest_num)
+		{
+			biggest_num = stack->num;
+			biggest_node = stack;
+		}
+		stack = stack->next;
+	}
+	return (biggest_node);
+}
