@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 16:18:23 by mott              #+#    #+#             */
-/*   Updated: 2024/01/28 17:42:33 by mott             ###   ########.fr       */
+/*   Updated: 2024/01/30 17:36:16 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ int	main(int argc, char **argv)
 		ps_swap_a(&stack_a, 1);
 	else if (lst_size == 3)
 		ps_sort_3(&stack_a);
+	else
+		ps_sort_5(&stack_a, &stack_b);
 	ps_print_stack(stack_a, stack_b);
 	ps_free_stack(stack_a);
 	return (EXIT_SUCCESS);
@@ -45,6 +47,8 @@ void	ps_init_stack(int argc, char **argv, t_stack **stack)
 	long	num;
 	t_stack	*new_node;
 
+	if (argv[1][0] == '\0')
+		ps_error("Error\n", NULL, NULL);
 	temp = ps_parse_input(argc, argv);
 	i = 0;
 	while (temp[i] != NULL)

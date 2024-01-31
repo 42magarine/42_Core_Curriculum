@@ -6,12 +6,14 @@
 /*   By: mott <mott@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/28 12:54:03 by mott              #+#    #+#             */
-/*   Updated: 2024/01/28 14:52:47 by mott             ###   ########.fr       */
+/*   Updated: 2024/01/29 12:33:50 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/push_swap.h"
 
+// Shift down all elements of stack a by 1.
+// The last element becomes the first one.
 void	ps_reverse_rotate_a(t_stack **stack_a, int print)
 {
 	t_stack	*last;
@@ -31,6 +33,8 @@ void	ps_reverse_rotate_a(t_stack **stack_a, int print)
 		ft_putstr_fd("rra\n", STDOUT_FILENO);
 }
 
+// Shift down all elements of stack b by 1.
+// The last element becomes the first one.
 void	ps_reverse_rotate_b(t_stack **stack_b, int print)
 {
 	t_stack	*last;
@@ -50,6 +54,7 @@ void	ps_reverse_rotate_b(t_stack **stack_b, int print)
 		ft_putstr_fd("rrb\n", STDOUT_FILENO);
 }
 
+// reverse_rotate_a and reverse_rotate_b at the same time.
 void	ps_reverse_rotate_ab(t_stack **stack_a, t_stack **stack_b)
 {
 	ps_reverse_rotate_a(stack_a, 0);

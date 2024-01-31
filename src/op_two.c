@@ -6,12 +6,14 @@
 /*   By: mott <mott@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/28 12:53:46 by mott              #+#    #+#             */
-/*   Updated: 2024/01/28 14:57:14 by mott             ###   ########.fr       */
+/*   Updated: 2024/01/29 12:32:14 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/push_swap.h"
 
+// Shift up all elements of stack a by 1.
+// The first element becomes the last one.
 void	ps_rotate_a(t_stack **stack_a, int print)
 {
 	t_stack	*temp;
@@ -26,6 +28,8 @@ void	ps_rotate_a(t_stack **stack_a, int print)
 		ft_putstr_fd("ra\n", STDOUT_FILENO);
 }
 
+// Shift up all elements of stack b by 1.
+// The first element becomes the last one.
 void	ps_rotate_b(t_stack **stack_b, int print)
 {
 	t_stack	*temp;
@@ -40,6 +44,7 @@ void	ps_rotate_b(t_stack **stack_b, int print)
 		ft_putstr_fd("rb\n", STDOUT_FILENO);
 }
 
+// rotate_a and rotate_b at the same time.
 void	ps_rotate_ab(t_stack **stack_a, t_stack **stack_b)
 {
 	ps_rotate_a(stack_a, 0);

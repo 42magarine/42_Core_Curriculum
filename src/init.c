@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/27 15:14:49 by mott              #+#    #+#             */
-/*   Updated: 2024/01/28 15:36:59 by mott             ###   ########.fr       */
+/*   Updated: 2024/01/30 16:23:50 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,9 @@ int	ps_isdup(int num, t_stack *stack)
 	while (stack != NULL)
 	{
 		if (num == stack->num)
+		{
 			return (-1);
+		}
 		stack = stack->next;
 	}
 	return (0);
