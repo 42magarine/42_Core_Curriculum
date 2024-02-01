@@ -6,12 +6,12 @@
 #    By: mott <mott@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/26 14:56:48 by mott              #+#    #+#              #
-#    Updated: 2024/01/31 14:28:45 by mott             ###   ########.fr        #
+#    Updated: 2024/02/01 19:30:01 by mott             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -g
 NAME = push_swap
 
 SRCS = ./src/push_swap.c \
@@ -20,7 +20,7 @@ SRCS = ./src/push_swap.c \
        ./src/op_one.c \
        ./src/op_two.c \
        ./src/op_three.c \
-       ./src/utils.c \
+       ./src/find.c \
        ./src/sort.c
 
 OBJS = $(SRCS:.c=.o)

@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 16:18:23 by mott              #+#    #+#             */
-/*   Updated: 2024/01/31 16:24:55 by mott             ###   ########.fr       */
+/*   Updated: 2024/02/01 20:19:18 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,22 +31,52 @@ int	main(int argc, char **argv)
 		else if (lst_size == 3)
 			ps_sort_three(&stack_a);
 		else
-			ps_sort(&stack_a, &stack_b, lst_size);
-		ps_print_stack(stack_a, stack_b);
+			ps_sort_more(&stack_a, &stack_b, lst_size);
+		// ps_print_stack(stack_a, stack_b);
 	}
 	ps_free_stack(stack_a);
 	return (EXIT_SUCCESS);
 }
 
-bool	ps_issorted(t_stack *stack)
+void	ps_error(char *error, char **strs, t_stack *stack)
 {
-	while (stack != NULL && stack->next != NULL)
+	ps_free_strs(strs);
+	ps_free_stack(stack);
+	ft_putstr_fd(error, STDERR_FILENO);
+	exit(EXIT_FAILURE);
+}
+
+void	ps_free_strs(char **strs)
+{
+	int	i;
+
+	i = 0;
+	if (strs == NULL)
+		return ;
+	while (strs[i] != NULL)
+		free(strs[i++]);
+	free(strs);
+}
+
+// void	ps_free_strs(char **strs)
+// {
+// 	if (strs == NULL)
+// 		return ;
+// 	while (*strs != NULL)
+// 		free((*strs)++);
+// 	free(strs);
+// }
+
+void	ps_free_stack(t_stack *stack)
+{
+	t_stack	*temp;
+
+	while (stack != NULL)
 	{
-		if (stack->num > stack->next->num)
-			return (false);
-		stack = stack->next;
+		temp = stack->next;
+		free(stack);
+		stack = temp;
 	}
-	return (true);
 }
 
 void	ps_print_stack(t_stack *stack_a, t_stack *stack_b)
