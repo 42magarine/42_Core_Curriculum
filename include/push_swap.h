@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 14:15:05 by mott              #+#    #+#             */
-/*   Updated: 2024/02/01 20:29:13 by mott             ###   ########.fr       */
+/*   Updated: 2024/02/02 17:46:21 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@
 typedef struct s_stack
 {
 	int				num;
-	int				movestotop;
-	struct s_stack	*matching;
+	int				moves_to_top;
+	struct s_stack	*matching_node;
 	struct s_stack	*next;
 }	t_stack;
 
@@ -28,21 +28,32 @@ int		main(int argc, char **argv);
 void	ps_error(char *error, char **strs, t_stack *stack);
 void	ps_free_strs(char **strs);
 void	ps_free_stack(t_stack *stack);
-void	ps_print_stack(t_stack *stack_a, t_stack *stack_b);
+// void	ps_print_stack(t_stack *stack_a, t_stack *stack_b);
 
 // init.c
-void	ps_init_stack(int argc, char **argv, t_stack **stack);
+void	ps_init_stack(int argc, char **argv, t_stack **stack_a);
 char	**ps_parse_input(int argc, char **argv);
 bool	ps_valid_num(char *str);
 long	ps_atol(char *str);
-bool	ps_isduplicate(int num, t_stack *stack);
+bool	ps_is_duplicate(int num, t_stack *stack);
 
-// list.c
-size_t	ps_lstsize(t_stack *stack);
-t_stack	*ps_lstnew(int num);
-t_stack	*ps_lstlast(t_stack *stack);
-void	ps_lstadd_front(t_stack **stack, t_stack *new_node);
-void	ps_lstadd_back(t_stack **stack, t_stack *new_node);
+// sort.c
+bool	ps_is_sorted(t_stack *stack);
+void	ps_sort_three(t_stack **stack_a);
+void	ps_sort_more(t_stack **stack_a, t_stack **stack_b, size_t stack_size);
+void	ps_node_to_top(t_stack **stack_a, t_stack *node_to_top);
+
+// find.c
+t_stack	*ps_find_smallest(t_stack *stack);
+t_stack	*ps_find_biggest(t_stack *stack);
+t_stack	*ps_find_smaller(int num, t_stack *stack);
+t_stack	*ps_find_bigger(int num, t_stack *stack);
+t_stack	*ps_find_cheapest(t_stack *stack_a, t_stack *stack_b);
+
+// move.c
+void	ps_set_moves_to_top(t_stack *stack);
+int		ps_calculate_moves(t_stack *stack_a, t_stack *matching_b);
+void	ps_move_stacks(t_stack **stack_a, t_stack **stack_b, t_stack *nodetomove);
 
 // op_one.c
 void	ps_swap_a(t_stack **stack_a, bool print);
@@ -61,26 +72,11 @@ void	ps_reverse_rotate_a(t_stack **stack_a, bool print);
 void	ps_reverse_rotate_b(t_stack **stack_b, bool print);
 void	ps_reverse_rotate_ab(t_stack **stack_a, t_stack **stack_b);
 
-// sort.c
-bool	ps_issorted(t_stack *stack);
-void	ps_sort_three(t_stack **stack_a);
-void	ps_sort_more(t_stack **stack_a, t_stack **stack_b, size_t lst_size);
-void	ps_set_movestotop(t_stack **stack);
-int		ps_calculate_moves(t_stack *stack_a, t_stack *matching_b);
-
-// find.c
-t_stack	*ps_find_smallest(t_stack *stack);
-t_stack	*ps_find_biggest(t_stack *stack);
-t_stack	*ps_find_smaller(int num, t_stack *stack);
-t_stack	*ps_find_bigger(int num, t_stack *stack);
-t_stack	*ps_find_cheapest(t_stack **stack_a, t_stack *stack_b);
-t_stack	*ps_find_cheapest2(t_stack **stack_a, t_stack *stack_b);
-void	ps_move_stacks(t_stack **stack_a, t_stack **stack_b, t_stack *nodetomove);
-void	ps_move_stacks2(t_stack **stack_a, t_stack **stack_b, t_stack *nodetomove);
+// stack_utils.c
+t_stack	*ps_stack_new(int num);
+t_stack	*ps_stack_last(t_stack *stack);
+size_t	ps_stack_size(t_stack *stack);
+void	ps_stack_add_front(t_stack **stack, t_stack *new_node);
+void	ps_stack_add_back(t_stack **stack, t_stack *new_node);
 
 #endif
-
-// sort   3 <=    3
-// sort   5 <=   12
-// sort 100 <=  700
-// sort 500 <= 5500

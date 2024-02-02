@@ -26,4 +26,4 @@ WORKDIR /mnt
 #   docker stop ubuntu_valgrind
 
 # Command to run Valgrind for memory debugging:
-#   valgrind --leak-check=full ./<program> <parameters>
+#   valgrind --leak-check=full ./<program> <argument>

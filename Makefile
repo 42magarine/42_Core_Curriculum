@@ -6,7 +6,7 @@
 #    By: mott <mott@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/26 14:56:48 by mott              #+#    #+#              #
-#    Updated: 2024/02/01 19:30:01 by mott             ###   ########.fr        #
+#    Updated: 2024/02/02 17:50:09 by mott             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,13 +15,14 @@ CFLAGS = -Wall -Wextra -Werror -g
 NAME = push_swap
 
 SRCS = ./src/push_swap.c \
+       ./src/find.c \
        ./src/init.c \
-       ./src/list.c \
+       ./src/move.c \
        ./src/op_one.c \
        ./src/op_two.c \
        ./src/op_three.c \
-       ./src/find.c \
-       ./src/sort.c
+       ./src/sort.c \
+       ./src/stack_utils.c \
 
 OBJS = $(SRCS:.c=.o)
 

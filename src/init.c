@@ -6,13 +6,13 @@
 /*   By: mott <mott@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/27 15:14:49 by mott              #+#    #+#             */
-/*   Updated: 2024/01/31 16:07:47 by mott             ###   ########.fr       */
+/*   Updated: 2024/02/02 13:20:43 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/push_swap.h"
 
-void	ps_init_stack(int argc, char **argv, t_stack **stack)
+void	ps_init_stack(int argc, char **argv, t_stack **stack_a)
 {
 	t_stack	*new_node;
 	char	**temp;
@@ -26,16 +26,16 @@ void	ps_init_stack(int argc, char **argv, t_stack **stack)
 	while (temp[i] != NULL)
 	{
 		if (ps_valid_num(temp[i]) == false)
-			ps_error("Error\n", temp, *stack);
+			ps_error("Error\n", temp, *stack_a);
 		num = ps_atol(temp[i]);
 		if (num > INT_MAX || num < INT_MIN)
-			ps_error("Error\n", temp, *stack);
-		if (ps_isduplicate((int)num, *stack) == true)
-			ps_error("Error\n", temp, *stack);
-		new_node = ps_lstnew((int)num);
+			ps_error("Error\n", temp, *stack_a);
+		if (ps_is_duplicate((int)num, *stack_a) == true)
+			ps_error("Error\n", temp, *stack_a);
+		new_node = ps_stack_new((int)num);
 		if (new_node == NULL)
-			ps_error("malloc\n", temp, *stack);
-		ps_lstadd_back(stack, new_node);
+			ps_error("malloc\n", temp, *stack_a);
+		ps_stack_add_back(stack_a, new_node);
 		i++;
 	}
 	ps_free_strs(temp);
@@ -70,7 +70,6 @@ char	**ps_parse_input(int argc, char **argv)
 	return (temp);
 }
 
-// checks for invalid characters
 bool	ps_valid_num(char *str)
 {
 	if (*str == '+' || *str == '-')
@@ -99,8 +98,7 @@ long	ps_atol(char *str)
 	return (sign * num);
 }
 
-// checks for duplicate numbers
-bool	ps_isduplicate(int num, t_stack *stack)
+bool	ps_is_duplicate(int num, t_stack *stack)
 {
 	while (stack != NULL)
 	{

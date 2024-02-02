@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/28 12:53:46 by mott              #+#    #+#             */
-/*   Updated: 2024/01/31 16:15:01 by mott             ###   ########.fr       */
+/*   Updated: 2024/02/02 12:51:44 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	ps_rotate_a(t_stack **stack_a, bool print)
 	temp = *stack_a;
 	*stack_a = (*stack_a)->next;
 	temp->next = NULL;
-	ps_lstadd_back(stack_a, temp);
+	ps_stack_add_back(stack_a, temp);
 	if (print == true)
 		ft_putstr_fd("ra\n", STDOUT_FILENO);
 }
@@ -39,7 +39,7 @@ void	ps_rotate_b(t_stack **stack_b, bool print)
 	temp = *stack_b;
 	*stack_b = (*stack_b)->next;
 	temp->next = NULL;
-	ps_lstadd_back(stack_b, temp);
+	ps_stack_add_back(stack_b, temp);
 	if (print == true)
 		ft_putstr_fd("rb\n", STDOUT_FILENO);
 }
