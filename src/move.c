@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 13:05:13 by mott              #+#    #+#             */
-/*   Updated: 2024/02/02 17:47:09 by mott             ###   ########.fr       */
+/*   Updated: 2024/02/02 19:33:01 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,42 +62,37 @@ int	ps_calculate_moves(t_stack *stack_a, t_stack *matching_b)
 	return (move_counter);
 }
 
-void	ps_move_stacks(t_stack **stack_a, t_stack **stack_b, t_stack *node_to_top)
+void	ps_ab_to_top(t_stack **stack_a, t_stack **stack_b, t_stack *a_to_top)
 {
-	while (*stack_a != node_to_top || *stack_b != node_to_top->matching_node)
-	// while (*stack_a != node_to_top && *stack_b != node_to_top->matching_node)
+	while (*stack_a != a_to_top || *stack_b != a_to_top->matching_node)
 	{
-		if (node_to_top->moves_to_top > 0 && node_to_top->matching_node->moves_to_top > 0)
-		{
+		if (a_to_top->moves_to_top > 0
+			&& a_to_top->matching_node->moves_to_top > 0)
 			ps_rotate_ab(stack_a, stack_b);
-			node_to_top->moves_to_top--;
-			node_to_top->matching_node->moves_to_top--;
-		}
-		else if (node_to_top->moves_to_top > 0)
-		{
+		else if (a_to_top->moves_to_top > 0)
 			ps_rotate_a(stack_a, true);
-			node_to_top->moves_to_top--;
-		}
-		else if (node_to_top->matching_node->moves_to_top > 0)
-		{
+		else if (a_to_top->matching_node->moves_to_top > 0)
 			ps_rotate_b(stack_b, true);
-			node_to_top->matching_node->moves_to_top--;
-		}
-		if (node_to_top->moves_to_top < 0 && node_to_top->matching_node->moves_to_top < 0)
-		{
+		if (a_to_top->moves_to_top < 0
+			&& a_to_top->matching_node->moves_to_top < 0)
 			ps_reverse_rotate_ab(stack_a, stack_b);
-			node_to_top->moves_to_top++;
-			node_to_top->matching_node->moves_to_top++;
-		}
-		else if (node_to_top->moves_to_top < 0)
-		{
+		else if (a_to_top->moves_to_top < 0)
 			ps_reverse_rotate_a(stack_a, true);
-			node_to_top->moves_to_top++;
-		}
-		else if (node_to_top->matching_node->moves_to_top < 0)
-		{
+		else if (a_to_top->matching_node->moves_to_top < 0)
 			ps_reverse_rotate_b(stack_b, true);
-			node_to_top->matching_node->moves_to_top++;
-		}
+		ps_set_moves_to_top(*stack_a);
+		ps_set_moves_to_top(*stack_b);
+	}
+}
+
+void	ps_a_to_top(t_stack **stack_a, t_stack *a_to_top)
+{
+	ps_set_moves_to_top(*stack_a);
+	while (*stack_a != a_to_top)
+	{
+		if (a_to_top->moves_to_top > 0)
+			ps_rotate_a(stack_a, true);
+		else
+			ps_reverse_rotate_a(stack_a, true);
 	}
 }

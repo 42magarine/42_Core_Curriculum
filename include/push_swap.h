@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 14:15:05 by mott              #+#    #+#             */
-/*   Updated: 2024/02/02 17:46:21 by mott             ###   ########.fr       */
+/*   Updated: 2024/02/02 19:34:20 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,9 @@ long	ps_atol(char *str);
 bool	ps_is_duplicate(int num, t_stack *stack);
 
 // sort.c
-bool	ps_is_sorted(t_stack *stack);
 void	ps_sort_three(t_stack **stack_a);
 void	ps_sort_more(t_stack **stack_a, t_stack **stack_b, size_t stack_size);
-void	ps_node_to_top(t_stack **stack_a, t_stack *node_to_top);
+bool	ps_is_sorted(t_stack *stack);
 
 // find.c
 t_stack	*ps_find_smallest(t_stack *stack);
@@ -53,7 +52,8 @@ t_stack	*ps_find_cheapest(t_stack *stack_a, t_stack *stack_b);
 // move.c
 void	ps_set_moves_to_top(t_stack *stack);
 int		ps_calculate_moves(t_stack *stack_a, t_stack *matching_b);
-void	ps_move_stacks(t_stack **stack_a, t_stack **stack_b, t_stack *nodetomove);
+void	ps_ab_to_top(t_stack **stack_a, t_stack **stack_b, t_stack *a_to_top);
+void	ps_a_to_top(t_stack **stack_a, t_stack *a_to_top);
 
 // op_one.c
 void	ps_swap_a(t_stack **stack_a, bool print);

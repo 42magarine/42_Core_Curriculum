@@ -41,12 +41,12 @@ checker="./checker_Mac"
 
 # for args in "${test_error[@]}"; do
 # for args in "${test_basic[@]}"; do
-for args in "${test_4[@]}"; do
+# for args in "${test_4[@]}"; do
 # for args in "${test_5[@]}"; do
 # for args in "${test_100[@]}"; do
-# for args in "${test_500[@]}"; do
+for args in "${test_500[@]}"; do
 	echo "Testing: $args"
-	$executable $args
-	# $executable $args | $checker $args
+	# $executable $args | wc -l
+	$executable $args | $checker $args
 	echo "---------------------"
 done
