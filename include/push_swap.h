@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 14:15:05 by mott              #+#    #+#             */
-/*   Updated: 2024/02/02 19:34:20 by mott             ###   ########.fr       */
+/*   Updated: 2024/02/09 19:14:49 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,12 @@ typedef struct s_stack
 
 // push_swap.c
 int		main(int argc, char **argv);
+// void	ps_print_stack(t_stack *stack_a, t_stack *stack_b);
+
+// error.c
 void	ps_error(char *error, char **strs, t_stack *stack);
 void	ps_free_strs(char **strs);
 void	ps_free_stack(t_stack *stack);
-// void	ps_print_stack(t_stack *stack_a, t_stack *stack_b);
 
 // init.c
 void	ps_init_stack(int argc, char **argv, t_stack **stack_a);
@@ -58,19 +60,19 @@ void	ps_a_to_top(t_stack **stack_a, t_stack *a_to_top);
 // op_one.c
 void	ps_swap_a(t_stack **stack_a, bool print);
 void	ps_swap_b(t_stack **stack_b, bool print);
-void	ps_swap_ab(t_stack **stack_a, t_stack **stack_b);
-void	ps_push_a(t_stack **stack_a, t_stack **stack_b);
-void	ps_push_b(t_stack **stack_a, t_stack **stack_b);
+void	ps_swap_ab(t_stack **stack_a, t_stack **stack_b, bool print);
+void	ps_push_a(t_stack **stack_a, t_stack **stack_b, bool print);
+void	ps_push_b(t_stack **stack_a, t_stack **stack_b, bool print);
 
 // op_two.c
 void	ps_rotate_a(t_stack **stack_a, bool print);
 void	ps_rotate_b(t_stack **stack_b, bool print);
-void	ps_rotate_ab(t_stack **stack_a, t_stack **stack_b);
+void	ps_rotate_ab(t_stack **stack_a, t_stack **stack_b, bool print);
 
 // op_three.c
 void	ps_reverse_rotate_a(t_stack **stack_a, bool print);
 void	ps_reverse_rotate_b(t_stack **stack_b, bool print);
-void	ps_reverse_rotate_ab(t_stack **stack_a, t_stack **stack_b);
+void	ps_reverse_rotate_ab(t_stack **stack_a, t_stack **stack_b, bool print);
 
 // stack_utils.c
 t_stack	*ps_stack_new(int num);

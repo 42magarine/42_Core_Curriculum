@@ -37,7 +37,8 @@ test_500=(
 )
 
 executable="./push_swap"
-checker="./checker_Mac"
+# checker="./checker_Mac"
+checker="./checker"
 
 # for args in "${test_error[@]}"; do
 # for args in "${test_basic[@]}"; do
@@ -50,3 +51,8 @@ for args in "${test_500[@]}"; do
 	$executable $args | $checker $args
 	echo "---------------------"
 done
+
+
+# echo sa\\nsa | ./checker 1 2 3 4
+# echo sa\\nsa\\nsa | ./checker 1 2 3 4
+# echo sa\\nssa\\nsa | ./checker 1 2 3 4

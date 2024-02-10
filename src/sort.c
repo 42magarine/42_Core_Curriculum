@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/28 15:52:46 by mott              #+#    #+#             */
-/*   Updated: 2024/02/02 19:31:37 by mott             ###   ########.fr       */
+/*   Updated: 2024/02/09 19:18:05 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,23 +37,23 @@ void	ps_sort_more(t_stack **stack_a, t_stack **stack_b, size_t stack_size)
 	t_stack	*node_to_top;
 
 	if (stack_size-- > 3 && ps_is_sorted(*stack_a) == false)
-		ps_push_b(stack_a, stack_b);
+		ps_push_b(stack_a, stack_b, true);
 	if (stack_size-- > 3 && ps_is_sorted(*stack_a) == false)
-		ps_push_b(stack_a, stack_b);
+		ps_push_b(stack_a, stack_b, true);
 	while (stack_size-- > 3 && ps_is_sorted(*stack_a) == false)
 	{
 		ps_set_moves_to_top(*stack_a);
 		ps_set_moves_to_top(*stack_b);
 		node_to_top = ps_find_cheapest(*stack_a, *stack_b);
 		ps_ab_to_top(stack_a, stack_b, node_to_top);
-		ps_push_b(stack_a, stack_b);
+		ps_push_b(stack_a, stack_b, true);
 	}
 	ps_sort_three(stack_a);
 	while (*stack_b != NULL)
 	{
 		node_to_top = ps_find_bigger((*stack_b)->num, *stack_a);
 		ps_a_to_top(stack_a, node_to_top);
-		ps_push_a(stack_a, stack_b);
+		ps_push_a(stack_a, stack_b, true);
 	}
 	node_to_top = ps_find_smallest(*stack_a);
 	ps_a_to_top(stack_a, node_to_top);

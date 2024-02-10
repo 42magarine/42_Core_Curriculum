@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/28 12:54:03 by mott              #+#    #+#             */
-/*   Updated: 2024/02/02 12:52:25 by mott             ###   ########.fr       */
+/*   Updated: 2024/02/09 19:14:04 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,9 +55,10 @@ void	ps_reverse_rotate_b(t_stack **stack_b, bool print)
 }
 
 // reverse_rotate_a and reverse_rotate_b at the same time.
-void	ps_reverse_rotate_ab(t_stack **stack_a, t_stack **stack_b)
+void	ps_reverse_rotate_ab(t_stack **stack_a, t_stack **stack_b, bool print)
 {
 	ps_reverse_rotate_a(stack_a, false);
 	ps_reverse_rotate_b(stack_b, false);
-	ft_putstr_fd("rrr\n", STDOUT_FILENO);
+	if (print == true)
+		ft_putstr_fd("rrr\n", STDOUT_FILENO);
 }

@@ -6,15 +6,17 @@
 #    By: mott <mott@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/26 14:56:48 by mott              #+#    #+#              #
-#    Updated: 2024/02/02 17:50:09 by mott             ###   ########.fr        #
+#    Updated: 2024/02/09 17:58:13 by mott             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -g
 NAME = push_swap
+NAME_B = checker
 
 SRCS = ./src/push_swap.c \
+       ./src/error.c \
        ./src/find.c \
        ./src/init.c \
        ./src/move.c \
@@ -24,9 +26,19 @@ SRCS = ./src/push_swap.c \
        ./src/sort.c \
        ./src/stack_utils.c \
 
+SRCS_B = ./src_b/checker.c \
+       ./src/error.c \
+       ./src/init.c \
+       ./src/op_one.c \
+       ./src/op_two.c \
+       ./src/op_three.c \
+       ./src/stack_utils.c \
+
 OBJS = $(SRCS:.c=.o)
+OBJS_B = $(SRCS_B:.c=.o)
 
 HEADER = ./include/push_swap.h
+HEADER_B = ./include/checker.h
 
 LIBFT = ./Libft/libft.a
 
@@ -43,14 +55,24 @@ $(NAME): $(OBJS) $(LIBFT)
 $(LIBFT):
 	@$(MAKE) -C ./Libft
 
+bonus: $(NAME) $(NAME_B)
+
+$(NAME_B): $(OBJS_B) $(LIBFT)
+	@echo "$(BLUE)$(CC) $(CFLAGS) -o $(NAME_B) $(OBJS_B) -L./Libft -lft  $@$(DEFAULT)"
+	@$(CC) $(CFLAGS) -o $(NAME_B) $(OBJS_B) -L./Libft -lft
+
+%.o: %.c $(HEADER_B) $(LIBFT)
+	@echo "$(YELLOW)$(CC) $(CFLAGS) -c $< -o $@$(DEFAULT)"
+	@$(CC) $(CFLAGS) -c $< -o $@
+
 clean:
-	@echo "$(RED)rm -f $(OBJS) $@$(DEFAULT)"
-	@rm -f $(OBJS)
+	@echo "$(RED)rm -f $(OBJS) $(OBJS_B) $@$(DEFAULT)"
+	@rm -f $(OBJS) $(OBJS_B)
 	@$(MAKE) clean -C ./Libft
 
 fclean: clean
-	@echo "$(RED)rm -f $(NAME) $@$(DEFAULT)"
-	@rm -f $(NAME)
+	@echo "$(RED)rm -f $(NAME) $(NAME_B) $@$(DEFAULT)"
+	@rm -f $(NAME) $(NAME_B)
 	@$(MAKE) fclean -C ./Libft
 
 re: fclean all

@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 13:05:13 by mott              #+#    #+#             */
-/*   Updated: 2024/02/02 19:33:01 by mott             ###   ########.fr       */
+/*   Updated: 2024/02/09 19:16:50 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,14 +68,14 @@ void	ps_ab_to_top(t_stack **stack_a, t_stack **stack_b, t_stack *a_to_top)
 	{
 		if (a_to_top->moves_to_top > 0
 			&& a_to_top->matching_node->moves_to_top > 0)
-			ps_rotate_ab(stack_a, stack_b);
+			ps_rotate_ab(stack_a, stack_b, true);
 		else if (a_to_top->moves_to_top > 0)
 			ps_rotate_a(stack_a, true);
 		else if (a_to_top->matching_node->moves_to_top > 0)
 			ps_rotate_b(stack_b, true);
 		if (a_to_top->moves_to_top < 0
 			&& a_to_top->matching_node->moves_to_top < 0)
-			ps_reverse_rotate_ab(stack_a, stack_b);
+			ps_reverse_rotate_ab(stack_a, stack_b, true);
 		else if (a_to_top->moves_to_top < 0)
 			ps_reverse_rotate_a(stack_a, true);
 		else if (a_to_top->matching_node->moves_to_top < 0)

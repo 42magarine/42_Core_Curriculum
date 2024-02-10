@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/28 11:12:42 by mott              #+#    #+#             */
-/*   Updated: 2024/01/31 16:14:40 by mott             ###   ########.fr       */
+/*   Updated: 2024/02/09 19:02:25 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,16 +45,17 @@ void	ps_swap_b(t_stack **stack_b, bool print)
 }
 
 // swap_a and swap_b at the same time.
-void	ps_swap_ab(t_stack **stack_a, t_stack **stack_b)
+void	ps_swap_ab(t_stack **stack_a, t_stack **stack_b, bool print)
 {
 	ps_swap_a(stack_a, false);
 	ps_swap_b(stack_b, false);
-	ft_putstr_fd("ss\n", STDOUT_FILENO);
+	if (print == true)
+		ft_putstr_fd("ss\n", STDOUT_FILENO);
 }
 
 // Take the first element at the top of b and put it at the top of a.
 // Do nothing if b is empty.
-void	ps_push_a(t_stack **stack_a, t_stack **stack_b)
+void	ps_push_a(t_stack **stack_a, t_stack **stack_b, bool print)
 {
 	t_stack	*temp;
 
@@ -64,12 +65,13 @@ void	ps_push_a(t_stack **stack_a, t_stack **stack_b)
 	*stack_b = (*stack_b)->next;
 	temp->next = *stack_a;
 	*stack_a = temp;
-	ft_putstr_fd("pa\n", STDOUT_FILENO);
+	if (print == true)
+		ft_putstr_fd("pa\n", STDOUT_FILENO);
 }
 
 // Take the first element at the top of a and put it at the top of b.
 // Do nothing if a is empty.
-void	ps_push_b(t_stack **stack_a, t_stack **stack_b)
+void	ps_push_b(t_stack **stack_a, t_stack **stack_b, bool print)
 {
 	t_stack	*temp;
 
@@ -79,5 +81,6 @@ void	ps_push_b(t_stack **stack_a, t_stack **stack_b)
 	*stack_a = (*stack_a)->next;
 	temp->next = *stack_b;
 	*stack_b = temp;
-	ft_putstr_fd("pb\n", STDOUT_FILENO);
+	if (print == true)
+		ft_putstr_fd("pb\n", STDOUT_FILENO);
 }
