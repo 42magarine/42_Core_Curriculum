@@ -6,7 +6,7 @@
 #    By: mott <mott@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/13 13:29:46 by mott              #+#    #+#              #
-#    Updated: 2024/01/26 13:11:47 by mott             ###   ########.fr        #
+#    Updated: 2024/01/26 14:07:06 by mott             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -58,20 +58,10 @@ SRCS = ft_atoi.c \
        ft_lstmap.c \
        ft_lstnew.c \
        ft_lstsize.c \
-       ft_printf/ft_printf.c \
-       ft_printf/ft_printf_flags.c \
-       ft_printf/ft_printf_process.c \
-       ft_printf/ft_printf_utils.c \
-       get_next_line/get_next_line.c \
-       get_next_line/get_next_line_utils.c \
-       get_next_line/get_next_line_bonus.c \
-       get_next_line/get_next_line_utils_bonus.c
 
 OBJS = $(SRCS:.c=.o)
 
-HEADER = libft.h \
-         ft_printf/ft_printf.h \
-         get_next_line/get_next_line.h
+HEADER = libft.h
 
 all: $(NAME)
 

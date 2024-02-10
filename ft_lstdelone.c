@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 16:13:01 by mott              #+#    #+#             */
-/*   Updated: 2024/01/25 16:30:28 by mott             ###   ########.fr       */
+/*   Updated: 2024/01/26 14:05:13 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	ft_lstdelone(t_list *lst, void (*del)(void *))
 {
-	if (lst = NULL)
+	if (lst == NULL)
 		return ;
 	del(lst->content);
 	free(lst);
