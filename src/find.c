@@ -6,12 +6,13 @@
 /*   By: mott <mott@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/28 15:35:19 by mott              #+#    #+#             */
-/*   Updated: 2024/02/02 17:44:11 by mott             ###   ########.fr       */
+/*   Updated: 2024/02/10 13:41:57 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/push_swap.h"
 
+// searches for the smallest number in the stack.
 t_stack	*ps_find_smallest(t_stack *stack)
 {
 	int		smallest_num;
@@ -33,6 +34,7 @@ t_stack	*ps_find_smallest(t_stack *stack)
 	return (smallest_node);
 }
 
+// searches for the biggest number in the stack.
 t_stack	*ps_find_biggest(t_stack *stack)
 {
 	int		biggest_num;
@@ -54,6 +56,8 @@ t_stack	*ps_find_biggest(t_stack *stack)
 	return (biggest_node);
 }
 
+// searches for the next smaller number,
+// if there is no smaller number, it searches for the biggest number.
 t_stack	*ps_find_smaller(int num, t_stack *stack)
 {
 	t_stack	*smaller_node;
@@ -77,6 +81,8 @@ t_stack	*ps_find_smaller(int num, t_stack *stack)
 	return (smaller_node);
 }
 
+// searches for the next bigger number,
+// if there is no bigger number, it searches for the smallest number.
 t_stack	*ps_find_bigger(int num, t_stack *stack)
 {
 	t_stack	*bigger_node;
@@ -100,6 +106,8 @@ t_stack	*ps_find_bigger(int num, t_stack *stack)
 	return (bigger_node);
 }
 
+// for each number in stack a, find the correct position in stack b
+// and calculate the number of moves needed to move a to b.
 t_stack	*ps_find_cheapest(t_stack *stack_a, t_stack *stack_b)
 {
 	t_stack	*cheapest_node;

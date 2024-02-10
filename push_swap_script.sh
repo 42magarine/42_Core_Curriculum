@@ -8,7 +8,7 @@ test_error=(
 	"1 9 -2 7 6 8 5 3 4 10 -2147483649"
 )
 
-test_basic=(
+test_123=(
 	"42" "1 8" "8 1"
 	"1 2 3" "1 3 2" "2 1 3" "2 3 1" "3 1 2" "3 2 1"
 )
@@ -41,18 +41,13 @@ executable="./push_swap"
 checker="./checker"
 
 # for args in "${test_error[@]}"; do
-# for args in "${test_basic[@]}"; do
+# for args in "${test_123[@]}"; do
 # for args in "${test_4[@]}"; do
 # for args in "${test_5[@]}"; do
-# for args in "${test_100[@]}"; do
-for args in "${test_500[@]}"; do
+for args in "${test_100[@]}"; do
+# for args in "${test_500[@]}"; do
 	echo "Testing: $args"
 	# $executable $args | wc -l
 	$executable $args | $checker $args
 	echo "---------------------"
 done
-
-
-# echo sa\\nsa | ./checker 1 2 3 4
-# echo sa\\nsa\\nsa | ./checker 1 2 3 4
-# echo sa\\nssa\\nsa | ./checker 1 2 3 4

@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 12:10:28 by mott              #+#    #+#             */
-/*   Updated: 2024/02/10 12:47:19 by mott             ###   ########.fr       */
+/*   Updated: 2024/02/10 14:32:22 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ int	main(int argc, char **argv)
 	t_stack	*stack_a;
 	t_stack	*stack_b;
 	char	*next_op;
+	int		moves;
 
 	stack_a = NULL;
 	stack_b = NULL;
@@ -24,14 +25,16 @@ int	main(int argc, char **argv)
 		return (EXIT_SUCCESS);
 	ps_init_stack(argc, argv, &stack_a);
 	next_op = get_next_line(STDIN_FILENO);
+	moves = 0;
 	while (next_op != NULL)
 	{
 		ps_execute_op(&stack_a, &stack_b, next_op);
 		free(next_op);
+		moves++;
 		next_op = get_next_line(STDIN_FILENO);
 	}
 	if (ps_is_sorted(stack_a) == true && stack_b == NULL)
-		ft_putstr_fd("OK\n", STDOUT_FILENO);
+		ft_printf("OK (%d moves)\n", moves);
 	else
 		ft_putstr_fd("KO\n", STDOUT_FILENO);
 	ps_free_stack(stack_a);

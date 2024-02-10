@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 13:05:13 by mott              #+#    #+#             */
-/*   Updated: 2024/02/09 19:16:50 by mott             ###   ########.fr       */
+/*   Updated: 2024/02/10 14:18:27 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ void	ps_set_moves_to_top(t_stack *stack)
 	}
 }
 
+// calculates how many moves are needed to move a and b to the top
+// of their stacks, taking into account the operations rr and rrr.
 int	ps_calculate_moves(t_stack *stack_a, t_stack *matching_b)
 {
 	int	move_counter;
@@ -62,6 +64,7 @@ int	ps_calculate_moves(t_stack *stack_a, t_stack *matching_b)
 	return (move_counter);
 }
 
+// moves a and the matching b to the top of their stacks.
 void	ps_ab_to_top(t_stack **stack_a, t_stack **stack_b, t_stack *a_to_top)
 {
 	while (*stack_a != a_to_top || *stack_b != a_to_top->matching_node)
@@ -85,6 +88,7 @@ void	ps_ab_to_top(t_stack **stack_a, t_stack **stack_b, t_stack *a_to_top)
 	}
 }
 
+// moves a to the top of the stack.
 void	ps_a_to_top(t_stack **stack_a, t_stack *a_to_top)
 {
 	ps_set_moves_to_top(*stack_a);

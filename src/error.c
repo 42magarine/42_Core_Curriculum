@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 17:54:47 by mott              #+#    #+#             */
-/*   Updated: 2024/02/09 17:55:16 by mott             ###   ########.fr       */
+/*   Updated: 2024/02/10 13:33:28 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,15 +31,6 @@ void	ps_free_strs(char **strs)
 		free(strs[i++]);
 	free(strs);
 }
-
-// void	ps_free_strs(char **strs)
-// {
-// 	if (strs == NULL)
-// 		return ;
-// 	while (*strs != NULL)
-// 		free((*strs)++);
-// 	free(strs);
-// }
 
 void	ps_free_stack(t_stack *stack)
 {

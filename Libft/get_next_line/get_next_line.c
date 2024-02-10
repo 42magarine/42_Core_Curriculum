@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/01 14:39:39 by mott              #+#    #+#             */
-/*   Updated: 2024/02/10 13:02:08 by mott             ###   ########.fr       */
+/*   Updated: 2024/02/10 13:59:04 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,14 @@
 
 char	*get_next_line(int fd)
 {
-	static char	*next_line[];
+	static char	*next_line;
 	char		*current_line;
 	char		*temp;
 
 	if (fd < 0)
 	{
-		free(next_line);
+		if (next_line != NULL)
+			free(next_line);
 		return (NULL);
 	}
 	temp = ft_read_line(fd, next_line);

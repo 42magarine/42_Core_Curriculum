@@ -6,7 +6,7 @@
 #    By: mott <mott@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/26 14:56:48 by mott              #+#    #+#              #
-#    Updated: 2024/02/09 17:58:13 by mott             ###   ########.fr        #
+#    Updated: 2024/02/10 13:32:29 by mott             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,12 +27,12 @@ SRCS = ./src/push_swap.c \
        ./src/stack_utils.c \
 
 SRCS_B = ./src_b/checker.c \
-       ./src/error.c \
-       ./src/init.c \
-       ./src/op_one.c \
-       ./src/op_two.c \
-       ./src/op_three.c \
-       ./src/stack_utils.c \
+         ./src/error.c \
+         ./src/init.c \
+         ./src/op_one.c \
+         ./src/op_two.c \
+         ./src/op_three.c \
+         ./src/stack_utils.c \
 
 OBJS = $(SRCS:.c=.o)
 OBJS_B = $(SRCS_B:.c=.o)

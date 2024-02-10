@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/28 15:52:46 by mott              #+#    #+#             */
-/*   Updated: 2024/02/09 19:18:05 by mott             ###   ########.fr       */
+/*   Updated: 2024/02/10 14:06:06 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ void	ps_sort_more(t_stack **stack_a, t_stack **stack_b, size_t stack_size)
 	ps_a_to_top(stack_a, node_to_top);
 }
 
+// checks if the stack is sorted in ascending order
 bool	ps_is_sorted(t_stack *stack)
 {
 	while (stack != NULL && stack->next != NULL)
