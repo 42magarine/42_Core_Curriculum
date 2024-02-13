@@ -6,7 +6,7 @@
 #    By: mott <mott@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/13 13:29:46 by mott              #+#    #+#              #
-#    Updated: 2024/01/31 14:25:47 by mott             ###   ########.fr        #
+#    Updated: 2024/02/12 16:48:05 by mott             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -69,36 +69,35 @@ SRCS = ft_atoi.c \
 
 OBJS = $(SRCS:.c=.o)
 
-HEADER = libft.h \
-         ft_printf/ft_printf.h \
-         get_next_line/get_next_line.h
+HEADER = -I libft.h
+
+X = "\033[0m"
+R = "\033[31m"
+G = "\033[32m"
+Y = "\033[33m"
+B = "\033[34m"
 
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	@echo "$(BLUE)ar rcs $(NAME) $(OBJS) $@$(DEFAULT)"
 	@ar rcs $(NAME) $(OBJS)
+	@echo $(B)ar rcs $(NAME) $(OBJS) $@$(X)
 
-%.o: %.c $(HEADER)
-	@echo "$(YELLOW)$(CC) $(CFLAGS) -c $< -o $@$(DEFAULT)"
-	@$(CC) $(CFLAGS) -c $< -o $@
+%.o: %.c
+	@$(CC) $(CFLAGS) $(HEADER) -c $< -o $@
+	@echo $(Y)$(CC) $(CFLAGS) $(HEADER) -c $< -o $@$(X)
 
 clean:
-	@echo "$(RED)rm -f $(OBJS) $@$(DEFAULT)"
 	@rm -f $(OBJS)
+	@echo $(R)rm -f $(OBJS) $@$(X)
 
 fclean: clean
-	@echo "$(RED)rm -f $(NAME) $@$(DEFAULT)"
 	@rm -f $(NAME)
+	@echo $(R)rm -f $(NAME) $@$(X)
 
 re: fclean all
 
 .PHONY: all clean fclean re
-
-DEFAULT = \033[0m
-RED = \033[0;31m
-YELLOW = \033[0;33m
-BLUE = \033[0;34m
 
 # https://www.gnu.org/software/make/manual/make.html
 # $@ automatic variable that holds the name of the target

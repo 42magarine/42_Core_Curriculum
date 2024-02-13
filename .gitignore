@@ -53,3 +53,10 @@ dkms.conf
 
 # my own
 .DS_Store
+so_long
+so_long_bonus
+textures
+maps
+example
+src/tests.c
+MLX42

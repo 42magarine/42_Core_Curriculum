@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 12:35:56 by mott              #+#    #+#             */
-/*   Updated: 2024/01/31 12:28:48 by mott             ###   ########.fr       */
+/*   Updated: 2024/02/12 15:53:43 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,6 @@
 
 # include <unistd.h>
 # include <stdlib.h>
-# include <stdarg.h>
-# include <stdbool.h>
-# include <limits.h>
 # include "ft_printf/ft_printf.h"
 # include "get_next_line/get_next_line.h"
 

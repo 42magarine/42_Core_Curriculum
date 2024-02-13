@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils_bonus.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
+/*   By: mott <mott@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/01 15:04:58 by mott              #+#    #+#             */
-/*   Updated: 2023/11/17 13:33:10 by mott             ###   ########.fr       */
+/*   Updated: 2024/02/12 15:56:45 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line_bonus.h"
 
-size_t	ft_strlen(const char *str)
+size_t	gnl_strlen(const char *str)
 {
 	size_t	i;
 
@@ -24,7 +24,7 @@ size_t	ft_strlen(const char *str)
 	return (i);
 }
 
-char	*ft_strchr(const char *str, int c)
+char	*gnl_strchr(const char *str, int c)
 {
 	if (str == NULL)
 		return (NULL);
@@ -39,13 +39,13 @@ char	*ft_strchr(const char *str, int c)
 	return (NULL);
 }
 
-char	*ft_strjoin(const char *str1, const char *str2)
+char	*gnl_strjoin(const char *str1, const char *str2)
 {
 	char	*newstr;
 	size_t	i;
 	size_t	j;
 
-	newstr = (char *)malloc(ft_strlen(str1) + ft_strlen(str2) + 1);
+	newstr = (char *)malloc(gnl_strlen(str1) + gnl_strlen(str2) + 1);
 	if (newstr == NULL)
 		return (NULL);
 	i = 0;
@@ -67,7 +67,7 @@ char	*ft_strjoin(const char *str1, const char *str2)
 	return (newstr);
 }
 
-char	*ft_substr(const char *str, size_t start, size_t n)
+char	*gnl_substr(const char *str, size_t start, size_t n)
 {
 	char	*substr;
 	size_t	i;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
+/*   By: mott <mott@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/01 15:04:08 by mott              #+#    #+#             */
-/*   Updated: 2023/11/17 13:40:44 by mott             ###   ########.fr       */
+/*   Updated: 2024/02/12 15:58:39 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,11 @@ char	*get_next_line(int fd)
 	char		*temp;
 
 	if (fd < 0 || fd >= OPEN_MAX)
+	{
+		if (next_line != NULL)
+			free(next_line);
 		return (NULL);
+	}
 	temp = ft_read_line(fd, next_line[fd]);
 	current_line = ft_create_current_line(temp);
 	next_line[fd] = ft_create_next_line(temp);
@@ -35,7 +39,7 @@ char	*ft_read_line(int fd, char *temp)
 	buffer = (char *)malloc(BUFFER_SIZE + 1);
 	if (buffer == NULL)
 		return (NULL);
-	while (ft_strchr(temp, '\n') == NULL)
+	while (gnl_strchr(temp, '\n') == NULL)
 	{
 		nbytes = read(fd, buffer, BUFFER_SIZE);
 		if (nbytes == -1)
@@ -48,7 +52,7 @@ char	*ft_read_line(int fd, char *temp)
 			break ;
 		buffer[nbytes] = '\0';
 		swap = temp;
-		temp = ft_strjoin(swap, buffer);
+		temp = gnl_strjoin(swap, buffer);
 		free(swap);
 	}
 	return (free(buffer), temp);
@@ -61,11 +65,11 @@ char	*ft_create_current_line(char *temp)
 	size_t	n;
 
 	start = 0;
-	if (ft_strchr(temp, '\n') != NULL)
-		n = ft_strchr(temp, '\n') - temp + 1;
+	if (gnl_strchr(temp, '\n') != NULL)
+		n = gnl_strchr(temp, '\n') - temp + 1;
 	else
-		n = ft_strlen(temp);
-	current_line = ft_substr(temp, start, n);
+		n = gnl_strlen(temp);
+	current_line = gnl_substr(temp, start, n);
 	return (current_line);
 }
 
@@ -75,13 +79,13 @@ char	*ft_create_next_line(char *temp)
 	size_t	start;
 	size_t	n;
 
-	if (ft_strchr(temp, '\n') != NULL)
-		start = ft_strchr(temp, '\n') - temp + 1;
+	if (gnl_strchr(temp, '\n') != NULL)
+		start = gnl_strchr(temp, '\n') - temp + 1;
 	else
 		return (NULL);
-	n = ft_strlen(temp) - start;
+	n = gnl_strlen(temp) - start;
 	if (n == 0)
 		return (NULL);
-	next_line = ft_substr(temp, start, n);
+	next_line = gnl_substr(temp, start, n);
 	return (next_line);
 }
