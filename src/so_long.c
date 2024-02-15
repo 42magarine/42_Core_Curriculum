@@ -6,22 +6,11 @@
 /*   By: mott <mott@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 13:42:22 by mott              #+#    #+#             */
-/*   Updated: 2024/02/13 18:51:35 by mott             ###   ########.fr       */
+/*   Updated: 2024/02/15 19:08:10 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/so_long.h"
-
-int	main(int argc, char **argv)
-{
-	if (argc != 2)
-		return (EXIT_FAILURE);
-
-	(void)argv;
-	run_game();
-
-	return(EXIT_SUCCESS);
-}
 
 // - read map (get_next_line)
 // 	check filename?
@@ -39,83 +28,75 @@ int	main(int argc, char **argv)
 // - loop
 // what do i need to free?
 // makefile doesnt re-compile if i change headerfile
+// mlx close hook for (x) necessary?
+// ft_printf -> toupper duplicate
 
-void	run_game()
+int	main(int argc, char **argv)
 {
-	mlx_t		*game;
-	t_textures	*textures;
-	t_images	*images;
-	t_pos		*mapsize;
+	if (argc != 2)
+		return (EXIT_FAILURE);
 
-	mapsize = malloc(sizeof(t_pos));
-	mapsize->x = 8;
-	mapsize->y = 8;
-	// mlx_set_setting(MLX_MAXIMIZED, true);
-	// game = mlx_init(WIDTH, HEIGHT, "so_long", true);
-	game = mlx_init(WIDTH, HEIGHT, "so_long", false);
-	if (game == NULL)
-		sl_error();
-	textures = load_png();
-	images = create_images(game, textures);
-	display_board(game, mapsize, images);
-	mlx_loop(game);
+	(void)argv;
+	run_game();
+
+	return(EXIT_SUCCESS);
+}
+
+void	run_game(void)
+{
+	t_game		*game;
+
+	game = malloc(sizeof(t_game));
+	game->map_size = malloc(sizeof(t_position));
+	game->map_size->x = 9;
+	game->map_size->y = 9;
+	game->player_position = malloc(sizeof(t_position));
+	game->player_position->x = 3;
+	game->player_position->y = 3;
+	game->window = mlx_init(game->map_size->x * 64, game->map_size->y * 64, "so_long", false);
+	// if (game == NULL)
+	// 	sl_error();
+	load_png(game);
+	create_images(game);
+	display_board(game);
+	display_objects(game);
+	mlx_key_hook(game->window, key_hook, game);
+	mlx_loop(game->window);
 	// mlx_delete_image();
 	// mlx_delete_texture();
-	mlx_terminate(game);
+	mlx_terminate(game->window);
 }
 
-t_textures	*load_png(void) //mlx_errors
+void	key_hook(mlx_key_data_t keydata, void *param)
 {
-	t_textures	*textures;
+	t_game	*game;
 
-	textures = malloc(sizeof(t_textures));
-	textures->board1 = mlx_load_png("./textures/wood_light.png");
-	if (textures->board1 == NULL)
-		sl_error();
-	textures->board2 = mlx_load_png("./textures/wood_dark.png");
-	textures->wall = mlx_load_png("./textures/wall.png");
-	textures->player = mlx_load_png("./textures/player.png");
-	textures->collectible = mlx_load_png("./textures/collectible.png");
-	textures->enemy = mlx_load_png("./textures/enemy.png");
-	return (textures);
+	game = param;
+	if (keydata.key == MLX_KEY_W && keydata.action == MLX_PRESS)
+		game->player_position->y--;
+	if (keydata.key == MLX_KEY_A && keydata.action == MLX_PRESS)
+		game->player_position->x--;
+	if (keydata.key == MLX_KEY_S && keydata.action == MLX_PRESS)
+		game->player_position->y++;
+	if (keydata.key == MLX_KEY_D && keydata.action == MLX_PRESS)
+		game->player_position->x++;
+	if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_PRESS)
+		exit(EXIT_SUCCESS);
+	display_board(game);
+	display_objects(game);
+	// mlx_image_to_window(game->window, game->images->player, game->player_position->x * 64, game->player_position->y * 64);
 }
 
-t_images	*create_images(mlx_t *game, t_textures *textures) //mlx_error
-{
-	t_images	*images;
+// void	hook(void *param)
+// {
+// 	t_game	*game;
 
-	images = malloc(sizeof(t_images));
-	images->board1 = mlx_texture_to_image(game, textures->board1);
-	if (images->board1 == NULL)
-		sl_error();
-	images->board2 = mlx_texture_to_image(game, textures->board2);
-	images->wall = mlx_texture_to_image(game, textures->wall);
-	images->player = mlx_texture_to_image(game, textures->player);
-	images->collectibles = mlx_texture_to_image(game, textures->collectible);
-	images->enemy = mlx_texture_to_image(game, textures->enemy);
-	return (images);
-}
-
-void	display_board(mlx_t *game, t_pos *mapsize, t_images *images)
-{
-	t_pos	*pos;
-
-	pos = malloc(sizeof(t_pos));
-	pos->y = 0;
-	while (pos->y < mapsize->y)
-	{
-		pos->x = 0;
-		while (pos->x < mapsize->x)
-		{
-			if ((pos->y + pos->x) % 2 == 0)
-				mlx_image_to_window(game, images->board1, pos->y * 64, pos->x * 64); //mlx_error
-			else
-				mlx_image_to_window(game, images->board2, pos->y * 64, pos->x * 64); //mlx_error
-			pos->x++;
-		}
-		pos->y++;
-	}
-}
+// 	game = param;
+// 	game->player_position->x = 0;
+// 	game->player_position->y = 0;
+// 	if (mlx_is_key_down(game->window, MLX_KEY_ESCAPE))
+// 		mlx_close_window(game->window);
+// }
 
 void	sl_error(void)
 {

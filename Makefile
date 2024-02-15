@@ -6,7 +6,7 @@
 #    By: mott <mott@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/11 13:19:37 by mott              #+#    #+#              #
-#    Updated: 2024/02/12 19:47:52 by mott             ###   ########.fr        #
+#    Updated: 2024/02/15 15:51:52 by mott             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,8 @@ LDFLAGS = -ldl -lglfw -pthread -lm
 NAME = so_long
 # BONUS = so_long_bonus
 
-SRCS = ./src/so_long.c
+SRCS = ./src/so_long.c \
+       ./src/png.c
 
 OBJS = $(SRCS:.c=.o)
 

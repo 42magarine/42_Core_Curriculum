@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/01 13:25:36 by mott              #+#    #+#             */
-/*   Updated: 2024/02/12 19:49:08 by mott             ###   ########.fr       */
+/*   Updated: 2024/02/15 16:15:27 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,12 @@ bool	ft_is_digit(int c)
 	return (false);
 }
 
-int	ft_toupper(int c)
-{
-	if (c >= 'a' && c <= 'z')
-		c -= 32;
-	return (c);
-}
+// int	ft_toupper(int c)
+// {
+// 	if (c >= 'a' && c <= 'z')
+// 		c -= 32;
+// 	return (c);
+// }
 
 int	ft_strnlen(const char *str, size_t n)
 {
