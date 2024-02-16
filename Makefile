@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mott <mott@student.42.fr>                  +#+  +:+       +#+         #
+#    By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/11 13:19:37 by mott              #+#    #+#              #
-#    Updated: 2024/02/15 15:51:52 by mott             ###   ########.fr        #
+#    Updated: 2024/02/16 15:53:48 by mott             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ SRCS = ./src/so_long.c \
 
 OBJS = $(SRCS:.c=.o)
 
-HEADER = -I ./include/so_long.h
+HEADER = ./include/so_long.h
 
 LIBFT = ./Libft/libft.a
 LIBMLX42 = ./MLX42/build/libmlx42.a
@@ -32,15 +32,15 @@ G = "\033[32m"
 Y = "\033[33m"
 B = "\033[34m"
 
-all: $(NAME)
+all: $(LIBFT) $(LIBMLX42) $(NAME)
 
-$(NAME): $(OBJS) $(LIBFT) $(LIBMLX42)
-	@$(CC) $(CFLAGS) $(OBJS) $(LIBFT) $(LIBMLX42) $(LDFLAGS) -o $(NAME)
-	@echo $(B)$(CC) $(CFLAGS) $(OBJS) $(LIBFT) $(LIBMLX42) $(LDFLAGS) -o $(NAME)$(X)
+$(NAME): $(OBJS)
+	@$(CC) $(CFLAGS) $(OBJS) $(LIBFT) $(LIBMLX42) $(LDFLAGS) -o $@
+	@echo $(B)$(CC) $(CFLAGS) $(OBJS) $(LIBFT) $(LIBMLX42) $(LDFLAGS) -o $@$(X)
 
-%.o: %.c
-	@$(CC) $(CFLAGS) $(HEADER) -c $< -o $@
-	@echo $(Y)$(CC) $(CFLAGS) $(HEADER) -c $< -o $@$(X)
+%.o: %.c $(HEADER)
+	@$(CC) $(CFLAGS) -c $< -o $@
+	@echo $(Y)$(CC) $(CFLAGS) -c $< -o $@$(X)
 
 $(LIBFT):
 	@$(MAKE) -C ./Libft

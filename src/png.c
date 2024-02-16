@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   png.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mott <mott@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 14:56:31 by mott              #+#    #+#             */
-/*   Updated: 2024/02/15 19:09:00 by mott             ###   ########.fr       */
+/*   Updated: 2024/02/16 16:23:18 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ void	create_images(t_game *game)
 {
 	game->images = malloc(sizeof(t_images));
 	game->images->board1 = mlx_texture_to_image(game->window, game->textures->board1);
+		ft_printf("hello\n");
 	// if (game->images->board1 == NULL)
 	// 	sl_error();
 	game->images->board2 = mlx_texture_to_image(game->window, game->textures->board2);

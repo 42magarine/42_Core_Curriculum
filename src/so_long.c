@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mott <mott@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 13:42:22 by mott              #+#    #+#             */
-/*   Updated: 2024/02/15 19:08:10 by mott             ###   ########.fr       */
+/*   Updated: 2024/02/16 16:22:52 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ void	run_game(void)
 	// if (game == NULL)
 	// 	sl_error();
 	load_png(game);
+
 	create_images(game);
 	display_board(game);
 	display_objects(game);
@@ -82,8 +83,8 @@ void	key_hook(mlx_key_data_t keydata, void *param)
 		game->player_position->x++;
 	if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_PRESS)
 		exit(EXIT_SUCCESS);
-	display_board(game);
-	display_objects(game);
+	// display_board(game);
+	// display_objects(game);
 	// mlx_image_to_window(game->window, game->images->player, game->player_position->x * 64, game->player_position->y * 64);
 }
 

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mott <mott@student.42.fr>                  +#+  +:+       +#+         #
+#    By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/13 13:29:46 by mott              #+#    #+#              #
-#    Updated: 2024/02/12 16:48:05 by mott             ###   ########.fr        #
+#    Updated: 2024/02/16 15:56:45 by mott             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -69,7 +69,7 @@ SRCS = ft_atoi.c \
 
 OBJS = $(SRCS:.c=.o)
 
-HEADER = -I libft.h
+HEADER = libft.h
 
 X = "\033[0m"
 R = "\033[31m"
@@ -81,19 +81,19 @@ all: $(NAME)
 
 $(NAME): $(OBJS)
 	@ar rcs $(NAME) $(OBJS)
-	@echo $(B)ar rcs $(NAME) $(OBJS) $@$(X)
+	@echo $(B)ar rcs $(NAME) $(OBJS)$(X)
 
-%.o: %.c
-	@$(CC) $(CFLAGS) $(HEADER) -c $< -o $@
-	@echo $(Y)$(CC) $(CFLAGS) $(HEADER) -c $< -o $@$(X)
+%.o: %.c $(HEADER)
+	@$(CC) $(CFLAGS) -c $< -o $@
+	@echo $(Y)$(CC) $(CFLAGS) -c $< -o $@$(X)
 
 clean:
 	@rm -f $(OBJS)
-	@echo $(R)rm -f $(OBJS) $@$(X)
+	@echo $(R)rm -f $(OBJS)$(X)
 
 fclean: clean
 	@rm -f $(NAME)
-	@echo $(R)rm -f $(NAME) $@$(X)
+	@echo $(R)rm -f $(NAME)$(X)
 
 re: fclean all
 
