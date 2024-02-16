@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mott <mott@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/11 13:20:16 by mott              #+#    #+#             */
-/*   Updated: 2024/02/15 19:04:56 by mott             ###   ########.fr       */
+/*   Updated: 2024/02/16 20:47:53 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,11 @@
 # include "../Libft/libft.h"
 # include "../MLX42/include/MLX42/MLX42.h"
 
-typedef struct s_position
+typedef struct s_xy
 {
 	int	x;
 	int	y;
-}	t_position;
+}	t_xy;
 
 typedef struct s_textures
 {
@@ -52,23 +52,35 @@ typedef struct s_images
 
 typedef struct s_game
 {
+	t_xy		*map_size;
+	char		**map;
 	mlx_t		*window;
-	t_position	*player_position;
-	t_position	*map_size;
+	t_xy		*player_position;
 	t_textures	*textures;
 	t_images	*images;
 }	t_game;
 
 // so_long.c
-int			main(int argc, char **argv);
-void		run_game(void);
-void		key_hook(mlx_key_data_t keydata, void *param);
-void		sl_error(void);
+int		main(int argc, char **argv);
+void	run_game(t_game *game);
+void	key_hook(mlx_key_data_t keydata, void *param);
+void	so_exit(char *exit_type, t_game *game);
 
 // png.c
 void	load_png(t_game *game);
 void	create_images(t_game *game);
 void	display_board(t_game *game);
 void	display_objects(t_game *game);
+
+// map.c
+void	so_load_map(t_game *game, char *filename);
+void	so_map_size(t_game *game, char *filename);
+void	so_read_map(t_game *game, char *filename);
+int		so_strlen(char *str);
+
+// map_valid.c
+void	so_map_rectangular(t_game *game);
+void	so_map_wall(t_game *game);
+void	so_map_objects(t_game *game, char object);
 
 #endif
