@@ -6,94 +6,97 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 19:40:25 by mott              #+#    #+#             */
-/*   Updated: 2024/02/16 21:00:17 by mott             ###   ########.fr       */
+/*   Updated: 2024/02/17 16:28:23 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/so_long.h"
 
+// Checks if the map is rectangular.
 void	so_map_rectangular(t_game *game)
 {
 	int	y;
 
 	y = 0;
-	while (y < game->map_size->y)
+	while (y < game->map_size.y)
 	{
-		if (so_strlen(game->map[y]) != game->map_size->x)
-			so_exit("rectangular", game);
+		if (so_strlen(game->map[y]) != game->map_size.x)
+			so_exit("Map is not rectangular.\n", game);
 		y++;
 	}
 }
 
+// Checks if the map is surrounded by walls.
 void	so_map_wall(t_game *game)
 {
-	int	y;
-	int	x;
+	t_xy	xy;
 
-	y = 0;
-	x = 0;
-	while (x < game->map_size->x)
+	xy.y = 0;
+	xy.x = 0;
+	while (xy.x < game->map_size.x)
 	{
-		if (game->map[y][x] != '1')
-			so_exit("wall", game);
-		x++;
+		if (game->map[xy.y][xy.x] != '1')
+			so_exit("Map is not surrounded by walls.\n", game);
+		xy.x++;
 	}
-	x = game->map_size->x - 1;
-	while (++y < game->map_size->y - 1)
+	xy.y++;
+	xy.x = game->map_size.x - 1;
+	while (xy.y < game->map_size.y - 1)
 	{
-		if (game->map[y][0] != '1' || game->map[y][x] != '1')
-			so_exit("wall", game);
+		if (game->map[xy.y][0] != '1' || game->map[xy.y][xy.x] != '1')
+			so_exit("Map is not surrounded by walls.\n", game);
+		xy.y++;
 	}
-	x = 0;
-	while (x < game->map_size->x)
+	xy.x = 0;
+	while (xy.x < game->map_size.x)
 	{
-		if (game->map[y][x] != '1')
-			so_exit("wall", game);
-		x++;
+		if (game->map[xy.y][xy.x] != '1')
+			so_exit("Map is not surrounded by walls.\n", game);
+		xy.x++;
 	}
 }
 
-void	so_map_objects(t_game *game, char object)
+// Counts the number of the given object.
+int	so_object_counter(char **map, t_xy map_size, char c)
 {
-	int	y;
-	int	x;
-	int	counter;
+	t_xy	xy;
+	int		counter;
 
 	counter = 0;
-	y = 0;
-	while (y < game->map_size->y)
+	xy.y = 0;
+	while (xy.y < map_size.y)
 	{
-		x = 0;
-		while (x < game->map_size->x)
+		xy.x = 0;
+		while (xy.x < map_size.x)
 		{
-			if (game->map[y][x] == object)
+			if (map[xy.y][xy.x] == c)
 				counter++;
-			x++;
+			xy.x++;
 		}
-		y++;
+		xy.y++;
 	}
-	if (object == 'P' && counter != 1)
-		so_exit("player", game);
-	if (object == 'C' && counter < 1)
-		so_exit("collectibles", game);
-	if (object == 'E' && counter != 1)
-		so_exit("exit", game);
+	return (counter);
 }
 
-// void	fill_zone(char **tab, t_xy size, t_xy current, char target)
-// {
-// 	if (current.x < 0 || current.y < 0 || current.x >= size.x || current.y >= size.y || tab[current.y][current.x] != target)
-// 		return ;
-// 	tab[current.y][current.x] = 'F';
-// 	fill_zone(tab, size, (t_xy){current.x + 1, current.y}, target);
-// 	fill_zone(tab, size, (t_xy){current.x - 1, current.y}, target);
-// 	fill_zone(tab, size, (t_xy){current.x, current.y + 1}, target);
-// 	fill_zone(tab, size, (t_xy){current.x, current.y - 1}, target);
-// }
+// Checks if the map contains wrong characters.
+void	so_map_wrong_character(t_game *game)
+{
+	t_xy	xy;
 
-// void	flood_fill(char **tab, t_xy size, t_xy begin)
-// {
-// 	if (tab == 0 || size.x <= 0 || size.y <= 0 || begin.x < 0 || begin.y < 0 || begin.x >= size.x || begin.y >= size.y)
-// 		return ;
-// 	fill_zone(tab, size, begin, tab[begin.y][begin.x]);
-// }
+	xy.y = 0;
+	while (xy.y < game->map_size.y)
+	{
+		xy.x = 0;
+		while (xy.x < game->map_size.x)
+		{
+			if (game->map[xy.y][xy.x] != '1'
+					&& game->map[xy.y][xy.x] != '0'
+					&& game->map[xy.y][xy.x] != 'C'
+					&& game->map[xy.y][xy.x] != 'E'
+					&& game->map[xy.y][xy.x] != 'P')
+				so_exit("Wrong character in map.\n", game);
+			xy.x++;
+		}
+		xy.y++;
+	}
+}

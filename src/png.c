@@ -6,107 +6,150 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 14:56:31 by mott              #+#    #+#             */
-/*   Updated: 2024/02/16 17:35:43 by mott             ###   ########.fr       */
+/*   Updated: 2024/02/17 20:43:40 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/so_long.h"
 
 // load png-files form disk.
-void	load_png(t_game *game)
+void	so_load_png(t_game *game)
 {
-	game->textures = malloc(sizeof(t_textures));
-	game->textures->board1 = mlx_load_png("./textures/wood_light.png");
-	// if (textures->board1 == NULL)
-	// 	sl_error();
-	game->textures->board2 = mlx_load_png("./textures/wood_dark.png");
-	// if (textures->board2 == NULL)
-	// 	sl_error();
-	game->textures->wall = mlx_load_png("./textures/wall.png");
-	// if (textures->wall == NULL)
-	// 	sl_error();
-	game->textures->player = mlx_load_png("./textures/player.png");
-	// if (textures->player == NULL)
-	// 	sl_error();
-	game->textures->collectible = mlx_load_png("./textures/collectible.png");
-	// if (textures->collectible == NULL)
-	// 	sl_error();
-	game->textures->exit = mlx_load_png("./textures/exit.png");
-	// if (textures->exit == NULL)
-	// 	sl_error();
-	game->textures->enemy = mlx_load_png("./textures/enemy.png");
-	// if (textures->enemy == NULL)
-	// 	sl_error();
+	game->png = malloc(sizeof(t_textures));
+	if (game->png == NULL)
+		so_exit("malloc\n", game);
+	game->png->board1 = mlx_load_png("./textures/wood_light.png");
+	if (game->png->board1 == NULL)
+		so_exit(NULL, game);
+	game->png->board2 = mlx_load_png("./textures/wood_dark.png");
+	if (game->png->board2 == NULL)
+		so_exit(NULL, game);
+	game->png->wall = mlx_load_png("./textures/wall.png");
+	if (game->png->wall == NULL)
+		so_exit(NULL, game);
+	game->png->coll = mlx_load_png("./textures/collectible.png");
+	if (game->png->coll == NULL)
+		so_exit(NULL, game);
+	game->png->exit = mlx_load_png("./textures/exit.png");
+	if (game->png->exit == NULL)
+		so_exit(NULL, game);
+	game->png->player = mlx_load_png("./textures/player.png");
+	if (game->png->player == NULL)
+		so_exit(NULL, game);
+	// game->png->enemy = mlx_load_png("./textures/enemy.png");
+	// if (game->png->enemy == NULL)
+	// 	so_exit(NULL, game);
 }
 
 // convert png-files to images.
-void	create_images(t_game *game)
+void	so_create_images(t_game *game)
 {
-	game->images = malloc(sizeof(t_images));
+	game->img = malloc(sizeof(t_images));
+	if (game->img == NULL)
+		so_exit("malloc\n", game);
 	// ft_printf("hello 1\n");
-	game->images->board1 = mlx_texture_to_image(game->window, game->textures->board1);
+	game->img->board1 = mlx_texture_to_image(game->window, game->png->board1);
+	if (game->img->board1 == NULL)
+		so_exit(NULL, game);
 	// ft_printf("hello 2\n");
-	// if (game->images->board1 == NULL)
-	// 	sl_error();
-	game->images->board2 = mlx_texture_to_image(game->window, game->textures->board2);
-	// if (game->images->board2 == NULL)
-	// 	sl_error();
-	game->images->wall = mlx_texture_to_image(game->window, game->textures->wall);
-	// if (game->images->wall == NULL)
-	// 	sl_error();
-	game->images->player = mlx_texture_to_image(game->window, game->textures->player);
-	// if (game->images->player == NULL)
-	// 	sl_error();
-	game->images->collectible = mlx_texture_to_image(game->window, game->textures->collectible);
-	// if (game->images->collectible == NULL)
-	// 	sl_error();
-	game->images->exit = mlx_texture_to_image(game->window, game->textures->exit);
-	// if (game->images->exit == NULL)
-	// 	sl_error();
-	game->images->enemy = mlx_texture_to_image(game->window, game->textures->enemy);
-	// if (game->images->enemy == NULL)
-	// 	sl_error();
+	game->img->board2 = mlx_texture_to_image(game->window, game->png->board2);
+	if (game->img->board2 == NULL)
+		so_exit(NULL, game);
+	game->img->wall = mlx_texture_to_image(game->window, game->png->wall);
+	if (game->img->wall == NULL)
+		so_exit(NULL, game);
+	game->img->coll = mlx_texture_to_image(game->window, game->png->coll);
+	if (game->img->coll == NULL)
+		so_exit(NULL, game);
+	game->img->exit = mlx_texture_to_image(game->window, game->png->exit);
+	if (game->img->exit == NULL)
+		so_exit(NULL, game);
+	game->img->player = mlx_texture_to_image(game->window, game->png->player);
+	if (game->img->player == NULL)
+		so_exit(NULL, game);
+	// game->img->enemy = mlx_texture_to_image(game->window, game->png->enemy);
+	// if (game->img->enemy == NULL)
+	// 	so_exit(NULL, game);
 }
 
-void	display_board(t_game *game)
+void	so_display_board(t_game *game)
 {
-	int	x;
-	int	y;
+	t_xy	xy;
 
-	y = 0;
-	while (y < game->map_size->y)
+	xy.y = 0;
+	while (xy.y < game->map_size.y)
 	{
-		x = 0;
-		while (x < game->map_size->x)
+		xy.x = 0;
+		while (xy.x < game->map_size.x)
 		{
-			if ((y + x) % 2 == 0)
-				mlx_image_to_window(game->window, game->images->board1, x * 64, y * 64); //mlx_error
+			if ((xy.y + xy.x) % 2 == 0)
+			{
+				if (mlx_image_to_window(game->window, game->img->board1,
+						xy.x * PIXEL, xy.y * PIXEL) == -1)
+					so_exit(NULL, game);
+			}
 			else
-				mlx_image_to_window(game->window, game->images->board2, x * 64, y * 64); //mlx_error
-			x++;
+			{
+				if (mlx_image_to_window(game->window, game->img->board2,
+						xy.x * PIXEL, xy.y * PIXEL) == -1)
+					so_exit(NULL, game);
+			}
+			xy.x++;
 		}
-		y++;
+		xy.y++;
 	}
 }
 
-void	display_objects(t_game *game)
+void	so_display_objects(t_game *game)
 {
-	int	x;
-	int	y;
+	t_xy	xy;
+	// int		collect_instance;
 
-	y = 0;
-	while (y < game->map_size->y)
+	// so_create_cmap(game);
+	xy.y = 0;
+	while (xy.y < game->map_size.y)
 	{
-		x = 0;
-		while (x < game->map_size->x)
+		xy.x = 0;
+		while (xy.x < game->map_size.x)
 		{
-			x++;
+			if (game->map[xy.y][xy.x] == '1')
+			{
+				if (mlx_image_to_window(game->window, game->img->wall,
+						xy.x * PIXEL, xy.y * PIXEL) == -1)
+					so_exit(NULL, game);
+			}
+			if (game->map[xy.y][xy.x] == 'C')
+			{
+				if (mlx_image_to_window(game->window, game->img->coll,
+						xy.x * PIXEL, xy.y * PIXEL) == -1)
+					so_exit(NULL, game);
+				// collect_instance = mlx_image_to_window(game->window, game->img->coll,
+				// 		xy.x * PIXEL, xy.y * PIXEL);
+				// if (collect_instance == -1)
+				// 	so_exit(NULL, game);
+				// else
+				// 	game->cmap[xy.y][xy.x] = collect_instance;
+			}
+			if (game->map[xy.y][xy.x] == 'E')
+			{
+				if (mlx_image_to_window(game->window, game->img->exit,
+						xy.x * PIXEL, xy.y * PIXEL) == -1)
+					so_exit(NULL, game);
+			}
+			if (game->map[xy.y][xy.x] == 'P')
+			{
+				if (mlx_image_to_window(game->window, game->img->player,
+						xy.x * PIXEL, xy.y * PIXEL) == -1)
+					so_exit(NULL, game);
+			}
+			// if (game->map[xy.y][xy.x] == '?')
+			// {
+			// 	if (mlx_image_to_window(game->window, game->img->enemy,
+			// 			xy.x * PIXEL, xy.y * PIXEL) == -1);
+			// 		so_exit(NULL, game);
+			// }
+			xy.x++;
 		}
-		y++;
+		xy.y++;
 	}
-	mlx_image_to_window(game->window, game->images->player, game->player_position->x * 64, game->player_position->y * 64);
-	mlx_image_to_window(game->window, game->images->collectible, 5 * 64, 4 * 64);
-	mlx_image_to_window(game->window, game->images->enemy, 4 * 64, 4 * 64);
-	mlx_image_to_window(game->window, game->images->exit, 1 * 64, 1 * 64);
-	mlx_image_to_window(game->window, game->images->wall, 0 * 64, 0 * 64);
 }

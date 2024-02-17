@@ -6,7 +6,7 @@
 #    By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/11 13:19:37 by mott              #+#    #+#              #
-#    Updated: 2024/02/16 19:48:52 by mott             ###   ########.fr        #
+#    Updated: 2024/02/17 19:47:31 by mott             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,9 @@ NAME = so_long
 SRCS = ./src/so_long.c \
        ./src/png.c \
        ./src/map.c \
-       ./src/map_valid.c
+       ./src/map_valid.c \
+       ./src/utils.c \
+       ./src/collect.c
 
 OBJS = $(SRCS:.c=.o)
 
