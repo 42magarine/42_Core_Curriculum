@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map.c                                              :+:      :+:    :+:   */
+/*   map_bonus.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 17:38:58 by mott              #+#    #+#             */
-/*   Updated: 2024/02/19 18:41:58 by mott             ###   ########.fr       */
+/*   Updated: 2024/02/19 20:30:28 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/so_long.h"
+#include "../include/so_long_bonus.h"
 
 // Opens, reads and validates the map.
 void	so_init_map(t_game *game, char *file)
@@ -29,6 +29,8 @@ void	so_init_map(t_game *game, char *file)
 		so_exit(ERR_USE, "Wrong number of exits.\n", game);
 	if (game->player_count != 1)
 		so_exit(ERR_USE, "Wrong number of players.\n", game);
+	if (game->enemy_count > 1)
+		so_exit(ERR_USE, "Wrong number of enemies.\n", game);
 	so_map_rectangular(game);
 	so_map_wall(game);
 	map_copy = so_copy_map(game);
@@ -109,6 +111,12 @@ void	so_count_objects(t_game *game, int x, int y)
 		game->player_count++;
 		game->player.y = y;
 		game->player.x = x;
+	}
+	else if (game->map[y][x] == 'X')
+	{
+		game->enemy_count++;
+		game->enemy.y = y;
+		game->enemy.x = x;
 	}
 	else if (game->map[y][x] != '0' && game->map[y][x] != '1')
 		so_exit(ERR_USE, "Forbidden character in map.\n", game);

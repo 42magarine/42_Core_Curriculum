@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mott <mott@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 17:18:41 by mott              #+#    #+#             */
-/*   Updated: 2024/02/12 19:49:27 by mott             ###   ########.fr       */
+/*   Updated: 2024/02/18 16:40:57 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int			ft_process_nbr16(long nbr, t_flags *flags, char xp);
 int			ft_set_sign(long *nbr, t_flags *flags);
 
 bool		ft_is_digit(int c);
-int			ft_toupper(int c);
+int			pf_toupper(int c);
 int			ft_strnlen(const char *str, size_t n);
 int			ft_nbrlen(unsigned long nbr, unsigned long base);
 int			ft_fill(int n, char c);

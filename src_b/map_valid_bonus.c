@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map_valid.c                                        :+:      :+:    :+:   */
+/*   map_valid_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 19:40:25 by mott              #+#    #+#             */
-/*   Updated: 2024/02/18 21:48:04 by mott             ###   ########.fr       */
+/*   Updated: 2024/02/19 15:08:55 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/so_long.h"
+#include "../include/so_long_bonus.h"
 
 // Checks if the map is rectangular.
 void	so_map_rectangular(t_game *game)
@@ -79,7 +79,8 @@ void	so_flood_fill(char **map, t_xy map_size, t_xy position)
 {
 	if (position.x < 0 || position.y < 0
 		|| position.x >= map_size.x || position.y >= map_size.y
-		|| map[position.y][position.x] == '1')
+		|| map[position.y][position.x] == '1'
+		|| map[position.y][position.x] == 'X')
 		return ;
 	map[position.y][position.x] = '1';
 	so_flood_fill(map, map_size, (t_xy){position.x - 1, position.y});

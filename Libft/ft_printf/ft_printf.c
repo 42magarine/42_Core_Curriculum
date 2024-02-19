@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 12:01:38 by mott              #+#    #+#             */
-/*   Updated: 2023/11/02 13:52:45 by mott             ###   ########.fr       */
+/*   Updated: 2024/02/18 16:41:38 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,6 @@ int	ft_putnbr16(unsigned long n, char xp)
 	if (xp == 'x' || xp == 'p')
 		nbytes += ft_putchar(base[n % 16]);
 	else
-		nbytes += ft_putchar(ft_toupper(base[n % 16]));
+		nbytes += ft_putchar(pf_toupper(base[n % 16]));
 	return (nbytes);
 }

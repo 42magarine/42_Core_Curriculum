@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mott <mott@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/01 13:25:36 by mott              #+#    #+#             */
-/*   Updated: 2024/02/15 16:15:27 by mott             ###   ########.fr       */
+/*   Updated: 2024/02/18 16:40:45 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,12 @@ bool	ft_is_digit(int c)
 	return (false);
 }
 
-// int	ft_toupper(int c)
-// {
-// 	if (c >= 'a' && c <= 'z')
-// 		c -= 32;
-// 	return (c);
-// }
+int	pf_toupper(int c)
+{
+	if (c >= 'a' && c <= 'z')
+		c -= 32;
+	return (c);
+}
 
 int	ft_strnlen(const char *str, size_t n)
 {
