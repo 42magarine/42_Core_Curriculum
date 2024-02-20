@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 19:40:25 by mott              #+#    #+#             */
-/*   Updated: 2024/02/19 15:08:55 by mott             ###   ########.fr       */
+/*   Updated: 2024/02/20 12:00:11 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,8 +79,7 @@ void	so_flood_fill(char **map, t_xy map_size, t_xy position)
 {
 	if (position.x < 0 || position.y < 0
 		|| position.x >= map_size.x || position.y >= map_size.y
-		|| map[position.y][position.x] == '1'
-		|| map[position.y][position.x] == 'X')
+		|| map[position.y][position.x] == '1')
 		return ;
 	map[position.y][position.x] = '1';
 	so_flood_fill(map, map_size, (t_xy){position.x - 1, position.y});

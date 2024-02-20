@@ -6,12 +6,13 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 16:46:51 by mott              #+#    #+#             */
-/*   Updated: 2024/02/19 17:44:19 by mott             ###   ########.fr       */
+/*   Updated: 2024/02/20 14:38:22 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/so_long.h"
 
+// Creates and runs the game.
 void	so_init_game(t_game *game)
 {
 	game->window = mlx_init(game->map_size.x * PIXEL, game->map_size.y * PIXEL,
@@ -30,6 +31,7 @@ void	so_init_game(t_game *game)
 	free(game->img);
 }
 
+// Detects keyboard input and executes the corresponding action.
 void	so_key_hook(mlx_key_data_t keydata, void *param)
 {
 	t_game	*game;
@@ -51,24 +53,7 @@ void	so_key_hook(mlx_key_data_t keydata, void *param)
 		mlx_close_window(game->window);
 }
 
-// replace mlx_key_hook() with: mlx_loop_hook(game->window, so_hook, game);
-// void	so_hook(void *param)
-// {
-// 	t_game	*game;
-
-// 	game = param;
-// 	if (mlx_is_key_down(game->window, MLX_KEY_W))
-// 		so_move_player(game, game->player.x, game->player.y - 1);
-// 	if (mlx_is_key_down(game->window, MLX_KEY_A))
-// 		so_move_player(game, game->player.x - 1, game->player.y);
-// 	if (mlx_is_key_down(game->window, MLX_KEY_S))
-// 		so_move_player(game, game->player.x, game->player.y + 1);
-// 	if (mlx_is_key_down(game->window, MLX_KEY_D))
-// 		so_move_player(game, game->player.x + 1, game->player.y);
-// 	if (mlx_is_key_down(game->window, MLX_KEY_ESCAPE))
-// 		mlx_close_window(game->window);
-// }
-
+// Moves the player on the board and displays the number of moves.
 void	so_move_player(t_game *game, int x, int y)
 {
 	if (game->map[y][x] == '1')
@@ -86,6 +71,7 @@ void	so_move_player(t_game *game, int x, int y)
 		so_did_you_win(game);
 }
 
+// disable the image of collected collectivles.
 void	so_collect_collectible(t_game *game, int x, int y)
 {
 	int	i;
@@ -103,6 +89,7 @@ void	so_collect_collectible(t_game *game, int x, int y)
 	}
 }
 
+// Checks if all collectibles are collected.
 void	so_did_you_win(t_game *game)
 {
 	int		i;

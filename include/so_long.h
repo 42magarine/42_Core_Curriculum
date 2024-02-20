@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/11 13:20:16 by mott              #+#    #+#             */
-/*   Updated: 2024/02/19 18:41:01 by mott             ###   ########.fr       */
+/*   Updated: 2024/02/20 14:19:09 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,10 +57,10 @@ typedef struct s_game
 	t_images	*img;
 	char		**map;
 	t_xy		map_size;
-	t_xy		player;
-	int			player_count;
 	int			collect_count;
 	int			exit_count;
+	int			player_count;
+	t_xy		player;
 	int			move_count;
 }	t_game;
 

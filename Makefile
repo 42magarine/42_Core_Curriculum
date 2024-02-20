@@ -6,7 +6,7 @@
 #    By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/11 13:19:37 by mott              #+#    #+#              #
-#    Updated: 2024/02/19 20:20:45 by mott             ###   ########.fr        #
+#    Updated: 2024/02/20 14:42:58 by mott             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,6 +28,7 @@ SRCS_B = ./src_b/so_long_bonus.c \
          ./src_b/map_bonus.c \
          ./src_b/map_valid_bonus.c \
          ./src_b/png_bonus.c \
+         ./src_b/enemy_bonus.c \
 
 OBJS = $(SRCS:.c=.o)
 OBJS_B = $(SRCS_B:.c=.o)

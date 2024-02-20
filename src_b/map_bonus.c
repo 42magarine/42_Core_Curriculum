@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 17:38:58 by mott              #+#    #+#             */
-/*   Updated: 2024/02/19 20:30:28 by mott             ###   ########.fr       */
+/*   Updated: 2024/02/20 12:25:21 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ void	so_loop_map(t_game *game, void (*f)(t_game *game, int x, int y))
 		x = 0;
 		while (x < game->map_size.x)
 		{
-			f(game, x * PIXEL, y * PIXEL);
+			f(game, x, y);
 			x++;
 		}
 		y++;
@@ -100,8 +100,6 @@ void	so_loop_map(t_game *game, void (*f)(t_game *game, int x, int y))
 // Counts the number of all objects.
 void	so_count_objects(t_game *game, int x, int y)
 {
-	y /= 64;
-	x /= 64;
 	if (game->map[y][x] == 'C')
 		game->collect_count++;
 	else if (game->map[y][x] == 'E')

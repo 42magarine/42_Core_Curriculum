@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 13:42:22 by mott              #+#    #+#             */
-/*   Updated: 2024/02/19 18:37:14 by mott             ###   ########.fr       */
+/*   Updated: 2024/02/20 14:31:32 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ int	main(int argc, char **argv)
 	so_init_map(game, argv[1]);
 	so_init_game(game);
 	free(game);
-	system("leaks so_long");
 	return (EXIT_SUCCESS);
 }
 
@@ -47,7 +46,6 @@ void	so_exit(int error, char *message, t_game *game)
 	}
 	else if (error == ERR_MLX)
 		ft_putstr_fd((char *)mlx_strerror(mlx_errno), STDERR_FILENO);
-	system("leaks so_long");
 	exit(EXIT_FAILURE);
 }
 

@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 14:56:31 by mott              #+#    #+#             */
-/*   Updated: 2024/02/19 18:43:53 by mott             ###   ########.fr       */
+/*   Updated: 2024/02/20 14:39:36 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ void	so_create_images(t_game *game)
 		so_exit(ERR_MLX, NULL, game);
 }
 
+// Decides which board color should be displayed.
 void	so_board_to_window(t_game *game, int x, int y)
 {
 	if ((y / PIXEL + x / PIXEL) % 2 == 0)
@@ -62,6 +63,7 @@ void	so_board_to_window(t_game *game, int x, int y)
 	}
 }
 
+// Decides which object should be displayed.
 void	so_objects_to_window(t_game *game, int x, int y)
 {
 	if (game->map[y / PIXEL][x / PIXEL] == '1')

@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 14:56:31 by mott              #+#    #+#             */
-/*   Updated: 2024/02/19 20:14:36 by mott             ###   ########.fr       */
+/*   Updated: 2024/02/20 14:28:40 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,90 +24,90 @@ void	so_load_png(t_game *game)
 	game->png->collect = mlx_load_png("./textures/collectible.png");
 	game->png->exit = mlx_load_png("./textures/exit.png");
 	game->png->player = mlx_load_png("./textures/player.png");
-	game->png->enemy1 = mlx_load_png("./textures/enemy1.png");
-	game->png->enemy2 = mlx_load_png("./textures/enemy2.png");
+	game->png->enemy[0] = mlx_load_png("./textures/queen-01.png");
+	game->png->enemy[1] = mlx_load_png("./textures/queen-02.png");
+	game->png->enemy[2] = mlx_load_png("./textures/queen-03.png");
+	game->png->enemy[3] = mlx_load_png("./textures/queen-04.png");
+	game->png->enemy[4] = mlx_load_png("./textures/queen-05.png");
+	game->png->enemy[5] = mlx_load_png("./textures/queen-06.png");
+	game->png->enemy[6] = mlx_load_png("./textures/queen-07.png");
+	game->png->enemy[7] = mlx_load_png("./textures/queen-08.png");
 	if (game->png->board1 == NULL || game->png->board2 == NULL
 		|| game->png->wall == NULL || game->png->collect == NULL
 		|| game->png->exit == NULL || game->png->player == NULL
-		|| game->png->enemy1 == NULL || game->png->enemy2 == NULL)
+		|| game->png->enemy[0] == NULL || game->png->enemy[1] == NULL
+		|| game->png->enemy[2] == NULL || game->png->enemy[3] == NULL
+		|| game->png->enemy[4] == NULL || game->png->enemy[5] == NULL
+		|| game->png->enemy[6] == NULL || game->png->enemy[7] == NULL)
 		so_exit(ERR_MLX, NULL, game);
 }
 
 // convert png-files to images.
-void	so_create_images(t_game *game)
+void	so_create_images(t_game *g)
 {
-	game->img = malloc(sizeof(t_images));
-	if (game->img == NULL)
-		so_exit(ERR_SYS, "malloc", game);
-	game->img->board1 = mlx_texture_to_image(game->window, game->png->board1);
-	game->img->board2 = mlx_texture_to_image(game->window, game->png->board2);
-	game->img->wall = mlx_texture_to_image(game->window, game->png->wall);
-	game->img->collect = mlx_texture_to_image(game->window, game->png->collect);
-	game->img->exit = mlx_texture_to_image(game->window, game->png->exit);
-	game->img->player = mlx_texture_to_image(game->window, game->png->player);
-	game->img->enemy1 = mlx_texture_to_image(game->window, game->png->enemy1);
-	game->img->enemy2 = mlx_texture_to_image(game->window, game->png->enemy2);
-	if (game->img->board1 == NULL || game->img->board2 == NULL
-		|| game->img->wall == NULL || game->img->collect == NULL
-		|| game->img->exit == NULL || game->img->player == NULL
-		|| game->img->enemy1 == NULL || game->img->enemy2 == NULL)
-		so_exit(ERR_MLX, NULL, game);
+	g->img = malloc(sizeof(t_images));
+	if (g->img == NULL)
+		so_exit(ERR_SYS, "malloc", g);
+	g->img->board1 = mlx_texture_to_image(g->window, g->png->board1);
+	g->img->board2 = mlx_texture_to_image(g->window, g->png->board2);
+	g->img->wall = mlx_texture_to_image(g->window, g->png->wall);
+	g->img->collect = mlx_texture_to_image(g->window, g->png->collect);
+	g->img->exit = mlx_texture_to_image(g->window, g->png->exit);
+	g->img->player = mlx_texture_to_image(g->window, g->png->player);
+	g->img->enemy[0] = mlx_texture_to_image(g->window, g->png->enemy[0]);
+	g->img->enemy[1] = mlx_texture_to_image(g->window, g->png->enemy[1]);
+	g->img->enemy[2] = mlx_texture_to_image(g->window, g->png->enemy[2]);
+	g->img->enemy[3] = mlx_texture_to_image(g->window, g->png->enemy[3]);
+	g->img->enemy[4] = mlx_texture_to_image(g->window, g->png->enemy[4]);
+	g->img->enemy[5] = mlx_texture_to_image(g->window, g->png->enemy[5]);
+	g->img->enemy[6] = mlx_texture_to_image(g->window, g->png->enemy[6]);
+	g->img->enemy[7] = mlx_texture_to_image(g->window, g->png->enemy[7]);
+	if (g->img->board1 == NULL || g->img->board2 == NULL
+		|| g->img->wall == NULL || g->img->collect == NULL
+		|| g->img->exit == NULL || g->img->player == NULL
+		|| g->img->enemy[0] == NULL || g->img->enemy[1] == NULL
+		|| g->img->enemy[2] == NULL || g->img->enemy[3] == NULL
+		|| g->img->enemy[4] == NULL || g->img->enemy[5] == NULL
+		|| g->img->enemy[6] == NULL || g->img->enemy[7] == NULL)
+		so_exit(ERR_MLX, NULL, g);
 }
 
+// Decides which board color should be displayed.
 void	so_board_to_window(t_game *game, int x, int y)
 {
-	if ((y / PIXEL + x / PIXEL) % 2 == 0)
-	{
-		if (mlx_image_to_window(game->window, game->img->board1, x, y) == -1)
-			so_exit(ERR_MLX, NULL, game);
-	}
+	if ((y + x) % 2 == 0)
+		so_image_to_window(game, game->img->board1, x, y);
 	else
-	{
-		if (mlx_image_to_window(game->window, game->img->board2, x, y) == -1)
-			so_exit(ERR_MLX, NULL, game);
-	}
+		so_image_to_window(game, game->img->board2, x, y);
 }
 
+// Decides which object should be displayed.
 void	so_objects_to_window(t_game *game, int x, int y)
-{
-	if (game->map[y / PIXEL][x / PIXEL] == '1')
-	{
-		if (mlx_image_to_window(game->window, game->img->wall, x, y) == -1)
-			so_exit(ERR_MLX, NULL, game);
-	}
-	else if (game->map[y / PIXEL][x / PIXEL] == 'C')
-	{
-		if (mlx_image_to_window(game->window, game->img->collect, x, y) == -1)
-			so_exit(ERR_MLX, NULL, game);
-	}
-	else if (game->map[y / PIXEL][x / PIXEL] == 'E')
-	{
-		if (mlx_image_to_window(game->window, game->img->exit, x, y) == -1)
-			so_exit(ERR_MLX, NULL, game);
-	}
-	else if (game->map[y / PIXEL][x / PIXEL] == 'P')
-	{
-		if (mlx_image_to_window(game->window, game->img->player, x, y) == -1)
-			so_exit(ERR_MLX, NULL, game);
-	}
-	else if (game->map[y / PIXEL][x / PIXEL] == 'X')
-	{
-		if (mlx_image_to_window(game->window, game->img->enemy1, x, y) == -1)
-			so_exit(ERR_MLX, NULL, game);
-		if (mlx_image_to_window(game->window, game->img->enemy2, x, y) == -1)
-			so_exit(ERR_MLX, NULL, game);
-	}
-}
-
-// Calculates the length of the string until '\n'.
-int	so_strlen(char *str)
 {
 	int	i;
 
-	i = 0;
-	if (str == NULL)
-		return (i);
-	while (str[i] != '\n')
-		i++;
-	return (i);
+	if (game->map[y][x] == '1')
+		so_image_to_window(game, game->img->wall, x, y);
+	else if (game->map[y][x] == 'C')
+		so_image_to_window(game, game->img->collect, x, y);
+	else if (game->map[y][x] == 'E')
+		so_image_to_window(game, game->img->exit, x, y);
+	else if (game->map[y][x] == 'P')
+		so_image_to_window(game, game->img->player, x, y);
+	else if (game->map[y][x] == 'X')
+	{
+		i = 0;
+		while (i < 8)
+		{
+			so_image_to_window(game, game->img->enemy[i], x, y);
+			i++;
+		}
+	}
+}
+
+// Displays the image in the window.
+void	so_image_to_window(t_game *game, mlx_image_t *img, int x, int y)
+{
+	if (mlx_image_to_window(game->window, img, x * PIXEL, y * PIXEL) == -1)
+		so_exit(ERR_MLX, NULL, game);
 }

@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/11 13:20:16 by mott              #+#    #+#             */
-/*   Updated: 2024/02/19 21:32:01 by mott             ###   ########.fr       */
+/*   Updated: 2024/02/20 14:19:33 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,7 @@ typedef struct s_textures
 	mlx_texture_t	*collect;
 	mlx_texture_t	*exit;
 	mlx_texture_t	*player;
-	mlx_texture_t	*enemy1;
-	mlx_texture_t	*enemy2;
+	mlx_texture_t	*enemy[8];
 }	t_textures;
 
 typedef struct s_images
@@ -50,8 +49,7 @@ typedef struct s_images
 	mlx_image_t	*collect;
 	mlx_image_t	*exit;
 	mlx_image_t	*player;
-	mlx_image_t	*enemy1;
-	mlx_image_t	*enemy2;
+	mlx_image_t	*enemy[8];
 }	t_images;
 
 typedef struct s_game
@@ -61,13 +59,13 @@ typedef struct s_game
 	t_images	*img;
 	char		**map;
 	t_xy		map_size;
-	t_xy		player;
-	t_xy		enemy;
 	int			collect_count;
 	int			exit_count;
 	int			player_count;
-	int			enemy_count;
+	t_xy		player;
 	int			move_count;
+	int			enemy_count;
+	t_xy		enemy;
 }	t_game;
 
 enum e_error
@@ -101,8 +99,6 @@ void	so_valid_path(t_game *game, char **map_copy);
 // game_bonus.c
 void	so_init_game(t_game *game);
 void	so_key_hook(mlx_key_data_t keydata, void *param);
-void	so_enemy_hook(void *param);
-void	so_move_enemy(t_game *game, int y, int x);
 void	so_move_player(t_game *game, int x, int y);
 void	so_collect_collectible(t_game *game, int x, int y);
 void	so_did_you_win(t_game *game);
@@ -112,6 +108,12 @@ void	so_load_png(t_game *game);
 void	so_create_images(t_game *game);
 void	so_board_to_window(t_game *game, int x, int y);
 void	so_objects_to_window(t_game *game, int x, int y);
+void	so_image_to_window(t_game *game, mlx_image_t *img, int x, int y);
+
+// enemy_bonus.c
+void	so_enemy_hook(void *param);
+void	so_enemy_animation(t_game *game, int i);
+void	so_move_enemy(t_game *game, int x, int y);
 int		so_strlen(char *str);
 
 #endif

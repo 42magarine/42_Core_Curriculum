@@ -6,13 +6,11 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 13:42:22 by mott              #+#    #+#             */
-/*   Updated: 2024/02/19 20:16:51 by mott             ###   ########.fr       */
+/*   Updated: 2024/02/20 14:31:47 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/so_long_bonus.h"
-
-// floodfile with only way through enemy
 
 int	main(int argc, char **argv)
 {
@@ -27,7 +25,6 @@ int	main(int argc, char **argv)
 	so_init_map(game, argv[1]);
 	so_init_game(game);
 	free(game);
-	system("leaks so_long_bonus");
 	return (EXIT_SUCCESS);
 }
 
@@ -49,7 +46,6 @@ void	so_exit(int error, char *message, t_game *game)
 	}
 	else if (error == ERR_MLX)
 		ft_putstr_fd((char *)mlx_strerror(mlx_errno), STDERR_FILENO);
-	system("leaks so_long");
 	exit(EXIT_FAILURE);
 }
 
@@ -69,6 +65,8 @@ void	so_free_strs(char **strs)
 // Frees all png-files.
 void	so_free_png(t_textures *png)
 {
+	int	i;
+
 	if (png->board1 != NULL)
 		mlx_delete_texture(png->board1);
 	if (png->board2 != NULL)
@@ -81,16 +79,21 @@ void	so_free_png(t_textures *png)
 		mlx_delete_texture(png->exit);
 	if (png->player != NULL)
 		mlx_delete_texture(png->player);
-	if (png->enemy1 != NULL)
-		mlx_delete_texture(png->enemy1);
-	if (png->enemy2 != NULL)
-		mlx_delete_texture(png->enemy2);
+	i = 0;
+	while (i < 8)
+	{
+		if (png->enemy[i] != NULL)
+			mlx_delete_texture(png->enemy[i]);
+		i++;
+	}
 	free(png);
 }
 
 // Frees all img-files.
 void	so_free_img(t_game *game)
 {
+	int	i;
+
 	if (game->img->board1 != NULL)
 		mlx_delete_image(game->window, game->img->board1);
 	if (game->img->board2 != NULL)
@@ -103,9 +106,12 @@ void	so_free_img(t_game *game)
 		mlx_delete_image(game->window, game->img->exit);
 	if (game->img->player != NULL)
 		mlx_delete_image(game->window, game->img->player);
-	if (game->img->enemy1 != NULL)
-		mlx_delete_image(game->window, game->img->enemy1);
-	if (game->img->enemy2 != NULL)
-		mlx_delete_image(game->window, game->img->enemy2);
+	i = 0;
+	while (i < 8)
+	{
+		if (game->img->enemy[i] != NULL)
+			mlx_delete_image(game->window, game->img->enemy[i]);
+		i++;
+	}
 	free(game->img);
 }
