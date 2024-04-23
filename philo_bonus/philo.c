@@ -6,8 +6,13 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 17:20:36 by mott              #+#    #+#             */
-/*   Updated: 2024/04/23 17:20:49 by mott             ###   ########.fr       */
+/*   Updated: 2024/04/23 19:09:55 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
+int	main(void)
+{
+	return (EXIT_SUCCESS);
+}
