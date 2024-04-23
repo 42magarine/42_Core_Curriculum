@@ -1,0 +1,4 @@
+
+git remote -v
+git remote set-url --add --push origin [vogshere-url]
+git remote set-url --add --push origin [github-url]
