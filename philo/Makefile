@@ -6,12 +6,13 @@
 #    By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/23 17:21:11 by mott              #+#    #+#              #
-#    Updated: 2024/04/23 19:18:14 by mott             ###   ########.fr        #
+#    Updated: 2024/04/25 19:09:12 by mott             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC		= cc
-CFLAGS	= -Wall -Wextra -Werror
+# CFLAGS	= -Wall -Wextra -Werror
+CFLAGS	= -Wall -Wextra -Werror -pthread
 RM		= rm -rf
 
 NAME	= philo
