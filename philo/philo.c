@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 17:20:36 by mott              #+#    #+#             */
-/*   Updated: 2024/05/09 17:30:05 by mott             ###   ########.fr       */
+/*   Updated: 2024/05/09 18:22:31 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,9 +87,9 @@
 // 	return (EXIT_SUCCESS);
 // }
 
-static int	ft_error()
+static int	ft_error(const char *str)
 {
-	printf("Error\n");
+	printf("Error: %s\n", str);
 	return (EXIT_FAILURE);
 }
 
@@ -107,10 +107,9 @@ int	main(int argc, char **argv)
 	t_philo	philo;
 
 	if (argc < 5 || argc > 6)
-		return (ft_error());
+		return (ft_error("Wrong number of arguments"));
 	if (parse_input(&philo, argv) == EXIT_FAILURE)
-		return (ft_error());
+		return (ft_error("Wrong input"));
 	printer(&philo);
 	return (EXIT_SUCCESS);
 }
-

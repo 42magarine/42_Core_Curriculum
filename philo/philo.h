@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 17:20:24 by mott              #+#    #+#             */
-/*   Updated: 2024/05/09 17:30:17 by mott             ###   ########.fr       */
+/*   Updated: 2024/05/09 18:23:22 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,14 +24,14 @@
 
 typedef struct s_philo
 {
-	int	num_philo; // number_of_philosophers;
+	int	num_philo;
 	int	time_to_die;
 	int	time_to_eat;
 	int	time_to_sleep;
-	int	num_eaten; // number_of_times_each_philosophers_must_eat;
-} t_philo;
-
-#endif
+	int	num_eaten;
+}	t_philo;
 
 int	main(int argc, char **argv);
 int	parse_input(t_philo *philo, char **argv);
+
+#endif
