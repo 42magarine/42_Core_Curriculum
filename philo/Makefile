@@ -6,24 +6,25 @@
 #    By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/23 17:21:11 by mott              #+#    #+#              #
-#    Updated: 2024/05/06 15:00:16 by mott             ###   ########.fr        #
+#    Updated: 2024/05/09 15:18:01 by mott             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-CC		= cc
-# CFLAGS	= -Wall -Wextra -Werror
-CFLAGS	= -Wall -Wextra -Werror -pthread
-RM		= rm -rf
+CC		=	cc
+# CFLAGS	=	-Wall -Wextra -Werror
+CFLAGS	=	-Wall -Wextra -Werror -pthread
+RM		=	rm -rf
 
-NAME	= philo
-SRCS	= philo.c
-OBJS	= $(SRCS:.c=.o)
-HEADERS	= philo.h
+NAME	=	philo
+SRCS	=	philo.c \
+			ft_atoi.c
+OBJS	=	$(SRCS:.c=.o)
+HEADERS	=	philo.h
 
-RESET	= \033[0m
-RED		= \033[0;31m
-YELLOW	= \033[0;33m
-BLUE	= \033[0;34m
+RESET	=	\033[0m
+RED		=	\033[0;31m
+YELLOW	=	\033[0;33m
+BLUE	=	\033[0;34m
 
 all: $(NAME)
 
@@ -50,7 +51,20 @@ fclean: clean
 re: fclean
 	@$(MAKE) all
 
-.PHONY: all clean fclean re
+run:
+	@$(MAKE) all
+	@echo "$(YELLOW)./philo 1 800 200 200$(RESET)"
+	@./philo 1 800 200 200
+# @echo "$(YELLOW)./philo 5 800 200 200$(RESET)"
+# @./philo 5 800 200 200
+# @echo "$(YELLOW)./philo 5 800 200 200 7$(RESET)"
+# @./philo 5 800 200 200 7
+# @echo "$(YELLOW)./philo 4 410 200 200$(RESET)"
+# @./philo 4 410 200 200
+# @echo "$(YELLOW)./philo 4 310 200 100$(RESET)"
+# @./philo 4 310 200 100
+
+.PHONY: all clean fclean re run
 
 # https://www.gnu.org/software/make/manual/make.html
 # https://github.com/Nuno-Jesus/Make-A-Make
