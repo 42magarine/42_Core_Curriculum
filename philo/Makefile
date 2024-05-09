@@ -6,7 +6,7 @@
 #    By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/23 17:21:11 by mott              #+#    #+#              #
-#    Updated: 2024/05/09 15:18:01 by mott             ###   ########.fr        #
+#    Updated: 2024/05/09 17:30:49 by mott             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ RM		=	rm -rf
 
 NAME	=	philo
 SRCS	=	philo.c \
-			ft_atoi.c
+			input.c
 OBJS	=	$(SRCS:.c=.o)
 HEADERS	=	philo.h
 

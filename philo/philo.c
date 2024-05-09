@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 17:20:36 by mott              #+#    #+#             */
-/*   Updated: 2024/05/09 15:22:54 by mott             ###   ########.fr       */
+/*   Updated: 2024/05/09 17:30:05 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,18 +87,10 @@
 // 	return (EXIT_SUCCESS);
 // }
 
-static t_philo	*init_input(char **argv)
+static int	ft_error()
 {
-	t_philo	*philo;
-
-	philo = malloc(sizeof(t_philo));
-	philo->num_philo = ft_atoi(argv[1]);
-	philo->time_to_die = ft_atoi(argv[2]);
-	philo->time_to_eat = ft_atoi(argv[3]);
-	philo->time_to_sleep = ft_atoi(argv[4]);
-	if (argv[5] != NULL)
-		philo->num_eaten = ft_atoi(argv[5]);
-	return (philo);
+	printf("Error\n");
+	return (EXIT_FAILURE);
 }
 
 static void	printer(t_philo *philo)
@@ -107,29 +99,18 @@ static void	printer(t_philo *philo)
 	printf("time_to_die: %d\n", philo->time_to_die);
 	printf("time_to_eat: %d\n", philo->time_to_eat);
 	printf("time_to_sleep: %d\n", philo->time_to_sleep);
-	if (philo->num_eaten != 0)
-		printf("num_eaten: %d\n", philo->num_eaten);
-}
-
-static void	ft_free(t_philo *philo)
-{
-	free(philo);
+	printf("num_eaten: %d\n", philo->num_eaten);
 }
 
 int	main(int argc, char **argv)
 {
-	t_philo	*philo;
+	t_philo	philo;
 
-	if (argc == 5 || argc == 6)
-	{
-		philo = init_input(argv);
-		printer(philo);
-		ft_free(philo);
-	}
-	else
-	{
-		printf("Error\n");
-	}
+	if (argc < 5 || argc > 6)
+		return (ft_error());
+	if (parse_input(&philo, argv) == EXIT_FAILURE)
+		return (ft_error());
+	printer(&philo);
 	return (EXIT_SUCCESS);
 }
 

@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 17:20:24 by mott              #+#    #+#             */
-/*   Updated: 2024/05/09 15:08:12 by mott             ###   ########.fr       */
+/*   Updated: 2024/05/09 17:30:17 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,4 +34,4 @@ typedef struct s_philo
 #endif
 
 int	main(int argc, char **argv);
-int	ft_atoi(const char *str);
+int	parse_input(t_philo *philo, char **argv);
