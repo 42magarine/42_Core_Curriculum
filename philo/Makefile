@@ -6,7 +6,7 @@
 #    By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/23 17:21:11 by mott              #+#    #+#              #
-#    Updated: 2024/05/09 17:30:49 by mott             ###   ########.fr        #
+#    Updated: 2024/05/09 18:57:26 by mott             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,8 +16,9 @@ CFLAGS	=	-Wall -Wextra -Werror -pthread
 RM		=	rm -rf
 
 NAME	=	philo
-SRCS	=	philo.c \
-			input.c
+SRCS	=	input.c \
+			main.c \
+			time.c
 OBJS	=	$(SRCS:.c=.o)
 HEADERS	=	philo.h
 

@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 17:20:24 by mott              #+#    #+#             */
-/*   Updated: 2024/05/09 18:23:22 by mott             ###   ########.fr       */
+/*   Updated: 2024/05/09 19:24:47 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,16 +22,18 @@
 						// pthread_mutex_init, pthread_mutex_destroy,
 						// pthread_mutex_lock, pthread_mutex_unlock
 
-typedef struct s_philo
+typedef struct s_input
 {
-	int	num_philo;
-	int	time_to_die;
-	int	time_to_eat;
-	int	time_to_sleep;
-	int	num_eaten;
-}	t_philo;
+	int		num_philo;
+	int		time_to_die;
+	int		time_to_eat;
+	int		time_to_sleep;
+	int		num_eaten;
+	long	start_time;
+}	t_input;
 
-int	main(int argc, char **argv);
-int	parse_input(t_philo *philo, char **argv);
+int		main(int argc, char **argv);
+int		parse_input(t_input *input, char **argv);
+long	get_time(void);
 
 #endif

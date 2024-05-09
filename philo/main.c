@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo.c                                            :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 17:20:36 by mott              #+#    #+#             */
-/*   Updated: 2024/05/09 18:22:31 by mott             ###   ########.fr       */
+/*   Updated: 2024/05/09 19:28:37 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,6 @@
 
 // pthread_mutex_t	g_mutex;
 // pthread_mutex_t	g_mutex2 = PTHREAD_MUTEX_INITIALIZER;
-
-// void	ft_usleep(void)
-// {
-// 	int	usec;
-
-// 	usec = 999999;
-// 	usleep(usec);
-// }
-
-// void	ft_gettimeofday(void)
-// {
-// 	struct timeval	tv;
-
-// 	gettimeofday(&tv, NULL);
-// 	printf("tv_sec: %ld\n", tv.tv_sec);		// seconds since 01.01.1970 00:00:00
-// 	printf("tv_usec: %d\n", tv.tv_usec);	// microseconds within the current second (1.000.000 usec = 1 sec)
-// }
 
 // void	*start_routine(void *id)
 // {
@@ -93,23 +76,37 @@ static int	ft_error(const char *str)
 	return (EXIT_FAILURE);
 }
 
-static void	printer(t_philo *philo)
+static void print_status(void)
 {
-	printf("num_philo: %d\n", philo->num_philo);
-	printf("time_to_die: %d\n", philo->time_to_die);
-	printf("time_to_eat: %d\n", philo->time_to_eat);
-	printf("time_to_sleep: %d\n", philo->time_to_sleep);
-	printf("num_eaten: %d\n", philo->num_eaten);
+	printf("%d %d has taken a fork\n", 0, 0);
+	printf("%d %d is eating\n", 0, 0);
+	printf("%d %d is sleeping\n", 0, 0);
+	printf("%d %d is thinking\n",0, 0);
+	printf("%d %d died\n", 0, 0);
+}
+
+static void	print_input(t_input *input)
+{
+	printf("num_philo: %d\n", input->num_philo);
+	printf("time_to_die: %d\n", input->time_to_die);
+	printf("time_to_eat: %d\n", input->time_to_eat);
+	printf("time_to_sleep: %d\n", input->time_to_sleep);
+	printf("num_eaten: %d\n", input->num_eaten);
 }
 
 int	main(int argc, char **argv)
 {
-	t_philo	philo;
+	t_input	input;
 
 	if (argc < 5 || argc > 6)
 		return (ft_error("Wrong number of arguments"));
-	if (parse_input(&philo, argv) == EXIT_FAILURE)
+	if (parse_input(&input, argv) == EXIT_FAILURE)
 		return (ft_error("Wrong input"));
-	printer(&philo);
+	input.start_time = get_time();
+	if (input.start_time == -1)
+		return (ft_error("gettimeofday"));
+	printf("starttime: %ld\n", input.start_time);
+	print_input(&input);
+	print_status();
 	return (EXIT_SUCCESS);
 }
