@@ -6,12 +6,12 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 18:45:21 by mott              #+#    #+#             */
-/*   Updated: 2024/05/09 19:28:57 by mott             ###   ########.fr       */
+/*   Updated: 2024/05/09 19:50:03 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-#include <limits.h>
+// #include <limits.h>
 
 // void	ft_usleep(void)
 // {

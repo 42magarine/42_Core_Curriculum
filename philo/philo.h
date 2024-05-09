@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 17:20:24 by mott              #+#    #+#             */
-/*   Updated: 2024/05/09 19:24:47 by mott             ###   ########.fr       */
+/*   Updated: 2024/05/09 20:18:33 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,5 +35,6 @@ typedef struct s_input
 int		main(int argc, char **argv);
 int		parse_input(t_input *input, char **argv);
 long	get_time(void);
+int		pthread_create_join(t_input *input);
 
 #endif
