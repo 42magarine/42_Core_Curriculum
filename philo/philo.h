@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 17:20:24 by mott              #+#    #+#             */
-/*   Updated: 2024/05/09 20:18:33 by mott             ###   ########.fr       */
+/*   Updated: 2024/05/10 16:20:26 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,17 @@ typedef struct s_input
 	long	start_time;
 }	t_input;
 
+typedef struct s_philo
+{
+	int				id_philo;
+	pthread_mutex_t	fork;
+}	t_philo;
+
 int		main(int argc, char **argv);
 int		parse_input(t_input *input, char **argv);
-long	get_time(void);
-int		pthread_create_join(t_input *input);
+int		get_time(long *time);
+int		pthread_create_join(t_input *input, t_philo **philo);
+int		init_philo_mutex(int num_philo, t_philo **philo);
+int		destroy_mutex(int num_philo, t_philo **philo);
 
 #endif

@@ -1,50 +1,46 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   threads.c                                          :+:      :+:    :+:   */
+/*   mutex.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/09 19:48:04 by mott              #+#    #+#             */
-/*   Updated: 2024/05/10 16:23:20 by mott             ###   ########.fr       */
+/*   Created: 2024/05/10 14:36:50 by mott              #+#    #+#             */
+/*   Updated: 2024/05/10 16:17:39 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-static void	*start_routine(void *arg)
+int	init_philo_mutex(int num_philo, t_philo **philo)
 {
-	t_philo	*philo;
+	int	i;
 
-	philo = (t_philo *)arg;
-	pthread_mutex_lock(&philo->fork);
-	printf("Hello from Philosopher[%d]\n", philo->id_philo);
-	pthread_mutex_unlock(&philo->fork);
-	return (NULL);
-}
-
-int	pthread_create_join(t_input *input, t_philo **philo)
-{
-	pthread_t	*tid;
-	int			i;
-
-	tid = malloc(sizeof(pthread_t) * input->num_philo);
-	if (tid == NULL)
+	*philo = malloc(sizeof(t_philo) * num_philo);
+	if (*philo == NULL)
 		return (EXIT_FAILURE);
 	i = 0;
-	while (i < input->num_philo)
+	while (i < num_philo)
 	{
-		if (pthread_create(&tid[i], NULL, &start_routine, philo[i]) != 0)
+		philo[i]->id_philo = i + 1;
+		if (pthread_mutex_init(&philo[i]->fork, NULL) != 0)
 			return (EXIT_FAILURE);
 		i++;
 	}
+	return (EXIT_SUCCESS);
+}
+
+int	destroy_mutex(int num_philo, t_philo **philo)
+{
+	int	i;
+
 	i = 0;
-	while (i < input->num_philo)
+	while (i < num_philo)
 	{
-		if (pthread_join(tid[i], NULL) != 0)
+		if (pthread_mutex_destroy(&philo[i]->fork) != 0)
 			return (EXIT_FAILURE);
 		i++;
 	}
-	free(tid);
+	free(*philo);
 	return (EXIT_SUCCESS);
 }

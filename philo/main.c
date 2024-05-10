@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 17:20:36 by mott              #+#    #+#             */
-/*   Updated: 2024/05/09 20:20:35 by mott             ###   ########.fr       */
+/*   Updated: 2024/05/10 16:21:58 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,17 +39,23 @@ static int	ft_error(const char *str)
 int	main(int argc, char **argv)
 {
 	t_input	input;
+	t_philo	*philo;
 
 	if (argc < 5 || argc > 6)
 		return (ft_error("Wrong number of arguments"));
 	if (parse_input(&input, argv) == EXIT_FAILURE)
 		return (ft_error("Wrong input"));
-	input.start_time = get_time();
-	if (input.start_time == -1)
-		return (ft_error("gettimeofday"));
-	pthread_create_join(&input);
-	// printf("starttime: %ld\n", input.start_time);
 	// print_input(&input);
+	if (get_time(&input.start_time) == EXIT_FAILURE)
+		return (ft_error("gettimeofday"));
+	// printf("starttime: %ld\n", input.start_time);
+	if (init_philo_mutex(input.num_philo, &philo) == EXIT_FAILURE)
+		return (ft_error("mutex"));
+	if (pthread_create_join(&input, &philo) == EXIT_FAILURE)
+		return (ft_error("pthread"));
 	// print_status();
+	if (destroy_mutex(input.num_philo, &philo) == EXIT_FAILURE)
+		return (ft_error("mutex"));
+	system("leaks philo");
 	return (EXIT_SUCCESS);
 }

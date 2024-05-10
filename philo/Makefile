@@ -6,7 +6,7 @@
 #    By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/23 17:21:11 by mott              #+#    #+#              #
-#    Updated: 2024/05/09 20:19:02 by mott             ###   ########.fr        #
+#    Updated: 2024/05/10 14:45:37 by mott             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,6 +18,7 @@ RM		=	rm -rf
 NAME	=	philo
 SRCS	=	input.c \
 			main.c \
+			mutex.c \
 			threads.c \
 			time.c
 OBJS	=	$(SRCS:.c=.o)
