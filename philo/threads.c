@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 19:48:04 by mott              #+#    #+#             */
-/*   Updated: 2024/05/10 16:23:20 by mott             ###   ########.fr       */
+/*   Updated: 2024/05/10 18:26:57 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,28 +18,30 @@ static void	*start_routine(void *arg)
 
 	philo = (t_philo *)arg;
 	pthread_mutex_lock(&philo->fork);
-	printf("Hello from Philosopher[%d]\n", philo->id_philo);
+	printf("Hello from Philosopher[%d]\n", philo->philo_id);
 	pthread_mutex_unlock(&philo->fork);
 	return (NULL);
 }
 
-int	pthread_create_join(t_input *input, t_philo **philo)
+int	pthread_create_join(int num_philo, t_philo **philo)
 {
 	pthread_t	*tid;
+	t_philo		*temp;
 	int			i;
 
-	tid = malloc(sizeof(pthread_t) * input->num_philo);
+	tid = malloc(sizeof(pthread_t) * num_philo);
 	if (tid == NULL)
 		return (EXIT_FAILURE);
 	i = 0;
-	while (i < input->num_philo)
+	while (i < num_philo)
 	{
-		if (pthread_create(&tid[i], NULL, &start_routine, philo[i]) != 0)
+		temp = &(*philo)[i];
+		if (pthread_create(&tid[i], NULL, &start_routine, temp) != 0)
 			return (EXIT_FAILURE);
 		i++;
 	}
 	i = 0;
-	while (i < input->num_philo)
+	while (i < num_philo)
 	{
 		if (pthread_join(tid[i], NULL) != 0)
 			return (EXIT_FAILURE);

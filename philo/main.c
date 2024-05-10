@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 17:20:36 by mott              #+#    #+#             */
-/*   Updated: 2024/05/10 16:21:58 by mott             ###   ########.fr       */
+/*   Updated: 2024/05/10 17:43:31 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,11 +51,11 @@ int	main(int argc, char **argv)
 	// printf("starttime: %ld\n", input.start_time);
 	if (init_philo_mutex(input.num_philo, &philo) == EXIT_FAILURE)
 		return (ft_error("mutex"));
-	if (pthread_create_join(&input, &philo) == EXIT_FAILURE)
+	if (pthread_create_join(input.num_philo, &philo) == EXIT_FAILURE)
 		return (ft_error("pthread"));
 	// print_status();
 	if (destroy_mutex(input.num_philo, &philo) == EXIT_FAILURE)
 		return (ft_error("mutex"));
-	system("leaks philo");
+	// system("leaks philo");
 	return (EXIT_SUCCESS);
 }

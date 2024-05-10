@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 14:36:50 by mott              #+#    #+#             */
-/*   Updated: 2024/05/10 16:17:39 by mott             ###   ########.fr       */
+/*   Updated: 2024/05/10 18:27:01 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 int	init_philo_mutex(int num_philo, t_philo **philo)
 {
-	int	i;
+	t_philo	*temp;
+	int		i;
 
 	*philo = malloc(sizeof(t_philo) * num_philo);
 	if (*philo == NULL)
@@ -22,8 +23,9 @@ int	init_philo_mutex(int num_philo, t_philo **philo)
 	i = 0;
 	while (i < num_philo)
 	{
-		philo[i]->id_philo = i + 1;
-		if (pthread_mutex_init(&philo[i]->fork, NULL) != 0)
+		temp = &(*philo)[i];
+		temp->philo_id = i + 1;
+		if (pthread_mutex_init(&temp->fork, NULL) != 0)
 			return (EXIT_FAILURE);
 		i++;
 	}
@@ -32,12 +34,14 @@ int	init_philo_mutex(int num_philo, t_philo **philo)
 
 int	destroy_mutex(int num_philo, t_philo **philo)
 {
-	int	i;
+	t_philo	*temp;
+	int		i;
 
 	i = 0;
 	while (i < num_philo)
 	{
-		if (pthread_mutex_destroy(&philo[i]->fork) != 0)
+		temp = &(*philo)[i];
+		if (pthread_mutex_destroy(&temp->fork) != 0)
 			return (EXIT_FAILURE);
 		i++;
 	}
