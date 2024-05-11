@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 14:46:10 by mott              #+#    #+#             */
-/*   Updated: 2024/05/11 12:01:41 by mott             ###   ########.fr       */
+/*   Updated: 2024/05/11 16:07:20 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,5 +48,6 @@ int	parse_input(t_data *data, char **argv)
 	}
 	else
 		data->num_eaten = -1;
+	data->philo_died = false;
 	return (EXIT_SUCCESS);
 }

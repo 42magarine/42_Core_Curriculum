@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 17:20:24 by mott              #+#    #+#             */
-/*   Updated: 2024/05/11 12:18:25 by mott             ###   ########.fr       */
+/*   Updated: 2024/05/11 16:11:37 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # include <pthread.h>	// pthread_create, pthread_detach, pthread_join,
 						// pthread_mutex_init, pthread_mutex_destroy,
 						// pthread_mutex_lock, pthread_mutex_unlock
+# include <stdbool.h>
 
 typedef struct s_data
 {
@@ -30,6 +31,7 @@ typedef struct s_data
 	int		time_to_sleep;
 	int		num_eaten;
 	long	start_time;
+	bool	philo_died;
 }	t_data;
 
 typedef struct s_philo
@@ -37,6 +39,7 @@ typedef struct s_philo
 	int				philo_id;
 	pthread_mutex_t	left_fork;
 	pthread_mutex_t	*right_fork;
+	long			last_meal;
 	t_data			*data;
 }	t_philo;
 
@@ -51,13 +54,14 @@ typedef enum e_status
 
 // main.c
 int		main(int argc, char **argv);
-int		print_status(int philo_id, t_status status);
+int		print_status(t_philo *philo, t_status status);
 // input.c
 int		parse_input(t_data *data, char **argv);
 // time.c
 int		get_time(long *time);
+void	ft_usleep(int msec);
 // mutex.c
-int		init_philo_mutex(int num_philo, t_philo **philo);
+int		init_philo_mutex(t_data *data, t_philo **philo);
 int		destroy_mutex(int num_philo, t_philo **philo);
 // threads.c
 int		pthread_create_join(int num_philo, t_philo **philo);

@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 17:20:36 by mott              #+#    #+#             */
-/*   Updated: 2024/05/11 12:01:04 by mott             ###   ########.fr       */
+/*   Updated: 2024/05/11 15:36:23 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,22 +27,24 @@ static int	ft_error(const char *str)
 	// printf("num_eaten: %d\n", data->num_eaten);
 // }
 
-int	print_status(int philo_id, t_status status)
+int	print_status(t_philo *philo, t_status status)
 {
 	long	time;
 
 	if (get_time(&time) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
+	time -= philo->data->start_time;
 	if (status == FORK)
-		printf("%ld %d has taken a fork\n", time, philo_id);
+		printf("%ld %d has taken a fork\n", time, philo->philo_id);
 	else if (status == EAT)
-		printf("%ld %d is eating\n", time, philo_id);
+		printf("%ld %d is eating\n", time, philo->philo_id);
 	else if (status == SLEEP)
-		printf("%ld %d is sleeping\n", time, philo_id);
+		printf("%ld %d is sleeping\n", time, philo->philo_id);
 	else if (status == THINK)
-		printf("%ld %d is thinking\n", time, philo_id);
+		printf("%ld %d is thinking\n", time, philo->philo_id);
 	else if (status == DIE)
-		printf("%ld %d died\n", time, philo_id);
+		printf("\x1b[33m%ld %d died\n\x1b[0m", time, philo->philo_id);
+		// printf("%ld %d died\n", time, philo->philo_id);
 	return (EXIT_SUCCESS);
 }
 
@@ -59,7 +61,7 @@ int	main(int argc, char **argv)
 	if (get_time(&data.start_time) == EXIT_FAILURE)
 		return (ft_error("gettimeofday"));
 	// printf("starttime: %ld\n", data.start_time);
-	if (init_philo_mutex(data.num_philo, &philo) == EXIT_FAILURE)
+	if (init_philo_mutex(&data, &philo) == EXIT_FAILURE)
 		return (ft_error("mutex"));
 	if (pthread_create_join(data.num_philo, &philo) == EXIT_FAILURE)
 		return (ft_error("pthread"));
