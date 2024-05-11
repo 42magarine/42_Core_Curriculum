@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 19:30:24 by mott              #+#    #+#             */
-/*   Updated: 2024/05/11 16:44:37 by mott             ###   ########.fr       */
+/*   Updated: 2024/05/11 19:35:13 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,8 @@ void	philo_eat(t_philo *philo)
 void	philo_sleep(t_philo *philo)
 {
 	print_status(philo, SLEEP);
+	if (philo_die(philo, philo->data->time_to_sleep) == true)
+		return ;
 	ft_usleep(philo->data->time_to_sleep);
 }
 
@@ -59,18 +61,18 @@ void	philo_think(t_philo *philo)
 	print_status(philo, THINK);
 }
 
-void	philo_die(t_philo *philo)
+bool	philo_die(t_philo *philo, int philo_action)
 {
 	long	time;
 
 	if (get_time(&time) == EXIT_FAILURE)
-		return ;
-	// printf("time: %ld\n", time);
-	// printf("philo->last_meal: %ld\n", philo->last_meal);
-	// printf("philo->data->time_to_die: %d\n", philo->data->time_to_die);
-	if (time > philo->last_meal + philo->data->time_to_die)
+		return (true);
+	if (time + philo_action > philo->last_meal + philo->data->time_to_die)
 	{
 		philo->data->philo_died = true;
+		ft_usleep(philo->last_meal + philo->data->time_to_die - time);
 		print_status(philo, DIE);
+		return (true);
 	}
+	return (false);
 }

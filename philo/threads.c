@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 19:48:04 by mott              #+#    #+#             */
-/*   Updated: 2024/05/11 16:04:53 by mott             ###   ########.fr       */
+/*   Updated: 2024/05/11 19:34:06 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,16 @@ static void	*start_routine(void *arg)
 	philo = (t_philo *)arg;
 	while (philo->data->philo_died == false)
 	{
+		if (philo->data->philo_died == true)
+			break ;
 		philo_fork(philo);
 		philo_eat(philo);
+		if (philo->data->philo_died == true)
+			break ;
 		philo_sleep(philo);
+		if (philo->data->philo_died == true)
+			break ;
 		philo_think(philo);
-		philo_die(philo);
 	}
 	return (NULL);
 }
