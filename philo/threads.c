@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 19:48:04 by mott              #+#    #+#             */
-/*   Updated: 2024/05/10 18:26:57 by mott             ###   ########.fr       */
+/*   Updated: 2024/05/10 19:36:52 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,12 @@ static void	*start_routine(void *arg)
 	t_philo	*philo;
 
 	philo = (t_philo *)arg;
-	pthread_mutex_lock(&philo->fork);
 	printf("Hello from Philosopher[%d]\n", philo->philo_id);
-	pthread_mutex_unlock(&philo->fork);
+	philo_fork(philo);
+	philo_eat(philo);
+	philo_sleep(philo);
+	philo_think(philo);
+	philo_die(philo);
 	return (NULL);
 }
 
