@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 14:46:10 by mott              #+#    #+#             */
-/*   Updated: 2024/05/12 19:09:24 by mott             ###   ########.fr       */
+/*   Updated: 2024/05/13 12:37:31 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,5 @@ int	init_data(t_data *data, char **argv)
 	if (get_time(&data->start_time) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
 	data->philo_died = false;
-	
 	return (EXIT_SUCCESS);
 }

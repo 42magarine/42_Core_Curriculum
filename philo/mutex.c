@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 14:36:50 by mott              #+#    #+#             */
-/*   Updated: 2024/05/12 21:05:48 by mott             ###   ########.fr       */
+/*   Updated: 2024/05/13 12:37:03 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ static int	init_mutex(t_data *data, t_philo **philo)
 
 	i = 0;
 	if (pthread_mutex_init(&data->printer, NULL) != 0)
+		return (ft_error("mutex_init"));
+	if (pthread_mutex_init(&data->dead, NULL) != 0)
 		return (ft_error("mutex_init"));
 	while (i < data->num_philo)
 	{
@@ -57,6 +59,8 @@ int	destroy_mutex(t_data *data, t_philo **philo)
 
 	i = 0;
 	if (pthread_mutex_destroy(&data->printer) != 0)
+		return (ft_error("mutex_destroy"));
+	if (pthread_mutex_destroy(&data->dead) != 0)
 		return (ft_error("mutex_destroy"));
 	while (i < data->num_philo)
 	{

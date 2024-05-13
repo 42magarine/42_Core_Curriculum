@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 17:20:36 by mott              #+#    #+#             */
-/*   Updated: 2024/05/12 19:35:27 by mott             ###   ########.fr       */
+/*   Updated: 2024/05/13 13:34:47 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	main(int argc, char **argv)
 		return (EXIT_FAILURE);
 	if (destroy_mutex(&data, &philo) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
-	system("leaks philo");
+	// system("leaks philo");
 	return (EXIT_SUCCESS);
 }
 
@@ -39,17 +39,14 @@ int	print_status(t_philo *philo, t_status status)
 	if (get_time(&time) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
 	time -= philo->data->start_time;
-	if (philo->data->philo_died == false)
-	{
-		if (status == FORK)
-			printf("%ld %d has taken a fork\n", time, philo->philo_id);
-		else if (status == EAT)
-			printf("%ld %d is eating\n", time, philo->philo_id);
-		else if (status == SLEEP)
-			printf("%ld %d is sleeping\n", time, philo->philo_id);
-		else if (status == THINK)
-			printf("%ld %d is thinking\n", time, philo->philo_id);
-	}
+	if (status == FORK)
+		printf("%ld %d has taken a fork\n", time, philo->philo_id);
+	else if (status == EAT)
+		printf("%ld %d is eating\n", time, philo->philo_id);
+	else if (status == SLEEP)
+		printf("%ld %d is sleeping\n", time, philo->philo_id);
+	else if (status == THINK)
+		printf("%ld %d is thinking\n", time, philo->philo_id);
 	else if (status == DIE)
 		printf("%ld %d died\n", time, philo->philo_id);
 	pthread_mutex_unlock(&philo->data->printer);

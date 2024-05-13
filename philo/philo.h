@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 17:20:24 by mott              #+#    #+#             */
-/*   Updated: 2024/05/12 21:06:19 by mott             ###   ########.fr       */
+/*   Updated: 2024/05/13 17:58:23 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ typedef struct s_data
 	long			start_time;
 	bool			philo_died;
 	pthread_mutex_t	printer;
-	// pthread_mutex_t	dead;
+	pthread_mutex_t	dead;
 }	t_data;
 
 typedef struct s_philo
@@ -66,11 +66,23 @@ int		ft_usleep(long milliseconds);
 int		init_philo_mutex(t_data *data, t_philo **philo);
 int		destroy_mutex(t_data *data, t_philo **philo);
 // threads.c
+void	philo_die(t_philo *philo, int time);
+bool	someone_died(t_philo *philo);
 int		pthread_create_join(int num_philo, t_philo **philo);
 // philo.c
-void	philo_fork(t_philo *philo);
 void	philo_eat(t_philo *philo);
 void	philo_sleep(t_philo *philo);
 void	philo_think(t_philo *philo);
 
 #endif
+
+// who dies first?
+// 5 400 200 200
+// 5 400 300 100
+// 5 400 100 300
+
+// is someone dying?
+// 200 200 100 <90
+// 200 200 <90 100
+
+// only print one dying message?

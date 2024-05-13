@@ -6,7 +6,7 @@
 #    By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/23 17:21:11 by mott              #+#    #+#              #
-#    Updated: 2024/05/12 15:44:12 by mott             ###   ########.fr        #
+#    Updated: 2024/05/13 18:02:07 by mott             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -57,20 +57,7 @@ fclean: clean
 re: fclean
 	@$(MAKE) all
 
-run:
-	@$(MAKE) all
-	@echo "$(YELLOW)./philo 1 800 200 200$(RESET)"
-	@./philo 1 800 200 200
-# @echo "$(YELLOW)./philo 5 800 200 200$(RESET)"
-# @./philo 5 800 200 200
-# @echo "$(YELLOW)./philo 5 800 200 200 7$(RESET)"
-# @./philo 5 800 200 200 7
-# @echo "$(YELLOW)./philo 4 410 200 200$(RESET)"
-# @./philo 4 410 200 200
-# @echo "$(YELLOW)./philo 4 310 200 100$(RESET)"
-# @./philo 4 310 200 100
-
-.PHONY: all clean fclean re run
+.PHONY: all clean fclean re
 
 # https://www.gnu.org/software/make/manual/make.html
 # https://github.com/Nuno-Jesus/Make-A-Make
