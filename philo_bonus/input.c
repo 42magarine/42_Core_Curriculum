@@ -6,12 +6,14 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 11:59:22 by mott              #+#    #+#             */
-/*   Updated: 2024/05/14 11:59:39 by mott             ###   ########.fr       */
+/*   Updated: 2024/05/14 14:33:24 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
+// Converts a string into an integer.
+// Returns EXIT_FAILURE if it is > INT_MAX or not contains only digits or is 0.
 static int	ft_atoi(int *n, char *str)
 {
 	*n = 0;
@@ -41,8 +43,7 @@ int	init_data(t_data *data, char **argv)
 		return (ft_error("Invalid number of times each philosopher must eat"));
 	else if (argv[5] == NULL)
 		data->num_eaten = -1;
-	if (get_time(&data->start_time) == EXIT_FAILURE)
-		return (EXIT_FAILURE);
-	data->philo_died = false;
+	data->start_time = get_time();
+	data->someone_died = false;
 	return (EXIT_SUCCESS);
 }

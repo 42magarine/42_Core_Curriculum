@@ -6,7 +6,7 @@
 #    By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/23 17:21:11 by mott              #+#    #+#              #
-#    Updated: 2024/05/13 18:02:07 by mott             ###   ########.fr        #
+#    Updated: 2024/05/14 13:57:38 by mott             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,10 +27,10 @@ SRCS	=	input.c \
 OBJS	=	$(SRCS:.c=.o)
 HEADERS	=	philo.h
 
-RESET	=	\033[0m
-RED		=	\033[0;31m
-YELLOW	=	\033[0;33m
-BLUE	=	\033[0;34m
+RESET	=	\x1b[0m
+RED		=	\x1b[31m
+YELLOW	=	\x1b[33m
+BLUE	=	\x1b[34m
 
 all: $(NAME)
 

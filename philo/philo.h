@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 17:20:24 by mott              #+#    #+#             */
-/*   Updated: 2024/05/13 17:58:23 by mott             ###   ########.fr       */
+/*   Updated: 2024/05/14 14:18:43 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ typedef struct s_data
 	long			start_time;
 	bool			philo_died;
 	pthread_mutex_t	printer;
-	pthread_mutex_t	dead;
+	pthread_mutex_t	dead; //death;
 }	t_data;
 
 typedef struct s_philo
