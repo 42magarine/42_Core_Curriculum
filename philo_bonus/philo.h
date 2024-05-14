@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 17:20:24 by mott              #+#    #+#             */
-/*   Updated: 2024/04/23 17:56:53 by mott             ###   ########.fr       */
+/*   Updated: 2024/05/14 12:01:54 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,5 +22,42 @@
 # include <signal.h>	// kill
 # include <sys/wait.h>	// waitpid
 # include <semaphore.h>	// sem_open, sem_close, sem_post, sem_wait, sem_unlink
+# include <stdbool.h>
+
+typedef struct s_data
+{
+	int		num_philo;
+	int		time_to_die;
+	int		time_to_eat;
+	int		time_to_sleep;
+	int		num_eaten;
+	long	start_time;
+	bool	philo_died;
+}	t_data;
+
+typedef struct s_philo
+{
+	int		philo_id;
+	t_data	*data;
+}	t_philo;
+
+typedef enum e_status
+{
+	FORK,
+	EAT,
+	SLEEP,
+	THINK,
+	DIE
+}	t_status;
+
+// main.c
+int	main(int argc, char **argv);
+int		print_status(t_philo *philo, t_status status);
+int		ft_error(char *str);
+// input.c
+int		init_data(t_data *data, char **argv);
+// time.c
+int		get_time(long *time);
+int		ft_usleep(long milliseconds);
 
 #endif

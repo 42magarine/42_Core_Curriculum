@@ -6,24 +6,26 @@
 #    By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/23 17:21:11 by mott              #+#    #+#              #
-#    Updated: 2024/05/08 13:42:52 by mott             ###   ########.fr        #
+#    Updated: 2024/05/14 12:02:31 by mott             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-CC		= cc
-# CFLAGS	= -Wall -Wextra -Werror
-CFLAGS	= -Wall -Wextra -Werror -pthread
-RM		= rm -rf
+CC		=	cc
+CFLAGS	=	-Wall -Wextra -Werror
+CFLAGS	+=	-fsanitize=address -g
+RM		=	rm -rf
 
-NAME	= philo
-SRCS	= philo.c
-OBJS	= $(SRCS:.c=.o)
-HEADERS	= philo.h
+NAME	=	philo
+SRCS	=	input.c \
+			main.c \
+			time.c
+OBJS	=	$(SRCS:.c=.o)
+HEADERS	=	philo.h
 
-RESET	= \033[0m
-RED		= \033[0;31m
-YELLOW	= \033[0;33m
-BLUE	= \033[0;34m
+RESET	=	\033[0m
+RED		=	\033[0;31m
+YELLOW	=	\033[0;33m
+BLUE	=	\033[0;34m
 
 all: $(NAME)
 
