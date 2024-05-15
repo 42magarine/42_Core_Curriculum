@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 17:20:24 by mott              #+#    #+#             */
-/*   Updated: 2024/05/14 15:53:23 by mott             ###   ########.fr       */
+/*   Updated: 2024/05/15 14:06:57 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ typedef struct s_data
 	int		num_eaten;
 	long	start_time;
 	bool	someone_died;
+	sem_t	*forks;
+	sem_t	*printer;
 }	t_data;
 
 typedef struct s_philo
@@ -52,7 +54,7 @@ typedef enum e_status
 
 // main.c
 int		main(int argc, char **argv);
-void	print_status(t_philo *philo, t_status status);
+void	print_status(t_data *data, int philo_id, t_status status);
 int		ft_error(char *str);
 // input.c
 int		init_data(t_data *data, char **argv);
@@ -60,11 +62,15 @@ int		init_data(t_data *data, char **argv);
 long	get_time(void);
 void	ft_usleep(long milliseconds);
 // child_process.c
-int		create_child_process(int num_philo, t_philo **philo);
+int		create_child_process(t_data *data);
 // philo.c
-void	philo_eat(t_philo *philo);
-void	philo_sleep(t_philo *philo);
-void	philo_think(t_philo *philo);
-void	philo_die(t_philo *philo, int time);
+void	philo_eat(t_data *data, int philo_id);
+void	philo_sleep(t_data *data, int philo_id);
+void	philo_think(t_data *data, int philo_id);
+void	philo_die(t_data *data, int philo_id, int time);
+// semaphore.c
+// int	init_philo(t_data *data, t_philo **philo);
+int		open_semaphore(t_data *data);
+int		unlink_semaphore(t_data *data);
 
 #endif

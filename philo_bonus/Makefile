@@ -6,13 +6,13 @@
 #    By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/23 17:21:11 by mott              #+#    #+#              #
-#    Updated: 2024/05/14 15:50:33 by mott             ###   ########.fr        #
+#    Updated: 2024/05/15 13:04:06 by mott             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC		=	cc
 CFLAGS	=	-Wall -Wextra -Werror
-CFLAGS	+=	-fsanitize=address -g
+# CFLAGS	+=	-fsanitize=address -g
 RM		=	rm -rf
 
 NAME	=	philo
@@ -20,6 +20,7 @@ SRCS	=	child_process.c \
 			input.c \
 			main.c \
 			philo.c \
+			semaphore.c \
 			time.c
 OBJS	=	$(SRCS:.c=.o)
 HEADERS	=	philo.h
