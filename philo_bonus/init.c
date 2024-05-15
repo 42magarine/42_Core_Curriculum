@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   input.c                                            :+:      :+:    :+:   */
+/*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 11:59:22 by mott              #+#    #+#             */
-/*   Updated: 2024/05/15 14:06:26 by mott             ###   ########.fr       */
+/*   Updated: 2024/05/15 16:46:22 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,5 +45,22 @@ int	init_data(t_data *data, char **argv)
 		data->num_eaten = -1;
 	data->start_time = get_time();
 	data->someone_died = false;
+	return (EXIT_SUCCESS);
+}
+
+int	init_philo(t_data *data, t_philo **philo)
+{
+	int	i;
+
+	*philo = malloc(sizeof(t_philo) * data->num_philo);
+	if (*philo == NULL)
+		return (ft_error("malloc"));
+	i = 0;
+	while (i < data->num_philo)
+	{
+		(*philo)[i].philo_id = i + 1;
+		(*philo)[i].last_meal = 0;
+		i++;
+	}
 	return (EXIT_SUCCESS);
 }

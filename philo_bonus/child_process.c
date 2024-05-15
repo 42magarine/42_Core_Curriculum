@@ -6,34 +6,42 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 14:17:10 by mott              #+#    #+#             */
-/*   Updated: 2024/05/15 13:21:01 by mott             ###   ########.fr       */
+/*   Updated: 2024/05/15 17:37:25 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-static void	start_routine(t_data *data, int philo_id)
+static void	dinner_for_one(t_data *data, int philo_id)
+{
+	philo_lock_fork(data, philo_id);
+	ft_usleep(data->time_to_die);
+	philo_die(data, philo_id);
+}
+
+static void	start_routine(t_data *data, t_philo *philo)
 {
 	int	counter;
 
-	// if (philo->data->num_philo == 1)
-	// 	return (dinner_for_one(philo));
+	if (data->num_philo == 1)
+		return (dinner_for_one(data, philo->philo_id));
+	if (philo->philo_id % 2 == 0)
+		ft_usleep (data->time_to_eat);
 	counter = data->num_eaten;
 	// pthread_mutex_lock(&philo->data->dead);
 	while (data->someone_died == false && counter != 0)
 	{
 		// pthread_mutex_unlock(&philo->data->dead);
-		printf("Hello from philosopher [%d]\n", philo_id);
-		philo_eat(data, philo_id);
-		philo_sleep(data, philo_id);
-		philo_think(data, philo_id);
+		philo_eat(data, philo);
+		philo_sleep(data, philo);
+		philo_think(data, philo);
 		counter--;
 		// pthread_mutex_lock(&philo->data->dead);
 	}
 	// pthread_mutex_unlock(&philo->data->dead);
 }
 
-int	create_child_process(t_data *data)
+int	create_child_process(t_data *data, t_philo **philo)
 {
 	pid_t	pid;
 	int		i;
@@ -46,7 +54,7 @@ int	create_child_process(t_data *data)
 			return (ft_error("fork"));
 		else if (pid == 0)
 		{
-			start_routine(data, i + 1);
+			start_routine(data, &(*philo)[i]);
 			exit(EXIT_SUCCESS);
 		}
 		i++;
