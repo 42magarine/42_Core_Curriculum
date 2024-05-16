@@ -6,7 +6,7 @@
 #    By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/23 17:21:11 by mott              #+#    #+#              #
-#    Updated: 2024/05/14 13:57:38 by mott             ###   ########.fr        #
+#    Updated: 2024/05/16 12:07:42 by mott             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,7 +42,7 @@ $(NAME): $(OBJS) $(HEADERS)
 %.o: %.c
 	@$(CC) $(CFLAGS) -c $< -o $@
 	@echo "$(BLUE) $(CC) $(CFLAGS) -c $< -o $@ $(RESET)"
-	@echo "$(YELLOW)Creating object files finished.$(RESET)"
+	@echo "$(YELLOW)Creating object file finished.$(RESET)"
 
 clean:
 	@$(RM) $(OBJS)

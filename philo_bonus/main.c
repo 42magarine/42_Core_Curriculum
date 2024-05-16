@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 17:20:36 by mott              #+#    #+#             */
-/*   Updated: 2024/05/15 17:39:47 by mott             ###   ########.fr       */
+/*   Updated: 2024/05/16 19:51:47 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,14 +46,14 @@ void	print_status(t_data *data, t_status status, long time, int philo_id)
 		printf("%ld %d is sleeping\n", time, philo_id);
 	else if (status == THINK)
 		printf("%ld %d is thinking\n", time, philo_id);
-	else if (status == DIE)
-		printf("%ld %d died\n", time, philo_id);
+	// else if (status == DIE)
+	// 	printf("%ld %d died\n", time, philo_id);
 	if (sem_post(data->printer) == -1)
 		ft_error("sem_post");
 }
 
 int	ft_error(char *str)
 {
-	printf("\x1b[31mError: %s!\n\x1b[0m", str);
+	printf("\x1b[31mError: %s!\x1b[0m\n", str);
 	return (EXIT_FAILURE);
 }

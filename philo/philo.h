@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 17:20:24 by mott              #+#    #+#             */
-/*   Updated: 2024/05/14 14:18:43 by mott             ###   ########.fr       */
+/*   Updated: 2024/05/16 15:57:56 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,5 +84,7 @@ void	philo_think(t_philo *philo);
 // is someone dying?
 // 200 200 100 <90
 // 200 200 <90 100
+
+// 2 200 300 200
 
 // only print one dying message?

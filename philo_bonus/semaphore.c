@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 12:13:02 by mott              #+#    #+#             */
-/*   Updated: 2024/05/15 17:57:19 by mott             ###   ########.fr       */
+/*   Updated: 2024/05/16 18:50:54 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,13 @@ int	open_semaphore(t_data *data)
 	sem_unlink("/forks");
 	sem_unlink("/printer");
 	sem_unlink("/dead");
-
 	data->forks = sem_open("/forks", O_CREAT, S_IRUSR | S_IWUSR, data->num_philo);
 	if (data->forks == SEM_FAILED)
 		return (ft_error("sem_open"));
 	data->printer = sem_open("/printer", O_CREAT, S_IRUSR | S_IWUSR, 1);
 	if (data->forks == SEM_FAILED)
 		return (ft_error("sem_open"));
-	data->dead = sem_open("/dead", O_CREAT, S_IRUSR | S_IWUSR, 1);
+	data->dead = sem_open("/dead", O_CREAT, S_IRUSR | S_IWUSR, 0);
 	if (data->forks == SEM_FAILED)
 		return (ft_error("sem_open"));
 	return (EXIT_SUCCESS);
@@ -47,13 +46,10 @@ int	unlink_semaphore(t_data *data)
 	return (EXIT_SUCCESS);
 }
 
-void	philo_lock_fork(t_data *data, int philo_id)
+void	philo_lock_fork(t_data *data, long time, int philo_id)
 {
-	long	time;
-
 	if (sem_wait(data->forks) == -1)
 		ft_error("sem_wait");
-	time = get_time() - data->start_time;
 	print_status(data, FORK, time, philo_id);
 }
 

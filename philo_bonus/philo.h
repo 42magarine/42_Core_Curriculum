@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 17:20:24 by mott              #+#    #+#             */
-/*   Updated: 2024/05/15 17:56:03 by mott             ###   ########.fr       */
+/*   Updated: 2024/05/16 18:34:05 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # include <sys/wait.h>	// waitpid
 # include <semaphore.h>	// sem_open, sem_close, sem_post, sem_wait, sem_unlink
 # include <stdbool.h>
+# include <errno.h>
 
 typedef struct s_data
 {
@@ -41,6 +42,7 @@ typedef struct s_data
 typedef struct s_philo
 {
 	int		philo_id;
+	pid_t	philo_pid;
 	long	last_meal;
 }	t_philo;
 
@@ -73,7 +75,7 @@ void	philo_die(t_data *data, int philo_id);
 // semaphore.c
 int		open_semaphore(t_data *data);
 int		unlink_semaphore(t_data *data);
-void	philo_lock_fork(t_data *data, int philo_id);
+void	philo_lock_fork(t_data *data, long time, int philo_id);
 void	philo_unlock_fork(t_data *data);
 
 #endif
