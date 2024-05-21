@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 11:59:22 by mott              #+#    #+#             */
-/*   Updated: 2024/05/16 20:00:58 by mott             ###   ########.fr       */
+/*   Updated: 2024/05/21 21:12:10 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ int	init_data(t_data *data, char **argv)
 	else if (argv[5] == NULL)
 		data->num_eaten = -1;
 	// data->start_time = get_time();
-	// data->someone_died = false;
 	return (EXIT_SUCCESS);
 }
 

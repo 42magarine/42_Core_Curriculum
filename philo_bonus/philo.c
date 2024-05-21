@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 15:49:43 by mott              #+#    #+#             */
-/*   Updated: 2024/05/16 20:04:53 by mott             ###   ########.fr       */
+/*   Updated: 2024/05/21 21:10:43 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,11 @@ void	philo_eat(t_data *data, t_philo *philo)
 {
 	long	time;
 
+	philo_lock_fork(data, philo);
+	philo_lock_fork(data, philo);
 	time = get_time() - data->start_time;
-	if (time < philo->last_meal + data->time_to_die)
+	if (time <= philo->last_meal + data->time_to_die)
 	{
-		philo_lock_fork(data, time, philo->philo_id);
-		philo_lock_fork(data, time, philo->philo_id);
 		philo->last_meal = time;
 		print_status(data, EAT, time, philo->philo_id);
 		ft_usleep(data->time_to_eat);
@@ -30,8 +30,7 @@ void	philo_eat(t_data *data, t_philo *philo)
 	else
 	{
 		ft_usleep(data->time_to_die - time);
-		philo_die(data, philo->philo_id);
-		// return ;
+		philo_die(data, philo);
 	}
 }
 
@@ -47,33 +46,44 @@ void	philo_sleep(t_data *data, t_philo *philo)
 	}
 	else
 	{
-		ft_usleep(data->time_to_die - time);
-		philo_die(data, philo->philo_id);
-		// return ;
+		ft_usleep(data->time_to_die - data->time_to_eat);
+		philo_die(data, philo);
 	}
 }
 
 void	philo_think(t_data *data, t_philo *philo)
 {
 	long	time;
+	long	time_to_think;
 
 	time = get_time() - data->start_time;
-	if (time <= philo->last_meal + data->time_to_die)
+	time_to_think = data->time_to_die - data->time_to_eat - data->time_to_sleep;
+	if (data->num_philo % 2 == 0)
 	{
 		print_status(data, THINK, time, philo->philo_id);
 	}
+	else
+	{
+		if (time + data->time_to_eat <= philo->last_meal + data->time_to_die)
+		{
+			ft_usleep(data->time_to_eat);
+		}
+		else
+		{
+			ft_usleep(data->time_to_die - data->time_to_eat - data->time_to_sleep);
+			philo_die(data, philo);
+		}
+	}
 }
 
-void	philo_die(t_data *data, int philo_id)
+void	philo_die(t_data *data, t_philo *philo)
 {
 	long	time;
 
-	if (sem_wait(data->printer) == -1)
-		ft_error("sem_post");
 	time = get_time() - data->start_time;
-	printf("%ld %d died\n", time, philo_id);
-	// print_status(data, DIE, time, philo_id);
+	if (sem_wait(data->printer) == -1)
+		ft_error("sem_wait");
+	printf("%ld %d died\n", time, philo->philo_id);
 	if (sem_post(data->dead) == -1)
 		ft_error("sem_post");
-	exit(EXIT_SUCCESS);
 }

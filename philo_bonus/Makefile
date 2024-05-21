@@ -6,7 +6,7 @@
 #    By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/23 17:21:11 by mott              #+#    #+#              #
-#    Updated: 2024/05/16 12:07:30 by mott             ###   ########.fr        #
+#    Updated: 2024/05/21 17:01:37 by mott             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,6 +19,7 @@ NAME	=	philo
 SRCS	=	child_process.c \
 			init.c \
 			main.c \
+			monitor.c \
 			philo.c \
 			semaphore.c \
 			time.c

@@ -6,33 +6,30 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 14:17:10 by mott              #+#    #+#             */
-/*   Updated: 2024/05/16 20:09:55 by mott             ###   ########.fr       */
+/*   Updated: 2024/05/21 21:12:59 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-static void	dinner_for_one(t_data *data, int philo_id)
+static void	dinner_for_one(t_data *data, t_philo *philo)
 {
-	long	time;
-
-	time = get_time() - data->start_time;
-	philo_lock_fork(data, time, philo_id);
-	ft_usleep(data->time_to_die - time);
-	philo_die(data, philo_id);
+	philo_lock_fork(data, philo);
+	ft_usleep(data->time_to_die);
+	philo_die(data, philo);
 }
 
-static void	wait_for_dinner(t_data *data, int philo_id)
+static void	wait_for_dinner(t_data *data, t_philo *philo)
 {
 	int	multi;
 
 	multi = 1;
-	if (philo_id == data->num_philo)
+	if (philo->philo_id == data->num_philo)
 		multi = 2;
 	if (data->time_to_die < data->time_to_eat * multi)
 	{
 		ft_usleep (data->time_to_die);
-		philo_die(data, philo_id);
+		philo_die(data, philo);
 	}
 	else
 		ft_usleep (data->time_to_eat * multi);
@@ -43,16 +40,21 @@ static void	start_routine(t_data *data, t_philo *philo)
 	int	counter;
 
 	if (data->num_philo == 1)
-		return (dinner_for_one(data, philo->philo_id));
+		return (dinner_for_one(data, philo));
 	if (philo->philo_id % 2 != 0)
-		wait_for_dinner(data, philo->philo_id);
+		wait_for_dinner(data, philo);
 	counter = data->num_eaten;
-	while (counter != 0)
+	// while (counter != 0)
+	while (true)
 	{
 		philo_eat(data, philo);
+		// if (counter == 0)
+		// 	if (sem_post(data->eaten) == -1)
+		// 			ft_error("sem_wait");
 		philo_sleep(data, philo);
 		philo_think(data, philo);
-		counter--;
+		// counter--;
+
 	}
 }
 
@@ -74,14 +76,8 @@ int	create_child_process(t_data *data, t_philo **philo)
 		}
 		i++;
 	}
-
-		sem_wait(data->dead);
-	i = 0;
-	while (i < data->num_philo)
-	{
-		kill((*philo)[i].philo_pid, SIGKILL);
-		i++;
-	}
+	if (monitor_thread(data, philo) == EXIT_FAILURE)
+		return (EXIT_FAILURE);
 	while (waitpid(-1, NULL, 0) > 0)
 		continue ;
 	return (EXIT_SUCCESS);
