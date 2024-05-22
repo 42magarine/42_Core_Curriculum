@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 17:20:36 by mott              #+#    #+#             */
-/*   Updated: 2024/05/21 21:11:57 by mott             ###   ########.fr       */
+/*   Updated: 2024/05/22 19:41:11 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,17 +27,20 @@ int	main(int argc, char **argv)
 		return (EXIT_FAILURE);
 	if (create_child_process(&data, &philo) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
-	if (unlink_semaphore(&data) == EXIT_FAILURE)
+	if (close_semaphore(&data) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
 	free(philo);
 	// system("leaks philo");
 	return (EXIT_SUCCESS);
 }
 
-void	print_status(t_data *data, t_status status, long time, int philo_id)
+void	print_status(t_data *data, t_status status, int philo_id)
 {
+	long	time;
+
 	if (sem_wait(data->printer) == -1)
 		ft_error("sem_wait");
+	time = get_time() - data->start_time;
 	if (status == FORK)
 		printf("%ld %d has taken a fork\n", time, philo_id);
 	else if (status == EAT)
@@ -46,8 +49,11 @@ void	print_status(t_data *data, t_status status, long time, int philo_id)
 		printf("%ld %d is sleeping\n", time, philo_id);
 	else if (status == THINK)
 		printf("%ld %d is thinking\n", time, philo_id);
-	// else if (status == DIE)
-	// 	printf("%ld %d died\n", time, philo_id);
+	else if (status == DIE)
+	{
+		printf("%ld %d died\n", time, philo_id);
+		return ;
+	}
 	if (sem_post(data->printer) == -1)
 		ft_error("sem_post");
 }

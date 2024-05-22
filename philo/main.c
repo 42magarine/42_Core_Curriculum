@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 17:20:36 by mott              #+#    #+#             */
-/*   Updated: 2024/05/13 13:34:47 by mott             ###   ########.fr       */
+/*   Updated: 2024/05/22 19:43:07 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,24 +21,24 @@ int	main(int argc, char **argv)
 		return (ft_error("Invalid number of arguments"));
 	if (init_data(&data, argv) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
-	if (init_philo_mutex(&data, &philo) == EXIT_FAILURE)
+	if (init_philo(&data, &philo) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
 	if (pthread_create_join(data.num_philo, &philo) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
 	if (destroy_mutex(&data, &philo) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
+	free(philo);
 	// system("leaks philo");
 	return (EXIT_SUCCESS);
 }
 
-int	print_status(t_philo *philo, t_status status)
+void	print_status(t_philo *philo, t_status status)
 {
 	long	time;
 
-	pthread_mutex_lock(&philo->data->printer);
-	if (get_time(&time) == EXIT_FAILURE)
-		return (EXIT_FAILURE);
-	time -= philo->data->start_time;
+	if (pthread_mutex_lock(&philo->data->printer) != 0)
+		ft_error("pthread_mutex_lock");
+	time = get_time() - philo->data->start_time;
 	if (status == FORK)
 		printf("%ld %d has taken a fork\n", time, philo->philo_id);
 	else if (status == EAT)
@@ -48,9 +48,12 @@ int	print_status(t_philo *philo, t_status status)
 	else if (status == THINK)
 		printf("%ld %d is thinking\n", time, philo->philo_id);
 	else if (status == DIE)
+	{
 		printf("%ld %d died\n", time, philo->philo_id);
-	pthread_mutex_unlock(&philo->data->printer);
-	return (EXIT_SUCCESS);
+		return ;
+	}
+	if (pthread_mutex_unlock(&philo->data->printer) != 0)
+		ft_error("pthread_mutex_unlock");
 }
 
 int	ft_error(char *str)

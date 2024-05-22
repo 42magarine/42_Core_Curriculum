@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 12:00:59 by mott              #+#    #+#             */
-/*   Updated: 2024/05/14 15:22:16 by mott             ###   ########.fr       */
+/*   Updated: 2024/05/22 16:01:04 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ long	get_time(void)
 {
 	struct timeval	tv;
 
-	gettimeofday(&tv, NULL);
+	if (gettimeofday(&tv, NULL) == -1)
+		ft_error("gettimeofday");
 	return (tv.tv_sec * 1000 + (long)tv.tv_usec / 1000);
 }
 

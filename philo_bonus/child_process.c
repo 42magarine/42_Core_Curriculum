@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 14:17:10 by mott              #+#    #+#             */
-/*   Updated: 2024/05/21 21:12:59 by mott             ###   ########.fr       */
+/*   Updated: 2024/05/22 19:52:15 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static void	dinner_for_one(t_data *data, t_philo *philo)
 {
-	philo_lock_fork(data, philo);
+	print_status(data, FORK, philo->philo_id);
 	ft_usleep(data->time_to_die);
 	philo_die(data, philo);
 }
@@ -44,17 +44,17 @@ static void	start_routine(t_data *data, t_philo *philo)
 	if (philo->philo_id % 2 != 0)
 		wait_for_dinner(data, philo);
 	counter = data->num_eaten;
-	// while (counter != 0)
 	while (true)
 	{
 		philo_eat(data, philo);
-		// if (counter == 0)
-		// 	if (sem_post(data->eaten) == -1)
-		// 			ft_error("sem_wait");
+		counter--;
+		if (counter == 0)
+		{
+			if (sem_post(data->eaten) == -1)
+				ft_error("sem_wait");
+		}
 		philo_sleep(data, philo);
 		philo_think(data, philo);
-		// counter--;
-
 	}
 }
 
@@ -62,7 +62,6 @@ int	create_child_process(t_data *data, t_philo **philo)
 {
 	int	i;
 
-	data->start_time = get_time();
 	i = 0;
 	while (i < data->num_philo)
 	{
@@ -76,7 +75,7 @@ int	create_child_process(t_data *data, t_philo **philo)
 		}
 		i++;
 	}
-	if (monitor_thread(data, philo) == EXIT_FAILURE)
+	if (monitor_threads(data, philo) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
 	while (waitpid(-1, NULL, 0) > 0)
 		continue ;

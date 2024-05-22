@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 19:48:04 by mott              #+#    #+#             */
-/*   Updated: 2024/05/13 16:01:18 by mott             ###   ########.fr       */
+/*   Updated: 2024/05/22 21:09:10 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,25 @@
 static void	*dinner_for_one(t_philo *philo)
 {
 	print_status(philo, FORK);
-	philo_die(philo, philo->data->time_to_die);
+	ft_usleep(philo->data->time_to_die);
+	philo_die(philo);
 	return (NULL);
+}
+
+static void	wait_for_dinner(t_philo *philo)
+{
+	int	multi;
+
+	multi = 1;
+	if (philo->philo_id == philo->data->num_philo)
+		multi = 2;
+	if (philo->data->time_to_die < philo->data->time_to_eat * multi)
+	{
+		ft_usleep (philo->data->time_to_die);
+		philo_die(philo);
+	}
+	else
+		ft_usleep (philo->data->time_to_eat * multi);
 }
 
 static void	*start_routine(void *arg)
@@ -27,40 +44,44 @@ static void	*start_routine(void *arg)
 	philo = (t_philo *)arg;
 	if (philo->data->num_philo == 1)
 		return (dinner_for_one(philo));
+	if (philo->philo_id % 2 != 0)
+		wait_for_dinner(philo);
 	counter = philo->data->num_eaten;
-	pthread_mutex_lock(&philo->data->dead);
-	while (philo->data->philo_died == false && counter != 0)
+	while (true)
 	{
-		pthread_mutex_unlock(&philo->data->dead);
 		philo_eat(philo);
+		counter--;
+		if (counter == 0)
+			philo->philo_full = true;
 		philo_sleep(philo);
 		philo_think(philo);
-		counter--;
-		pthread_mutex_lock(&philo->data->dead);
+		pthread_mutex_lock(&philo->data->finish);
+		if (philo->data->is_finish == true)
+		{
+			pthread_mutex_unlock(&philo->data->finish);
+			return (NULL);
+		}
+		pthread_mutex_unlock(&philo->data->finish);
 	}
-	pthread_mutex_unlock(&philo->data->dead);
 	return (NULL);
 }
 
-void	philo_die(t_philo *philo, int time)
+static void	eaten_monitor(t_philo **philo)
 {
-	ft_usleep(time);
-	if (someone_died(philo) == true)
-		return ;
-	pthread_mutex_lock(&philo->data->dead);
-	philo->data->philo_died = true;
-	pthread_mutex_unlock(&philo->data->dead);
-	print_status(philo, DIE);
-}
+	int	i;
 
-bool	someone_died(t_philo *philo)
-{
-	bool	someone_died;
-
-	pthread_mutex_lock(&philo->data->dead);
-	someone_died = philo->data->philo_died;
-	pthread_mutex_unlock(&philo->data->dead);
-	return (someone_died);
+	i = 0;
+	while (i < philo[i]->data->num_philo)
+	{
+		if (philo[i]->philo_full == true)
+			i++;
+		if (philo[i]->data->is_finish == true)
+			break ;
+		ft_usleep(1000);
+	}
+	pthread_mutex_lock(&philo[i]->data->finish);
+	philo[i]->data->is_finish = true;
+	pthread_mutex_unlock(&philo[i]->data->finish);
 }
 
 int	pthread_create_join(int num_philo, t_philo **philo)
@@ -78,6 +99,8 @@ int	pthread_create_join(int num_philo, t_philo **philo)
 			return (ft_error("pthread_create"));
 		i++;
 	}
+	if (philo[i]->data->num_eaten > 0)
+		eaten_monitor(philo);
 	i = 0;
 	while (i < num_philo)
 	{

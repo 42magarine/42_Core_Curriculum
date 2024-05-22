@@ -6,16 +6,18 @@
 #    By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/23 17:21:11 by mott              #+#    #+#              #
-#    Updated: 2024/05/21 17:01:37 by mott             ###   ########.fr        #
+#    Updated: 2024/05/22 16:39:17 by mott             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC		=	cc
 CFLAGS	=	-Wall -Wextra -Werror
+CFLAGS	+=	-pthread
+# CFLAGS	+=	-fsanitize=thread -g
 # CFLAGS	+=	-fsanitize=address -g
 RM		=	rm -rf
 
-NAME	=	philo
+NAME	=	philo_bonus
 SRCS	=	child_process.c \
 			init.c \
 			main.c \

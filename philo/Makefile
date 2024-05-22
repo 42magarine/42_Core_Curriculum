@@ -6,7 +6,7 @@
 #    By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/23 17:21:11 by mott              #+#    #+#              #
-#    Updated: 2024/05/16 12:07:42 by mott             ###   ########.fr        #
+#    Updated: 2024/05/22 21:04:20 by mott             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ CFLAGS	+=	-pthread
 RM		=	rm -rf
 
 NAME	=	philo
-SRCS	=	input.c \
+SRCS	=	init.c \
 			main.c \
 			mutex.c \
 			philo.c \
