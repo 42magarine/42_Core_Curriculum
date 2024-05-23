@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 15:49:43 by mott              #+#    #+#             */
-/*   Updated: 2024/05/22 20:54:28 by mott             ###   ########.fr       */
+/*   Updated: 2024/05/23 19:35:43 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,20 +16,25 @@ void	philo_eat(t_data *data, t_philo *philo)
 {
 	long	time;
 
-	philo_lock_fork(data, philo);
-	philo_lock_fork(data, philo);
-	time = get_time() - data->start_time;
+	if (sem_wait(data->forks) == -1)
+		ft_error("sem_wait");
+	print_status(data, FORK, philo->philo_id);
+	if (sem_wait(data->forks) == -1)
+		ft_error("sem_wait");
+	print_status(data, FORK, philo->philo_id);
+	time = print_status(data, EAT, philo->philo_id);
 	if (time <= philo->last_meal + data->time_to_die)
 	{
 		philo->last_meal = time;
-		print_status(data, EAT, philo->philo_id);
 		ft_usleep(data->time_to_eat);
-		philo_unlock_fork(data);
-		philo_unlock_fork(data);
+		if (sem_post(data->forks) == -1)
+			ft_error("sem_post");
+		if (sem_post(data->forks) == -1)
+			ft_error("sem_post");
 	}
 	else
 	{
-		ft_usleep(data->time_to_die - time);
+		ft_usleep(philo->last_meal + data->time_to_die - time);
 		philo_die(data, philo);
 	}
 }
@@ -38,15 +43,14 @@ void	philo_sleep(t_data *data, t_philo *philo)
 {
 	long	time;
 
-	time = get_time() - data->start_time;
+	time = print_status(data, SLEEP, philo->philo_id);
 	if (time + data->time_to_sleep <= philo->last_meal + data->time_to_die)
 	{
-		print_status(data, SLEEP, philo->philo_id);
 		ft_usleep(data->time_to_sleep);
 	}
 	else
 	{
-		ft_usleep(data->time_to_die - data->time_to_eat);
+		ft_usleep(philo->last_meal + data->time_to_die - time);
 		philo_die(data, philo);
 	}
 }
@@ -54,25 +58,16 @@ void	philo_sleep(t_data *data, t_philo *philo)
 void	philo_think(t_data *data, t_philo *philo)
 {
 	long	time;
-	long	time_to_think;
 
-	time = get_time() - data->start_time;
-	time_to_think = data->time_to_die - data->time_to_eat - data->time_to_sleep;
+	time = print_status(data, THINK, philo->philo_id);
 	if (data->num_philo % 2 == 0)
-	{
-		print_status(data, THINK, philo->philo_id);
-	}
+		return ;
+	if (3 * data->time_to_eat <= data->time_to_die)
+		ft_usleep(2 * data->time_to_eat - data->time_to_sleep);
 	else
 	{
-		if (time + data->time_to_eat <= philo->last_meal + data->time_to_die)
-		{
-			ft_usleep(data->time_to_eat);
-		}
-		else
-		{
-			ft_usleep(data->time_to_die - data->time_to_eat - data->time_to_sleep);
-			philo_die(data, philo);
-		}
+		ft_usleep(philo->last_meal + data->time_to_die - time);
+		philo_die(data, philo);
 	}
 }
 

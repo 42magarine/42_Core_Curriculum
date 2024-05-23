@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 17:20:36 by mott              #+#    #+#             */
-/*   Updated: 2024/05/22 19:43:07 by mott             ###   ########.fr       */
+/*   Updated: 2024/05/23 15:58:45 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,19 @@ int	main(int argc, char **argv)
 	return (EXIT_SUCCESS);
 }
 
-void	print_status(t_philo *philo, t_status status)
+long	print_status(t_philo *philo, t_status status)
 {
 	long	time;
 
 	if (pthread_mutex_lock(&philo->data->printer) != 0)
 		ft_error("pthread_mutex_lock");
 	time = get_time() - philo->data->start_time;
+	if (philo_finish(philo) == true)
+	{
+		if (pthread_mutex_unlock(&philo->data->printer) != 0)
+			ft_error("pthread_mutex_unlock");
+		return (time);
+	}
 	if (status == FORK)
 		printf("%ld %d has taken a fork\n", time, philo->philo_id);
 	else if (status == EAT)
@@ -48,12 +54,10 @@ void	print_status(t_philo *philo, t_status status)
 	else if (status == THINK)
 		printf("%ld %d is thinking\n", time, philo->philo_id);
 	else if (status == DIE)
-	{
 		printf("%ld %d died\n", time, philo->philo_id);
-		return ;
-	}
 	if (pthread_mutex_unlock(&philo->data->printer) != 0)
 		ft_error("pthread_mutex_unlock");
+	return (time);
 }
 
 int	ft_error(char *str)

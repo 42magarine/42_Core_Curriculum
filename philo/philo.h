@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 17:20:24 by mott              #+#    #+#             */
-/*   Updated: 2024/05/22 21:09:50 by mott             ###   ########.fr       */
+/*   Updated: 2024/05/23 19:36:09 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ typedef struct s_philo
 	int				philo_id;
 	pthread_mutex_t	left_fork;
 	pthread_mutex_t	*right_fork;
+	long			last_meal;
 	bool			philo_full;
 	t_data			*data;
 }	t_philo;
@@ -55,7 +56,7 @@ typedef enum e_status
 
 // main.c
 int		main(int argc, char **argv);
-void	print_status(t_philo *philo, t_status status);
+long	print_status(t_philo *philo, t_status status);
 int		ft_error(char *str);
 // init.c
 int		init_data(t_data *data, char **argv);
@@ -63,8 +64,6 @@ int		init_philo(t_data *data, t_philo **philo);
 // mutex.c
 int		init_mutex(t_data *data, t_philo **philo);
 int		destroy_mutex(t_data *data, t_philo **philo);
-void	philo_lock_forks(t_philo *philo);
-void	philo_unlock_forks(t_philo *philo);
 // threads.c
 int		pthread_create_join(int num_philo, t_philo **philo);
 // philo.c
@@ -72,6 +71,7 @@ void	philo_eat(t_philo *philo);
 void	philo_sleep(t_philo *philo);
 void	philo_think(t_philo *philo);
 void	philo_die(t_philo *philo);
+bool	philo_finish(t_philo *philo);
 // time.c
 long	get_time(void);
 void	ft_usleep(long milliseconds);

@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 14:46:10 by mott              #+#    #+#             */
-/*   Updated: 2024/05/22 21:04:48 by mott             ###   ########.fr       */
+/*   Updated: 2024/05/23 18:49:51 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ int	init_philo(t_data *data, t_philo **philo)
 			(*philo)[i].right_fork = &(*philo)[i + 1].left_fork;
 		else
 			(*philo)[i].right_fork = &(*philo)[0].left_fork;
+		(*philo)[i].last_meal = data->start_time;
 		(*philo)[i].philo_full = false;
 		(*philo)[i].data = data;
 		i++;

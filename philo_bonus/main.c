@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 17:20:36 by mott              #+#    #+#             */
-/*   Updated: 2024/05/22 19:41:11 by mott             ###   ########.fr       */
+/*   Updated: 2024/05/23 15:49:17 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	main(int argc, char **argv)
 	return (EXIT_SUCCESS);
 }
 
-void	print_status(t_data *data, t_status status, int philo_id)
+long	print_status(t_data *data, t_status status, int philo_id)
 {
 	long	time;
 
@@ -52,10 +52,11 @@ void	print_status(t_data *data, t_status status, int philo_id)
 	else if (status == DIE)
 	{
 		printf("%ld %d died\n", time, philo_id);
-		return ;
+		return (time);
 	}
 	if (sem_post(data->printer) == -1)
 		ft_error("sem_post");
+	return(time);
 }
 
 int	ft_error(char *str)

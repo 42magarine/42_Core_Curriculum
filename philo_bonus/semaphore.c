@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 12:13:02 by mott              #+#    #+#             */
-/*   Updated: 2024/05/22 21:03:11 by mott             ###   ########.fr       */
+/*   Updated: 2024/05/23 19:37:09 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,28 +61,4 @@ int	close_semaphore(t_data *data)
 	if (sem_close(data->finish) == -1)
 		return (ft_error("sem_close"));
 	return (EXIT_SUCCESS);
-}
-
-void	philo_lock_fork(t_data *data, t_philo *philo)
-{
-	long	time;
-
-	if (sem_wait(data->forks) == -1)
-		ft_error("sem_wait");
-	time = get_time() - data->start_time;
-	if (time <= philo->last_meal + data->time_to_die)
-	{
-		print_status(data, FORK, philo->philo_id);
-	}
-	else
-	{
-		// ft_usleep(data->time_to_die - time);
-		philo_die(data, philo);
-	}
-}
-
-void	philo_unlock_fork(t_data *data)
-{
-	if (sem_post(data->forks) == -1)
-		ft_error("sem_post");
 }

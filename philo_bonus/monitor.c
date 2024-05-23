@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 16:54:45 by mott              #+#    #+#             */
-/*   Updated: 2024/05/22 20:59:27 by mott             ###   ########.fr       */
+/*   Updated: 2024/05/23 15:32:49 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ static void	*dead_monitor(void *arg)
 	data = (t_data *)arg;
 	if (sem_wait(data->dead) == -1)
 		ft_error("sem_wait");
+	if (sem_post(data->finish) == -1)
+		ft_error("sem_post");
 	i = 0;
 	while (i < data->num_philo)
 	{
@@ -39,8 +41,6 @@ static void	*dead_monitor(void *arg)
 			ft_error("sem_post");
 		i++;
 	}
-	if (sem_post(data->finish) == -1)
-		ft_error("sem_post");
 	return (NULL);
 }
 
@@ -57,9 +57,9 @@ static void	*eaten_monitor(void *arg)
 			ft_error("sem_wait");
 		i++;
 	}
-	if (sem_post(data->dead) == -1)
-		ft_error("sem_post");
 	if (sem_post(data->finish) == -1)
+		ft_error("sem_post");
+	if (sem_post(data->dead) == -1)
 		ft_error("sem_post");
 	return (NULL);
 }

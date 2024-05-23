@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 19:48:04 by mott              #+#    #+#             */
-/*   Updated: 2024/05/22 21:09:10 by mott             ###   ########.fr       */
+/*   Updated: 2024/05/23 19:37:00 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,13 +55,8 @@ static void	*start_routine(void *arg)
 			philo->philo_full = true;
 		philo_sleep(philo);
 		philo_think(philo);
-		pthread_mutex_lock(&philo->data->finish);
-		if (philo->data->is_finish == true)
-		{
-			pthread_mutex_unlock(&philo->data->finish);
+		if (philo_finish(philo) == true)
 			return (NULL);
-		}
-		pthread_mutex_unlock(&philo->data->finish);
 	}
 	return (NULL);
 }
@@ -71,17 +66,16 @@ static void	eaten_monitor(t_philo **philo)
 	int	i;
 
 	i = 0;
-	while (i < philo[i]->data->num_philo)
+	while (i < (*philo)[0].data->num_philo)
 	{
-		if (philo[i]->philo_full == true)
+		if ((*philo)[i].philo_full == true)
 			i++;
-		if (philo[i]->data->is_finish == true)
+		if (philo_finish(&(*philo)[0]) == true)
 			break ;
-		ft_usleep(1000);
 	}
-	pthread_mutex_lock(&philo[i]->data->finish);
-	philo[i]->data->is_finish = true;
-	pthread_mutex_unlock(&philo[i]->data->finish);
+	pthread_mutex_lock(&(*philo)[0].data->finish);
+	(*philo)[0].data->is_finish = true;
+	pthread_mutex_unlock(&(*philo)[0].data->finish);
 }
 
 int	pthread_create_join(int num_philo, t_philo **philo)
@@ -99,7 +93,7 @@ int	pthread_create_join(int num_philo, t_philo **philo)
 			return (ft_error("pthread_create"));
 		i++;
 	}
-	if (philo[i]->data->num_eaten > 0)
+	if ((*philo)[0].data->num_eaten > 0)
 		eaten_monitor(philo);
 	i = 0;
 	while (i < num_philo)

@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 17:20:24 by mott              #+#    #+#             */
-/*   Updated: 2024/05/22 19:47:21 by mott             ###   ########.fr       */
+/*   Updated: 2024/05/23 19:35:53 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ typedef enum e_status
 
 // main.c
 int		main(int argc, char **argv);
-void	print_status(t_data *data, t_status status, int philo_id);
+long	print_status(t_data *data, t_status status, int philo_id);
 int		ft_error(char *str);
 // init.c
 int		init_data(t_data *data, char **argv);
@@ -64,8 +64,6 @@ int		init_philo(t_data *data, t_philo **philo);
 // semaphore.c
 int		open_semaphore(t_data *data);
 int		close_semaphore(t_data *data);
-void	philo_lock_fork(t_data *data, t_philo *philo);
-void	philo_unlock_fork(t_data *data);
 // child_process.c
 int		create_child_process(t_data *data, t_philo **philo);
 // philo.c

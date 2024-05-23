@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 11:59:22 by mott              #+#    #+#             */
-/*   Updated: 2024/05/22 16:09:53 by mott             ###   ########.fr       */
+/*   Updated: 2024/05/23 16:21:02 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int	init_philo(t_data *data, t_philo **philo)
 	while (i < data->num_philo)
 	{
 		(*philo)[i].philo_id = i + 1;
-		(*philo)[i].last_meal = 0;
+		(*philo)[i].last_meal = data->start_time;
 		i++;
 	}
 	return (EXIT_SUCCESS);
