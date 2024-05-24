@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 17:20:36 by mott              #+#    #+#             */
-/*   Updated: 2024/05/23 15:58:45 by mott             ###   ########.fr       */
+/*   Updated: 2024/05/23 19:42:11 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ int	main(int argc, char **argv)
 	if (destroy_mutex(&data, &philo) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
 	free(philo);
-	// system("leaks philo");
 	return (EXIT_SUCCESS);
 }
 

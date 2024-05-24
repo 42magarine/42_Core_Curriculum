@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 17:20:36 by mott              #+#    #+#             */
-/*   Updated: 2024/05/23 15:49:17 by mott             ###   ########.fr       */
+/*   Updated: 2024/05/23 19:43:10 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ int	main(int argc, char **argv)
 	if (close_semaphore(&data) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
 	free(philo);
-	// system("leaks philo");
 	return (EXIT_SUCCESS);
 }
 
@@ -56,7 +55,7 @@ long	print_status(t_data *data, t_status status, int philo_id)
 	}
 	if (sem_post(data->printer) == -1)
 		ft_error("sem_post");
-	return(time);
+	return (time);
 }
 
 int	ft_error(char *str)

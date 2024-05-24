@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 14:46:10 by mott              #+#    #+#             */
-/*   Updated: 2024/05/23 18:49:51 by mott             ###   ########.fr       */
+/*   Updated: 2024/05/24 16:54:00 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,20 @@ static int	ft_atoi(int *n, char *str)
 	return (EXIT_SUCCESS);
 }
 
+static int	time_to_think(t_data *data)
+{
+	int		multi;
+	long	time_to_think;
+
+	multi = 1;
+	if (data->num_philo % 2 != 0)
+		multi = 2;
+	time_to_think = multi * data->time_to_eat - data->time_to_sleep;
+	if (time_to_think < 0)
+		time_to_think = 0;
+	return (time_to_think);
+}
+
 int	init_data(t_data *data, char **argv)
 {
 	if (ft_atoi(&data->num_philo, argv[1]) == EXIT_FAILURE)
@@ -43,6 +57,7 @@ int	init_data(t_data *data, char **argv)
 		return (ft_error("Invalid number of times each philosopher must eat"));
 	else if (argv[5] == NULL)
 		data->num_eaten = -1;
+	data->time_to_think = time_to_think(data);
 	data->start_time = get_time();
 	data->is_finish = false;
 	return (EXIT_SUCCESS);

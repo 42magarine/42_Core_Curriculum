@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 15:49:43 by mott              #+#    #+#             */
-/*   Updated: 2024/05/23 19:35:43 by mott             ###   ########.fr       */
+/*   Updated: 2024/05/23 20:06:17 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,13 +61,24 @@ void	philo_think(t_data *data, t_philo *philo)
 
 	time = print_status(data, THINK, philo->philo_id);
 	if (data->num_philo % 2 == 0)
-		return ;
-	if (3 * data->time_to_eat <= data->time_to_die)
-		ft_usleep(2 * data->time_to_eat - data->time_to_sleep);
+	{
+		if (2 * data->time_to_eat <= data->time_to_die)
+			ft_usleep(data->time_to_eat - data->time_to_sleep);
+		else
+		{
+			ft_usleep(philo->last_meal + data->time_to_die - time);
+			philo_die(data, philo);
+		}
+	}
 	else
 	{
-		ft_usleep(philo->last_meal + data->time_to_die - time);
-		philo_die(data, philo);
+		if (3 * data->time_to_eat <= data->time_to_die)
+			ft_usleep(2 * data->time_to_eat - data->time_to_sleep);
+		else
+		{
+			ft_usleep(philo->last_meal + data->time_to_die - time);
+			philo_die(data, philo);
+		}
 	}
 }
 

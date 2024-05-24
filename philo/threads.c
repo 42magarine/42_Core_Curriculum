@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 19:48:04 by mott              #+#    #+#             */
-/*   Updated: 2024/05/23 19:37:00 by mott             ###   ########.fr       */
+/*   Updated: 2024/05/24 17:23:04 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,11 @@ static void	*start_routine(void *arg)
 		philo_eat(philo);
 		counter--;
 		if (counter == 0)
+		{
+			pthread_mutex_lock(&philo->data->finish);
 			philo->philo_full = true;
+			pthread_mutex_unlock(&philo->data->finish);
+		}
 		philo_sleep(philo);
 		philo_think(philo);
 		if (philo_finish(philo) == true)
@@ -68,10 +72,13 @@ static void	eaten_monitor(t_philo **philo)
 	i = 0;
 	while (i < (*philo)[0].data->num_philo)
 	{
+		pthread_mutex_lock(&(*philo)[0].data->finish);
 		if ((*philo)[i].philo_full == true)
 			i++;
+		pthread_mutex_unlock(&(*philo)[0].data->finish);
 		if (philo_finish(&(*philo)[0]) == true)
 			break ;
+		ft_usleep(100);
 	}
 	pthread_mutex_lock(&(*philo)[0].data->finish);
 	(*philo)[0].data->is_finish = true;
