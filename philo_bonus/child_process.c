@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 14:17:10 by mott              #+#    #+#             */
-/*   Updated: 2024/05/22 19:52:15 by mott             ###   ########.fr       */
+/*   Updated: 2024/05/24 17:41:16 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,11 @@ static void	wait_for_dinner(t_data *data, t_philo *philo)
 		multi = 2;
 	if (data->time_to_die < data->time_to_eat * multi)
 	{
-		ft_usleep (data->time_to_die);
+		ft_usleep(data->time_to_die);
 		philo_die(data, philo);
 	}
 	else
-		ft_usleep (data->time_to_eat * multi);
+		ft_usleep(data->time_to_eat * multi);
 }
 
 static void	start_routine(t_data *data, t_philo *philo)

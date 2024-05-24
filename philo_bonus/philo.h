@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 17:20:24 by mott              #+#    #+#             */
-/*   Updated: 2024/05/23 19:35:53 by mott             ###   ########.fr       */
+/*   Updated: 2024/05/24 17:50:18 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,12 @@
 # include <stdlib.h>	// malloc, free, exit
 # include <unistd.h>	// usleep, fork
 # include <sys/time.h>	// gettimeofday
-# include <pthread.h>	// pthread_create, pthread_detach, pthread_join,
+# include <pthread.h>	// pthread_create, pthread_detach
 # include <signal.h>	// kill
 # include <sys/wait.h>	// waitpid
 # include <semaphore.h>	// sem_open, sem_close, sem_post, sem_wait, sem_unlink
 # include <stdbool.h>
+# include <fcntl.h>
 
 typedef struct s_data
 {
@@ -29,6 +30,7 @@ typedef struct s_data
 	int		time_to_die;
 	int		time_to_eat;
 	int		time_to_sleep;
+	int		time_to_think;
 	int		num_eaten;
 	long	start_time;
 	sem_t	*forks;
