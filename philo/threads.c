@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 19:48:04 by mott              #+#    #+#             */
-/*   Updated: 2024/05/24 17:41:24 by mott             ###   ########.fr       */
+/*   Updated: 2024/05/25 12:49:22 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,6 @@ static void	eaten_monitor(t_philo **philo)
 		pthread_mutex_unlock(&(*philo)[0].data->finish);
 		if (philo_finish(&(*philo)[0]) == true)
 			break ;
-		ft_usleep(100);
 	}
 	pthread_mutex_lock(&(*philo)[0].data->finish);
 	(*philo)[0].data->is_finish = true;

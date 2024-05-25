@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 15:49:43 by mott              #+#    #+#             */
-/*   Updated: 2024/05/24 18:49:49 by mott             ###   ########.fr       */
+/*   Updated: 2024/05/25 13:27:32 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void	philo_think(t_data *data, t_philo *philo)
 
 void	philo_die(t_data *data, t_philo *philo)
 {
+	print_status(data, DIE, philo->philo_id);
 	if (sem_post(data->dead) == -1)
 		ft_error("sem_post");
-	print_status(data, DIE, philo->philo_id);
 }
