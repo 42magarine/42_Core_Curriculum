@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/25 18:27:36 by mott              #+#    #+#             */
-/*   Updated: 2024/05/26 15:27:55 by mott             ###   ########.fr       */
+/*   Updated: 2024/05/26 17:31:44 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,9 +71,79 @@
 #include <signal.h>		// signal, kill
 #include <string.h>		// strcmp, strncmp
 
-int	main(int argc, char **argv)
+typedef enum e_error
 {
-	(void)argc;
-	(void)argv;
+	FATAL,
+	EXECVE,
+	CD1,
+	CD2
+}	t_error;
+
+void	ft_putchar_fd(char c, int fd)
+{
+	write(fd, &c, 1);
+}
+
+void	ft_putstr_fd(char *str, int fd)
+{
+	if (str == NULL)
+		return ;
+	while (*str != '\0')
+		ft_putchar_fd(*str++, fd);
+}
+
+void	ft_error(int error, char *str)
+{
+	if (error == FATAL)
+		ft_putstr_fd("error: fatal\n", STDERR_FILENO);
+	else if (error == EXECVE)
+	{
+		ft_putstr_fd("error: cannot execute ", STDERR_FILENO);
+		ft_putstr_fd(str, STDERR_FILENO);
+		ft_putchar_fd('\n', STDERR_FILENO);
+	}
+	else if (error == CD1)
+		ft_putstr_fd("error: cd: bad arguments\n", STDERR_FILENO);
+	else if (error == CD2)
+	{
+		ft_putstr_fd("error: cd: cannot change directory to ", STDERR_FILENO);
+		ft_putstr_fd(str, STDERR_FILENO);
+		ft_putchar_fd('\n', STDERR_FILENO);
+	}
+	exit(EXIT_FAILURE);
+}
+
+void	executor(char **argv, char **envp)
+{
+	if (execve(argv[0], argv, envp) == -1)
+		ft_error(EXECVE, argv[1]);
+}
+
+void	print_argv(int argc, char **argv)
+{
+	int	i;
+
+	i = 0;
+	ft_putstr_fd("------------\n", STDOUT_FILENO);
+	while (++i < argc)
+	{
+		ft_putstr_fd(argv[i], STDOUT_FILENO);
+		ft_putchar_fd('\n', STDOUT_FILENO);
+	}
+	ft_putstr_fd("------------\n", STDOUT_FILENO);
+}
+
+int	main(int argc, char **argv, char **envp)
+{
+	int	i;
+
+	print_argv(argc, argv);
+	i = 0;
+	while (++i < argc)
+	{
+		if (strcmp(argv[i], ";") == 0)
+			i++;
+		executor(&argv[i], envp);
+	}
 	return (EXIT_SUCCESS);
 }
