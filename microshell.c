@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/25 18:27:36 by mott              #+#    #+#             */
-/*   Updated: 2024/05/26 17:31:44 by mott             ###   ########.fr       */
+/*   Updated: 2024/05/27 19:51:56 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,37 +113,81 @@ void	ft_error(int error, char *str)
 	exit(EXIT_FAILURE);
 }
 
-void	executor(char **argv, char **envp)
+void	ft_execute(int stop, char **argv, char **envp)
 {
+	argv[stop] = NULL;
 	if (execve(argv[0], argv, envp) == -1)
-		ft_error(EXECVE, argv[1]);
+	{
+		ft_error(EXECVE, argv[0]);
+		exit(EXIT_FAILURE);
+	}
 }
 
-void	print_argv(int argc, char **argv)
+void	ft_exec_cd(int stop, char **argv)
 {
-	int	i;
+	if (stop != 2)
+		ft_error(CD1, NULL);
+	if (chdir(argv[1]) == -1)
+		ft_error(CD2, argv[1]);
+}
 
-	i = 0;
-	ft_putstr_fd("------------\n", STDOUT_FILENO);
-	while (++i < argc)
+void	ft_exec_cmd(int stop, char **argv, char **envp)
+{
+	pid_t	pid;
+
+	pid = fork();
+	if (pid == -1)
+		ft_error(FATAL, NULL);
+	else if (pid == 0)
+		ft_execute(stop, argv, envp);
+	else
+		waitpid(pid, NULL, 0);
+}
+
+void	ft_exec_pipe(int stop, char **argv, char **envp)
+{
+	int		fd[2];
+	pid_t	pid;
+
+	if (pipe(fd) == -1)
+		ft_error(FATAL, NULL);
+	pid = fork();
+	if (pid == -1)
+		ft_error(FATAL, NULL);
+	else if (pid == 0)
 	{
-		ft_putstr_fd(argv[i], STDOUT_FILENO);
-		ft_putchar_fd('\n', STDOUT_FILENO);
+		close(fd[0]);
+		dup2(fd[1], STDOUT_FILENO);
+		close(fd[1]);
+		ft_execute(stop, argv, envp);
 	}
-	ft_putstr_fd("------------\n", STDOUT_FILENO);
+	else
+	{
+		close(fd[1]);
+		dup2(fd[0], STDIN_FILENO);
+		close(fd[0]);
+		waitpid(pid, NULL, 0);
+	}
 }
 
 int	main(int argc, char **argv, char **envp)
 {
-	int	i;
+	int	start;
+	int	stop;
 
-	print_argv(argc, argv);
-	i = 0;
-	while (++i < argc)
+	start = 1;
+	while (start < argc)
 	{
-		if (strcmp(argv[i], ";") == 0)
-			i++;
-		executor(&argv[i], envp);
+		stop = start;
+		while (argv[stop] != NULL && strcmp(argv[stop], ";") != 0 && strcmp(argv[stop], "|") != 0)
+			stop++;
+		if (strcmp(argv[start], "cd") == 0)
+			ft_exec_cd(stop - start, &argv[start]);
+		else if (argv[stop] == NULL || strcmp(argv[stop], ";") == 0)
+			ft_exec_cmd(stop - start, &argv[start], envp);
+		else if (strcmp(argv[stop], "|") == 0)
+			ft_exec_pipe(stop - start, &argv[start], envp);
+		start = stop + 1;
 	}
 	return (EXIT_SUCCESS);
 }
