@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/25 18:27:36 by mott              #+#    #+#             */
-/*   Updated: 2024/05/27 19:51:56 by mott             ###   ########.fr       */
+/*   Updated: 2024/05/28 14:53:29 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,109 +65,80 @@
 // Hints:
 // Do not leak file descriptors!
 
-#include <stdlib.h>		// malloc, free, exit
-#include <unistd.h>		// write, close, fork, chdir, execve, dup, dup2, pipe
+#include <stdlib.h>		// exit
+#include <unistd.h>		// write, close, fork, chdir, execve, dup2, pipe
 #include <sys/wait.h>	// waitpid
-#include <signal.h>		// signal, kill
-#include <string.h>		// strcmp, strncmp
+#include <string.h>		// strcmp
 
-typedef enum e_error
+void	ft_putstr_stderr(char *str)
 {
-	FATAL,
-	EXECVE,
-	CD1,
-	CD2
-}	t_error;
-
-void	ft_putchar_fd(char c, int fd)
-{
-	write(fd, &c, 1);
-}
-
-void	ft_putstr_fd(char *str, int fd)
-{
-	if (str == NULL)
-		return ;
 	while (*str != '\0')
-		ft_putchar_fd(*str++, fd);
+		write(STDERR_FILENO, str++, 1);
 }
 
-void	ft_error(int error, char *str)
+void	ft_exit(void)
 {
-	if (error == FATAL)
-		ft_putstr_fd("error: fatal\n", STDERR_FILENO);
-	else if (error == EXECVE)
-	{
-		ft_putstr_fd("error: cannot execute ", STDERR_FILENO);
-		ft_putstr_fd(str, STDERR_FILENO);
-		ft_putchar_fd('\n', STDERR_FILENO);
-	}
-	else if (error == CD1)
-		ft_putstr_fd("error: cd: bad arguments\n", STDERR_FILENO);
-	else if (error == CD2)
-	{
-		ft_putstr_fd("error: cd: cannot change directory to ", STDERR_FILENO);
-		ft_putstr_fd(str, STDERR_FILENO);
-		ft_putchar_fd('\n', STDERR_FILENO);
-	}
+	ft_putstr_stderr("error: fatal\n");
 	exit(EXIT_FAILURE);
 }
 
-void	ft_execute(int stop, char **argv, char **envp)
+void	ft_exec_cd(int argc, char **argv)
 {
-	argv[stop] = NULL;
+	if (argc != 2)
+		ft_putstr_stderr("error: cd: bad arguments\n");
+	else if (chdir(argv[1]) == -1)
+	{
+		ft_putstr_stderr("error: cd: cannot change directory to ");
+		ft_putstr_stderr(argv[1]);
+		ft_putstr_stderr("\n");
+	}
+}
+
+void	ft_execute(int argc, char **argv, char **envp)
+{
+	argv[argc] = NULL;
 	if (execve(argv[0], argv, envp) == -1)
 	{
-		ft_error(EXECVE, argv[0]);
+		ft_putstr_stderr("error: cannot execute ");
+		ft_putstr_stderr(argv[0]);
+		ft_putstr_stderr("\n");
 		exit(EXIT_FAILURE);
 	}
 }
 
-void	ft_exec_cd(int stop, char **argv)
-{
-	if (stop != 2)
-		ft_error(CD1, NULL);
-	if (chdir(argv[1]) == -1)
-		ft_error(CD2, argv[1]);
-}
-
-void	ft_exec_cmd(int stop, char **argv, char **envp)
+void	ft_exec_cmd(int argc, char **argv, char **envp)
 {
 	pid_t	pid;
 
 	pid = fork();
 	if (pid == -1)
-		ft_error(FATAL, NULL);
+		ft_exit();
 	else if (pid == 0)
-		ft_execute(stop, argv, envp);
-	else
-		waitpid(pid, NULL, 0);
+		ft_execute(argc, argv, envp);
+	waitpid(pid, NULL, 0);
 }
 
-void	ft_exec_pipe(int stop, char **argv, char **envp)
+void	ft_exec_pipe(int argc, char **argv, char **envp)
 {
 	int		fd[2];
 	pid_t	pid;
 
 	if (pipe(fd) == -1)
-		ft_error(FATAL, NULL);
+		ft_exit();
 	pid = fork();
 	if (pid == -1)
-		ft_error(FATAL, NULL);
+		ft_exit();
 	else if (pid == 0)
 	{
 		close(fd[0]);
 		dup2(fd[1], STDOUT_FILENO);
 		close(fd[1]);
-		ft_execute(stop, argv, envp);
+		ft_execute(argc, argv, envp);
 	}
-	else
-	{
-		close(fd[1]);
-		dup2(fd[0], STDIN_FILENO);
-		close(fd[0]);
-		waitpid(pid, NULL, 0);
-	}
+	close(fd[1]);
+	dup2(fd[0], STDIN_FILENO);
+	close(fd[0]);
+	waitpid(pid, NULL, 0);
 }
 
 int	main(int argc, char **argv, char **envp)
@@ -175,19 +146,19 @@ int	main(int argc, char **argv, char **envp)
 	int	start;
 	int	stop;
 
-	start = 1;
-	while (start < argc)
+	start = 0;
+	while (++start < argc)
 	{
 		stop = start;
-		while (argv[stop] != NULL && strcmp(argv[stop], ";") != 0 && strcmp(argv[stop], "|") != 0)
+		while (stop < argc && strcmp(argv[stop], ";") != 0 && strcmp(argv[stop], "|") != 0)
 			stop++;
 		if (strcmp(argv[start], "cd") == 0)
 			ft_exec_cd(stop - start, &argv[start]);
-		else if (argv[stop] == NULL || strcmp(argv[stop], ";") == 0)
+		else if (start < stop && (stop == argc || strcmp(argv[stop], ";") == 0))
 			ft_exec_cmd(stop - start, &argv[start], envp);
-		else if (strcmp(argv[stop], "|") == 0)
+		else if (start < stop && strcmp(argv[stop], "|") == 0)
 			ft_exec_pipe(stop - start, &argv[start], envp);
-		start = stop + 1;
+		start = stop;
 	}
 	return (EXIT_SUCCESS);
 }
