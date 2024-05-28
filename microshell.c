@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/25 18:27:36 by mott              #+#    #+#             */
-/*   Updated: 2024/05/28 14:53:29 by mott             ###   ########.fr       */
+/*   Updated: 2024/05/28 16:17:26 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@
 // Do not leak file descriptors!
 
 #include <stdlib.h>		// exit
-#include <unistd.h>		// write, close, fork, chdir, execve, dup2, pipe
+#include <unistd.h>		// write, close, fork, chdir, execve, dup, dup2, pipe
 #include <sys/wait.h>	// waitpid
 #include <string.h>		// strcmp
 
@@ -145,7 +145,9 @@ int	main(int argc, char **argv, char **envp)
 {
 	int	start;
 	int	stop;
+	// int	save_fd;
 
+	// save_fd = dup(STDIN_FILENO);
 	start = 0;
 	while (++start < argc)
 	{
@@ -160,5 +162,11 @@ int	main(int argc, char **argv, char **envp)
 			ft_exec_pipe(stop - start, &argv[start], envp);
 		start = stop;
 	}
+	// dup2(save_fd, STDIN_FILENO);
+	// close(save_fd);
 	return (EXIT_SUCCESS);
 }
+
+// ./[program] [arguments] &	run process in background
+// lsof -p [pid]				list open file descriptors
+// kill [pid]					terminate background process
