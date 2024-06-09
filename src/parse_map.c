@@ -10,20 +10,57 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3D.h"
+#include "../include/cub3D.h"
 
-void	parse_map(t_map *map, char *line)
+static void	parse_map(t_map *map, char *line)
 {
-	
+	static int	i = 0;
+
+	if (line[0] == '1' || line[0] == ' ')
+	{
+		map->map[i] = ft_strdup(line);
+	}
 }
 
-void	parse_floor_ceiling(t_map *map, char *line)
+static void	parse_floor_ceiling(t_map *map, char *line)
 {
+	int	i;
+	int	j;
 
+	i = 1;
+	j = 0;
+	if (line[0] == 'F')
+	{
+		while (line[i] != NULL && j < 3)
+		{
+			while (!ft_isdigit(line[i]))
+				i++;
+			map->floor_color[j] = ft_atoi(&line[i]);
+			j++;
+		}
+	}
+	else if (line[0] == 'C')
+	{
+		while (line[i] != NULL && j < 3)
+		{
+			while (!ft_isdigit(line[i]))
+				i++;
+			map->ceiling_color[j] = ft_atoi(&line[i]);
+			j++;
+		}
+	}
 }
 
-void	parse_textures(t_map *map, char	*line)
+static void	parse_textures(t_map *map, char	*line)
 {
+	if (ft_strncmp(line, "NO ", 3) == 0)
+		map->n_texture = ft_strdup(line + 3);
+	else if (ft_strncmp(line, "EA ", 3) == 0)
+		map->e_texture = ft_strdup(line + 3);
+	else if (ft_strncmp(line, "SO ", 3) == 0)
+		map->s_texture = ft_strdup(line + 3);
+	else if (ft_strncmp(line, "WE ", 3) == 0)
+		map->w_texture = ft_strdup(line + 3);
 }
 
 t_map	*parse_mapfile(char	*filename)
@@ -36,12 +73,16 @@ t_map	*parse_mapfile(char	*filename)
 	fd = open(filename, O_RDONLY);
 	if (fd == -1)
 		ft_error();
-	line = NULL;
-	while (get_next_line(fd) != NULL)
+	while (true)
 	{
+		line = get_next_line(fd);
+		if (line == NULL)
+			break;
 		parse_textures(map, line);
 		parse_floor_ceiling(map, line);
 		parse_map(map, line);
+		free(line);
 	}
+	close(fd);
 	return(map);
 }
