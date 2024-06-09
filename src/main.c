@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3D.h"
+#include "../include/cub3D.h"
 
 int	main(int argc, char **argv)
 {
@@ -20,5 +20,6 @@ int	main(int argc, char **argv)
 		ft_error();
 	game = ft_calloc(1, sizeof(t_game));
 	game->map = parse_mapfile(argv[1]);
+	
 	return (EXIT_SUCCESS);
 }

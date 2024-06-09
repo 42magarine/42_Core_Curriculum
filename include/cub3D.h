@@ -13,21 +13,23 @@
 #ifndef CUB3D_H
 # define CUB3D_H
 
+
 # include <fcntl.h>		// open
 # include <unistd.h>	// close, read, write
 # include <stdio.h>		// printf, perror
 # include <stdlib.h>	// malloc, free, exit
 # include <string.h>	// strerror
-# include "../Libft/libft.h"
-# include "../MLX42/include/MLX42/MLX42.h"
+# include <stdbool.h>
+//# include "../Libft/libft.h"
+//# include "../MLX42/include/MLX42/MLX42.h"
 
 typedef struct s_map
 {
 	char	**map;
-	char	*n_texture;
-	char	*e_texture;
-	char	*s_texture;
-	char	*w_texture;
+	char	*n_tex;
+	char	*e_tex;
+	char	*s_tex;
+	char	*w_tex;
 	int		floor_color[3];
 	int		ceiling_color[3];
 }	t_map;

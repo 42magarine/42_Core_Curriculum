@@ -54,13 +54,13 @@ static void	parse_floor_ceiling(t_map *map, char *line)
 static void	parse_textures(t_map *map, char	*line)
 {
 	if (ft_strncmp(line, "NO ", 3) == 0)
-		map->n_texture = ft_strdup(line + 3);
+		map->n_tex = ft_strdup(line + 3);
 	else if (ft_strncmp(line, "EA ", 3) == 0)
-		map->e_texture = ft_strdup(line + 3);
+		map->e_tex = ft_strdup(line + 3);
 	else if (ft_strncmp(line, "SO ", 3) == 0)
-		map->s_texture = ft_strdup(line + 3);
+		map->s_tex = ft_strdup(line + 3);
 	else if (ft_strncmp(line, "WE ", 3) == 0)
-		map->w_texture = ft_strdup(line + 3);
+		map->w_tex = ft_strdup(line + 3);
 }
 
 t_map	*parse_mapfile(char	*filename)
