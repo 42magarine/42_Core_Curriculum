@@ -6,7 +6,7 @@
 /*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 17:14:11 by fwahl             #+#    #+#             */
-/*   Updated: 2024/06/09 18:23:10 by fwahl            ###   ########.fr       */
+/*   Updated: 2024/06/10 16:47:52 by fwahl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ static void	parse_map(t_map *map, char *line)
 	if (line[0] == '1' || line[0] == ' ')
 	{
 		map->map[i] = ft_strdup(line);
+		i++;
 	}
 }
 
