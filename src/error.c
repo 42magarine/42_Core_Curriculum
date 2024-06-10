@@ -1,25 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/09 17:06:47 by fwahl             #+#    #+#             */
-/*   Updated: 2024/06/10 17:26:12 by fwahl            ###   ########.fr       */
+/*   Created: 2024/06/10 17:21:47 by fwahl             #+#    #+#             */
+/*   Updated: 2024/06/10 17:22:06 by fwahl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3D.h"
 
-int	main(int argc, char **argv)
+void	ft_error(void)
 {
-	t_game	*game;
-
-	if (argc != 2)
-		ft_error();
-	game = ft_calloc(1, sizeof(t_game));
-	game->map = parse_mapfile(argv[1]);
-	debug_map(game->map);
-	return (EXIT_SUCCESS);
+	printf("error\n");
 }

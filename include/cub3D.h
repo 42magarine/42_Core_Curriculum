@@ -6,7 +6,7 @@
 /*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 17:11:55 by mott              #+#    #+#             */
-/*   Updated: 2024/06/09 17:13:27 by fwahl            ###   ########.fr       */
+/*   Updated: 2024/06/10 17:23:48 by fwahl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@
 # include <stdlib.h>	// malloc, free, exit
 # include <string.h>	// strerror
 # include <stdbool.h>
-//# include "../Libft/libft.h"
-//# include "../MLX42/include/MLX42/MLX42.h"
+# include "../libft/libft.h"
+# include "../MLX42/include/MLX42/MLX42.h"
 
 typedef struct s_map
 {
@@ -39,5 +39,12 @@ typedef struct s_game
 	t_map	*map;
 }	t_game;
 
+//parsing
+t_map	*parse_mapfile(char	*filename);
 
+//debug
+void	debug_map(t_map *map);
+
+//error
+void	ft_error(void);
 #endif
