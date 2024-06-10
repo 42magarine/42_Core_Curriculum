@@ -37,11 +37,15 @@ typedef struct s_game
 }	t_game;
 
 //parsing
-t_map	*parse_mapfile(char	*filename);
+void	*parse_mapfile(t_game *game, char *filename);
 
 //debug
 void	debug_map(t_map *map);
 
 //error
-void	ft_error(void);
+void	ft_error(t_game *game, char *errormsg);
+
+//free
+void	free_game(t_game *game)
+
 #endif

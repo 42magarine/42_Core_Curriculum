@@ -16,10 +16,10 @@ int	main(int argc, char **argv)
 {
 	t_game	*game;
 
-	if (argc != 2)
-		ft_error();
 	game = ft_calloc(1, sizeof(t_game));
-	game->map = parse_mapfile(argv[1]);
+	if (argc != 2)
+		ft_error(game, "missing mapfile (argv[1])");
+	parse_mapfile(game, argv[1]);
 	debug_map(game->map);
 	return (EXIT_SUCCESS);
 }

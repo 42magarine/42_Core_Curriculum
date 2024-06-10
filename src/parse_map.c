@@ -12,65 +12,59 @@
 
 #include "../include/cub3D.h"
 
-static void	parse_map(t_map *map, char *line)
+static void	parse_map(t_game *game, char *line)
 {
 	static int	i = 0;
 
 	if (line[0] == '1' || line[0] == ' ')
 	{
-		map->map[i] = ft_strdup(line);
+		game->map->map[i] = ft_strdup(line);
 		i++;
 	}
 }
 
-static bool	parse_floor_ceiling(t_map *map, char *line)
+static void	parse_floor_ceiling(t_game *game, char *line)
+{
+	int		i;
+
+	i = 0;
+	while (ft_isspace(line[i]))
+		i++;
+	if (line[i] == 'F' || line[i] == 'C')
+	{
+		if (line[i] == 'F')
+			game->map->floor_color = parse_rgb(game, line + 1);
+		if (line[i] == 'C')
+			game->map->ceiling_color = parse_rgb(game, line + 1);
+	}
+}
+
+static int	*parse_rgb(t_game *game, char *line)
 {
 	int		i;
 	int		j;
-	bool	parsed;
+	int		rgb[3];
 
-	parsed = false;
 	i = 0;
 	j = 0;
+	while (line[i] != '\0' && j < 3)
+	{
+		while (ft_isspace(line[i]) || line[i] == ',')
+			i++;
+		if (!ft_isdigit(line[i]))
+			ft_error(game, "parse_rgb error - invalid chars");
+		rgb[j] = ft_atoi(&line[i]);
+		if (rbg[j] < 0 || rgb[j] > 255)
+			ft_error(game, "parse_rgb error - invalid range(0 to 255)")
+		while (ft_isdigit(line[i]))
+			i++;
+		j++;
+	}
 	while (ft_isspace(line[i]))
 		i++;
-	if (line[i] == 'F')
-	{
-		i++;
-		parsed = true;
-		while (line[i] != '\0' && j < 3)
-		{
-			while (ft_isspace(line[i]) || line[i] == ',')
-				i++;
-			if (!ft_isdigit(line[i]))
-				ft_error();
-			map->floor_color[j] = ft_atoi(&line[i]);
-			j++;
-		}
-		while (ft_isspace(line[i]) || line[i] == ',')
-			i++;
-		if (line[i] != '\0')
-			ft_error();
-	}
-	if (line[i] == 'C')
-	{
-		i++;
-		parsed = true;
-		while (line[i] != '\0' && j < 3)
-		{
-			while (ft_isspace(line[i]) || line[i] == ',')
-				i++;
-			if (!ft_isdigit(line[i]))
-				ft_error();
-			map->ceiling_color[j] = ft_atoi(&line[i]);
-			j++;
-		}
-		while (ft_isspace(line[i]) || line[i] == ',')
-			i++;
-		if (line[i] != '\0')
-			ft_error();
-	}
-	return (parsed);
+	if (ft_strlen(&line[i] > 0))
+		ft_error(game, "parse_rgb error - line too long");
+	return (rgb);
 }
 static mlx_texture_t	*set_texture(char *line)
 {
@@ -86,65 +80,51 @@ static mlx_texture_t	*set_texture(char *line)
 		else if (line[i] == '.')
 			break ;
 		else
-			ft_error();
+			ft_error(game, "parse_texture error - invalid filepath");
 	}
 	filepath = ft_strdup(line + i);
 	texture = mlx_load_png(filepath);
 	if (texture == NULL)
-		ft_error();
+		ft_error(game, "parse_texture error - invalid file");
 	free(filepath);
 	return (texture);
 }
 
-static bool	parse_textures(t_map *map, char	*line)
+static void	parse_textures(t_game *game, char *line)
 {
 	int		i;
-	bool	parsed;
 
-	parsed = false;
 	i = 0;
 	while (ft_isspace(line[i]))
 		i++;
-	if (ft_strncmp(&line[i], "NO", 2) || ft_strncmp(&line[i], "EA", 2)
-		|| ft_strncmp(&line[i], "SO", 2) || ft_strncmp(&line[i], "WE", 2))
-		parsed = true;
 	if (ft_strncmp(&line[i], "NO", 2) == 0)
-		map->walls[0] = set_texture(&line[i + 2]);
+		game->map->walls[0] = set_texture(&line[i + 2]);
 	else if (ft_strncmp(&line[i], "EA", 2) == 0)
-		map->walls[1] = set_texture(&line[i + 2]);
+		game->map->walls[1] = set_texture(&line[i + 2]);
 	else if (ft_strncmp(&line[i], "SO", 2) == 0)
-		map->walls[2] = set_texture(&line[i + 2]);
+		game->map->walls[2] = set_texture(&line[i + 2]);
 	else if (ft_strncmp(&line[i], "WE", 2) == 0)
-		map->walls[3] = set_texture(&line[i + 2]);
-	return (parsed);
+		game->map->walls[3] = set_texture(&line[i + 2]);
 }
 
-t_map	*parse_mapfile(char	*filename)
+void	*parse_mapfile(t_game *game, char *filename)
 {
-	t_map	*map;
 	int		fd;
 	char	*line;
 
-	map = ft_calloc(1, sizeof(t_map));
-	map->map = ft_calloc(15, sizeof(char *)); //calc x/y max beforehand
+	game->map = ft_calloc(1, sizeof(t_map));
+	game->map->map = ft_calloc(15, sizeof(char *)); //calc x/y max beforehand
 	fd = open(filename, O_RDONLY);
 	if (fd == -1)
-		ft_error();
-	while (true)
+		ft_error(game, "filename error (argv[1])");
+	line = get_next_line(fd);
+	while (line != NULL)
 	{
-		if (line)
-			free(line);
+		parse_textures(game, line);
+		parse_floor_ceiling(game, line)
+		parse_map(game, line);
+		free(line);
 		line = get_next_line(fd);
-		if (line == NULL)
-			break;
-		if (parse_textures(map, line) == true)
-			continue ;
-		if (parse_floor_ceiling(map, line) == true)
-			continue ;
-		parse_map(map, line);
 	}
 	close(fd);
-	if (line)
-		free(line);
-	return(map);
 }
