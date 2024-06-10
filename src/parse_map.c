@@ -6,7 +6,7 @@
 /*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 17:14:11 by fwahl             #+#    #+#             */
-/*   Updated: 2024/06/10 16:47:52 by fwahl            ###   ########.fr       */
+/*   Updated: 2024/06/10 17:15:47 by fwahl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ t_map	*parse_mapfile(char	*filename)
 	char	*line;
 
 	map = ft_calloc(1, sizeof(t_map));
+	map->map = ft_calloc(15, sizeof(char *)); //calc x/y max beforehand
 	fd = open(filename, O_RDONLY);
 	if (fd == -1)
 		ft_error();
