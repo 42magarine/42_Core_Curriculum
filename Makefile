@@ -6,7 +6,7 @@
 #    By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/04 17:02:41 by mott              #+#    #+#              #
-#    Updated: 2024/06/07 17:55:27 by mott             ###   ########.fr        #
+#    Updated: 2024/06/10 14:52:35 by mott             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,9 @@ LDFLAGS	=	-ldl -lglfw -pthread -lm
 RM		=	rm -rf
 
 NAME	=	cub3D
-SRCS	=	./src/test.c
+SRCS	=	./src/game.c \
+			./src/hook.c \
+			./src/main.c
 OBJS	=	$(SRCS:.c=.o)
 HEADERS	=	./include/cub3D.h
 
