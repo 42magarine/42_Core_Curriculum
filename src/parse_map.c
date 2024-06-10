@@ -6,7 +6,7 @@
 /*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 17:14:11 by fwahl             #+#    #+#             */
-/*   Updated: 2024/06/10 17:15:47 by fwahl            ###   ########.fr       */
+/*   Updated: 2024/06/10 19:47:20 by fwahl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,17 +51,43 @@ static void	parse_floor_ceiling(t_map *map, char *line)
 		}
 	}
 }
+static mlx_texture_t	*set_tex(char *line)
+{
+	char			*filepath;
+	mlx_texture_t	*texture;
+	int		i;
+
+	i = 0;
+	while (line[i] != NULL)
+	{
+		if (ft_isspace(line[i]))
+			i++;
+		else if (line[i] == '.')
+			break ;
+		else
+			ft_error();
+	}
+	filepath = ft_strdup(line + i);
+	texture = mlx_load_png(filepath);
+	free(filepath);
+	return (texture);
+}
 
 static void	parse_textures(t_map *map, char	*line)
 {
-	if (ft_strncmp(line, "NO ", 3) == 0)
-		map->n_tex = ft_strdup(line + 3);
-	else if (ft_strncmp(line, "EA ", 3) == 0)
-		map->e_tex = ft_strdup(line + 3);
-	else if (ft_strncmp(line, "SO ", 3) == 0)
-		map->s_tex = ft_strdup(line + 3);
-	else if (ft_strncmp(line, "WE ", 3) == 0)
-		map->w_tex = ft_strdup(line + 3);
+	int	i;
+
+	i = 0;
+	while (ft_isspace(line[i]))
+		i++;
+	if (ft_strncmp(&line[i], "NO", 2) == 0)
+		map->walls[0] = set_tex(&line[i + 2]);
+	else if (ft_strncmp(&line[i], "EA", 2) == 0)
+		map->walls[1] = set_tex(&line[i + 2]);
+	else if (ft_strncmp(&line[i], "SO", 2) == 0)
+		map->walls[2] = set_tex(&line[i + 2]);
+	else if (ft_strncmp(&line[i], "WE", 2) == 0)
+		map->walls[3] = set_tex(&line[i + 2]);
 }
 
 t_map	*parse_mapfile(char	*filename)

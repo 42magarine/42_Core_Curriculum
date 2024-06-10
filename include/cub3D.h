@@ -6,7 +6,7 @@
 /*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 17:11:55 by mott              #+#    #+#             */
-/*   Updated: 2024/06/10 17:23:48 by fwahl            ###   ########.fr       */
+/*   Updated: 2024/06/10 19:46:53 by fwahl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,10 @@
 
 typedef struct s_map
 {
-	char	**map;
-	char	*n_tex;
-	char	*e_tex;
-	char	*s_tex;
-	char	*w_tex;
-	int		floor_color[3];
-	int		ceiling_color[3];
+	char			**map;
+	int				floor_color[3];
+	int				ceiling_color[3];
+	mlx_texture_t	*walls[4];
 }	t_map;
 
 typedef struct s_game
