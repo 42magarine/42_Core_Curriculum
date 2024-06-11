@@ -6,7 +6,7 @@
 #    By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/04 17:02:41 by mott              #+#    #+#              #
-#    Updated: 2024/06/10 17:22:54 by fwahl            ###   ########.fr        #
+#    Updated: 2024/06/11 16:59:34 by fwahl            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,13 @@ LDFLAGS	=	-ldl -lglfw -pthread -lm
 RM		=	rm -rf
 
 NAME	=	cub3D
-SRCS	=	./src/main.c ./src/parse_map.c ./debug/debug.c ./src/error.c
+SRCS	=	./src/main.c \
+			./src/parser/parse_map.c \
+			./src/parser/parse_floor_ceiling.c \
+			./src/parser/parse_walls.c \
+			./src/utils/error.c \
+			./src/utils/free.c \
+			./src/utils/debug.c
 OBJS	=	$(SRCS:.c=.o)
 HEADERS	=	./include/cub3D.h
 

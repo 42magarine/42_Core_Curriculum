@@ -1,26 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free.c                                             :+:      :+:    :+:   */
+/*   parse_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/11 00:55:16 by fwahl             #+#    #+#             */
-/*   Updated: 2024/06/11 00:55:16 by fwahl            ###   ########.fr       */
+/*   Created: 2024/06/09 17:14:11 by fwahl             #+#    #+#             */
+/*   Updated: 2024/06/11 17:00:20 by fwahl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/cub3D.h"
+#include "../../include/cub3D.h"
 
-static void	free_map(t_map *map)
+void	parse_map(t_game *game, char *line)
 {
-	if (map->map)
-		ft_free_strarray(map->map);
-	free(map);
-}
+	static int	i = 0;
 
-void	free_game(t_game *game)
-{
-	if (game->map)
-		free_map(game->map);
+	if (line[0] == '1' || line[0] == ' ')
+	{
+		game->map->map[i] = ft_strdup(line);
+		i++;
+	}
 }

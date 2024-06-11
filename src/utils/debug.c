@@ -6,11 +6,11 @@
 /*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 16:59:11 by fwahl             #+#    #+#             */
-/*   Updated: 2024/06/10 19:52:52 by fwahl            ###   ########.fr       */
+/*   Updated: 2024/06/11 17:00:38 by fwahl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/cub3D.h"
+#include "../../include/cub3D.h"
 
 void	debug_map(t_map *map)
 {

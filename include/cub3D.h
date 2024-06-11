@@ -6,7 +6,7 @@
 /*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 17:11:55 by mott              #+#    #+#             */
-/*   Updated: 2024/06/10 19:46:53 by fwahl            ###   ########.fr       */
+/*   Updated: 2024/06/11 16:59:56 by fwahl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,9 @@ typedef struct s_game
 }	t_game;
 
 //parsing
-void	*parse_mapfile(t_game *game, char *filename);
+void	parse_textures(t_game *game, char *line);
+void	parse_floor_ceiling(t_game *game, char *line);
+void	parse_map(t_game *game, char *line);
 
 //debug
 void	debug_map(t_map *map);
@@ -46,6 +48,6 @@ void	debug_map(t_map *map);
 void	ft_error(t_game *game, char *errormsg);
 
 //free
-void	free_game(t_game *game)
+void	free_game(t_game *game);
 
 #endif
