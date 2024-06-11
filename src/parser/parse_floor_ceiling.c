@@ -6,7 +6,7 @@
 /*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 16:54:29 by fwahl             #+#    #+#             */
-/*   Updated: 2024/06/11 17:00:29 by fwahl            ###   ########.fr       */
+/*   Updated: 2024/06/11 17:27:05 by fwahl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static void	parse_rgb(t_game *game, char *line, int rgb[3])
 	}
 	while (ft_isspace(line[i]))
 		i++;
-	if (ft_strlen(&line[i] > 0))
+	if (ft_strlen(&line[i]) > 0)
 		ft_error(game, "parse_rgb error - line too long");
 }
 

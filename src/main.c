@@ -6,7 +6,7 @@
 /*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 17:06:47 by fwahl             #+#    #+#             */
-/*   Updated: 2024/06/11 16:56:53 by fwahl            ###   ########.fr       */
+/*   Updated: 2024/06/11 19:16:00 by fwahl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ static void	*parse_mapfile(t_game *game, char *filename)
 	line = get_next_line(fd);
 	while (line != NULL)
 	{
+		cut_next_line(line);
 		parse_textures(game, line);
 		parse_floor_ceiling(game, line);
 		parse_map(game, line);
