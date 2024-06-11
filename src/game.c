@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 13:37:56 by mott              #+#    #+#             */
-/*   Updated: 2024/06/10 15:41:01 by mott             ###   ########.fr       */
+/*   Updated: 2024/06/11 18:13:26 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ char	*g_map[] =
 	"1010000000100001",
 	"1010000000100001",
 	"1010000000100001",
-	"1000000000000001",
+	"1010000000000001",
 	"1000010000000101",
 	"1020000000000001",
 	"1111111111111111",
@@ -220,37 +220,66 @@ static void	ft_draw_player(t_game *game)
 // 	return (wand_x - player_x);
 // }
 
-// static void ft_draw_line(void *param)
-// {
-// 	mlx_t		*mlx;
-// 	mlx_image_t	*line;
-// 	int			x;
-// 	int			y;
-// 	int			wand_x;
+void ft_draw_line(void *param)
+{
+	t_game		*game;
+	mlx_image_t	*line;
+	// int			x;
+	// int			y;
+	// int			wand_x;
 
-// 	mlx = param;
-// 	wand_x = ft_wie_weit_ist_die_wand_weg();
+	game = param;
+	// wand_x = ft_wie_weit_ist_die_wand_weg();
 
-// 	printf("wand_x: %d\n", wand_x);
+	// printf("wand_x: %d\n", wand_x);
 
-// 	line = mlx_new_image(mlx, wand_x, player_size);
-// 	if (line == NULL)
-// 		ft_exit(mlx_strerror(mlx_errno));
+	line = mlx_new_image(game->window->mlx, game->window->width, game->window->height);
+	if (line == NULL)
+		ft_exit(mlx_strerror(mlx_errno));
 
-// 	y = 0;
-// 	while (y < player_size)
-// 	{
-// 		x = 0;
-// 		while (x < wand_x)
-// 		{
-// 			mlx_put_pixel(line, x, y, 255);
-// 			x++;
-// 		}
-// 		y++;
-// 	}
-// 	if (mlx_image_to_window(mlx, line, player_x, player_y) == -1)
-// 		ft_exit(mlx_strerror(mlx_errno));
-// }
+	// y = 0;
+	// while (y < game->window->height)
+	// {
+	// 	x = 0;
+	// 	while (x < game->window->width)
+	// 	{
+	// 		mlx_put_pixel(line, x, y, 255);
+	// 		x++;
+	// 	}
+	// 	y++;
+	// }
+
+	int	x = game->player->x;
+	int	y = game->player->y;
+
+	int dx = abs(game->x - x);
+	int dy = abs(game->y - y);
+	int sx = x < game->x ? 1 : -1;
+	int sy = y < game->y ? 1 : -1;
+	int err = (dx > dy ? dx : -dy) / 2;
+	int e2;
+
+	while (true)
+	{
+		mlx_put_pixel(line, x, y, 255);
+		if (x == game->x && y == game->y)
+			break;
+		e2 = err;
+		if (e2 > -dx)
+		{
+			err -= dy;
+			x += sx;
+		}
+		if (e2 < dy)
+		{
+			err += dx;
+			y += sy;
+		}
+	}
+
+	if (mlx_image_to_window(game->window->mlx, line, 0, 0) == -1)
+		ft_exit(mlx_strerror(mlx_errno));
+}
 
 int	init_mlx(t_game *game)
 {
@@ -260,13 +289,18 @@ int	init_mlx(t_game *game)
 	if (game->window->mlx == NULL)
 		ft_exit(mlx_strerror(mlx_errno));
 
+ 	game->window->image = mlx_new_image(game->window->mlx, game->window->width, game->window->height);
+	if (game->window->image == NULL)
+		ft_exit(mlx_strerror(mlx_errno));
+
  	ft_draw_map_2D(game);
 	ft_draw_player(game);
-	// ft_draw_line(mlx);
+	// ft_draw_line(game);
+	ft_ray_caster(game);
 
 	// mlx_key_hook(game->window->mlx, &ft_key_hook, game);
 	mlx_loop_hook(game->window->mlx, &ft_key_hook, game);
-	mlx_loop_hook(game->window->mlx, &ft_loop_hook, game);
+	// mlx_loop_hook(game->window->mlx, &ft_loop_hook, game);
 	mlx_loop(game->window->mlx);
 
 	mlx_terminate(game->window->mlx);

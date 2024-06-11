@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 14:08:58 by mott              #+#    #+#             */
-/*   Updated: 2024/06/10 15:44:00 by mott             ###   ########.fr       */
+/*   Updated: 2024/06/11 17:05:51 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,12 +66,16 @@ void	ft_key_hook(void *param)
 		printf("right\n");
 
 	if (mlx_is_key_down(game->window->mlx, MLX_KEY_W) == true)
+		// printf("w\n");
 		ft_move_player(game, 0, -game->player->size);
 	if (mlx_is_key_down(game->window->mlx, MLX_KEY_A) == true)
+		// printf("a\n");
 		ft_move_player(game, -game->player->size, 0);
 	if (mlx_is_key_down(game->window->mlx, MLX_KEY_S) == true)
+		// printf("s\n");
 		ft_move_player(game, 0, game->player->size);
 	if (mlx_is_key_down(game->window->mlx, MLX_KEY_D) == true)
+		// printf("d\n");
 		ft_move_player(game, game->player->size, 0);
 }
 
