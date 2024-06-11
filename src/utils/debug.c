@@ -6,7 +6,7 @@
 /*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 16:59:11 by fwahl             #+#    #+#             */
-/*   Updated: 2024/06/11 17:00:38 by fwahl            ###   ########.fr       */
+/*   Updated: 2024/06/11 20:31:45 by fwahl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,25 @@
 
 void	debug_map(t_map *map)
 {
-	// printf("North Texture: %s\n", map->n_tex);
-	// printf("East  Texture: %s\n", map->e_tex);
-	// printf("South Texture: %s\n", map->s_tex);
-	// printf("West  Texture: %s\n", map->w_tex);
 	printf("Floor - R: %d G: %d B: %d\n", map->floor_color[0], map->floor_color[1], map->floor_color[2]);
 	printf("Ceiling - R: %d G: %d B: %d\n", map->ceiling_color[0], map->ceiling_color[1], map->ceiling_color[2]);
+	printf("\n");
+	if (map->walls[0] != NULL)
+		printf("North wall texture loaded\n");
+	if (map->walls[1] != NULL)
+		printf("East  wall texture loaded\n");
+	if (map->walls[2] != NULL)
+		printf("South wall texture loaded\n");
+	if (map->walls[3] != NULL)
+		printf("West  wall texture loaded\n");
 	printf("\n");
 	int y = 0;
 	while (map->map[y] != NULL)
 	{
-		printf("%s\n", map->map[y]);
+		if (y < 10)
+			printf("map_line[0%d]: %s\n", y, map->map[y]);
+		else
+			printf("map_line[%d]: %s\n", y, map->map[y]);
 		y++;
 	}
 }
