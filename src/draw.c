@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 13:37:56 by mott              #+#    #+#             */
-/*   Updated: 2024/06/12 21:39:31 by mott             ###   ########.fr       */
+/*   Updated: 2024/06/12 22:56:27 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,7 @@ void	ft_draw_square(t_game *game, int map_x, int map_y, int size, int color)
 {
 	int	x;
 	int	y;
+	int white = ft_get_rgba(255, 255, 255, 255);
 
 	y = 0;
 	while (y < size)
@@ -116,7 +117,10 @@ void	ft_draw_square(t_game *game, int map_x, int map_y, int size, int color)
 		x = 0;
 		while (x < size)
 		{
-			mlx_put_pixel(game->window->image, map_x + x, map_y + y, color);
+			if (x == 0 || y == 0)
+				mlx_put_pixel(game->window->image, map_x + x, map_y + y, white);
+			else
+				mlx_put_pixel(game->window->image, map_x + x, map_y + y, color);
 			x++;
 		}
 		y++;
@@ -146,43 +150,71 @@ void	ft_draw_map_2D(t_game *game)
 
 void	ft_draw_player(t_game *game)
 {
-	ft_draw_square(game, game->player->x, game->player->y, 8, ft_get_rgba(0, 0, 255, 255));
+	ft_draw_square(game, game->player->x - 4, game->player->y - 4, 8, ft_get_rgba(0, 0, 255, 255));
 }
 
-void	ft_draw_line(t_game *game, int rx, int ry)
+// void	ft_draw_line(t_game *game, int rx, int ry)
+// {
+// 	int	px;
+// 	int	py;
+// 	int dx;
+// 	int dy;
+// 	int sx;
+// 	int sy;
+// 	int err;
+// 	int e2;
+
+// 	px = game->player->x + 4;
+// 	py = game->player->y + 4;
+// 	dx = abs(rx - px);
+// 	dy = abs(ry - py);
+// 	sx = px < rx ? 1 : -1;
+// 	sy = py < ry ? 1 : -1;
+// 	err = (dx > dy ? dx : -dy) / 2;
+
+// 	while (true)
+// 	{
+// 		mlx_put_pixel(game->window->image, px, py, 255);
+// 		if (px == rx && py == ry)
+// 			break ;
+// 		e2 = err;
+// 		if (e2 > -dx)
+// 		{
+// 			err -= dy;
+// 			px += sx;
+// 		}
+// 		if (e2 < dy)
+// 		{
+// 			err += dx;
+// 			py += sy;
+// 		}
+// 	}
+// }
+
+void ft_draw_line(t_game *game, int rx, int ry)
 {
-	int	px;
-	int	py;
-	int dx;
-	int dy;
-	int sx;
-	int sy;
-	int err;
-	int e2;
-
-	px = game->player->x + 4;
-	py = game->player->y + 4;
-	dx = abs(rx - px);
-	dy = abs(ry - py);
-	sx = px < rx ? 1 : -1;
-	sy = py < ry ? 1 : -1;
-	err = (dx > dy ? dx : -dy) / 2;
-
-	while (true)
-	{
-		mlx_put_pixel(game->window->image, px, py, 255);
-		if (px == rx && py == ry)
-			break ;
-		e2 = err;
-		if (e2 > -dx)
-		{
-			err -= dy;
-			px += sx;
-		}
-		if (e2 < dy)
-		{
-			err += dx;
-			py += sy;
-		}
-	}
+    int px = game->player->x;
+    int py = game->player->y;
+    int dx = abs(rx - px);
+    int dy = abs(ry - py);
+    int sx = (px < rx) ? 1 : -1;
+    int sy = (py < ry) ? 1 : -1;
+    int err = dx - dy;
+    while (true)
+    {
+        mlx_put_pixel(game->window->image, px, py, 255);
+        if (px == rx && py == ry)
+            break;
+        int e2 = err * 2;
+        if (e2 > -dy)
+        {
+            err -= dy;
+            px += sx;
+        }
+        if (e2 < dx)
+        {
+            err += dx;
+            py += sy;
+        }
+    }
 }

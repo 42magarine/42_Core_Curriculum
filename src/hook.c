@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 14:08:58 by mott              #+#    #+#             */
-/*   Updated: 2024/06/12 21:30:57 by mott             ###   ########.fr       */
+/*   Updated: 2024/06/12 22:00:52 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,14 +24,14 @@ static void	ft_move_player(t_game *game, int x, int y)
 static void	ft_rotate_player(t_game *game, char dir)
 {
 	if (dir == 'L')
-		game->player->direction -= 0.1;
-	if (dir == 'R')
 		game->player->direction += 0.1;
+	if (dir == 'R')
+		game->player->direction -= 0.1;
 
-	if (game->player->direction >= 2 * M_PI)
-		game->player->direction -= 2 * M_PI;
-	if (game->player->direction < 0)
-		game->player->direction += 2 * M_PI;
+	// if (game->player->direction >= 2 * M_PI)
+	// 	game->player->direction -= 2 * M_PI;
+	// if (game->player->direction < 0)
+	// 	game->player->direction += 2 * M_PI;
 }
 
 void	ft_key_hook(void *param)
@@ -66,7 +66,7 @@ void	ft_loop_hook(void *param)
 	ft_draw_map_2D(game);
 	ft_draw_player(game);
 	ft_ray_caster(game);
-	
+
 	if (mlx_image_to_window(game->window->mlx, game->window->image, 0, 0) == -1)
 		ft_exit(mlx_strerror(mlx_errno));
 }
