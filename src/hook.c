@@ -6,50 +6,33 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 14:08:58 by mott              #+#    #+#             */
-/*   Updated: 2024/06/11 17:05:51 by mott             ###   ########.fr       */
+/*   Updated: 2024/06/12 21:30:57 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3D.h"
-#include "../include/game.h"
 
 static void	ft_move_player(t_game *game, int x, int y)
 {
-	game->player->image->instances[0].x += x;
-	game->player->image->instances[0].y += y;
+
+	// game->player->image->instances[0].x += x;
+	// game->player->image->instances[0].y += y;
 	game->player->x += x;
 	game->player->y += y;
 }
 
-// void	ft_key_hook(mlx_key_data_t keydata, void *param)
-// {
-// 	mlx_t	*mlx;
+static void	ft_rotate_player(t_game *game, char dir)
+{
+	if (dir == 'L')
+		game->player->direction -= 0.1;
+	if (dir == 'R')
+		game->player->direction += 0.1;
 
-// 	mlx = param;
-
-// 	if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_PRESS)
-// 		mlx_close_window(mlx);
-
-// 	if (keydata.key == MLX_KEY_LEFT
-// 		&& (keydata.action == MLX_PRESS || keydata.action == MLX_REPEAT))
-// 		printf("left\n");
-// 	if (keydata.key == MLX_KEY_RIGHT
-// 		&& (keydata.action == MLX_PRESS || keydata.action == MLX_REPEAT))
-// 		printf("right\n");
-
-// 	if (keydata.key == MLX_KEY_W
-// 		&& (keydata.action == MLX_PRESS || keydata.action == MLX_REPEAT))
-// 		ft_move_player(mlx, 0, -player_size);
-// 	if (keydata.key == MLX_KEY_A
-// 		&& (keydata.action == MLX_PRESS || keydata.action == MLX_REPEAT))
-// 		ft_move_player(mlx, -player_size, 0);
-// 	if (keydata.key == MLX_KEY_S
-// 		&& (keydata.action == MLX_PRESS || keydata.action == MLX_REPEAT))
-// 		ft_move_player(mlx, 0, player_size);
-// 	if (keydata.key == MLX_KEY_D
-// 		&& (keydata.action == MLX_PRESS || keydata.action == MLX_REPEAT))
-// 		ft_move_player(mlx, player_size, 0);
-// }
+	if (game->player->direction >= 2 * M_PI)
+		game->player->direction -= 2 * M_PI;
+	if (game->player->direction < 0)
+		game->player->direction += 2 * M_PI;
+}
 
 void	ft_key_hook(void *param)
 {
@@ -61,25 +44,29 @@ void	ft_key_hook(void *param)
 		mlx_close_window(game->window->mlx);
 
 	if (mlx_is_key_down(game->window->mlx, MLX_KEY_LEFT) == true)
-		printf("left\n");
+		ft_rotate_player(game, 'L');
 	if (mlx_is_key_down(game->window->mlx, MLX_KEY_RIGHT) == true)
-		printf("right\n");
+		ft_rotate_player(game, 'R');
 
 	if (mlx_is_key_down(game->window->mlx, MLX_KEY_W) == true)
-		// printf("w\n");
 		ft_move_player(game, 0, -game->player->size);
 	if (mlx_is_key_down(game->window->mlx, MLX_KEY_A) == true)
-		// printf("a\n");
 		ft_move_player(game, -game->player->size, 0);
 	if (mlx_is_key_down(game->window->mlx, MLX_KEY_S) == true)
-		// printf("s\n");
 		ft_move_player(game, 0, game->player->size);
 	if (mlx_is_key_down(game->window->mlx, MLX_KEY_D) == true)
-		// printf("d\n");
 		ft_move_player(game, game->player->size, 0);
 }
 
 void	ft_loop_hook(void *param)
 {
-	(void)param;
+	t_game	*game;
+
+	game = param;
+	ft_draw_map_2D(game);
+	ft_draw_player(game);
+	ft_ray_caster(game);
+	
+	if (mlx_image_to_window(game->window->mlx, game->window->image, 0, 0) == -1)
+		ft_exit(mlx_strerror(mlx_errno));
 }
