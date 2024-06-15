@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 14:08:58 by mott              #+#    #+#             */
-/*   Updated: 2024/06/12 22:00:52 by mott             ###   ########.fr       */
+/*   Updated: 2024/06/15 14:58:10 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,14 +24,14 @@ static void	ft_move_player(t_game *game, int x, int y)
 static void	ft_rotate_player(t_game *game, char dir)
 {
 	if (dir == 'L')
-		game->player->direction += 0.1;
+		game->player->direction += 0.02;
 	if (dir == 'R')
-		game->player->direction -= 0.1;
+		game->player->direction -= 0.02;
 
-	// if (game->player->direction >= 2 * M_PI)
-	// 	game->player->direction -= 2 * M_PI;
-	// if (game->player->direction < 0)
-	// 	game->player->direction += 2 * M_PI;
+	if (game->player->direction >= 2 * M_PI)
+		game->player->direction -= 2 * M_PI;
+	if (game->player->direction < 0)
+		game->player->direction += 2 * M_PI;
 }
 
 void	ft_key_hook(void *param)

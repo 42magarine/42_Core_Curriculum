@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 17:11:55 by mott              #+#    #+#             */
-/*   Updated: 2024/06/12 21:29:04 by mott             ###   ########.fr       */
+/*   Updated: 2024/06/15 14:40:20 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,8 @@ typedef struct s_coordinates
 {
 	int	x;
 	int	y;
+	// double	x;
+	// double	y;
 }	t_coordinates;
 
 typedef struct s_game

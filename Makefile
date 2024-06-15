@@ -6,12 +6,12 @@
 #    By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/04 17:02:41 by mott              #+#    #+#              #
-#    Updated: 2024/06/11 19:44:00 by mott             ###   ########.fr        #
+#    Updated: 2024/06/15 13:45:44 by mott             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC		=	cc
-# CFLAGS	=	-Wall -Wextra -Werror
+CFLAGS	=	-Wall -Wextra -Werror
 # CFLAGS	+=	-fsanitize=address -g
 LDFLAGS	=	-ldl -lglfw -pthread -lm
 RM		=	rm -rf
