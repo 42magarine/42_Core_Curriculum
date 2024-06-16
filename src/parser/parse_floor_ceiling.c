@@ -6,7 +6,7 @@
 /*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 16:54:29 by fwahl             #+#    #+#             */
-/*   Updated: 2024/06/11 17:27:05 by fwahl            ###   ########.fr       */
+/*   Updated: 2024/06/12 18:13:49 by fwahl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ static void	parse_rgb(t_game *game, char *line, int rgb[3])
 {
 	int		i;
 	int		j;
+	int		value;
 
 	i = 0;
 	j = 0;
@@ -26,9 +27,11 @@ static void	parse_rgb(t_game *game, char *line, int rgb[3])
 			i++;
 		if (!ft_isdigit(line[i]))
 			ft_error(game, "parse_rgb error - invalid chars");
-		rgb[j] = ft_atoi(&line[i]);
-		if (rgb[j] < 0 || rgb[j] > 255)
-			ft_error(game, "parse_rgb error - invalid range(0 to 255)");
+		value = ft_atoi(&line[i]);
+		if (value < 0 || value > 255)
+			ft_error(game, "parse_rgb error - invalid range(uint8_t)");
+		else
+			rgb[j] = value;
 		while (ft_isdigit(line[i]))
 			i++;
 		j++;
@@ -52,15 +55,15 @@ void	parse_floor_ceiling(t_game *game, char *line)
 		parse_rgb(game, line + 1, rgb);
 		if (line[i] == 'F')
 		{
-			game->map->floor_color[0] = rgb[0];
-			game->map->floor_color[1] = rgb[1];
-			game->map->floor_color[2] = rgb[2];
+			game->map->bot_rgb[0] = rgb[0];
+			game->map->bot_rgb[1] = rgb[1];
+			game->map->bot_rgb[2] = rgb[2];
 		}
 		if (line[i] == 'C')
 		{
-			game->map->ceiling_color[0] = rgb[0];
-			game->map->ceiling_color[1] = rgb[1];
-			game->map->ceiling_color[2] = rgb[2];
+			game->map->top_rgb[0] = rgb[0];
+			game->map->top_rgb[1] = rgb[1];
+			game->map->top_rgb[2] = rgb[2];
 		}
 	}
 }

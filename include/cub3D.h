@@ -6,7 +6,7 @@
 /*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 17:11:55 by mott              #+#    #+#             */
-/*   Updated: 2024/06/11 16:59:56 by fwahl            ###   ########.fr       */
+/*   Updated: 2024/06/12 18:13:49 by fwahl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,15 +20,18 @@
 # include <stdlib.h>	// malloc, free, exit
 # include <string.h>	// strerror
 # include <stdbool.h>
+# include <stdint.h>
 # include "../libft/libft.h"
 # include "../MLX42/include/MLX42/MLX42.h"
 
 typedef struct s_map
 {
 	char			**map;
-	int				floor_color[3];
-	int				ceiling_color[3];
-	mlx_texture_t	*walls[4];
+	int				x_max;
+	int				y_max;
+	uint8_t			bot_rgb[3];
+	uint8_t			top_rgb[3];
+	mlx_texture_t	*walls[4]; //NESW
 }	t_map;
 
 typedef struct s_game
@@ -40,6 +43,7 @@ typedef struct s_game
 void	parse_textures(t_game *game, char *line);
 void	parse_floor_ceiling(t_game *game, char *line);
 void	parse_map(t_game *game, char *line);
+void	set_map_size(t_game *game, char *filename);
 
 //debug
 void	debug_map(t_map *map);
