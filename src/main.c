@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 17:31:12 by mott              #+#    #+#             */
-/*   Updated: 2024/06/16 15:35:12 by mott             ###   ########.fr       */
+/*   Updated: 2024/06/16 19:00:50 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,14 @@ int	ft_exit(const char *str)
 int	main(void)
 {
 	t_game		game;
-	t_player	player;
 	t_window	window;
-	t_point		map;
+	t_map		map;
+	t_player	player;
 
-	init_var(&game, &player, &window, &map);
-	init_mlx(&game.window);
+	init_var(&game, &window, &map, &player);
+	init_mlx(game.window);
 	// mlx_loop_hook(game.window->mlx, &ft_key_hook, &game);
-	mlx_loop_hook(game.window->mlx, &ft_loop_hook, &game);
+	mlx_loop_hook(game.window->mlx, &loop_hook, &game);
 	mlx_loop(game.window->mlx);
 	mlx_delete_image(game.window->mlx, game.window->image);
 	mlx_terminate(game.window->mlx);

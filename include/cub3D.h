@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 17:11:55 by mott              #+#    #+#             */
-/*   Updated: 2024/06/16 15:46:04 by mott             ###   ########.fr       */
+/*   Updated: 2024/06/16 19:14:33 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,12 +39,13 @@
 # define TEAL		0x008080	// (0, 128, 128)
 # define NAVY		0x000080	// (0, 0, 128)
 
-# define PLAYER_SIZE	8
-# define FIELD_SIZE		64
+# define PLAYER_SIZE	2
+# define FIELD_SIZE		16
 # define PI_ONE			M_PI
 # define PI_TWO			2 * M_PI
 # define PI_HALF		M_PI / 2
 # define PI_THREE_HALF	3 * M_PI / 2
+# define FOV			60
 
 extern char *g_map[];
 
@@ -54,13 +55,6 @@ typedef struct s_point
 	int			y;
 }	t_point;
 
-typedef struct s_player
-{
-	t_point		*pos;
-	int			fov;
-	double		dir;
-}	t_player;
-
 typedef struct s_window
 {
 	mlx_t		*mlx;
@@ -69,34 +63,43 @@ typedef struct s_window
 	int			height;
 }	t_window;
 
+typedef struct s_map
+{
+	t_point		pos;
+	int			floor[3];
+	int			ceiling[3];
+}	t_map;
+
+typedef struct s_player
+{
+	t_point		pos;
+	double		dir;
+}	t_player;
+
 typedef struct s_game
 {
-	t_player	*player;
 	t_window	*window;
-	t_point		*point;
+	t_map		*map;
+	t_player	*player;
 }	t_game;
 
 // init.c
-void	init_var(t_game *game, t_player *player, t_window *window, t_point *map);
+void	init_var(t_game *game, t_window *window, t_map *map, t_player *player);
 void	init_mlx(t_window *window);
 
 // draw.c
-void	ft_draw_square(t_game *game, int map_x, int map_y, int size_x, int size_y, int color);
-void	ft_draw_map_2D(t_game *game);
-void	ft_draw_player(t_game *game);
-void	draw_line(t_game *game, t_point start, t_point stop);
-void	ft_draw_background(t_game *game);
+void	draw_background(t_window *window, t_map *map);
+void	draw_minimap(t_window *window, t_map *map, t_point player);
+void	draw_game(t_window *window);
 
 // hook.c
-void	ft_key_hook(void *param);
-void	ft_loop_hook(void *param);
-
+void	loop_hook(void *param);
 
 // main.c
 int		main(void);
 int		ft_exit(const char *str);
 
 // ray.c
-void	ft_ray_caster(t_game *game);
+void	ray_caster(t_window *window, t_map *map, t_player *player);
 
 #endif

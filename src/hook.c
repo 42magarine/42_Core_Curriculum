@@ -6,19 +6,22 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 14:08:58 by mott              #+#    #+#             */
-/*   Updated: 2024/06/16 15:49:47 by mott             ###   ########.fr       */
+/*   Updated: 2024/06/16 19:17:28 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3D.h"
 
-static void	ft_move_player(t_player *player, int x, int y)
+static void	move_player(t_map *map, t_player *player, int x, int y)
 {
-	player->pos->x += x;
-	player->pos->y += y;
+	(void)map;
+	if (g_map[(player->pos.y + y) / FIELD_SIZE][(player->pos.x + x) / FIELD_SIZE] == '1')
+		return ;
+	player->pos.x += x;
+	player->pos.y += y;
 }
 
-static void	ft_rotate_player(t_player *player, char dir)
+static void	rotate_player(t_player *player, char dir)
 {
 	if (dir == 'L')
 		player->dir += 0.02;
@@ -31,39 +34,34 @@ static void	ft_rotate_player(t_player *player, char dir)
 		player->dir -= PI_TWO;
 }
 
-void	ft_key_hook(t_game *game)
+static void	key_hook(t_window *window, t_map *map, t_player *player)
 {
-	if (mlx_is_key_down(game->window->mlx, MLX_KEY_ESCAPE) == true)
-		mlx_close_window(game->window->mlx);
+	if (mlx_is_key_down(window->mlx, MLX_KEY_ESCAPE) == true)
+		mlx_close_window(window->mlx);
 
-	if (mlx_is_key_down(game->window->mlx, MLX_KEY_LEFT) == true)
-		ft_rotate_player(game->player, 'L');
-	if (mlx_is_key_down(game->window->mlx, MLX_KEY_RIGHT) == true)
-		ft_rotate_player(game->player, 'R');
+	if (mlx_is_key_down(window->mlx, MLX_KEY_LEFT) == true)
+		rotate_player(player, 'L');
+	if (mlx_is_key_down(window->mlx, MLX_KEY_RIGHT) == true)
+		rotate_player(player, 'R');
 
-	if (mlx_is_key_down(game->window->mlx, MLX_KEY_W) == true)
-		ft_move_player(game->player, 0, -PLAYER_SIZE);
-	if (mlx_is_key_down(game->window->mlx, MLX_KEY_A) == true)
-		ft_move_player(game->player, -PLAYER_SIZE, 0);
-	if (mlx_is_key_down(game->window->mlx, MLX_KEY_S) == true)
-		ft_move_player(game->player, 0, PLAYER_SIZE);
-	if (mlx_is_key_down(game->window->mlx, MLX_KEY_D) == true)
-		ft_move_player(game->player, PLAYER_SIZE, 0);
+	if (mlx_is_key_down(window->mlx, MLX_KEY_W) == true)
+		move_player(map, player, 0, -PLAYER_SIZE);
+	if (mlx_is_key_down(window->mlx, MLX_KEY_A) == true)
+		move_player(map, player, -PLAYER_SIZE, 0);
+	if (mlx_is_key_down(window->mlx, MLX_KEY_S) == true)
+		move_player(map, player, 0, PLAYER_SIZE);
+	if (mlx_is_key_down(window->mlx, MLX_KEY_D) == true)
+		move_player(map, player, PLAYER_SIZE, 0);
 }
 
-void	ft_loop_hook(void *param)
+void	loop_hook(void *param)
 {
 	t_game	*game;
 
 	game = param;
-
-	ft_key_hook(game);
-	ft_draw_background(game);
-
-	// ft_draw_map_2D(game);
-	// ft_draw_player(game);
-	// ft_ray_caster(game);
-
-	if (mlx_image_to_window(game->window->mlx, game->window->image, 0, 0) == -1)
-		ft_exit(mlx_strerror(mlx_errno));
+	key_hook(game->window, game->map, game->player);
+	draw_background(game->window, game->map);
+	draw_minimap(game->window, game->map, game->player->pos);
+	ray_caster(game->window, game->map, game->player);
+	draw_game(game->window);
 }

@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 18:27:53 by mott              #+#    #+#             */
-/*   Updated: 2024/06/16 15:41:58 by mott             ###   ########.fr       */
+/*   Updated: 2024/06/16 19:16:12 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,25 +24,29 @@ char	*g_map[] =
 	"1111111111111111", //7
 };
 
-void	init_var(t_game *game, t_player *player, t_window *window, t_point *map)
+void	init_var(t_game *game, t_window *window, t_map *map, t_player *player)
 {
 	game->player = player;
 	game->window = window;
-	game->point = map;
-
-	player->pos->x = 5 * FIELD_SIZE + FIELD_SIZE / 2;
-	player->pos->y = 4 * FIELD_SIZE + FIELD_SIZE / 2;
-	player->fov = 60;
-	player->dir = 0;				// 0°	east
-	player->dir = M_PI / 2;			// 90°	north
-	player->dir = M_PI;				// 180°	west
-	player->dir = 3 * M_PI / 2;		// 270°	south
+	game->map = map;
 
 	window->width = 1024;
 	window->height = 512;
 
-	map->x = 16;
-	map->y = 8;
+	map->pos.x = 16;
+	map->pos.y = 8;
+	map->floor[0] = 220;
+	map->floor[1] = 100;
+	map->floor[2] = 0;
+	map->ceiling[0] = 225;
+	map->ceiling[1] = 30;
+	map->ceiling[1] = 0;
+	player->pos.x = 5 * FIELD_SIZE + FIELD_SIZE / 2;
+	player->pos.y = 4 * FIELD_SIZE + FIELD_SIZE / 2;
+	player->dir = 0;				// 0°	east
+	player->dir = PI_HALF;			// 90°	north
+	player->dir = PI_ONE;			// 180°	west
+	player->dir = PI_THREE_HALF;	// 270°	south
 }
 
 void	init_mlx(t_window *window)
