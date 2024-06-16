@@ -6,118 +6,55 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 13:37:56 by mott              #+#    #+#             */
-/*   Updated: 2024/06/12 22:56:27 by mott             ###   ########.fr       */
+/*   Updated: 2024/06/16 15:13:16 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3D.h"
+#include "../include/draw.h"
+
+// static void	ft_draw_wall(t_game *game, int x, int shortest_distance)
+// {
+// 	int	y;
+// 	int	height = game->window->height;
+// 	int	wall_height = game->map->field_size;
+// 	int	new_height;
+// 	int	distance = ft_math(game);
+
+// 	new_height = (int)(wall_height / shortest_distance * distance);
+
+// 	y = (height - wall_height) / 2;
+// 	while (y < (height - wall_height) / 2 + wall_height)
+// 	{
+// 		mlx_put_pixel(game->window->image, x, y, 10);
+// 		y++;
+// 	}
+// }
 
 static int	ft_get_rgba(int r, int g, int b, int a)
 {
 	return (r << 24 | g << 16 | b << 8 | a);
 }
 
-// static void ft_bottom(mlx_t *mlx)
-// {
-// 	mlx_image_t	*bottom;
-// 	int			color;
-// 	int			x;
-// 	int			y;
+void	ft_draw_background(t_game *game)
+{
+	ft_draw_square(game, 0, 0, game->window->width, game->window->height / 2, GOLD);
+	ft_draw_square(game, 0, 256, game->window->width, game->window->height / 2, SILVER);
+}
 
-// 	bottom = mlx_new_image(mlx, window->width, height / 2);
-// 	if (bottom == NULL)
-// 		ft_exit(mlx_strerror(mlx_errno));
-
-// 	color = ft_get_rgba(34, 139, 34, 255); // forestgreen
-// 	y = 0;
-// 	while (y < height / 2)
-// 	{
-// 		x = 0;
-// 		while (x < window->width)
-// 		{
-// 			mlx_put_pixel(bottom, x, y, color);
-// 			x++;
-// 		}
-// 		y++;
-// 	}
-
-// 	if (mlx_image_to_window(mlx, bottom, 0, height / 2) == -1)
-// 		ft_exit(mlx_strerror(mlx_errno));
-// }
-
-// static void ft_top(mlx_t *mlx)
-// {
-// 	mlx_image_t	*top;
-// 	int			color;
-// 	int			x;
-// 	int			y;
-
-// 	top = mlx_new_image(mlx, window->width, height / 2);
-// 	if (top == NULL)
-// 		ft_exit(mlx_strerror(mlx_errno));
-
-// 	color = ft_get_rgba(135, 206, 235, 255); // skyblue
-// 	y = 0;
-// 	while (y < height / 2)
-// 	{
-// 		x = 0;
-// 		while (x < window->width)
-// 		{
-// 			mlx_put_pixel(top, x, y, color);
-// 			x++;
-// 		}
-// 		y++;
-// 	}
-
-// 	if (mlx_image_to_window(mlx, top, 0, 0) == -1)
-// 		ft_exit(mlx_strerror(mlx_errno));
-// }
-
-// static int	test_mlx(void)
-// {
-// 	mlx_t			*mlx;
-// 	mlx_texture_t	*texture;
-// 	mlx_image_t		*img;
-
-// 	mlx = mlx_init(width, height, "cub3D", true);
-// 	if (mlx == NULL)
-// 		ft_exit(mlx_strerror(mlx_errno));
-
-// 	ft_bottom(mlx);
-// 	ft_top(mlx);
-
-// 	texture = mlx_load_png("./textures/north.png");
-// 	if (texture == NULL)
-// 		ft_exit(mlx_strerror(mlx_errno));
-
-// 	img = mlx_texture_to_image(mlx, texture);
-// 	if (img == NULL)
-// 		ft_exit(mlx_strerror(mlx_errno));
-
-// 	mlx_resize_image(img, 128, 128);
-
-// 	if (mlx_image_to_window(mlx, img, 128, 192) == -1)
-// 		ft_exit(mlx_strerror(mlx_errno));
-// 	if (mlx_image_to_window(mlx, img, 256, 192) == -1)
-// 		ft_exit(mlx_strerror(mlx_errno));
-
-// 	mlx_delete_image(mlx, img);
-// 	mlx_delete_texture(texture);
-// }
-
-void	ft_draw_square(t_game *game, int map_x, int map_y, int size, int color)
+void	ft_draw_square(t_game *game, int map_x, int map_y, int size_x, int size_y, int color)
 {
 	int	x;
 	int	y;
 	int white = ft_get_rgba(255, 255, 255, 255);
 
 	y = 0;
-	while (y < size)
+	while (y < size_y)
 	{
 		x = 0;
-		while (x < size)
+		while (x < size_x)
 		{
-			if (x == 0 || y == 0)
+			if (x == 0 || y == 0 || x == size_x - 1 || y == size_y - 1)
 				mlx_put_pixel(game->window->image, map_x + x, map_y + y, white);
 			else
 				mlx_put_pixel(game->window->image, map_x + x, map_y + y, color);
@@ -139,9 +76,10 @@ void	ft_draw_map_2D(t_game *game)
 		while (x < game->map->x)
 		{
 			if (g_map[y][x] == '1')
-				ft_draw_square(game, x * 64, y * 64, 64, ft_get_rgba(255, 0, 0, 255));
+				// ft_draw_square(game, x * 64, y * 64, 64, ft_get_rgba(255, 0, 0, 255));
+				ft_draw_square(game, x * 64, y * 64, 64, 64, SILVER);
 			else
-				ft_draw_square(game, x * 64, y * 64, 64, ft_get_rgba(0, 255, 0, 255));
+				ft_draw_square(game, x * 64, y * 64, 64, 64, GOLD);
 			x++;
 		}
 		y++;
@@ -150,71 +88,35 @@ void	ft_draw_map_2D(t_game *game)
 
 void	ft_draw_player(t_game *game)
 {
-	ft_draw_square(game, game->player->x - 4, game->player->y - 4, 8, ft_get_rgba(0, 0, 255, 255));
+	ft_draw_square(game, game->player->x - 4, game->player->y - 4, 8, 8, ft_get_rgba(0, 0, 255, 255));
 }
 
-// void	ft_draw_line(t_game *game, int rx, int ry)
-// {
-// 	int	px;
-// 	int	py;
-// 	int dx;
-// 	int dy;
-// 	int sx;
-// 	int sy;
-// 	int err;
-// 	int e2;
-
-// 	px = game->player->x + 4;
-// 	py = game->player->y + 4;
-// 	dx = abs(rx - px);
-// 	dy = abs(ry - py);
-// 	sx = px < rx ? 1 : -1;
-// 	sy = py < ry ? 1 : -1;
-// 	err = (dx > dy ? dx : -dy) / 2;
-
-// 	while (true)
-// 	{
-// 		mlx_put_pixel(game->window->image, px, py, 255);
-// 		if (px == rx && py == ry)
-// 			break ;
-// 		e2 = err;
-// 		if (e2 > -dx)
-// 		{
-// 			err -= dy;
-// 			px += sx;
-// 		}
-// 		if (e2 < dy)
-// 		{
-// 			err += dx;
-// 			py += sy;
-// 		}
-// 	}
-// }
-
-void ft_draw_line(t_game *game, int rx, int ry)
+void	draw_line(t_game *game, t_point start, t_point stop)
 {
-    int px = game->player->x;
-    int py = game->player->y;
-    int dx = abs(rx - px);
-    int dy = abs(ry - py);
-    int sx = (px < rx) ? 1 : -1;
-    int sy = (py < ry) ? 1 : -1;
-    int err = dx - dy;
-    while (true)
-    {
-        mlx_put_pixel(game->window->image, px, py, 255);
-        if (px == rx && py == ry)
-            break;
-        int e2 = err * 2;
-        if (e2 > -dy)
-        {
-            err -= dy;
-            px += sx;
-        }
-        if (e2 < dx)
-        {
-            err += dx;
-            py += sy;
-        }
-    }
+	t_line	line;
+
+	line.dx = abs(stop.x - start.x);
+	line.dy = -abs(stop.y - start.y);
+	line.sx = 1;
+	line.sy = 1;
+	if (start.x > stop.x)
+		line.sx = -1;
+	if (start.y > stop.y)
+		line.sy = -1;
+	line.err = line.dx + line.dy;
+	while (start.x != stop.x && start.y != stop.y)
+	{
+		mlx_put_pixel(game->window->image, start.x, start.y, WHITE);
+		line.e2 = 2 * line.err;
+		if (line.e2 > line.dy)
+		{
+			line.err += line.dy;
+			start.x += line.sx;
+		}
+		if (line.e2 < line.dx)
+		{
+			line.err += line.dx;
+			start.y += line.sy;
+		}
+	}
 }
