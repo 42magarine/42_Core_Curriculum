@@ -6,7 +6,7 @@
 #    By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/04 17:02:41 by mott              #+#    #+#              #
-#    Updated: 2024/06/11 16:59:34 by fwahl            ###   ########.fr        #
+#    Updated: 2024/06/16 20:54:44 by fwahl            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,6 +21,7 @@ SRCS	=	./src/main.c \
 			./src/parser/parse_map.c \
 			./src/parser/parse_floor_ceiling.c \
 			./src/parser/parse_walls.c \
+			./src/utils/bools.c \
 			./src/utils/error.c \
 			./src/utils/free.c \
 			./src/utils/debug.c

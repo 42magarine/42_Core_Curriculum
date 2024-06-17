@@ -6,7 +6,7 @@
 /*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 17:11:55 by mott              #+#    #+#             */
-/*   Updated: 2024/06/12 18:13:49 by fwahl            ###   ########.fr       */
+/*   Updated: 2024/06/17 16:06:29 by fwahl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,27 @@
 # include <string.h>	// strerror
 # include <stdbool.h>
 # include <stdint.h>
+# include <math.h>
 # include "../libft/libft.h"
 # include "../MLX42/include/MLX42/MLX42.h"
+
+# define PI_ONE			M_PI
+# define PI_TWO			2 * M_PI
+# define PI_HALF		M_PI / 2
+# define PI_THREE_HALF	3 * M_PI / 2
+
+typedef struct s_coords
+{
+	int		x;
+	int		y;
+}	t_coords;
+
+typedef struct s_player
+{
+	t_coords	pos;
+	double		dir;
+
+}	t_player;
 
 typedef struct s_map
 {
@@ -36,17 +55,15 @@ typedef struct s_map
 
 typedef struct s_game
 {
-	t_map	*map;
+	t_map			*map;
+	t_player		*player;
 }	t_game;
 
 //parsing
 void	parse_textures(t_game *game, char *line);
 void	parse_floor_ceiling(t_game *game, char *line);
 void	parse_map(t_game *game, char *line);
-void	set_map_size(t_game *game, char *filename);
-
-//debug
-void	debug_map(t_map *map);
+void	init_map(t_game *game, char *filename);
 
 //error
 void	ft_error(t_game *game, char *errormsg);
@@ -54,4 +71,13 @@ void	ft_error(t_game *game, char *errormsg);
 //free
 void	free_game(t_game *game);
 
+//bools
+bool	is_map_char(char c);
+bool	is_map_line(char *line);
+bool	is_player_char(char c);
+bool	is_player_start(char *line);
+
+//debug
+void	debug_map(t_map *map);
+void	debug_player(t_player *player);
 #endif

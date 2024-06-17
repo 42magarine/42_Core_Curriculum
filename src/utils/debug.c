@@ -6,11 +6,17 @@
 /*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 16:59:11 by fwahl             #+#    #+#             */
-/*   Updated: 2024/06/12 18:13:49 by fwahl            ###   ########.fr       */
+/*   Updated: 2024/06/16 21:14:17 by fwahl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3D.h"
+
+void	debug_player(t_player *player)
+{
+	printf("Player Pos	X: %d	Y: %d\n", player->pos.x, player->pos.y);
+	printf("Player Dir	%f\n", player->dir);
+}
 
 void	debug_map(t_map *map)
 {
