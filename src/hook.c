@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 14:08:58 by mott              #+#    #+#             */
-/*   Updated: 2024/06/16 19:17:28 by mott             ###   ########.fr       */
+/*   Updated: 2024/06/17 17:36:59 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,8 @@
 static void	move_player(t_map *map, t_player *player, int x, int y)
 {
 	(void)map;
-	if (g_map[(player->pos.y + y) / FIELD_SIZE][(player->pos.x + x) / FIELD_SIZE] == '1')
+	if (g_map[(player->pos.y + y) / FIELD_SIZE]
+		[(player->pos.x + x) / FIELD_SIZE] == '1')
 		return ;
 	player->pos.x += x;
 	player->pos.y += y;
@@ -27,7 +28,6 @@ static void	rotate_player(t_player *player, char dir)
 		player->dir += 0.02;
 	else if (dir == 'R')
 		player->dir -= 0.02;
-
 	if (player->dir < 0)
 		player->dir += PI_TWO;
 	else if (player->dir >= PI_TWO)
@@ -38,12 +38,10 @@ static void	key_hook(t_window *window, t_map *map, t_player *player)
 {
 	if (mlx_is_key_down(window->mlx, MLX_KEY_ESCAPE) == true)
 		mlx_close_window(window->mlx);
-
 	if (mlx_is_key_down(window->mlx, MLX_KEY_LEFT) == true)
 		rotate_player(player, 'L');
 	if (mlx_is_key_down(window->mlx, MLX_KEY_RIGHT) == true)
 		rotate_player(player, 'R');
-
 	if (mlx_is_key_down(window->mlx, MLX_KEY_W) == true)
 		move_player(map, player, 0, -PLAYER_SIZE);
 	if (mlx_is_key_down(window->mlx, MLX_KEY_A) == true)

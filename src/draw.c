@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 13:37:56 by mott              #+#    #+#             */
-/*   Updated: 2024/06/16 19:14:52 by mott             ###   ########.fr       */
+/*   Updated: 2024/06/17 15:55:16 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,48 +56,46 @@ static void	draw_square(t_window *window, t_point pos, t_point size, int color)
 	}
 }
 
-// static void	draw_line(t_game *game, t_point start, t_point stop)
-// {
-// 	t_line	line;
+void	draw_line(t_window *window, t_point start, t_point stop)
+{
+	double	dx;
+	double	dy;
+	double	x;
+	double	y;
+	int		i;
 
-// 	line.dx = abs(stop.x - start.x);
-// 	line.dy = -abs(stop.y - start.y);
-// 	line.sx = 1;
-// 	line.sy = 1;
-// 	if (start.x > stop.x)
-// 		line.sx = -1;
-// 	if (start.y > stop.y)
-// 		line.sy = -1;
-// 	line.err = line.dx + line.dy;
-// 	while (start.x != stop.x && start.y != stop.y)
-// 	{
-// 		mlx_put_pixel(game->window->image, start.x, start.y, WHITE);
-// 		line.e2 = 2 * line.err;
-// 		if (line.e2 > line.dy)
-// 		{
-// 			line.err += line.dy;
-// 			start.x += line.sx;
-// 		}
-// 		if (line.e2 < line.dx)
-// 		{
-// 			line.err += line.dx;
-// 			start.y += line.sy;
-// 		}
-// 	}
-// }
+	dx = stop.x - start.x;
+	dy = stop.y - start.y;
+	// printf("--- dx:%f dy:%f start.x: %d stop.x: %d, start.y: %d stop.y: %d\n", dx, dy, start.x, stop.x, start.y, stop.y);
+	if (fabs(dx) > fabs(dy))
+		i = fabs(dx);
+	else
+		i = fabs(dy);
+	dx /= i;
+	dy /= i;
+	x = (double)start.x;
+	y = (double)start.y;
+	while (i >= 0)
+	{
+		// printf("--- x:%f y:%f dx:%f dy:%f i:%d\n", x, y, dx, dy, i);
+		mlx_put_pixel(window->image, round(x), round(y), BLACK);
+		x += dx;
+		y += dy;
+		i--;
+	}
+}
 
 void	draw_background(t_window *window, t_map *map)
 {
-	int	floor;
 	int	ceiling;
+	int	floor;
 
-	floor = get_rgba(map->floor[0], map->floor[1], map->floor[2], 255);
 	ceiling = get_rgba(map->ceiling[0], map->ceiling[1], map->ceiling[2], 255);
-
+	floor = get_rgba(map->floor[0], map->floor[1], map->floor[2], 255);
 	draw_square(window, (t_point){0, 0},
-		(t_point){window->width, window->height / 2}, floor);
-	draw_square(window, (t_point){0, window->height / 2},
 		(t_point){window->width, window->height / 2}, ceiling);
+	draw_square(window, (t_point){0, window->height / 2},
+		(t_point){window->width, window->height / 2}, floor);
 }
 
 void	draw_minimap(t_window *window, t_map *map, t_point player)
@@ -113,10 +111,10 @@ void	draw_minimap(t_window *window, t_map *map, t_point player)
 		{
 			if (g_map[y][x] == '1')
 				draw_square(window, (t_point){x * FIELD_SIZE, y * FIELD_SIZE},
-					(t_point){FIELD_SIZE, FIELD_SIZE}, TEAL);
+					(t_point){FIELD_SIZE, FIELD_SIZE}, GRAY);
 			else
 				draw_square(window, (t_point){x * FIELD_SIZE, y * FIELD_SIZE},
-					(t_point){FIELD_SIZE, FIELD_SIZE}, MAROON);
+					(t_point){FIELD_SIZE, FIELD_SIZE}, WHITE_SMOKE);
 			x++;
 		}
 		y++;

@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 18:27:53 by mott              #+#    #+#             */
-/*   Updated: 2024/06/16 19:16:12 by mott             ###   ########.fr       */
+/*   Updated: 2024/06/17 15:17:10 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,29 +24,31 @@ char	*g_map[] =
 	"1111111111111111", //7
 };
 
+//   0° = east  = 0
+//  90° = north = PI_HALF
+// 180°	= west  = PI_ONE
+// 270° = south = PI_THREE_HALF
 void	init_var(t_game *game, t_window *window, t_map *map, t_player *player)
 {
 	game->player = player;
 	game->window = window;
 	game->map = map;
-
 	window->width = 1024;
 	window->height = 512;
-
 	map->pos.x = 16;
 	map->pos.y = 8;
-	map->floor[0] = 220;
-	map->floor[1] = 100;
-	map->floor[2] = 0;
-	map->ceiling[0] = 225;
-	map->ceiling[1] = 30;
+	map->floor[0] = 34;
+	map->floor[1] = 139;
+	map->floor[2] = 34;
+	map->ceiling[0] = 255;
+	map->ceiling[1] = 215;
 	map->ceiling[1] = 0;
 	player->pos.x = 5 * FIELD_SIZE + FIELD_SIZE / 2;
 	player->pos.y = 4 * FIELD_SIZE + FIELD_SIZE / 2;
-	player->dir = 0;				// 0°	east
-	player->dir = PI_HALF;			// 90°	north
-	player->dir = PI_ONE;			// 180°	west
-	player->dir = PI_THREE_HALF;	// 270°	south
+	// player->dir = 0;
+	player->dir = PI_HALF;
+	// player->dir = PI_ONE;
+	// player->dir = PI_THREE_HALF;
 }
 
 void	init_mlx(t_window *window)
