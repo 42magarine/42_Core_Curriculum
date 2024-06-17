@@ -1,0 +1,30 @@
+map validity:
+
+TEXTURES:
+skip whitespaces, skip identifiers(NO, SO ...)
+
+./adda/dhad NO
+open file, check if fd < 0
+
+
+bot_rgb / top:
+string can only contain
+		chars 'F' / 'C'
+		whitepaces / ','
+		integers
+skip whitespaces, skip identifiers (C / F)
+no more than 3 integers
+
+integers between 0-255
+
+
+MAP:
+string can only contain
+		1 (walls), 0 (bot_rgb)
+		player pos with direction (N , E , S , W)
+		whitepaces
+
+check if you can walk out of map(floodfill)
+
+
+check if all values are filled (!= NULL)

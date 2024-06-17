@@ -6,7 +6,7 @@
 /*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 17:21:47 by fwahl             #+#    #+#             */
-/*   Updated: 2024/06/11 21:24:05 by fwahl            ###   ########.fr       */
+/*   Updated: 2024/06/17 18:33:52 by fwahl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,6 @@ void	free_all(t_game	*game)
 void	ft_error(t_game *game, char *errormsg)
 {
 	free_all(game);
-	printf("error\n");
+	printf("%s\n", errormsg);
 	exit(EXIT_FAILURE);
 }

@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_floor_ceiling.c                              :+:      :+:    :+:   */
+/*   parse_bot_top_rgb.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "../../include/cub3D.h"
-
 
 static void	parse_rgb(t_game *game, char *line, int rgb[3])
 {
@@ -42,7 +41,7 @@ static void	parse_rgb(t_game *game, char *line, int rgb[3])
 		ft_error(game, "parse_rgb error - line too long");
 }
 
-void	parse_floor_ceiling(t_game *game, char *line)
+void	parse_bot_top_rgb(t_game *game, char *line)
 {
 	int		i;
 	int		rgb[3];

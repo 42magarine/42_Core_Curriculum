@@ -6,11 +6,18 @@
 /*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 17:06:47 by fwahl             #+#    #+#             */
-/*   Updated: 2024/06/17 16:10:43 by fwahl            ###   ########.fr       */
+/*   Updated: 2024/06/17 19:40:11 by fwahl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3D.h"
+
+int	ft_exit(const char *str)
+{
+	printf("Error\n");
+	printf("%s\n", str);
+	exit(EXIT_FAILURE);
+}
 
 static void	parse_mapfile(t_game *game, char *filename)
 {
@@ -26,14 +33,13 @@ static void	parse_mapfile(t_game *game, char *filename)
 	{
 		cut_next_line(line);
 		parse_textures(game, line);
-		parse_floor_ceiling(game, line);
+		parse_bot_top_rgb(game, line);
 		parse_map(game, line);
 		free(line);
 		line = get_next_line(fd);
 	}
 	close(fd);
 }
-
 
 int	main(int argc, char **argv)
 {
@@ -45,5 +51,11 @@ int	main(int argc, char **argv)
 	parse_mapfile(game, argv[1]);
 	debug_map(game->map);
 	debug_player(game->player);
+
+	init_mlx(game);
+	mlx_loop_hook(game->window->mlx, &loop_hook, game);
+	mlx_loop(game->window->mlx);
+	mlx_delete_image(game->window->mlx, game->window->image);
+	mlx_terminate(game->window->mlx);
 	return (EXIT_SUCCESS);
 }
