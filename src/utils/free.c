@@ -6,7 +6,7 @@
 /*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 00:55:16 by fwahl             #+#    #+#             */
-/*   Updated: 2024/06/11 17:00:45 by fwahl            ###   ########.fr       */
+/*   Updated: 2024/06/17 16:21:10 by fwahl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,4 +23,6 @@ void	free_game(t_game *game)
 {
 	if (game->map)
 		free_map(game->map);
+	if (game->player)
+		free(game->player);
 }

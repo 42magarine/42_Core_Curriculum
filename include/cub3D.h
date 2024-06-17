@@ -6,7 +6,7 @@
 /*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 17:11:55 by mott              #+#    #+#             */
-/*   Updated: 2024/06/17 16:06:29 by fwahl            ###   ########.fr       */
+/*   Updated: 2024/06/17 16:44:23 by fwahl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,7 @@ typedef struct s_player
 typedef struct s_map
 {
 	char			**map;
-	int				x_max;
-	int				y_max;
+	t_coords		max;
 	uint8_t			bot_rgb[3];
 	uint8_t			top_rgb[3];
 	mlx_texture_t	*walls[4]; //NESW

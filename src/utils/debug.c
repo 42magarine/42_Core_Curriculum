@@ -6,7 +6,7 @@
 /*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 16:59:11 by fwahl             #+#    #+#             */
-/*   Updated: 2024/06/16 21:14:17 by fwahl            ###   ########.fr       */
+/*   Updated: 2024/06/17 18:00:14 by fwahl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,10 @@ void	debug_map(t_map *map)
 	if (map->walls[3] != NULL)
 		printf("West  wall texture loaded\n");
 	printf("\n");
-	printf("Mapsize		X: %d	Y: %d\n", map->x_max, map->y_max);
+	printf("Mapsize		X: %d	Y: %d\n", map->max.x, map->max.y);
 	printf("\n");
 	int y = 0;
-	while (y <= map->y_max)
+	while (y <= map->max.y)
 	{
 		if (y < 10)
 			printf("map_line[0%d]: %s\n", y, map->map[y]);
