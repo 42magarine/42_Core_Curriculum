@@ -6,13 +6,13 @@
 /*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 17:55:44 by fwahl             #+#    #+#             */
-/*   Updated: 2024/06/18 19:41:56 by fwahl            ###   ########.fr       */
+/*   Updated: 2024/06/18 20:25:23 by fwahl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3D.h"
 
-static bool	is_valid_point(t_map *map, int x, int y, char filler)
+static bool	is_valid_start(t_map *map, int x, int y, char filler)
 {
 	if (x < 0 || x >= ft_strlen(map->map[y]) || y < 0 || y >= map->max.y)
 		return (false);
@@ -30,7 +30,9 @@ static bool	flood_fill(t_map *map, int x, int y, char filler)
 	bool	left;
 	bool	right;
 
-	if (!is_valid_point(map, x, y, filler))
+	if (x < 0 || x >= ft_strlen(map->map[y]) || y < 0 || y >= map->max.y)
+		return (false);
+	if (map->map[y][x] == '1' || map->map[y][x] == filler || map->map[y][x] == ' ')
 		return (true);
 	map->map[y][x] = filler;
 	up = flood_fill(map, x, y - 1, filler);
@@ -48,12 +50,14 @@ bool	validate_map(t_game *game)
 	bool	valid;
 	char	**temp;
 
+	DEBUG();
 	x = game->player->pos.x;
 	y = game->player->pos.y;
-	if (!is_valid_point(game->map, x, y, '2'))
+	if (!is_valid_start(game->map, x, y, '2'))
 		ft_error(game, "invalid player start position");
 	temp = ft_strarray_dup(game->map->map);
 	valid = flood_fill(game->map, x, y, '2');
+	DEBUG();
 	i = 0;
 	while (i < game->map->max.y)
 	{
@@ -61,6 +65,7 @@ bool	validate_map(t_game *game)
 		game->map->map[i] = ft_strdup(temp[i]);
 		i++;
 	}
+	DEBUG();
 	free(temp);
 	if (!valid)
 		ft_error(game, "flood_fill - invalid map");
