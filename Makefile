@@ -6,7 +6,7 @@
 #    By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/04 17:02:41 by mott              #+#    #+#              #
-#    Updated: 2024/06/17 18:52:50 by fwahl            ###   ########.fr        #
+#    Updated: 2024/06/18 19:16:12 by fwahl            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,8 +19,9 @@ RM		=	rm -rf
 NAME	=	cub3D
 SRCS	=	./src/main.c \
 			./src/parser/parse_map.c \
-			./src/parser/parse_bot_top_rgb.c \
+			./src/parser/parse_bot_top.c \
 			./src/parser/parse_walls.c \
+			./src/parser/map_validation.c \
 			./src/utils/bools.c \
 			./src/utils/error.c \
 			./src/utils/free.c \

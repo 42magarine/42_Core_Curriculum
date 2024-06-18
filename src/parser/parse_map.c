@@ -6,7 +6,7 @@
 /*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 17:14:11 by fwahl             #+#    #+#             */
-/*   Updated: 2024/06/17 19:39:30 by fwahl            ###   ########.fr       */
+/*   Updated: 2024/06/18 18:18:50 by fwahl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,12 @@ static void	init_player(t_game	*game, char *line)
 	if (game->player)
 		ft_error(game, "multiple players in map");
 	game->player = ft_calloc(1, sizeof(t_player));
-	game->player->pos.y = game->map->max.y * FIELD_SIZE;
+	game->player->pos.y = game->map->max.y;
 	while (line[i] != '\0')
 	{
 		if (is_player_char(line[i]))
 		{
-			game->player->pos.x = i * FIELD_SIZE;
+			game->player->pos.x = i;
 			if (line[i] == 'E')
 				game->player->dir = 0;
 			if (line[i] == 'N')

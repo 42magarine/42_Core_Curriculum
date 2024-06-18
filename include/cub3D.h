@@ -6,7 +6,7 @@
 /*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 17:11:55 by mott              #+#    #+#             */
-/*   Updated: 2024/06/17 19:44:46 by fwahl            ###   ########.fr       */
+/*   Updated: 2024/06/18 19:23:10 by fwahl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ typedef struct s_window
 typedef struct s_map
 {
 	char			**map;
+	bool			valid;
 	t_coords		max;
 	uint8_t			bot_rgb[3];
 	uint8_t			top_rgb[3];
@@ -112,6 +113,7 @@ void	parse_textures(t_game *game, char *line);
 void	parse_bot_top_rgb(t_game *game, char *line);
 void	parse_map(t_game *game, char *line);
 void	init_map(t_game *game, char *filename);
+bool	validate_map(t_game *game); //bool for improved debuging, can be changed to void later
 
 //error
 void	ft_error(t_game *game, char *errormsg);

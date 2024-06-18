@@ -6,7 +6,7 @@
 /*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 16:59:11 by fwahl             #+#    #+#             */
-/*   Updated: 2024/06/17 18:39:52 by fwahl            ###   ########.fr       */
+/*   Updated: 2024/06/18 19:25:52 by fwahl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,4 +43,5 @@ void	debug_map(t_map *map)
 			printf("map_line[%d]: %s\n", y, map->map[y]);
 		y++;
 	}
+	printf("Valid map: %d\n", map->valid);
 }

@@ -6,7 +6,7 @@
 /*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 17:06:47 by fwahl             #+#    #+#             */
-/*   Updated: 2024/06/17 19:40:11 by fwahl            ###   ########.fr       */
+/*   Updated: 2024/06/18 19:24:20 by fwahl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ int	main(int argc, char **argv)
 	if (argc != 2)
 		ft_error(game, "missing mapfile (argv[1])");
 	parse_mapfile(game, argv[1]);
+	game->map->valid = validate_map(game);
 	debug_map(game->map);
 	debug_player(game->player);
 
