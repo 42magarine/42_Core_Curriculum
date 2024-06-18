@@ -3,16 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 17:11:55 by mott              #+#    #+#             */
-/*   Updated: 2024/06/17 19:44:46 by fwahl            ###   ########.fr       */
+/*   Updated: 2024/06/18 21:16:11 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
-
 
 # include <fcntl.h>		// open
 # include <unistd.h>	// close, read, write
@@ -45,41 +44,44 @@
 # define TEAL			0x008080	// (0, 128, 128)
 # define NAVY			0x000080	// (0, 0, 128)
 
-# define PLAYER_SIZE	2
-# define FIELD_SIZE		16
-# define PI_ONE			M_PI
-# define PI_TWO			2 * M_PI
-# define PI_HALF		M_PI / 2
-# define PI_THREE_HALF	3 * M_PI / 2
+# define WIDTH			1024
+# define HEIGHT			512
+# define F_SIZE			64
+# define P_SIZE			8
 # define FOV			60.0
+# define ONE_PI			3.141592
+# define TWO_PI			6.283185
+# define HALF_PI		1.570796
+# define THREE_HALF_PI	4.712388
 
 typedef struct s_coords
 {
-	int		x;
-	int		y;
+	int	x;
+	int	y;
 }	t_coords;
 
 typedef struct s_window
 {
 	mlx_t		*mlx;
 	mlx_image_t	*image;
-	int			width;
-	int			height;
 }	t_window;
 
 typedef struct s_map
 {
 	char			**map;
 	t_coords		max;
-	uint8_t			bot_rgb[3];
-	uint8_t			top_rgb[3];
-	mlx_texture_t	*walls[4]; //NESW
+	t_coords		wall[WIDTH];
+	int				floor;
+	int				ceiling;
+	mlx_texture_t	*walls[4];
 }	t_map;
 
 typedef struct s_player
 {
 	t_coords	pos;
 	double		dir;
+	double		radian;
+	double		radian_add;
 }	t_player;
 
 typedef struct s_game
@@ -89,23 +91,26 @@ typedef struct s_game
 	t_player	*player;
 }	t_game;
 
+// main.c
+int		main(int argc, char **argv);
+
+// engine
+// draw_game.c
+void	draw_game(t_game *game);
+
+// draw_minimap.c
+void	draw_minimap(t_game *game);
+
 // init.c
-void	init_mlx(t_game *game);
-
-// draw.c
-void	draw_line(t_window *window, t_coords start, t_coords stop);
-void	draw_background(t_window *window, t_map *map);
-void	draw_minimap(t_window *window, t_map *map, t_coords player);
-void	draw_game(t_window *window);
-
-// hook.c
+int		get_rgba(int r, int g, int b, int a);
+void	init_game(t_game *game);
 void	loop_hook(void *param);
 
-// main.c
-int		ft_exit(const char *str);
+// key.c
+void	key_hook(t_game *game);
 
 // ray.c
-void	ray_caster(t_window *window, t_map *map, t_player *player);
+void	ray_caster(t_game *game);
 
 //parsing
 void	parse_textures(t_game *game, char *line);
@@ -114,7 +119,7 @@ void	parse_map(t_game *game, char *line);
 void	init_map(t_game *game, char *filename);
 
 //error
-void	ft_error(t_game *game, char *errormsg);
+void	ft_error(t_game *game, const char *errormsg);
 
 //free
 void	free_game(t_game *game);

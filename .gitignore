@@ -52,8 +52,9 @@ dkms.conf
 
 # my own
 .DS_Store
+.vscode
 cub3D
 MLX42
-Libft
 libft
+notes
 notes.rm
