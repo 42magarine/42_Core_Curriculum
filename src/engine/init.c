@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 15:31:03 by mott              #+#    #+#             */
-/*   Updated: 2024/06/19 18:57:34 by mott             ###   ########.fr       */
+/*   Updated: 2024/06/19 19:32:29 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ void	loop_hook(void *param)
 {
 	t_game		*game;
 	t_window	*window;
-	static int	i = 0;
 
 	game = (t_game *)param;
 	window = game->window;
@@ -49,7 +48,6 @@ void	loop_hook(void *param)
 		draw_minimap(game);
 		if (mlx_image_to_window(window->mlx, window->image, 0, 0) == -1)
 			ft_error(game, mlx_strerror(mlx_errno));
-		printf("new image %d\n", i++);
 		window->redraw = false;
 	}
 	key_hook(game);

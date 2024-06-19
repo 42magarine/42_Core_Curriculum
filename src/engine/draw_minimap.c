@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 13:37:56 by mott              #+#    #+#             */
-/*   Updated: 2024/06/19 17:43:32 by mott             ###   ########.fr       */
+/*   Updated: 2024/06/19 19:40:58 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,7 @@ static void	draw_square(t_game *game, t_coords pos, int size, int color)
 		x = 0;
 		while (x < size)
 		{
-			// if (x == 0 || y == 0 || x == size - 1 || y == size - 1)
-			// 	mlx_put_pixel(game->window->image, pos.x + x, pos.y + y, WHITE);
-			// else
-				mlx_put_pixel(game->window->image, pos.x + x, pos.y + y, color);
+			mlx_put_pixel(game->window->image, pos.x + x, pos.y + y, color);
 			x++;
 		}
 		y++;
@@ -58,8 +55,8 @@ static void	draw_player(t_game *game)
 {
 	t_coords	player;
 
-	player.x = game->player->pos.x - P_SIZE / 2;
-	player.y = game->player->pos.y - P_SIZE / 2;
+	player.x = game->player->pos.x - (P_SIZE >> 1);
+	player.y = game->player->pos.y - (P_SIZE >> 1);
 	draw_square(game, player, P_SIZE, YELLOW);
 }
 

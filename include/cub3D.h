@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 17:11:55 by mott              #+#    #+#             */
-/*   Updated: 2024/06/19 18:49:11 by mott             ###   ########.fr       */
+/*   Updated: 2024/06/19 19:20:18 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@
 # define WIDTH			2048
 # define HEIGHT			1024
 # define F_SIZE			64
-# define P_SIZE			9
+# define P_SIZE			5
 # define FOV			60.0
 # define ONE_PI			3.141592
 # define TWO_PI			6.283185

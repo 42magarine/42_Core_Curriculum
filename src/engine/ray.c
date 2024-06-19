@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 19:44:06 by mott              #+#    #+#             */
-/*   Updated: 2024/06/19 16:49:26 by mott             ###   ########.fr       */
+/*   Updated: 2024/06/19 19:39:52 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,8 @@ static t_coords	horizontal_line(t_game *game, double radian)
 	if (radian > 0 && radian < ONE_PI)
 	{
 		pos.y = ((game->player->pos.y >> 6) << 6) - 1;
-		pos.x = (game->player->pos.y - pos.y) / tan(radian) + game->player->pos.x;
+		pos.x = (game->player->pos.y - pos.y) / tan(radian)
+			+ game->player->pos.x;
 		pos_add.y = -F_SIZE;
 		pos_add.x = F_SIZE / tan(radian);
 		return (check_wall(game, pos, pos_add));
@@ -50,7 +51,8 @@ static t_coords	horizontal_line(t_game *game, double radian)
 	else if (radian > ONE_PI && radian < TWO_PI)
 	{
 		pos.y = ((game->player->pos.y >> 6) << 6) + F_SIZE;
-		pos.x = (game->player->pos.y - pos.y) / tan(radian) + game->player->pos.x;
+		pos.x = (game->player->pos.y - pos.y) / tan(radian)
+			+ game->player->pos.x;
 		pos_add.y = F_SIZE;
 		pos_add.x = -F_SIZE / tan(radian);
 		return (check_wall(game, pos, pos_add));
@@ -70,7 +72,8 @@ static t_coords	vertical_line(t_game *game, double radian)
 	if (radian < HALF_PI || radian > THREE_HALF_PI)
 	{
 		pos.x = ((game->player->pos.x >> 6) << 6) + F_SIZE;
-		pos.y = (game->player->pos.x - pos.x) * tan(radian) + game->player->pos.y;
+		pos.y = (game->player->pos.x - pos.x) * tan(radian)
+			+ game->player->pos.y;
 		pos_add.x = F_SIZE;
 		pos_add.y = -F_SIZE * tan(radian);
 		return (check_wall(game, pos, pos_add));
@@ -78,7 +81,8 @@ static t_coords	vertical_line(t_game *game, double radian)
 	else if (radian > HALF_PI && radian < THREE_HALF_PI)
 	{
 		pos.x = ((game->player->pos.x >> 6) << 6) - 1;
-		pos.y = (game->player->pos.x - pos.x) * tan(radian) + game->player->pos.y;
+		pos.y = (game->player->pos.x - pos.x) * tan(radian)
+			+ game->player->pos.y;
 		pos_add.x = -F_SIZE;
 		pos_add.y = F_SIZE * tan(radian);
 		return (check_wall(game, pos, pos_add));
@@ -95,10 +99,10 @@ static double	shortest_distance(t_game *game, double radian, int i)
 
 	point_h = horizontal_line(game, radian);
 	point_v = vertical_line(game, radian);
-	line_h = sqrt((game->player->pos.x - point_h.x) * (game->player->pos.x - point_h.x)
-		+ (game->player->pos.y - point_h.y) * (game->player->pos.y - point_h.y));
-	line_v = sqrt((game->player->pos.x - point_v.x) * (game->player->pos.x - point_v.x)
-		+ (game->player->pos.y - point_v.y) * (game->player->pos.y - point_v.y));
+	line_h = sqrt(pow(game->player->pos.x - point_h.x, 2)
+			+ pow(game->player->pos.y - point_h.y, 2));
+	line_v = sqrt(pow(game->player->pos.x - point_v.x, 2)
+			+ pow(game->player->pos.y - point_v.y, 2));
 	if (line_h == 0 || isnan(line_h))
 		line_h = INT64_MAX;
 	if (line_v == 0 || isnan(line_v))
