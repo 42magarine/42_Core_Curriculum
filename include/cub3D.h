@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 17:11:55 by mott              #+#    #+#             */
-/*   Updated: 2024/06/18 21:16:11 by mott             ###   ########.fr       */
+/*   Updated: 2024/06/19 18:49:11 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,28 +26,28 @@
 # include "../libft/libft.h"
 # include "../MLX42/include/MLX42/MLX42.h"
 
-# define BLACK			0x000000	// (0, 0, 0)
-# define WHITE			0xFFFFFF	// (255, 255, 255)
-# define WHITE_SMOKE	0xF5F5F5	// (245, 245, 245)
-# define RED			0xFF0000	// (255, 0, 0)
-# define LIME			0x00FF00	// (0, 255, 0)
-# define BLUE			0x0000FF	// (0, 0, 255)
-# define YELLOW			0xFFFF00	// (255, 255, 0)
-# define CYAN			0x00FFFF	// (0, 255, 255)
-# define MAGENTA		0xFF00FF	// (255, 0, 255)
-# define SILVER			0xC0C0C0	// (192, 192, 192)
-# define GRAY			0x808080	// (128, 128, 128)
-# define MAROON			0x800000	// (128, 0, 0)
-# define OLIVE			0x808000	// (128, 128, 0)
-# define GREEN			0x008000	// (0, 128, 0)
-# define PURPLE			0x800080	// (128, 0, 128)
-# define TEAL			0x008080	// (0, 128, 128)
-# define NAVY			0x000080	// (0, 0, 128)
+# define BLACK			0x00000000	// (0, 0, 0, 255)
+# define WHITE			0xFFFFFFFF	// (255, 255, 255, 255)
+# define WHITE_SMOKE	0xF5F5F5FF	// (245, 245, 245, 255)
+# define RED			0xFF0000FF	// (255, 0, 0, 255)
+# define LIME			0x00FF00FF	// (0, 255, 0, 255)
+# define BLUE			0x0000FFFF	// (0, 0, 255, 255)
+# define YELLOW			0xFFFF00FF	// (255, 255, 0, 255)
+# define CYAN			0x00FFFFFF	// (0, 255, 255, 255)
+# define MAGENTA		0xFF00FFFF	// (255, 0, 255, 255)
+# define SILVER			0xC0C0C0FF	// (192, 192, 192, 255)
+# define GRAY			0x808080FF	// (128, 128, 128, 255)
+# define MAROON			0x800000FF	// (128, 0, 0, 255)
+# define OLIVE			0x808000FF	// (128, 128, 0, 255)
+# define GREEN			0x008000FF	// (0, 128, 0, 255)
+# define PURPLE			0x800080FF	// (128, 0, 128, 255)
+# define TEAL			0x008080FF	// (0, 128, 128, 255)
+# define NAVY			0x000080FF	// (0, 0, 128, 255)
 
-# define WIDTH			1024
-# define HEIGHT			512
+# define WIDTH			2048
+# define HEIGHT			1024
 # define F_SIZE			64
-# define P_SIZE			8
+# define P_SIZE			9
 # define FOV			60.0
 # define ONE_PI			3.141592
 # define TWO_PI			6.283185
@@ -64,6 +64,7 @@ typedef struct s_window
 {
 	mlx_t		*mlx;
 	mlx_image_t	*image;
+	bool		redraw;
 }	t_window;
 
 typedef struct s_map
@@ -107,7 +108,7 @@ void	init_game(t_game *game);
 void	loop_hook(void *param);
 
 // key.c
-void	key_hook(t_game *game);
+void	key_hook(t_game	*game);
 
 // ray.c
 void	ray_caster(t_game *game);

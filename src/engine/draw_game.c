@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 16:28:04 by mott              #+#    #+#             */
-/*   Updated: 2024/06/18 20:44:40 by mott             ###   ########.fr       */
+/*   Updated: 2024/06/19 15:20:03 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ static void	draw_background(t_game *game)
 		x = 0;
 		while (x < WIDTH)
 		{
-			if (y < WIDTH >> 1)
+			if (y < HEIGHT >> 1)
 				mlx_put_pixel(game->window->image, x, y, game->map->ceiling);
 			else
 				mlx_put_pixel(game->window->image, x, y, game->map->floor);

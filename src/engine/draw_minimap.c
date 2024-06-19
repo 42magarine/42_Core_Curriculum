@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 13:37:56 by mott              #+#    #+#             */
-/*   Updated: 2024/06/18 22:13:54 by mott             ###   ########.fr       */
+/*   Updated: 2024/06/19 17:43:32 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@ static void	draw_square(t_game *game, t_coords pos, int size, int color)
 		x = 0;
 		while (x < size)
 		{
-			if (x == 0 || y == 0 || x == size - 1 || y == size - 1)
-				mlx_put_pixel(game->window->image, pos.x + x, pos.y + y, WHITE);
-			else
+			// if (x == 0 || y == 0 || x == size - 1 || y == size - 1)
+			// 	mlx_put_pixel(game->window->image, pos.x + x, pos.y + y, WHITE);
+			// else
 				mlx_put_pixel(game->window->image, pos.x + x, pos.y + y, color);
 			x++;
 		}
@@ -47,7 +47,7 @@ static void	draw_map(t_game *game)
 			if (game->map->map[y][x] == '1')
 				draw_square(game, (t_coords){x << 6, y << 6}, F_SIZE, GRAY);
 			else
-				draw_square(game, (t_coords){x << 6, y << 6}, F_SIZE, WHITE_SMOKE);
+				draw_square(game, (t_coords){x << 6, y << 6}, F_SIZE, SILVER);
 			x++;
 		}
 		y++;
@@ -56,7 +56,11 @@ static void	draw_map(t_game *game)
 
 static void	draw_player(t_game *game)
 {
-	draw_square(game, (t_coords){game->player->pos.x, game->player->pos.y}, P_SIZE, YELLOW);
+	t_coords	player;
+
+	player.x = game->player->pos.x - P_SIZE / 2;
+	player.y = game->player->pos.y - P_SIZE / 2;
+	draw_square(game, player, P_SIZE, YELLOW);
 }
 
 static void	draw_ray(t_game *game, t_coords wall)
