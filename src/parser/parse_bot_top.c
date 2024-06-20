@@ -12,11 +12,6 @@
 
 #include "../../include/cub3D.h"
 
-static int	get_rgba(int r, int g, int b, int a)
-{
-	return (r << 24 | g << 16 | b << 8 | a);
-}
-
 static void	parse_rgb(t_game *game, char *line, u_int8_t rgb[3])
 {
 	int		i;

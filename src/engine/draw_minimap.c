@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_minimap.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
+/*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 13:37:56 by mott              #+#    #+#             */
-/*   Updated: 2024/06/19 19:40:58 by mott             ###   ########.fr       */
+/*   Updated: 2024/06/20 21:08:01 by fwahl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static void	draw_map(t_game *game)
 		{
 			if (game->map->map[y][x] == '1')
 				draw_square(game, (t_coords){x << 6, y << 6}, F_SIZE, GRAY);
-			else
+			else if (game->map->map[y][x] == '0' || is_player_char(game->map->map[y][x]))
 				draw_square(game, (t_coords){x << 6, y << 6}, F_SIZE, SILVER);
 			x++;
 		}

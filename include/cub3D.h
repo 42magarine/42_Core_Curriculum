@@ -6,7 +6,7 @@
 /*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 17:11:55 by mott              #+#    #+#             */
-/*   Updated: 2024/06/20 20:53:55 by fwahl            ###   ########.fr       */
+/*   Updated: 2024/06/20 21:02:17 by fwahl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,8 +73,6 @@ typedef struct s_window
 typedef struct s_map
 {
 	char			**map;
-	int				floor;
-	int				ceiling;
 	t_coords		max;
 	t_coords		wall[WIDTH];
 	int				wall_dir[WIDTH];
@@ -133,7 +131,7 @@ void	parse_walls(t_game *game, char *line);
 void	parse_floor_ceiling(t_game *game, char *line);
 void	parse_map(t_game *game, char *line);
 void	init_map(t_game *game, char *filename);
-bool	validate_map(t_game *game); //bool for improved debuging, can be changed to void later
+void	validate_map(t_game *game); //bool for improved debuging, can be changed to void later
 
 //error
 void	ft_error(t_game *game, const char *errormsg);
