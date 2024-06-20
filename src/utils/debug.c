@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   debug.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
+/*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 16:59:11 by fwahl             #+#    #+#             */
-/*   Updated: 2024/06/20 18:18:53 by mott             ###   ########.fr       */
+/*   Updated: 2024/06/20 20:59:30 by fwahl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ void	debug_player(t_player *player)
 
 void	debug_map(t_map *map)
 {
-	// printf("bot_rgb - R: %d G: %d B: %d\n", map->bot_rgb[0], map->bot_rgb[1], map->bot_rgb[2]);
-	// printf("top - R: %d G: %d B: %d\n", map->top_rgb[0], map->top_rgb[1], map->top_rgb[2]);
+	printf("Floor   color: %d\n", map->floor);
+	printf("Ceiling color: %d\n", map->ceiling);
 	printf("\n");
 	if (map->walls[0] != NULL)
 		printf("North wall texture loaded\n");
@@ -43,5 +43,4 @@ void	debug_map(t_map *map)
 			printf("map_line[%d]: %s\n", y, map->map[y]);
 		y++;
 	}
-	printf("Valid map: %d\n", map->valid);
 }

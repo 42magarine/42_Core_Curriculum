@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_validation.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
+/*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 17:55:44 by fwahl             #+#    #+#             */
-/*   Updated: 2024/06/20 18:22:00 by mott             ###   ########.fr       */
+/*   Updated: 2024/06/20 20:57:19 by fwahl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static bool	flood_fill(t_map *map, int x, int y, char filler)
 	return(up && down && left && right);
 }
 
-bool	validate_map(t_game *game)
+void	validate_map(t_game *game)
 {
 	int		x;
 	int		y;
@@ -50,14 +50,12 @@ bool	validate_map(t_game *game)
 	bool	valid;
 	char	**temp;
 
-	DEBUG();
 	x = game->player->pos.x;
 	y = game->player->pos.y;
 	if (!is_valid_start(game->map, x, y, '2'))
 		ft_error(game, "invalid player start position");
 	temp = ft_strarray_dup(game->map->map);
 	valid = flood_fill(game->map, x, y, '2');
-	DEBUG();
 	i = 0;
 	while (i < game->map->max.y)
 	{
@@ -65,9 +63,7 @@ bool	validate_map(t_game *game)
 		game->map->map[i] = ft_strdup(temp[i]);
 		i++;
 	}
-	DEBUG();
 	free(temp);
 	if (!valid)
 		ft_error(game, "flood_fill - invalid map");
-	return (valid);
 }

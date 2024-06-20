@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
+/*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 17:14:11 by fwahl             #+#    #+#             */
-/*   Updated: 2024/06/20 18:18:16 by mott             ###   ########.fr       */
+/*   Updated: 2024/06/20 20:58:45 by fwahl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,11 +43,31 @@ static void	init_player(t_game	*game, char *line)
 	}
 }
 
+static bool	get_map_data(t_game *game, char *line)
+{
+	static bool	start = false;
+
+	if (start == true && (!is_map_line(line) || line[0] == '\0'))
+		return (true);
+	if (line[0] != '\0' && is_map_line(line))
+	{
+		start = true;
+		if ((int)ft_strlen(line) > game->map->max.x)
+			game->map->max.x = ft_strlen(line);
+		if (is_player_start(line))
+			init_player(game, line);
+		game->map->max.y++;
+	}
+	return (false);
+}
+
 void	init_map(t_game *game, char *filename)
 {
 	int		fd;
 	char	*line;
+	bool	stop;
 
+	stop = false;
 	game->map = ft_calloc(1, sizeof(t_map));
 	fd = open(filename, O_RDONLY);
 	if (fd == -1)
@@ -56,14 +76,8 @@ void	init_map(t_game *game, char *filename)
 	while (line != NULL)
 	{
 		cut_next_line(line);
-		if (line[0] != '\0' && is_map_line(line))
-		{
-			if ((int)ft_strlen(line) > game->map->max.x)
-				game->map->max.x = ft_strlen(line);
-			if (is_player_start(line))
-				init_player(game, line);
-			game->map->max.y++;
-		}
+		if (stop == false)
+			stop = get_map_data(game, line);
 		free(line);
 		line = get_next_line(fd);
 	}
@@ -73,11 +87,15 @@ void	init_map(t_game *game, char *filename)
 
 void	parse_map(t_game *game, char *line)
 {
-	static int	i = 0;
+	static int		i = 0;
+	static bool		start = false;
 
-	if (line[0] != '\0' && is_map_line(line) == true)
+	if (is_map_line(line))
 	{
+		start = true;
 		game->map->map[i] = ft_strdup(line);
 		i++;
 	}
+	if (start == true && (line[0] == '\0' || !is_map_line(line)))
+		game->parsed->map = true;
 }
