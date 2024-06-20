@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 15:31:03 by mott              #+#    #+#             */
-/*   Updated: 2024/06/19 19:32:29 by mott             ###   ########.fr       */
+/*   Updated: 2024/06/20 14:31:54 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,8 @@ void	loop_hook(void *param)
 	window = game->window;
 	if (window->redraw == true)
 	{
+		draw_background(game);
 		ray_caster(game);
-		draw_game(game);
 		draw_minimap(game);
 		if (mlx_image_to_window(window->mlx, window->image, 0, 0) == -1)
 			ft_error(game, mlx_strerror(mlx_errno));

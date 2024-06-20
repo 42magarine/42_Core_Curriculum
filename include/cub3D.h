@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 17:11:55 by mott              #+#    #+#             */
-/*   Updated: 2024/06/19 19:20:18 by mott             ###   ########.fr       */
+/*   Updated: 2024/06/20 18:09:07 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 # include "../libft/libft.h"
 # include "../MLX42/include/MLX42/MLX42.h"
 
-# define BLACK			0x00000000	// (0, 0, 0, 255)
+# define BLACK			0x000000FF	// (0, 0, 0, 255)
 # define WHITE			0xFFFFFFFF	// (255, 255, 255, 255)
 # define WHITE_SMOKE	0xF5F5F5FF	// (245, 245, 245, 255)
 # define RED			0xFF0000FF	// (255, 0, 0, 255)
@@ -53,6 +53,10 @@
 # define TWO_PI			6.283185
 # define HALF_PI		1.570796
 # define THREE_HALF_PI	4.712388
+# define EAST			0
+# define NORTH			1
+# define WEST			2
+# define SOUTH			3
 
 typedef struct s_coords
 {
@@ -72,6 +76,7 @@ typedef struct s_map
 	char			**map;
 	t_coords		max;
 	t_coords		wall[WIDTH];
+	int				wall_dir[WIDTH];
 	int				floor;
 	int				ceiling;
 	mlx_texture_t	*walls[4];
@@ -97,7 +102,8 @@ int		main(int argc, char **argv);
 
 // engine
 // draw_game.c
-void	draw_game(t_game *game);
+void	draw_background(t_game *game);
+void	draw_wall(t_game *game, int x, int ray, double radian);
 
 // draw_minimap.c
 void	draw_minimap(t_game *game);

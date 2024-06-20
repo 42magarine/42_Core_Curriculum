@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 19:44:06 by mott              #+#    #+#             */
-/*   Updated: 2024/06/19 19:39:52 by mott             ###   ########.fr       */
+/*   Updated: 2024/06/20 16:37:28 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ static t_coords	vertical_line(t_game *game, double radian)
 	return ((t_coords){game->player->pos.x, game->player->pos.y});
 }
 
-static double	shortest_distance(t_game *game, double radian, int i)
+static double	ray_distance(t_game *game, double radian, int x)
 {
 	t_coords	point_h;
 	t_coords	point_v;
@@ -109,34 +109,37 @@ static double	shortest_distance(t_game *game, double radian, int i)
 		line_v = INT64_MAX;
 	if (line_h < line_v)
 	{
-		game->map->wall[i] = point_h;
+		game->map->wall[x] = point_h;
+		game->map->wall_dir[x] = NORTH;
 		return (line_h);
 	}
 	else
 	{
-		game->map->wall[i] = point_v;
+		game->map->wall[x] = point_v;
+		game->map->wall_dir[x] = EAST;
 		return (line_v);
 	}
 }
 
 void	ray_caster(t_game *game)
 {
-	double		line;
+	double		ray;
 	double		radian;
 	double		radian_add;
-	int			i;
+	int			x;
 
 	radian = game->player->dir + FOV / 2 * ONE_PI / 180;
 	radian_add = FOV / WIDTH * ONE_PI / 180;
-	i = 0;
-	while (i < WIDTH)
+	x = 0;
+	while (x < WIDTH)
 	{
 		if (game->player->radian < 0)
 			game->player->radian += TWO_PI;
 		else if (game->player->radian >= TWO_PI)
 			game->player->radian -= TWO_PI;
-		line = shortest_distance(game, radian, i);
+		ray = ray_distance(game, radian, x);
+		draw_wall(game, x, ray, radian);
 		radian -= radian_add;
-		i++;
+		x++;
 	}
 }
