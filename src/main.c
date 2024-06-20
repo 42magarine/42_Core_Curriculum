@@ -3,21 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 17:06:47 by fwahl             #+#    #+#             */
-/*   Updated: 2024/06/18 19:24:20 by fwahl            ###   ########.fr       */
+/*   Updated: 2024/06/20 18:16:15 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3D.h"
-
-int	ft_exit(const char *str)
-{
-	printf("Error\n");
-	printf("%s\n", str);
-	exit(EXIT_FAILURE);
-}
 
 static void	parse_mapfile(t_game *game, char *filename)
 {
@@ -52,8 +45,7 @@ int	main(int argc, char **argv)
 	game->map->valid = validate_map(game);
 	debug_map(game->map);
 	debug_player(game->player);
-
-	init_mlx(game);
+	init_game(game);
 	mlx_loop_hook(game->window->mlx, &loop_hook, game);
 	mlx_loop(game->window->mlx);
 	mlx_delete_image(game->window->mlx, game->window->image);

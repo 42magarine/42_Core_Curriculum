@@ -53,16 +53,8 @@ void	parse_bot_top_rgb(t_game *game, char *line)
 	{
 		parse_rgb(game, line + 1, rgb);
 		if (line[i] == 'F')
-		{
-			game->map->bot_rgb[0] = rgb[0];
-			game->map->bot_rgb[1] = rgb[1];
-			game->map->bot_rgb[2] = rgb[2];
-		}
+			game->map->floor = get_rgba(rgb[0], rgb[1], rgb[2], 255);
 		if (line[i] == 'C')
-		{
-			game->map->top_rgb[0] = rgb[0];
-			game->map->top_rgb[1] = rgb[1];
-			game->map->top_rgb[2] = rgb[2];
-		}
+			game->map->ceiling = get_rgba(rgb[0], rgb[1], rgb[2], 255);
 	}
 }

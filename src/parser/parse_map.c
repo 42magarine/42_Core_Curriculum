@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 17:14:11 by fwahl             #+#    #+#             */
-/*   Updated: 2024/06/18 18:18:50 by fwahl            ###   ########.fr       */
+/*   Updated: 2024/06/20 18:18:16 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,11 @@ static void	init_player(t_game	*game, char *line)
 			if (line[i] == 'E')
 				game->player->dir = 0;
 			if (line[i] == 'N')
-				game->player->dir = PI_HALF;
+				game->player->dir = HALF_PI;
 			if (line[i] == 'W')
-				game->player->dir = PI_ONE;
+				game->player->dir = ONE_PI;
 			if (line[i] == 'S')
-				game->player->dir = PI_THREE_HALF;
+				game->player->dir = THREE_HALF_PI;
 		}
 		i++;
 	}

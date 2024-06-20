@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_validation.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 17:55:44 by fwahl             #+#    #+#             */
-/*   Updated: 2024/06/18 20:25:23 by fwahl            ###   ########.fr       */
+/*   Updated: 2024/06/20 18:22:00 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static bool	is_valid_start(t_map *map, int x, int y, char filler)
 {
-	if (x < 0 || x >= ft_strlen(map->map[y]) || y < 0 || y >= map->max.y)
+	if (x < 0 || x >= (int)ft_strlen(map->map[y]) || y < 0 || y >= map->max.y)
 		return (false);
 	if (map->map[y][x] == '1' || map->map[y][x] == filler)
 		return (false);
@@ -30,7 +30,7 @@ static bool	flood_fill(t_map *map, int x, int y, char filler)
 	bool	left;
 	bool	right;
 
-	if (x < 0 || x >= ft_strlen(map->map[y]) || y < 0 || y >= map->max.y)
+	if (x < 0 || x >= (int)ft_strlen(map->map[y]) || y < 0 || y >= map->max.y)
 		return (false);
 	if (map->map[y][x] == '1' || map->map[y][x] == filler || map->map[y][x] == ' ')
 		return (true);

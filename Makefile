@@ -3,15 +3,15 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+         #
+#    By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/04 17:02:41 by mott              #+#    #+#              #
-#    Updated: 2024/06/18 19:16:12 by fwahl            ###   ########.fr        #
+#    Updated: 2024/06/20 18:15:39 by mott             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC		=	cc
-# CFLAGS	=	-Wall -Wextra -Werror
+CFLAGS	=	-Wall -Wextra -Werror
 # CFLAGS	+=	-fsanitize=address -g
 LDFLAGS	=	-ldl -lglfw -pthread -lm
 RM		=	rm -rf
@@ -26,10 +26,11 @@ SRCS	=	./src/main.c \
 			./src/utils/error.c \
 			./src/utils/free.c \
 			./src/utils/debug.c \
-			./src/draw.c \
-			./src/hook.c \
-			./src/init.c \
-			./src/ray.c
+			./src/engine/draw_game.c \
+			./src/engine/draw_minimap.c \
+			./src/engine/init.c \
+			./src/engine/key.c \
+			./src/engine/ray.c
 OBJS	=	$(SRCS:.c=.o)
 HEADERS	=	./include/cub3D.h
 
