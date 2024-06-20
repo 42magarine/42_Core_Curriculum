@@ -6,7 +6,7 @@
 /*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 17:11:55 by mott              #+#    #+#             */
-/*   Updated: 2024/06/18 19:23:10 by fwahl            ###   ########.fr       */
+/*   Updated: 2024/06/19 18:06:07 by fwahl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@
 # include <math.h>
 # include "../libft/libft.h"
 # include <math.h>
-# include "../libft/libft.h"
 # include "../MLX42/include/MLX42/MLX42.h"
 
 # define BLACK			0x000000	// (0, 0, 0)
@@ -70,10 +69,9 @@ typedef struct s_window
 typedef struct s_map
 {
 	char			**map;
-	bool			valid;
+	int				floor;
+	int				ceiling;
 	t_coords		max;
-	uint8_t			bot_rgb[3];
-	uint8_t			top_rgb[3];
 	mlx_texture_t	*walls[4]; //NESW
 }	t_map;
 
@@ -83,11 +81,19 @@ typedef struct s_player
 	double		dir;
 }	t_player;
 
+typedef struct s_parse
+{
+	bool		walls;
+	bool		floor_ceiling;
+	bool		map;
+}	t_parse;
+
 typedef struct s_game
 {
 	t_window	*window;
 	t_map		*map;
 	t_player	*player;
+	t_parse		*parsed;
 }	t_game;
 
 // init.c
@@ -109,8 +115,8 @@ int		ft_exit(const char *str);
 void	ray_caster(t_window *window, t_map *map, t_player *player);
 
 //parsing
-void	parse_textures(t_game *game, char *line);
-void	parse_bot_top_rgb(t_game *game, char *line);
+void	parse_walls(t_game *game, char *line);
+void	parse_floor_ceiling(t_game *game, char *line);
 void	parse_map(t_game *game, char *line);
 void	init_map(t_game *game, char *filename);
 bool	validate_map(t_game *game); //bool for improved debuging, can be changed to void later

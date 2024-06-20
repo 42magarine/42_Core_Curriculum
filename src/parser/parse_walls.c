@@ -6,7 +6,7 @@
 /*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 16:52:17 by fwahl             #+#    #+#             */
-/*   Updated: 2024/06/11 21:31:54 by fwahl            ###   ########.fr       */
+/*   Updated: 2024/06/19 17:46:38 by fwahl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,19 +36,23 @@ static mlx_texture_t	*set_texture(t_game *game, char *line)
 	return (texture);
 }
 
-void	parse_textures(t_game *game, char *line)
+void	parse_walls(t_game *game, char *line)
 {
+	t_map	*map;
 	int		i;
 
+	map = game->map;
 	i = 0;
 	while (ft_isspace(line[i]))
 		i++;
 	if (ft_strncmp(&line[i], "NO", 2) == 0)
-		game->map->walls[0] = set_texture(game, &line[i + 2]);
+		map->walls[0] = set_texture(game, &line[i + 2]);
 	else if (ft_strncmp(&line[i], "EA", 2) == 0)
-		game->map->walls[1] = set_texture(game, &line[i + 2]);
+		map->walls[1] = set_texture(game, &line[i + 2]);
 	else if (ft_strncmp(&line[i], "SO", 2) == 0)
-		game->map->walls[2] = set_texture(game, &line[i + 2]);
+		map->walls[2] = set_texture(game, &line[i + 2]);
 	else if (ft_strncmp(&line[i], "WE", 2) == 0)
-		game->map->walls[3] = set_texture(game, &line[i + 2]);
+		map->walls[3] = set_texture(game, &line[i + 2]);
+	if (map->walls[0] && map->walls[1] && map->walls[2] && map->walls[3])
+		game->parsed->walls = true;
 }

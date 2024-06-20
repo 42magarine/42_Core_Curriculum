@@ -6,7 +6,7 @@
 /*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/16 20:41:35 by fwahl             #+#    #+#             */
-/*   Updated: 2024/06/17 15:56:40 by fwahl            ###   ########.fr       */
+/*   Updated: 2024/06/20 20:20:05 by fwahl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,18 @@ bool	is_map_char(char c)
 bool	is_map_line(char *line)
 {
 	int	i;
+	int	j;
 
+	j = 0;
+	while (line[j] != '\0')
+	{
+		if (ft_isspace(line[j]))
+			j++;
+		else
+			break ;
+	}
+	if (line[j] == '\0')
+		return (false);
 	i = 0;
 	while (line[i] != '\0')
 	{

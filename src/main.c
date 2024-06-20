@@ -6,7 +6,7 @@
 /*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 17:06:47 by fwahl             #+#    #+#             */
-/*   Updated: 2024/06/18 19:24:20 by fwahl            ###   ########.fr       */
+/*   Updated: 2024/06/20 20:47:54 by fwahl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,24 +21,28 @@ int	ft_exit(const char *str)
 
 static void	parse_mapfile(t_game *game, char *filename)
 {
-	int		fd;
+	int		fd2;
 	char	*line;
 
 	init_map(game, filename);
-	fd = open(filename, O_RDONLY);
-	if (fd == -1)
+	game->parsed = ft_calloc(1, sizeof(t_parse));
+	fd2 = open(filename, O_RDONLY);
+	if (fd2 == -1)
 		ft_error(game, "filename error (argv[1])");
-	line = get_next_line(fd);
+	line = get_next_line(fd2);
 	while (line != NULL)
 	{
 		cut_next_line(line);
-		parse_textures(game, line);
-		parse_bot_top_rgb(game, line);
-		parse_map(game, line);
+		if (!game->parsed->walls)
+			parse_walls(game, line);
+		if (!game->parsed->floor_ceiling)
+			parse_floor_ceiling(game, line);
+		if (!game->parsed->map)
+			parse_map(game, line);
 		free(line);
-		line = get_next_line(fd);
+		line = get_next_line(fd2);
 	}
-	close(fd);
+	close(fd2);
 }
 
 int	main(int argc, char **argv)
@@ -49,9 +53,9 @@ int	main(int argc, char **argv)
 	if (argc != 2)
 		ft_error(game, "missing mapfile (argv[1])");
 	parse_mapfile(game, argv[1]);
-	game->map->valid = validate_map(game);
 	debug_map(game->map);
 	debug_player(game->player);
+	validate_map(game);
 
 	init_mlx(game);
 	mlx_loop_hook(game->window->mlx, &loop_hook, game);

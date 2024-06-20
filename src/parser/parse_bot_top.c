@@ -12,7 +12,12 @@
 
 #include "../../include/cub3D.h"
 
-static void	parse_rgb(t_game *game, char *line, int rgb[3])
+static int	get_rgba(int r, int g, int b, int a)
+{
+	return (r << 24 | g << 16 | b << 8 | a);
+}
+
+static void	parse_rgb(t_game *game, char *line, u_int8_t rgb[3])
 {
 	int		i;
 	int		j;
@@ -37,15 +42,19 @@ static void	parse_rgb(t_game *game, char *line, int rgb[3])
 	}
 	while (ft_isspace(line[i]))
 		i++;
+	if (j < 3)
+		ft_error(game, "parse_floor_ceiling - incorrect rgb values");
 	if (ft_strlen(&line[i]) > 0)
 		ft_error(game, "parse_rgb error - line too long");
 }
 
-void	parse_bot_top_rgb(t_game *game, char *line)
+void	parse_floor_ceiling(t_game *game, char *line)
 {
-	int		i;
-	int		rgb[3];
+	int			i;
+	t_map		*map;
+	uint8_t		rgb[3];
 
+	map = game->map;
 	i = 0;
 	while (ft_isspace(line[i]))
 		i++;
@@ -53,16 +62,10 @@ void	parse_bot_top_rgb(t_game *game, char *line)
 	{
 		parse_rgb(game, line + 1, rgb);
 		if (line[i] == 'F')
-		{
-			game->map->bot_rgb[0] = rgb[0];
-			game->map->bot_rgb[1] = rgb[1];
-			game->map->bot_rgb[2] = rgb[2];
-		}
+			map->floor = get_rgba(rgb[0], rgb[1], rgb[2], 255);
 		if (line[i] == 'C')
-		{
-			game->map->top_rgb[0] = rgb[0];
-			game->map->top_rgb[1] = rgb[1];
-			game->map->top_rgb[2] = rgb[2];
-		}
+			map->ceiling = get_rgba(rgb[0], rgb[1], rgb[2], 255);
 	}
+	if (map->floor && map->ceiling)
+		game->parsed->floor_ceiling = true;
 }

@@ -6,7 +6,7 @@
 /*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 13:37:56 by mott              #+#    #+#             */
-/*   Updated: 2024/06/17 19:38:19 by fwahl            ###   ########.fr       */
+/*   Updated: 2024/06/19 18:32:01 by fwahl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,15 +85,10 @@ void	draw_line(t_window *window, t_coords start, t_coords stop)
 
 void	draw_background(t_window *window, t_map *map)
 {
-	int	top_rgb;
-	int	bot_rgb;
-
-	top_rgb = get_rgba(map->top_rgb[0], map->top_rgb[1], map->top_rgb[2], 255);
-	bot_rgb = get_rgba(map->bot_rgb[0], map->bot_rgb[1], map->bot_rgb[2], 255);
 	draw_square(window, (t_coords){0, 0},
-		(t_coords){window->width, window->height / 2}, top_rgb);
+		(t_coords){window->width, window->height / 2}, map->ceiling);
 	draw_square(window, (t_coords){0, window->height / 2},
-		(t_coords){window->width, window->height / 2}, bot_rgb);
+		(t_coords){window->width, window->height / 2}, map->floor);
 }
 
 void	draw_minimap(t_window *window, t_map *map, t_coords player)
