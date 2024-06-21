@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 14:08:58 by mott              #+#    #+#             */
-/*   Updated: 2024/06/19 19:33:27 by mott             ###   ########.fr       */
+/*   Updated: 2024/06/21 17:52:46 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,14 @@ static void	move_player(t_game *game, int x, int y)
 	i = 0;
 	while (i++ < (P_SIZE >> 1))
 	{
-		px = (game->player->pos.x + x) >> 6;
-		py = (game->player->pos.y + y) >> 6;
+		px = (int)(game->player->pos.x + x) >> 6;
+		py = (int)(game->player->pos.y + y) >> 6;
 		if (game->map->map[py][px] == '1')
 			return ;
 		game->player->pos.x += x;
 		game->player->pos.y += y;
 	}
-	game->window->redraw = true;
+	game->recalculate = true;
 }
 
 static void	rotate_player(t_game *game, char dir)
@@ -41,7 +41,7 @@ static void	rotate_player(t_game *game, char dir)
 		game->player->dir += TWO_PI;
 	else if (game->player->dir >= TWO_PI)
 		game->player->dir -= TWO_PI;
-	game->window->redraw = true;
+	game->recalculate = true;
 }
 
 void	key_hook(t_game	*game)

@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 16:59:11 by fwahl             #+#    #+#             */
-/*   Updated: 2024/06/20 18:18:53 by mott             ###   ########.fr       */
+/*   Updated: 2024/06/21 17:51:32 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 void	debug_player(t_player *player)
 {
-	printf("Player Pos	X: %d	Y: %d\n", player->pos.x, player->pos.y);
+	// printf("Player Pos	X: %d	Y: %d\n", player->pos.x, player->pos.y);
+	printf("Player Pos	X: %f	Y: %f\n", player->pos.x, player->pos.y);
 	printf("Player Dir	%f\n", player->dir);
 }
 
@@ -32,7 +33,8 @@ void	debug_map(t_map *map)
 	if (map->walls[3] != NULL)
 		printf("West  wall texture loaded\n");
 	printf("\n");
-	printf("Mapsize		X: %d	Y: %d\n", map->max.x, map->max.y);
+	// printf("Mapsize		X: %d	Y: %d\n", map->max.x, map->max.y);
+	printf("Mapsize		X: %f	Y: %f\n", map->max.x, map->max.y);
 	printf("\n");
 	int y = 0;
 	while (y <= map->max.y)

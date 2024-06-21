@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 17:11:55 by mott              #+#    #+#             */
-/*   Updated: 2024/06/20 18:16:50 by mott             ###   ########.fr       */
+/*   Updated: 2024/06/21 17:50:15 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,15 +60,16 @@
 
 typedef struct s_coords
 {
-	int	x;
-	int	y;
+	// int	x;
+	// int	y;
+	double	x;
+	double	y;
 }	t_coords;
 
 typedef struct s_window
 {
 	mlx_t		*mlx;
 	mlx_image_t	*image;
-	bool		redraw;
 }	t_window;
 
 typedef struct s_map
@@ -96,6 +97,7 @@ typedef struct s_game
 	t_window	*window;
 	t_map		*map;
 	t_player	*player;
+	bool		recalculate;
 }	t_game;
 
 // main.c

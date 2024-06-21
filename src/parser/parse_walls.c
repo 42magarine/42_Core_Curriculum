@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_walls.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 16:52:17 by fwahl             #+#    #+#             */
-/*   Updated: 2024/06/11 21:31:54 by fwahl            ###   ########.fr       */
+/*   Updated: 2024/06/21 12:32:27 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,12 +43,12 @@ void	parse_textures(t_game *game, char *line)
 	i = 0;
 	while (ft_isspace(line[i]))
 		i++;
-	if (ft_strncmp(&line[i], "NO", 2) == 0)
+	if (ft_strncmp(&line[i], "EA", 2) == 0)
 		game->map->walls[0] = set_texture(game, &line[i + 2]);
-	else if (ft_strncmp(&line[i], "EA", 2) == 0)
+	else if (ft_strncmp(&line[i], "NO", 2) == 0)
 		game->map->walls[1] = set_texture(game, &line[i + 2]);
-	else if (ft_strncmp(&line[i], "SO", 2) == 0)
-		game->map->walls[2] = set_texture(game, &line[i + 2]);
 	else if (ft_strncmp(&line[i], "WE", 2) == 0)
+		game->map->walls[2] = set_texture(game, &line[i + 2]);
+	else if (ft_strncmp(&line[i], "SO", 2) == 0)
 		game->map->walls[3] = set_texture(game, &line[i + 2]);
 }
