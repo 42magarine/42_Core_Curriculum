@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 13:37:56 by mott              #+#    #+#             */
-/*   Updated: 2024/06/19 19:40:58 by mott             ###   ########.fr       */
+/*   Updated: 2024/06/21 19:53:59 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,6 @@ void	draw_minimap(t_game *game)
 	while (i < WIDTH)
 	{
 		draw_ray(game, game->map->wall[i]);
-		i++;
+		i = i + 1;
 	}
 }
