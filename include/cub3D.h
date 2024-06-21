@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 17:11:55 by mott              #+#    #+#             */
-/*   Updated: 2024/06/20 21:02:17 by fwahl            ###   ########.fr       */
+/*   Updated: 2024/06/21 20:13:01 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,15 +59,16 @@
 
 typedef struct s_coords
 {
-	int	x;
-	int	y;
+	// int	x;
+	// int	y;
+	double	x;
+	double	y;
 }	t_coords;
 
 typedef struct s_window
 {
 	mlx_t		*mlx;
 	mlx_image_t	*image;
-	bool		redraw;
 }	t_window;
 
 typedef struct s_map
@@ -102,6 +103,7 @@ typedef struct s_game
 	t_map		*map;
 	t_player	*player;
 	t_parse		*parsed;
+	bool		recalculate;
 }	t_game;
 
 // main.c
