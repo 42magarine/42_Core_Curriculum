@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 17:11:55 by mott              #+#    #+#             */
-/*   Updated: 2024/06/21 20:13:01 by mott             ###   ########.fr       */
+/*   Updated: 2024/06/22 16:57:57 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,8 @@
 # define TEAL			0x008080FF	// (0, 128, 128, 255)
 # define NAVY			0x000080FF	// (0, 0, 128, 255)
 
-# define WIDTH			2048
-# define HEIGHT			1024
+# define WIDTH			1920
+# define HEIGHT			1080
 # define F_SIZE			64
 # define P_SIZE			5
 # define FOV			60.0
@@ -59,8 +59,6 @@
 
 typedef struct s_coords
 {
-	// int	x;
-	// int	y;
 	double	x;
 	double	y;
 }	t_coords;
@@ -75,11 +73,9 @@ typedef struct s_map
 {
 	char			**map;
 	t_coords		max;
-	t_coords		wall[WIDTH];
-	int				wall_dir[WIDTH];
 	int				floor;
 	int				ceiling;
-	mlx_texture_t	*walls[4];
+	mlx_texture_t	*wall[4];
 }	t_map;
 
 typedef struct s_player
@@ -97,12 +93,22 @@ typedef struct s_parse
 	bool		map;
 }	t_parse;
 
+typedef struct s_ray
+{
+	t_coords	hit[WIDTH];
+	double		len[WIDTH];
+	int			dir[WIDTH];
+	double		fov_start;
+	double		fov_add;
+}	t_ray;
+
 typedef struct s_game
 {
 	t_window	*window;
 	t_map		*map;
 	t_player	*player;
 	t_parse		*parsed;
+	t_ray		*ray;
 	bool		recalculate;
 }	t_game;
 
@@ -112,7 +118,7 @@ int		main(int argc, char **argv);
 // engine
 // draw_game.c
 void	draw_background(t_game *game);
-void	draw_wall(t_game *game, int x, int ray, double radian);
+void	draw_wall(t_game *game, int x);
 
 // draw_minimap.c
 void	draw_minimap(t_game *game);
@@ -133,7 +139,7 @@ void	parse_walls(t_game *game, char *line);
 void	parse_floor_ceiling(t_game *game, char *line);
 void	parse_map(t_game *game, char *line);
 void	init_map(t_game *game, char *filename);
-void	validate_map(t_game *game); //bool for improved debuging, can be changed to void later
+void	validate_map(t_game *game);
 
 //error
 void	ft_error(t_game *game, const char *errormsg);

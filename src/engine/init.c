@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 15:31:03 by mott              #+#    #+#             */
-/*   Updated: 2024/06/21 19:57:15 by mott             ###   ########.fr       */
+/*   Updated: 2024/06/22 14:48:52 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ int	get_rgba(int r, int g, int b, int a)
 void	init_game(t_game *game)
 {
 	t_window	*window;
+	t_ray		*ray;
 
 	window = ft_calloc(1, sizeof(t_window));
 	game->window = window;
@@ -34,6 +35,10 @@ void	init_game(t_game *game)
 	game->recalculate = true;
 	game->player->pos.x = game->player->pos.x * F_SIZE + F_SIZE / 2;
 	game->player->pos.y = game->player->pos.y * F_SIZE + F_SIZE / 2;
+	ray = ft_calloc(1, sizeof(t_ray));
+	game->ray = ray;
+	ray->fov_start = FOV / 2 * ONE_PI / 180;
+	ray->fov_add = FOV / WIDTH * ONE_PI / 180;
 }
 
 void	loop_hook(void *param)

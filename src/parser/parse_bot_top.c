@@ -57,7 +57,7 @@ void	parse_floor_ceiling(t_game *game, char *line)
 	{
 		parse_rgb(game, line + 1, rgb);
 		if (line[i] == 'F')
-			map->floor = get_rgba(rgb[0], rgb[1], rgb[2], 180);
+			map->floor = get_rgba(rgb[0], rgb[1], rgb[2], 255);
 		if (line[i] == 'C')
 			map->ceiling = get_rgba(rgb[0], rgb[1], rgb[2], 255);
 	}

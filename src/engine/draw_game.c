@@ -6,99 +6,59 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 16:28:04 by mott              #+#    #+#             */
-/*   Updated: 2024/06/21 20:21:19 by mott             ###   ########.fr       */
+/*   Updated: 2024/06/22 18:53:37 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3D.h"
 
+static t_coords texture_calculation(t_game *game, int x, int wall_height)
+{
+	t_ray		*ray;
+	t_coords	tex;
+
+	ray = game->ray;
+	tex.x = (double)game->map->wall[ray->dir[x]]->width / F_SIZE;
+	tex.y = (double)game->map->wall[ray->dir[x]]->height / wall_height;
+	if (ray->dir[x] == EAST)
+		tex.x *= ray->hit[x].y - (((int)ray->hit[x].y >> 6) << 6);
+	else if (ray->dir[x] == NORTH)
+		tex.x *= ray->hit[x].x - (((int)ray->hit[x].x >> 6) << 6);
+	else if (ray->dir[x] == WEST)
+		tex.x *= F_SIZE - (ray->hit[x].y - (((int)ray->hit[x].y >> 6) << 6));
+	else if (ray->dir[x] == SOUTH)
+		tex.x *= F_SIZE - (ray->hit[x].x - (((int)ray->hit[x].x >> 6) << 6));
+	return (tex);
+}
+
 // y_step < 0 = texture_height < wall_height = scaling up
 // y_step > 0 = texture_height > wall_height = scaling down
-void	draw_wall(t_game *game, int x, int ray, double radian)
+void	draw_wall(t_game *game, int x)
 {
-	int	line;
-	int	line_offset;
-	int	color;
-	int	y;
-	int	index;
-	double	hit_x;
+	t_coords	tex;
+	int			wall_height;
+	int			wall_offset;
+	int			y;
+	int			i;
+	double		new_y;
 
-	line = F_SIZE * HEIGHT / ray;
-	if (line > HEIGHT)
-		line = HEIGHT;
-	line_offset = (HEIGHT - line) / 2;
-
-	int tex_width = game->map->walls[NORTH]->width;
-	int tex_height = game->map->walls[NORTH]->height;
-	// printf("Texture Width: %d, Texture Height: %d\n", tex_width, tex_height);
-
-	// double hit_x = (game->map->wall[x].x - (int)game->map->wall[x].x) / 64;
-	// printf("h1:%f x1:%f x2:%d\n", hit_x, game->map->wall[x].x, (int)game->map->wall[x].x);
-	if (game->map->wall_dir[x] == NORTH)
-	{
-		if (radian >=0 && radian <= ONE_PI)
-			hit_x = game->map->wall[x].x / 64 - (int)game->map->wall[x].x / 64;
-		else
-			hit_x = 1.0 - (game->map->wall[x].x / 64 - (int)game->map->wall[x].x / 64);
-	}
-	else
-	{
-		if (radian >= HALF_PI && radian <= THREE_HALF_PI)
-			hit_x = 1.0 - game->map->wall[x].y / 64 - (int)game->map->wall[x].y / 64;
-		else
-			hit_x = game->map->wall[x].y / 64 - (int)game->map->wall[x].y / 64;
-	}
-	// printf("h2:%f x1:%f x2:%d\n", hit_x, game->map->wall[x].x, (int)game->map->wall[x].x);
-
-	// double hit_x = (int)(game->map->wall[x].x / 2.0) % tex_width;
-	int tex_x = (int)(hit_x * tex_width);
-	// int tex_x = (int)x;
-
-	// printf("x: %d, ray: %d, hit_x: %f, tex_x: %d\n", x, ray, hit_x, tex_x);
-
-	double y_step = (double)tex_height / line;
-	double tex_pos = 0;
-
+	wall_height = F_SIZE * HEIGHT / game->ray->len[x];
+	if (wall_height > HEIGHT)
+		wall_height = HEIGHT;
+	wall_offset = (HEIGHT - wall_height) >> 1;
+	tex = texture_calculation(game, x, wall_height);
 	y = 0;
-	while (y < line)
+	new_y = 0;
+	while (y < wall_height)
 	{
-		// int tex_y = (int)(y * y_step) % game->map->walls[NORTH]->height;
-		// int tex_y = (int)(y * y_step);
-		// double tex_y = (double) y / line * game->map->walls[NORTH]->height;
-
-		int tex_y = (int)tex_pos % tex_height;
-		index = (tex_y * tex_width + tex_x) * 4;
-		tex_pos += y_step;
-
-		// printf("y: %d, tex_y: %d, index: %d\n", y, tex_y, index);
-
-		if (game->map->wall_dir[x] == NORTH)
-		{
-			if (radian >=0 && radian <= ONE_PI)
-				color = get_rgba(game->map->walls[NORTH]->pixels[index + 0],
-								 game->map->walls[NORTH]->pixels[index + 1],
-								 game->map->walls[NORTH]->pixels[index + 2],
-								 game->map->walls[NORTH]->pixels[index + 3]);
-			else
-				color = get_rgba(game->map->walls[SOUTH]->pixels[index + 0],
-								 game->map->walls[SOUTH]->pixels[index + 1],
-								 game->map->walls[SOUTH]->pixels[index + 2],
-								 game->map->walls[SOUTH]->pixels[index + 3]);
-		}
-		else
-		{
-			if (radian >= HALF_PI && radian <= THREE_HALF_PI)
-				color = get_rgba(game->map->walls[WEST]->pixels[index + 0],
-								 game->map->walls[WEST]->pixels[index + 1],
-								 game->map->walls[WEST]->pixels[index + 2],
-								 game->map->walls[WEST]->pixels[index + 3]);
-			else
-				color = get_rgba(game->map->walls[EAST]->pixels[index + 0],
-								 game->map->walls[EAST]->pixels[index + 1],
-								 game->map->walls[EAST]->pixels[index + 2],
-								 game->map->walls[EAST]->pixels[index + 3]);
-		}
-		mlx_put_pixel(game->window->image, x, y + line_offset, color);
+		// i = ((int)tex.y * game->map->wall[game->ray->dir[x]]->width + (int)tex.x) * 4;
+		i = ((int)new_y * game->map->wall[game->ray->dir[x]]->width + (int)tex.x) * 4;
+		mlx_put_pixel(game->window->image, x, y + wall_offset,
+				get_rgba(game->map->wall[game->ray->dir[x]]->pixels[i + 0],
+				game->map->wall[game->ray->dir[x]]->pixels[i + 1],
+				game->map->wall[game->ray->dir[x]]->pixels[i + 2],
+				game->map->wall[game->ray->dir[x]]->pixels[i + 3]));
+		new_y +=tex.y;
 		y++;
 	}
 }

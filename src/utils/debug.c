@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 16:59:11 by fwahl             #+#    #+#             */
-/*   Updated: 2024/06/21 20:15:26 by mott             ###   ########.fr       */
+/*   Updated: 2024/06/22 16:57:44 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,13 @@ void	debug_map(t_map *map)
 	printf("Floor   color: %d\n", map->floor);
 	printf("Ceiling color: %d\n", map->ceiling);
 	printf("\n");
-	if (map->walls[0] != NULL)
+	if (map->wall[0] != NULL)
 		printf("North wall texture loaded\n");
-	if (map->walls[1] != NULL)
+	if (map->wall[1] != NULL)
 		printf("East  wall texture loaded\n");
-	if (map->walls[2] != NULL)
+	if (map->wall[2] != NULL)
 		printf("South wall texture loaded\n");
-	if (map->walls[3] != NULL)
+	if (map->wall[3] != NULL)
 		printf("West  wall texture loaded\n");
 	printf("\n");
 	// printf("Mapsize		X: %d	Y: %d\n", map->max.x, map->max.y);
