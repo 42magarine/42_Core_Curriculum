@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+         #
+#    By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/04 17:02:41 by mott              #+#    #+#              #
-#    Updated: 2024/06/20 18:15:39 by mott             ###   ########.fr        #
+#    Updated: 2024/06/22 13:27:38 by fwahl            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,8 +19,7 @@ RM		=	rm -rf
 NAME	=	cub3D
 SRCS	=	./src/main.c \
 			./src/parser/parse_map.c \
-			./src/parser/parse_bot_top.c \
-			./src/parser/parse_walls.c \
+			./src/parser/parse_textures.c \
 			./src/parser/map_validation.c \
 			./src/utils/bools.c \
 			./src/utils/error.c \

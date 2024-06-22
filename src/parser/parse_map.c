@@ -6,7 +6,7 @@
 /*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 17:14:11 by fwahl             #+#    #+#             */
-/*   Updated: 2024/06/20 20:58:45 by fwahl            ###   ########.fr       */
+/*   Updated: 2024/06/22 13:41:38 by fwahl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ static void	init_player(t_game	*game, char *line)
 		}
 		i++;
 	}
+	if (game->player->pos.x > 0 && game->player->pos.y > 0)
+		game->parsed->player = true;
 }
 
 static bool	get_map_data(t_game *game, char *line)
@@ -61,7 +63,22 @@ static bool	get_map_data(t_game *game, char *line)
 	return (false);
 }
 
-void	init_map(t_game *game, char *filename)
+static void	parse_map(t_game *game, char *line)
+{
+	static int		i = 0;
+	static bool		start = false;
+
+	if (is_map_line(line))
+	{
+		start = true;
+		game->map->map[i] = ft_strdup(line);
+		i++;
+	}
+	if (start == true && (line[0] == '\0' || !is_map_line(line)))
+		game->parsed->map = true;
+}
+
+static void	init_map(t_game *game, char *filename)
 {
 	int		fd;
 	char	*line;
@@ -85,17 +102,28 @@ void	init_map(t_game *game, char *filename)
 	game->map->map = ft_calloc(game->map->max.y + 1, sizeof(char *));
 }
 
-void	parse_map(t_game *game, char *line)
+void	parse_mapfile(t_game *game, char *filename)
 {
-	static int		i = 0;
-	static bool		start = false;
+	int		fd;
+	char	*line;
 
-	if (is_map_line(line))
+	game->parsed = ft_calloc(1, sizeof(t_parse));
+	init_map(game, filename);
+	fd = open(filename, O_RDONLY);
+	if (fd == -1)
+		ft_error(game, "filename error (argv[1])");
+	line = get_next_line(fd);
+	while (line != NULL)
 	{
-		start = true;
-		game->map->map[i] = ft_strdup(line);
-		i++;
+		cut_next_line(line);
+		if (!game->parsed->walls)
+			parse_walls(game, line);
+		if (!game->parsed->floor_ceiling)
+			parse_floor_ceiling(game, line);
+		if (!game->parsed->map)
+			parse_map(game, line);
+		free(line);
+		line = get_next_line(fd);
 	}
-	if (start == true && (line[0] == '\0' || !is_map_line(line)))
-		game->parsed->map = true;
+	close(fd);
 }

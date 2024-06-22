@@ -6,7 +6,7 @@
 /*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 17:11:55 by mott              #+#    #+#             */
-/*   Updated: 2024/06/20 21:02:17 by fwahl            ###   ########.fr       */
+/*   Updated: 2024/06/22 13:28:13 by fwahl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,7 @@ typedef struct s_parse
 	bool		walls;
 	bool		floor_ceiling;
 	bool		map;
+	bool		player;
 }	t_parse;
 
 typedef struct s_game
@@ -129,9 +130,8 @@ void	ray_caster(t_game *game);
 //parsing
 void	parse_walls(t_game *game, char *line);
 void	parse_floor_ceiling(t_game *game, char *line);
-void	parse_map(t_game *game, char *line);
-void	init_map(t_game *game, char *filename);
-void	validate_map(t_game *game); //bool for improved debuging, can be changed to void later
+void	parse_mapfile(t_game *game, char *filename);
+void	validate_map(t_game *game);
 
 //error
 void	ft_error(t_game *game, const char *errormsg);
