@@ -6,7 +6,7 @@
 /*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 17:06:47 by fwahl             #+#    #+#             */
-/*   Updated: 2024/06/22 13:38:27 by fwahl            ###   ########.fr       */
+/*   Updated: 2024/06/22 14:48:08 by fwahl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ int	main(int argc, char **argv)
 	init_game(game);
 	mlx_loop_hook(game->window->mlx, &loop_hook, game);
 	mlx_loop(game->window->mlx);
-	mlx_delete_image(game->window->mlx, game->window->image);
-	mlx_terminate(game->window->mlx);
+	free_game(game);
 	return (EXIT_SUCCESS);
 }
