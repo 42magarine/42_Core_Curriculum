@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 17:06:47 by fwahl             #+#    #+#             */
-/*   Updated: 2024/06/22 14:48:08 by fwahl            ###   ########.fr       */
+/*   Updated: 2024/06/23 17:39:38 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,9 @@ int	main(int argc, char **argv)
 	validate_map(game);
 	debug_map(game->map);
 	debug_player(game->player);
-
 	init_game(game);
 	mlx_loop_hook(game->window->mlx, &loop_hook, game);
 	mlx_loop(game->window->mlx);
-	free_game(game);
+	// free_game(game);
 	return (EXIT_SUCCESS);
 }

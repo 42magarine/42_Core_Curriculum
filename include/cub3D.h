@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 17:11:55 by mott              #+#    #+#             */
-/*   Updated: 2024/06/22 17:53:00 by fwahl            ###   ########.fr       */
+/*   Updated: 2024/06/23 17:28:58 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,8 @@
 # define TEAL			0x008080FF	// (0, 128, 128, 255)
 # define NAVY			0x000080FF	// (0, 0, 128, 255)
 
-# define WIDTH			2048
-# define HEIGHT			1024
+# define WIDTH			1920
+# define HEIGHT			1080
 # define F_SIZE			64
 # define P_SIZE			5
 # define FOV			60.0
@@ -56,11 +56,11 @@
 # define NORTH			1
 # define WEST			2
 # define SOUTH			3
+# define MOVE_SPEED		1.75
+# define ROTATION_SPEED	0.034907
 
 typedef struct s_coords
 {
-	// int	x;
-	// int	y;
 	double	x;
 	double	y;
 }	t_coords;
@@ -75,19 +75,15 @@ typedef struct s_map
 {
 	char			**map;
 	t_coords		max;
-	t_coords		wall[WIDTH];
-	int				wall_dir[WIDTH];
 	int				floor;
 	int				ceiling;
-	mlx_texture_t	*walls[4];
+	mlx_texture_t	*wall[4];
 }	t_map;
 
 typedef struct s_player
 {
 	t_coords	pos;
 	double		dir;
-	double		radian;
-	double		radian_add;
 }	t_player;
 
 typedef struct s_parse
@@ -98,12 +94,31 @@ typedef struct s_parse
 	bool		player;
 }	t_parse;
 
+typedef struct s_ray
+{
+	t_coords	hit[WIDTH];
+	double		len[WIDTH];
+	int			dir[WIDTH];
+	double		fov_start;
+	double		fov_add;
+}	t_ray;
+
+typedef struct s_texture
+{
+	t_coords	pos;
+	double		y_scale;
+	double		y_offset;
+	int			wall_height;
+	int			wall_offset;
+}	t_texture;
+
 typedef struct s_game
 {
 	t_window	*window;
 	t_map		*map;
 	t_player	*player;
 	t_parse		*parsed;
+	t_ray		*ray;
 	bool		recalculate;
 	bool		mouse_down;
 	int32_t		mouse_x;
@@ -116,7 +131,7 @@ int		main(int argc, char **argv);
 // engine
 // draw_game.c
 void	draw_background(t_game *game);
-void	draw_wall(t_game *game, int x, int ray, double radian);
+void	draw_wall(t_game *game, int x);
 
 // draw_minimap.c
 void	draw_minimap(t_game *game);
@@ -132,27 +147,29 @@ void	key_hook(t_game	*game);
 void	mouse_hook(t_game *game);
 
 // ray.c
-void	ray_caster(t_game *game);
+void	ray_calculation(t_game *game, double radian, int x);
 
-//parsing
+// parser
+// parsing
 void	parse_walls(t_game *game, char *line);
 void	parse_floor_ceiling(t_game *game, char *line);
 void	parse_mapfile(t_game *game, char *filename);
 void	validate_map(t_game *game);
 
-//error
+// utils
+// error.c
 void	ft_error(t_game *game, const char *errormsg);
 
-//free
+//free.c
 void	free_game(t_game *game);
 
-//bools
+// bools.c
 bool	is_map_char(char c);
 bool	is_map_line(char *line);
 bool	is_player_char(char c);
 bool	is_player_start(char *line);
 
-//debug
+// debug.c
 void	debug_map(t_map *map);
 void	debug_player(t_player *player);
 

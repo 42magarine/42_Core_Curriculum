@@ -3,16 +3,16 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+         #
+#    By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/04 17:02:41 by mott              #+#    #+#              #
-#    Updated: 2024/06/23 17:21:32 by fwahl            ###   ########.fr        #
+#    Updated: 2024/06/23 17:28:35 by mott             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC		=	cc
-# CFLAGS	=	-Wall -Wextra -Werror
-CFLAGS	+=	-Ofast
+CFLAGS	=	-Wall -Wextra -Werror
+# CFLAGS	+=	-Ofast
 # CFLAGS	+=	-fsanitize=address -g
 LDFLAGS	=	-ldl -lglfw -pthread -lm
 RM		=	rm -rf

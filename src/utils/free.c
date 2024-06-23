@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 00:55:16 by fwahl             #+#    #+#             */
-/*   Updated: 2024/06/22 14:47:08 by fwahl            ###   ########.fr       */
+/*   Updated: 2024/06/23 17:31:25 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ static void	free_map(t_map *map)
 	i = 0;
 	while (i <= 3)
 	{
-		if (map->walls[i])
-			mlx_delete_texture(map->walls[i]);
+		if (map->wall[i])
+			mlx_delete_texture(map->wall[i]);
 		i++;
 	}
 	free(map);

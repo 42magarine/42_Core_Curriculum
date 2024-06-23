@@ -6,37 +6,43 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 14:08:58 by mott              #+#    #+#             */
-/*   Updated: 2024/06/21 17:52:46 by mott             ###   ########.fr       */
+/*   Updated: 2024/06/23 15:57:05 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3D.h"
 
-static void	move_player(t_game *game, int x, int y)
+// sin (0°)		=  0	cos (0°)	=  1
+// sin (90°)	=  1	cos (90°)	=  0
+// sin (180°)	=  0	cos (180°)	= -1
+// sin (270°)	= -1	cos (270°)	=  0
+static void	move_player(t_game *game, char key, double move_x, double move_y)
 {
-	int	px;
-	int	py;
-	int	i;
-
-	i = 0;
-	while (i++ < (P_SIZE >> 1))
+	if (key == 'W' || key == 'S')
 	{
-		px = (int)(game->player->pos.x + x) >> 6;
-		py = (int)(game->player->pos.y + y) >> 6;
-		if (game->map->map[py][px] == '1')
-			return ;
-		game->player->pos.x += x;
-		game->player->pos.y += y;
+		move_x *= MOVE_SPEED * cos(game->player->dir);
+		move_y *= MOVE_SPEED * sin(game->player->dir);
 	}
+	else if (key == 'A' || key == 'D')
+	{
+		move_x *= MOVE_SPEED * sin(game->player->dir);
+		move_y *= MOVE_SPEED * cos(game->player->dir);
+	}
+	if (game->map->map[(int)(game->player->pos.y) >> 6]
+			[(int)(game->player->pos.x + move_x) >> 6] != '1')
+		game->player->pos.x += move_x;
+	if (game->map->map[(int)(game->player->pos.y + move_y) >> 6]
+			[(int)(game->player->pos.x) >> 6] != '1')
+		game->player->pos.y += move_y;
 	game->recalculate = true;
 }
 
 static void	rotate_player(t_game *game, char dir)
 {
 	if (dir == 'L')
-		game->player->dir += 0.1;
+		game->player->dir += ROTATION_SPEED;
 	else if (dir == 'R')
-		game->player->dir -= 0.1;
+		game->player->dir -= ROTATION_SPEED;
 	if (game->player->dir < 0)
 		game->player->dir += TWO_PI;
 	else if (game->player->dir >= TWO_PI)
@@ -53,11 +59,11 @@ void	key_hook(t_game	*game)
 	if (mlx_is_key_down(game->window->mlx, MLX_KEY_RIGHT) == true)
 		rotate_player(game, 'R');
 	if (mlx_is_key_down(game->window->mlx, MLX_KEY_W) == true)
-		move_player(game, 0, -(P_SIZE >> 1));
+		move_player(game, 'W', 1.0, -1.0);
 	if (mlx_is_key_down(game->window->mlx, MLX_KEY_A) == true)
-		move_player(game, -(P_SIZE >> 1), 0);
+		move_player(game, 'A', -1.0, -1.0);
 	if (mlx_is_key_down(game->window->mlx, MLX_KEY_S) == true)
-		move_player(game, 0, (P_SIZE >> 1));
+		move_player(game, 'S', -1.0, 1.0);
 	if (mlx_is_key_down(game->window->mlx, MLX_KEY_D) == true)
-		move_player(game, (P_SIZE >> 1), 0);
+		move_player(game, 'D', 1.0, 1.0);
 }

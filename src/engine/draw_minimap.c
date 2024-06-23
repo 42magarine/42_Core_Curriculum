@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 13:37:56 by mott              #+#    #+#             */
-/*   Updated: 2024/06/21 20:13:20 by mott             ###   ########.fr       */
+/*   Updated: 2024/06/22 14:54:00 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static void	draw_map(t_game *game)
 		{
 			if (game->map->map[y][x] == '1')
 				draw_square(game, (t_coords){x << 6, y << 6}, F_SIZE, GRAY);
-			else if (game->map->map[y][x] == '0' || is_player_char(game->map->map[y][x]))
+			else
 				draw_square(game, (t_coords){x << 6, y << 6}, F_SIZE, SILVER);
 			x++;
 		}
@@ -89,14 +89,14 @@ static void	draw_ray(t_game *game, t_coords wall)
 
 void	draw_minimap(t_game *game)
 {
-	static int	i;
+	int	i;
 
 	draw_map(game);
 	draw_player(game);
 	i = 0;
 	while (i < WIDTH)
 	{
-		draw_ray(game, game->map->wall[i]);
-		i = i + 1;
+		draw_ray(game, game->ray->hit[i]);
+		i += 1;
 	}
 }

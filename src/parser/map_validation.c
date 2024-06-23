@@ -3,26 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   map_validation.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 17:55:44 by fwahl             #+#    #+#             */
-/*   Updated: 2024/06/22 13:45:36 by fwahl            ###   ########.fr       */
+/*   Updated: 2024/06/23 17:43:04 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3D.h"
 
-static bool	all_parsed(t_parse *parse)
-{
-	bool	all_parsed;
+// static bool	all_parsed(t_parse *parse)
+// {
+// 	bool	all_parsed;
 
-	all_parsed = false;
-	if (parse->floor_ceiling && parse->map && parse->player && parse->walls)
-		all_parsed = true;
-	if (all_parsed)
-		free(parse);
-	return (all_parsed);
-}
+// 	all_parsed = false;
+// 	if (parse->floor_ceiling && parse->map && parse->player && parse->walls)
+// 		all_parsed = true;
+// 	if (all_parsed)
+// 		free(parse);
+// 	return (all_parsed);
+// }
 
 static bool	is_valid_start(t_map *map, int x, int y, char filler)
 {
@@ -51,7 +51,7 @@ static bool	flood_fill(t_map *map, int x, int y, char filler)
 	down = flood_fill(map, x, y + 1, filler);
 	left = flood_fill(map, x - 1, y, filler);
 	right = flood_fill(map, x + 1, y, filler);
-	return(up && down && left && right);
+	return (up && down && left && right);
 }
 
 void	validate_map(t_game *game)
@@ -62,8 +62,8 @@ void	validate_map(t_game *game)
 	bool	valid;
 	char	**temp;
 
-	if (!all_parsed(game->parsed))
-		ft_error(game, "values not parsed correctly");
+	// if (!all_parsed(game->parsed))
+	// 	ft_error(game, "values not parsed correctly");
 	x = game->player->pos.x;
 	y = game->player->pos.y;
 	if (!is_valid_start(game->map, x, y, '2'))

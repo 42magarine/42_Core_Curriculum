@@ -57,7 +57,7 @@ void	parse_floor_ceiling(t_game *game, char *line)
 	{
 		parse_rgb(game, line + 1, rgb);
 		if (line[i] == 'F')
-			map->floor = get_rgba(rgb[0], rgb[1], rgb[2], 180);
+			map->floor = get_rgba(rgb[0], rgb[1], rgb[2], 255);
 		if (line[i] == 'C')
 			map->ceiling = get_rgba(rgb[0], rgb[1], rgb[2], 255);
 	}
@@ -99,13 +99,13 @@ void	parse_walls(t_game *game, char *line)
 	while (ft_isspace(line[i]))
 		i++;
 	if (ft_strncmp(&line[i], "NO", 2) == 0)
-		map->walls[0] = set_texture(game, &line[i + 2]);
+		map->wall[0] = set_texture(game, &line[i + 2]);
 	else if (ft_strncmp(&line[i], "EA", 2) == 0)
-		map->walls[1] = set_texture(game, &line[i + 2]);
+		map->wall[1] = set_texture(game, &line[i + 2]);
 	else if (ft_strncmp(&line[i], "SO", 2) == 0)
-		map->walls[2] = set_texture(game, &line[i + 2]);
+		map->wall[2] = set_texture(game, &line[i + 2]);
 	else if (ft_strncmp(&line[i], "WE", 2) == 0)
-		map->walls[3] = set_texture(game, &line[i + 2]);
-	if (map->walls[0] && map->walls[1] && map->walls[2] && map->walls[3])
+		map->wall[3] = set_texture(game, &line[i + 2]);
+	if (map->wall[0] && map->wall[1] && map->wall[2] && map->wall[3])
 		game->parsed->walls = true;
 }
