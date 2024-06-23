@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 17:55:44 by fwahl             #+#    #+#             */
-/*   Updated: 2024/06/21 20:13:35 by mott             ###   ########.fr       */
+/*   Updated: 2024/06/23 14:58:32 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static bool	flood_fill(t_map *map, int x, int y, char filler)
 	down = flood_fill(map, x, y + 1, filler);
 	left = flood_fill(map, x - 1, y, filler);
 	right = flood_fill(map, x + 1, y, filler);
-	return(up && down && left && right);
+	return (up && down && left && right);
 }
 
 void	validate_map(t_game *game)

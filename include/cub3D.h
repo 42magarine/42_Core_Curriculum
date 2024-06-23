@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 17:11:55 by mott              #+#    #+#             */
-/*   Updated: 2024/06/23 12:59:53 by mott             ###   ########.fr       */
+/*   Updated: 2024/06/23 14:42:06 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,15 @@ typedef struct s_ray
 	double		fov_start;
 	double		fov_add;
 }	t_ray;
+
+typedef struct s_texture
+{
+	t_coords	pos;
+	double		y_scale;
+	double		y_offset;
+	int			wall_height;
+	int			wall_offset;
+}	t_texture;
 
 typedef struct s_game
 {

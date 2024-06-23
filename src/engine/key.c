@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 14:08:58 by mott              #+#    #+#             */
-/*   Updated: 2024/06/23 13:04:26 by mott             ###   ########.fr       */
+/*   Updated: 2024/06/23 13:31:55 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,12 @@ static void	move_player(t_game *game, char key, double move_x, double move_y)
 		move_x *= MOVE_SPEED * sin(game->player->dir);
 		move_y *= MOVE_SPEED * cos(game->player->dir);
 	}
+	if (game->map->map[(int)(game->player->pos.y) >> 6]
+			[(int)(game->player->pos.x + move_x) >> 6] != '1')
+		game->player->pos.x += move_x;
 	if (game->map->map[(int)(game->player->pos.y + move_y) >> 6]
-			[(int)(game->player->pos.x + move_x) >> 6] == '1')
-		return ;
-	game->player->pos.x += move_x;
-	game->player->pos.y += move_y;
+			[(int)(game->player->pos.x) >> 6] != '1')
+		game->player->pos.y += move_y;
 	game->recalculate = true;
 }
 

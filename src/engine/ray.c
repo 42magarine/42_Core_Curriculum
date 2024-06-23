@@ -6,18 +6,18 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 19:44:06 by mott              #+#    #+#             */
-/*   Updated: 2024/06/22 19:58:16 by mott             ###   ########.fr       */
+/*   Updated: 2024/06/23 14:57:03 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3D.h"
 
-static double ray_length(t_game *game, t_coords ray_hit)
+static double	ray_length(t_game *game, t_coords ray_hit)
 {
 	double	ray_len;
 
 	ray_len = (sqrt(pow(game->player->pos.x - ray_hit.x, 2)
-			+ pow(game->player->pos.y - ray_hit.y, 2)));
+				+ pow(game->player->pos.y - ray_hit.y, 2)));
 	if (ray_len == 0 || isnan(ray_len))
 		ray_len = INT64_MAX;
 	return (ray_len);
@@ -26,7 +26,7 @@ static double ray_length(t_game *game, t_coords ray_hit)
 static t_coords	check_wall(t_game *game, t_coords pos, t_coords add)
 {
 	while ((int)pos.x >> 6 >= 0 && (int)pos.x >> 6 < game->map->max.x
-			&& (int)pos.y >> 6 >= 0 && (int)pos.y >> 6 < game->map->max.y)
+		&& (int)pos.y >> 6 >= 0 && (int)pos.y >> 6 < game->map->max.y)
 	{
 		if (game->map->map[(int)pos.y >> 6][(int)pos.x >> 6] == '1')
 			break ;
@@ -68,7 +68,7 @@ static t_coords	horizontal_line(t_game *game, double radian, int *ray_dir)
 		*ray_dir = SOUTH;
 		return (check_wall(game, pos, pos_add));
 	}
-	*ray_dir = NORTH; // ?
+	*ray_dir = NORTH;
 	return ((t_coords){game->player->pos.x, game->player->pos.y});
 }
 
@@ -101,7 +101,7 @@ static t_coords	vertical_line(t_game *game, double radian, int *ray_dir)
 		*ray_dir = WEST;
 		return (check_wall(game, pos, pos_add));
 	}
-	*ray_dir = EAST; // ?
+	*ray_dir = EAST;
 	return ((t_coords){game->player->pos.x, game->player->pos.y});
 }
 

@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 17:06:47 by fwahl             #+#    #+#             */
-/*   Updated: 2024/06/22 17:27:24 by mott             ###   ########.fr       */
+/*   Updated: 2024/06/23 14:54:13 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ int	main(int argc, char **argv)
 	debug_map(game->map);
 	debug_player(game->player);
 	validate_map(game);
-
 	init_game(game);
 	mlx_loop_hook(game->window->mlx, &loop_hook, game);
 	mlx_loop(game->window->mlx);
