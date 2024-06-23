@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 14:08:58 by mott              #+#    #+#             */
-/*   Updated: 2024/06/23 12:56:33 by mott             ###   ########.fr       */
+/*   Updated: 2024/06/23 13:04:26 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	key_hook(t_game	*game)
 	if (mlx_is_key_down(game->window->mlx, MLX_KEY_W) == true)
 		move_player(game, 'W', 1.0, -1.0);
 	if (mlx_is_key_down(game->window->mlx, MLX_KEY_A) == true)
-		move_player(game, 'A', -1.0, 1.0);
+		move_player(game, 'A', -1.0, -1.0);
 	if (mlx_is_key_down(game->window->mlx, MLX_KEY_S) == true)
 		move_player(game, 'S', -1.0, 1.0);
 	if (mlx_is_key_down(game->window->mlx, MLX_KEY_D) == true)
