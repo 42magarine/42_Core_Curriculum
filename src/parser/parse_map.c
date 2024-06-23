@@ -6,7 +6,7 @@
 /*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 17:14:11 by fwahl             #+#    #+#             */
-/*   Updated: 2024/06/22 13:41:38 by fwahl            ###   ########.fr       */
+/*   Updated: 2024/06/23 18:33:52 by fwahl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,13 +68,13 @@ static void	parse_map(t_game *game, char *line)
 	static int		i = 0;
 	static bool		start = false;
 
-	if (is_map_line(line))
+	if (is_map_line(line) && i <= game->map->max.y)
 	{
 		start = true;
 		game->map->map[i] = ft_strdup(line);
 		i++;
 	}
-	if (start == true && (line[0] == '\0' || !is_map_line(line)))
+	if (start == true && i == game->map->max.y)
 		game->parsed->map = true;
 }
 

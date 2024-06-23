@@ -3,22 +3,28 @@
 /*                                                        :::      ::::::::   */
 /*   debug.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
+/*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 16:59:11 by fwahl             #+#    #+#             */
-/*   Updated: 2024/06/23 15:00:21 by mott             ###   ########.fr       */
+/*   Updated: 2024/06/23 18:39:24 by fwahl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3D.h"
 
-void	debug_player(t_player *player)
+static void	debug_player(t_player *player)
 {
-	printf("Player Pos	X: %f	Y: %f\n", player->pos.x, player->pos.y);
-	printf("Player Dir	%f\n", player->dir);
+	if (player->pos.x > 0 && player->pos.y > 0)
+		printf("Player Pos	X: %f	Y: %f\n", player->pos.x, player->pos.y);
+	else
+		printf("Player Pos missing");
+	if (player->dir)
+		printf("Player Dir	%f\n", player->dir);
+	else
+		printf("Player Dir missing");
 }
 
-void	debug_map(t_map *map)
+static void	debug_map(t_map *map)
 {
 	int	y;
 
@@ -45,4 +51,10 @@ void	debug_map(t_map *map)
 			printf("map_line[%d]: %s\n", y, map->map[y]);
 		y++;
 	}
+}
+
+void	debug_parse(t_game *game)
+{
+	debug_map(game->map);
+	debug_player(game->player);
 }
