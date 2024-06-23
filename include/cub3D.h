@@ -6,7 +6,7 @@
 /*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 17:11:55 by mott              #+#    #+#             */
-/*   Updated: 2024/06/22 13:45:07 by fwahl            ###   ########.fr       */
+/*   Updated: 2024/06/22 17:53:00 by fwahl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,9 @@ typedef struct s_game
 	t_player	*player;
 	t_parse		*parsed;
 	bool		recalculate;
+	bool		mouse_down;
+	int32_t		mouse_x;
+	int32_t		mouse_y;
 }	t_game;
 
 // main.c
@@ -125,6 +128,8 @@ void	loop_hook(void *param);
 
 // key.c
 void	key_hook(t_game	*game);
+// mouse.c
+void	mouse_hook(t_game *game);
 
 // ray.c
 void	ray_caster(t_game *game);

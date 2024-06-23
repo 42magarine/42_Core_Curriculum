@@ -6,12 +6,12 @@
 #    By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/04 17:02:41 by mott              #+#    #+#              #
-#    Updated: 2024/06/22 13:45:29 by fwahl            ###   ########.fr        #
+#    Updated: 2024/06/23 17:21:32 by fwahl            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC		=	cc
-CFLAGS	=	-Wall -Wextra -Werror
+# CFLAGS	=	-Wall -Wextra -Werror
 CFLAGS	+=	-Ofast
 # CFLAGS	+=	-fsanitize=address -g
 LDFLAGS	=	-ldl -lglfw -pthread -lm
@@ -29,6 +29,7 @@ SRCS	=	./src/main.c \
 			./src/engine/draw_game.c \
 			./src/engine/draw_minimap.c \
 			./src/engine/init.c \
+			./src/engine/mouse.c \
 			./src/engine/key.c \
 			./src/engine/ray.c
 OBJS	=	$(SRCS:.c=.o)
