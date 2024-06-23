@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 13:37:56 by mott              #+#    #+#             */
-/*   Updated: 2024/06/22 14:54:00 by mott             ###   ########.fr       */
+/*   Updated: 2024/06/23 20:07:31 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,12 +60,10 @@ static void	draw_player(t_game *game)
 	draw_square(game, player, P_SIZE, YELLOW);
 }
 
-static void	draw_ray(t_game *game, t_coords wall)
+static void	draw_ray(t_game *game, t_coords player, t_coords wall)
 {
 	double	dx;
 	double	dy;
-	double	x;
-	double	y;
 	int		i;
 
 	dx = wall.x - game->player->pos.x;
@@ -76,13 +74,11 @@ static void	draw_ray(t_game *game, t_coords wall)
 		i = fabs(dy);
 	dx /= i;
 	dy /= i;
-	x = (double)game->player->pos.x;
-	y = (double)game->player->pos.y;
-	while (i >= 0)
+	while (i > 0)
 	{
-		mlx_put_pixel(game->window->image, round(x), round(y), BLACK);
-		x += dx;
-		y += dy;
+		mlx_put_pixel(game->window->image, (int)player.x, (int)player.y, BLACK);
+		player.x += dx;
+		player.y += dy;
 		i--;
 	}
 }
@@ -96,7 +92,7 @@ void	draw_minimap(t_game *game)
 	i = 0;
 	while (i < WIDTH)
 	{
-		draw_ray(game, game->ray->hit[i]);
+		draw_ray(game, game->player->pos, game->ray->hit[i]);
 		i += 1;
 	}
 }

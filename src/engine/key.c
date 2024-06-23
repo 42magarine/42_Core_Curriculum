@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 14:08:58 by mott              #+#    #+#             */
-/*   Updated: 2024/06/23 15:57:05 by mott             ###   ########.fr       */
+/*   Updated: 2024/06/23 17:56:06 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,13 +40,9 @@ static void	move_player(t_game *game, char key, double move_x, double move_y)
 static void	rotate_player(t_game *game, char dir)
 {
 	if (dir == 'L')
-		game->player->dir += ROTATION_SPEED;
+		game->player->dir = pi_overflow(game->player->dir + ROTATION_SPEED);
 	else if (dir == 'R')
-		game->player->dir -= ROTATION_SPEED;
-	if (game->player->dir < 0)
-		game->player->dir += TWO_PI;
-	else if (game->player->dir >= TWO_PI)
-		game->player->dir -= TWO_PI;
+		game->player->dir = pi_overflow(game->player->dir - ROTATION_SPEED);
 	game->recalculate = true;
 }
 

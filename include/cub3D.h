@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 17:11:55 by mott              #+#    #+#             */
-/*   Updated: 2024/06/23 17:28:58 by mott             ###   ########.fr       */
+/*   Updated: 2024/06/23 17:54:14 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,6 +138,7 @@ void	draw_minimap(t_game *game);
 
 // init.c
 int		get_rgba(int r, int g, int b, int a);
+double	pi_overflow(double radian);
 void	init_game(t_game *game);
 void	loop_hook(void *param);
 
