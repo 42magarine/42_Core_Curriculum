@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 17:11:55 by mott              #+#    #+#             */
-/*   Updated: 2024/06/22 16:57:57 by mott             ###   ########.fr       */
+/*   Updated: 2024/06/23 12:59:53 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,8 @@
 # define NORTH			1
 # define WEST			2
 # define SOUTH			3
+# define MOVE_SPEED		1.75
+# define ROTATION_SPEED	0.034907
 
 typedef struct s_coords
 {
@@ -82,8 +84,6 @@ typedef struct s_player
 {
 	t_coords	pos;
 	double		dir;
-	double		radian;
-	double		radian_add;
 }	t_player;
 
 typedef struct s_parse

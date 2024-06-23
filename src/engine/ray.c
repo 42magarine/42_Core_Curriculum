@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 19:44:06 by mott              #+#    #+#             */
-/*   Updated: 2024/06/22 15:34:41 by mott             ###   ########.fr       */
+/*   Updated: 2024/06/22 19:58:16 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,10 +138,10 @@ void	ray_caster(t_game *game)
 	x = 0;
 	while (x < WIDTH)
 	{
-		if (game->player->radian < 0)
-			game->player->radian += TWO_PI;
-		else if (game->player->radian >= TWO_PI)
-			game->player->radian -= TWO_PI;
+		if (radian < 0)
+			radian += TWO_PI;
+		else if (radian >= TWO_PI)
+			radian -= TWO_PI;
 		ray_calculation(game, radian, x);
 		draw_wall(game, x);
 		radian -= game->ray->fov_add;
