@@ -6,12 +6,13 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 19:44:06 by mott              #+#    #+#             */
-/*   Updated: 2024/06/23 14:57:03 by mott             ###   ########.fr       */
+/*   Updated: 2024/06/23 16:09:23 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3D.h"
 
+// a² + b² = c²
 static double	ray_length(t_game *game, t_coords ray_hit)
 {
 	double	ray_len;
@@ -39,10 +40,8 @@ static t_coords	check_wall(t_game *game, t_coords pos, t_coords add)
 	return (pos);
 }
 
-// 0 < radian < ONE_PI = up
-// ONE_PI < radian < TWO_PI = down
-// 0 or TWO_PI = right
-// ONE_PI = left
+// 0		<	radian	<	ONE_PI	= up
+// ONE_PI	<	radian	<	TWO_PI	= down
 static t_coords	horizontal_line(t_game *game, double radian, int *ray_dir)
 {
 	t_coords	pos;
@@ -72,10 +71,8 @@ static t_coords	horizontal_line(t_game *game, double radian, int *ray_dir)
 	return ((t_coords){game->player->pos.x, game->player->pos.y});
 }
 
-// radian < HALF_PI or radian > THREE_HALF_PI = right
-// HALF_PI < radian < THREE_HALF_PI	= left
-// HALF_PI = up
-// THREE_HALF_PI = down
+// HALF_PI	>	radian	>	THREE_HALF_PI	= right
+// HALF_PI	<	radian	<	THREE_HALF_PI	= left
 static t_coords	vertical_line(t_game *game, double radian, int *ray_dir)
 {
 	t_coords	pos;
@@ -105,7 +102,11 @@ static t_coords	vertical_line(t_game *game, double radian, int *ray_dir)
 	return ((t_coords){game->player->pos.x, game->player->pos.y});
 }
 
-static void	ray_calculation(t_game *game, double radian, int x)
+// tan (0°)		=  0
+// tan (90°)	=  undefined
+// tan (180°)	=  0
+// tan (270°)	=  undefined
+void	ray_calculation(t_game *game, double radian, int x)
 {
 	t_coords	ray_hit[2];
 	double		ray_len[2];
@@ -126,25 +127,5 @@ static void	ray_calculation(t_game *game, double radian, int x)
 		game->ray->hit[x] = ray_hit[1];
 		game->ray->len[x] = ray_len[1];
 		game->ray->dir[x] = ray_dir[1];
-	}
-}
-
-void	ray_caster(t_game *game)
-{
-	double	radian;
-	int		x;
-
-	radian = game->player->dir + game->ray->fov_start;
-	x = 0;
-	while (x < WIDTH)
-	{
-		if (radian < 0)
-			radian += TWO_PI;
-		else if (radian >= TWO_PI)
-			radian -= TWO_PI;
-		ray_calculation(game, radian, x);
-		draw_wall(game, x);
-		radian -= game->ray->fov_add;
-		x++;
 	}
 }

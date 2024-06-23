@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 17:11:55 by mott              #+#    #+#             */
-/*   Updated: 2024/06/23 14:42:06 by mott             ###   ########.fr       */
+/*   Updated: 2024/06/23 15:55:46 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,28 +141,30 @@ void	loop_hook(void *param);
 void	key_hook(t_game	*game);
 
 // ray.c
-void	ray_caster(t_game *game);
+void	ray_calculation(t_game *game, double radian, int x);
 
-//parsing
+// parser
+// parsing
 void	parse_walls(t_game *game, char *line);
 void	parse_floor_ceiling(t_game *game, char *line);
 void	parse_map(t_game *game, char *line);
 void	init_map(t_game *game, char *filename);
 void	validate_map(t_game *game);
 
-//error
+// utils
+// error.c
 void	ft_error(t_game *game, const char *errormsg);
 
-//free
+//free.c
 void	free_game(t_game *game);
 
-//bools
+// bools.c
 bool	is_map_char(char c);
 bool	is_map_line(char *line);
 bool	is_player_char(char c);
 bool	is_player_start(char *line);
 
-//debug
+// debug.c
 void	debug_map(t_map *map);
 void	debug_player(t_player *player);
 

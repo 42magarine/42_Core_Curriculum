@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 16:28:04 by mott              #+#    #+#             */
-/*   Updated: 2024/06/23 14:55:56 by mott             ###   ########.fr       */
+/*   Updated: 2024/06/23 15:58:12 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,8 @@ static void	texture_y_calculation(t_game *game, t_texture *tex, int x)
 	tex->wall_offset = (HEIGHT - tex->wall_height) >> 1;
 }
 
-// y_step < 0 = texture_height < wall_height = scaling up
-// y_step > 0 = texture_height > wall_height = scaling down
+// y_scale < 0 = texture_height < wall_height = scaling up
+// y_scale > 0 = texture_height > wall_height = scaling down
 void	draw_wall(t_game *game, int x)
 {
 	t_texture	tex;
