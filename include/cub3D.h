@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
+/*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 17:11:55 by mott              #+#    #+#             */
-/*   Updated: 2024/06/23 17:28:58 by mott             ###   ########.fr       */
+/*   Updated: 2024/06/23 19:01:30 by fwahl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,10 +151,10 @@ void	ray_calculation(t_game *game, double radian, int x);
 
 // parser
 // parsing
+void	init_map(t_game *game, char *filename);
 void	parse_walls(t_game *game, char *line);
 void	parse_floor_ceiling(t_game *game, char *line);
 void	parse_mapfile(t_game *game, char *filename);
-void	validate_map(t_game *game);
 
 // utils
 // error.c
@@ -170,7 +170,6 @@ bool	is_player_char(char c);
 bool	is_player_start(char *line);
 
 // debug.c
-void	debug_map(t_map *map);
-void	debug_player(t_player *player);
+void	debug_parse(t_game *game);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 17:14:11 by fwahl             #+#    #+#             */
-/*   Updated: 2024/06/23 18:33:52 by fwahl            ###   ########.fr       */
+/*   Updated: 2024/06/23 18:57:34 by fwahl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static void	init_player(t_game	*game, char *line)
 		game->parsed->player = true;
 }
 
-static bool	get_map_data(t_game *game, char *line)
+static bool	set_map_size(t_game *game, char *line)
 {
 	static bool	start = false;
 
@@ -78,7 +78,7 @@ static void	parse_map(t_game *game, char *line)
 		game->parsed->map = true;
 }
 
-static void	init_map(t_game *game, char *filename)
+static void	alloc_map(t_game *game, char *filename)
 {
 	int		fd;
 	char	*line;
@@ -94,7 +94,7 @@ static void	init_map(t_game *game, char *filename)
 	{
 		cut_next_line(line);
 		if (stop == false)
-			stop = get_map_data(game, line);
+			stop = set_map_size(game, line);
 		free(line);
 		line = get_next_line(fd);
 	}
@@ -108,7 +108,7 @@ void	parse_mapfile(t_game *game, char *filename)
 	char	*line;
 
 	game->parsed = ft_calloc(1, sizeof(t_parse));
-	init_map(game, filename);
+	alloc_map(game, filename);
 	fd = open(filename, O_RDONLY);
 	if (fd == -1)
 		ft_error(game, "filename error (argv[1])");

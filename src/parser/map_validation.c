@@ -6,7 +6,7 @@
 /*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 17:55:44 by fwahl             #+#    #+#             */
-/*   Updated: 2024/06/23 18:10:12 by fwahl            ###   ########.fr       */
+/*   Updated: 2024/06/23 19:00:57 by fwahl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ static bool	flood_fill(t_map *map, int x, int y, char filler)
 	return (up && down && left && right);
 }
 
-void	validate_map(t_game *game)
+static void	validate_map(t_game *game)
 {
 	int		x;
 	int		y;
@@ -88,4 +88,11 @@ void	validate_map(t_game *game)
 	free(temp);
 	if (!valid)
 		ft_error(game, "flood_fill - invalid map");
+}
+
+void	init_map(t_game *game, char *filename)
+{
+	parse_mapfile(game, filename);
+	validate_map(game);
+	debug_parse(game);
 }
