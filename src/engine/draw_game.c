@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 16:28:04 by mott              #+#    #+#             */
-/*   Updated: 2024/06/23 15:58:12 by mott             ###   ########.fr       */
+/*   Updated: 2024/06/24 16:47:45 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,15 +46,24 @@ static void	texture_y_calculation(t_game *game, t_texture *tex, int x)
 	tex->wall_offset = (HEIGHT - tex->wall_height) >> 1;
 }
 
+static void	fisheye(t_game *game, double radian, int x)
+{
+	double fish_radian;
+
+	fish_radian = pi_overflow(radian - game->player->dir);
+	game->ray->len[x] = game->ray->len[x] * cos(fish_radian);
+}
+
 // y_scale < 0 = texture_height < wall_height = scaling up
 // y_scale > 0 = texture_height > wall_height = scaling down
-void	draw_wall(t_game *game, int x)
+void	draw_wall(t_game *game, double radian, int x)
 {
 	t_texture	tex;
 	int			dir;
 	int			y;
 	int			i;
 
+	fisheye(game, radian, x);
 	texture_x_calculation(game, &tex, x);
 	texture_y_calculation(game, &tex, x);
 	dir = game->ray->dir[x];

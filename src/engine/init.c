@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 15:31:03 by mott              #+#    #+#             */
-/*   Updated: 2024/06/23 18:13:43 by mott             ###   ########.fr       */
+/*   Updated: 2024/06/24 16:39:12 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ static void	ray_caster(t_game *game)
 	while (x < WIDTH)
 	{
 		ray_calculation(game, radian, x);
-		// draw_wall(game, x);
+		draw_wall(game, radian, x);
 		radian = pi_overflow(radian - game->ray->fov_add);
 		x++;
 	}
@@ -76,7 +76,7 @@ void	loop_hook(void *param)
 	game = (t_game *)param;
 	if (game->recalculate == true)
 	{
-		// draw_background(game);
+		draw_background(game);
 		ray_caster(game);
 		draw_minimap(game);
 		game->recalculate = false;

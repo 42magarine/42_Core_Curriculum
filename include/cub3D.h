@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 17:11:55 by mott              #+#    #+#             */
-/*   Updated: 2024/06/23 17:54:14 by mott             ###   ########.fr       */
+/*   Updated: 2024/06/24 16:39:27 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,7 +131,7 @@ int		main(int argc, char **argv);
 // engine
 // draw_game.c
 void	draw_background(t_game *game);
-void	draw_wall(t_game *game, int x);
+void	draw_wall(t_game *game, double radian, int x);
 
 // draw_minimap.c
 void	draw_minimap(t_game *game);
