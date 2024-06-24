@@ -6,7 +6,7 @@
 /*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 17:11:55 by mott              #+#    #+#             */
-/*   Updated: 2024/06/23 19:01:30 by fwahl            ###   ########.fr       */
+/*   Updated: 2024/06/24 15:53:56 by fwahl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,9 +120,7 @@ typedef struct s_game
 	t_parse		*parsed;
 	t_ray		*ray;
 	bool		recalculate;
-	bool		mouse_down;
-	int32_t		mouse_x;
-	int32_t		mouse_y;
+	bool		mouse_rotate;
 }	t_game;
 
 // main.c
