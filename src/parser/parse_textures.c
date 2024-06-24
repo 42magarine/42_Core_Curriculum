@@ -89,7 +89,7 @@ static mlx_texture_t	*set_texture(t_game *game, char *line)
 	return (texture);
 }
 
-void	parse_walls(t_game *game, char *line)
+void	parse_tex(t_game *game, char *line)
 {
 	t_map	*map;
 	int		i;
@@ -106,6 +106,12 @@ void	parse_walls(t_game *game, char *line)
 		map->wall[2] = set_texture(game, &line[i + 2]);
 	else if (ft_strncmp(&line[i], "WE", 2) == 0)
 		map->wall[3] = set_texture(game, &line[i + 2]);
+	else if (ft_strncmp(&line[i], "DC", 2) == 0)
+		map->door[0] = set_texture(game, &line[i + 2]);
+	else if (ft_strncmp(&line[i], "DO", 2) == 0)
+		map->door[1] = set_texture(game, &line[i + 2]);
 	if (map->wall[0] && map->wall[1] && map->wall[2] && map->wall[3])
 		game->parsed->walls = true;
+	if (map->door[0] && map->door[1])
+		game->parsed->doors = true;
 }

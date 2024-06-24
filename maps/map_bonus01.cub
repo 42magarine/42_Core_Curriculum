@@ -1,0 +1,21 @@
+NO ./textures/north.png
+SO ./textures/south.png
+WE ./textures/west.png
+EA ./textures/east.png
+DC ./textures/door_closed.png
+DO ./textures/door_open.png
+
+11111111111
+10000000001
+10000100001
+10000100001
+10000100001
+1011111D101
+10000100001
+10000D00001
+10000100N01
+10000000001
+11111111111
+
+C 135, 206, 250
+F 0, 100, 0

@@ -6,7 +6,7 @@
 /*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/16 20:41:35 by fwahl             #+#    #+#             */
-/*   Updated: 2024/06/20 20:20:05 by fwahl            ###   ########.fr       */
+/*   Updated: 2024/06/24 18:27:34 by fwahl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 bool	is_map_char(char c)
 {
-	return (c == '0' || c == '1' || c == ' ' || is_player_char(c));
+	return (c == '0' || c == '1' || c == ' ' || c == 'D' || c == 'd' ||
+		is_player_char(c));
 }
 
 bool	is_map_line(char *line)
