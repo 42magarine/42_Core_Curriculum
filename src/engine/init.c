@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 15:31:03 by mott              #+#    #+#             */
-/*   Updated: 2024/06/25 13:52:22 by mott             ###   ########.fr       */
+/*   Updated: 2024/06/25 15:02:46 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,6 @@ void	loop_hook(void *param)
 			draw_minimap(game);
 		game->recalculate = false;
 	}
-	// key_hook(game);
+	key_hook(game);
 	// mouse_hook(game);
 }

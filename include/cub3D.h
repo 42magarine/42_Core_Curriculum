@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 17:11:55 by mott              #+#    #+#             */
-/*   Updated: 2024/06/25 13:55:23 by mott             ###   ########.fr       */
+/*   Updated: 2024/06/25 14:20:58 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,7 +144,10 @@ void	init_game(t_game *game);
 void	loop_hook(void *param);
 
 // key.c
-void	key_hook(mlx_key_data_t keydata, void *param);
+// void	key_hook(mlx_key_data_t keydata, void *param);
+void	key_hook(void *param);
+void	minimap(mlx_key_data_t keydata, void *param);
+
 // mouse.c
 void	mouse_hook(t_game *game);
 

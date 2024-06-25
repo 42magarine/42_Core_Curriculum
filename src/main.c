@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 17:06:47 by fwahl             #+#    #+#             */
-/*   Updated: 2024/06/25 13:51:02 by mott             ###   ########.fr       */
+/*   Updated: 2024/06/25 14:17:23 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@ int	main(int argc, char **argv)
 	debug_map(game->map);
 	debug_player(game->player);
 	init_game(game);
-	mlx_key_hook(game->window->mlx, &key_hook, game);
+	// mlx_key_hook(game->window->mlx, &key_hook, game);
+	mlx_key_hook(game->window->mlx, &minimap, game);
 	mlx_loop_hook(game->window->mlx, &loop_hook, game);
 	mlx_loop(game->window->mlx);
 	// free_game(game);

@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 13:37:56 by mott              #+#    #+#             */
-/*   Updated: 2024/06/25 13:57:51 by mott             ###   ########.fr       */
+/*   Updated: 2024/06/25 15:39:22 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static void	draw_map(t_game *game)
 		x = 0;
 		while (game->map->map[y][x] != '\0')
 		{
-			if (mini_x + (x << 5) < WIDTH && mini_y + (y << 5) < HEIGHT)
+			if (mini_x + (x << 5) < WIDTH && 2 * mini_y + (y << 5) < HEIGHT)
 			// if (mini_x + (x << 5) >= 0 && mini_x + (x << 5) < WIDTH
 			// 	&& mini_y + (y << 5) >= 0 && mini_y + (y << 5) < HEIGHT)
 			{
@@ -109,7 +109,10 @@ static void	draw_ray(t_game *game, t_coords player, t_coords wall)
 	dy /= i;
 	while (i > 0)
 	{
-		mlx_put_pixel(game->window->image, (int)player.x, (int)player.y, BLACK);
+		if (player.x >= 0 && player.x < WIDTH && player.y >= 0 && player.y < HEIGHT)
+		{
+			mlx_put_pixel(game->window->image, (int)player.x, (int)player.y, BLACK);
+		}
 		player.x += dx;
 		player.y += dy;
 		i--;
