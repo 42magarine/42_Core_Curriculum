@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 14:08:58 by mott              #+#    #+#             */
-/*   Updated: 2024/06/25 17:40:07 by mott             ###   ########.fr       */
+/*   Updated: 2024/06/25 19:15:15 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,14 @@ static void	move_player(t_game *game, char key, double move_x, double move_y)
 		move_y *= round(MOVE_SPEED * cos(game->player->dir));
 	}
 	if (game->map->map[(int)game->player->pos.y >> 5]
-			[(int)(game->player->pos.x + move_x) >> 5] != '1')
+			[(int)(game->player->pos.x + move_x) >> 5] != '1'
+			&& game->map->map[(int)game->player->pos.y >> 5]
+			[(int)(game->player->pos.x + move_x) >> 5] != 'D')
 		game->player->pos.x += move_x;
 	if (game->map->map[(int)(game->player->pos.y + move_y) >> 5]
-			[(int)game->player->pos.x >> 5] != '1')
+			[(int)game->player->pos.x >> 5] != '1'
+			&& game->map->map[(int)(game->player->pos.y + move_y) >> 5]
+			[(int)game->player->pos.x >> 5] != 'D')
 		game->player->pos.y += move_y;
 	game->recalculate = true;
 }
@@ -46,6 +50,42 @@ void	rotate_player(t_game *game, char dir)
 	game->recalculate = true;
 }
 
+void	door(t_game *game)
+{
+	if (game->ray->dir[WIDTH / 2] == NORTH)
+	{
+		if (game->map->map[((int)game->player->pos.y >> 5) - 1][(int)game->player->pos.x >> 5]  == 'D')
+			game->map->map[((int)game->player->pos.y >> 5) - 1][(int)game->player->pos.x >> 5] = 'd';
+		else if (game->map->map[((int)game->player->pos.y >> 5) - 1][(int)game->player->pos.x >> 5]  == 'd')
+			game->map->map[((int)game->player->pos.y >> 5) - 1][(int)game->player->pos.x >> 5] = 'D';
+	}
+	else if (game->ray->dir[WIDTH / 2] == SOUTH)
+	{
+		if (game->map->map[((int)game->player->pos.y >> 5) + 1][(int)game->player->pos.x >> 5]  == 'D')
+			game->map->map[((int)game->player->pos.y >> 5) + 1][(int)game->player->pos.x >> 5] = 'd';
+		else if (game->map->map[((int)game->player->pos.y >> 5) + 1][(int)game->player->pos.x >> 5]  == 'd')
+			game->map->map[((int)game->player->pos.y >> 5) + 1][(int)game->player->pos.x >> 5] = 'D';
+	}
+	else if (game->ray->dir[WIDTH / 2] == EAST)
+	{
+		if (game->map->map[((int)game->player->pos.y >> 5)][((int)game->player->pos.x + 1) >> 5]  == 'D')
+			game->map->map[((int)game->player->pos.y >> 5)][((int)game->player->pos.x + 1) >> 5] = 'd';
+		else if (game->map->map[((int)game->player->pos.y >> 5)][((int)game->player->pos.x + 1) >> 5]  == 'd')
+			game->map->map[((int)game->player->pos.y >> 5)][((int)game->player->pos.x + 1) >> 5] = 'D';
+	}
+	else if (game->ray->dir[WIDTH / 2] == WEST)
+	{
+		if (game->map->map[((int)game->player->pos.y >> 5)][((int)game->player->pos.x - 1) >> 5]  == 'D')
+			game->map->map[((int)game->player->pos.y >> 5)][((int)game->player->pos.x - 1) >> 5] = 'd';
+		else if (game->map->map[((int)game->player->pos.y >> 5)][((int)game->player->pos.x - 1) >> 5]  == 'd')
+			game->map->map[((int)game->player->pos.y >> 5)][((int)game->player->pos.x - 1) >> 5] = 'D';
+	}
+	// printf("ray->dir: %d\n", game->ray->dir[WIDTH / 2]);
+	// printf("player->pos.y: %d\n", ((int)game->player->pos.y >> 5) - 1);
+	// printf("player->pos.x: %d\n", (int)game->player->pos.x >> 5);
+	// printf("map: %c\n", game->map->map[((int)game->player->pos.y >> 5) - 1][(int)game->player->pos.x >> 5]);
+}
+
 void	minimap(mlx_key_data_t keydata, void *param)
 {
 	t_game	*game;
@@ -53,6 +93,8 @@ void	minimap(mlx_key_data_t keydata, void *param)
 	game = param;
 	if (keydata.key == MLX_KEY_M && keydata.action == MLX_PRESS)
 		game->minimap = !game->minimap;
+	if (keydata.key == MLX_KEY_E && keydata.action == MLX_PRESS)
+		door(game);
 	game->recalculate = true;
 }
 

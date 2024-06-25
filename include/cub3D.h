@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 17:11:55 by mott              #+#    #+#             */
-/*   Updated: 2024/06/25 17:36:06 by mott             ###   ########.fr       */
+/*   Updated: 2024/06/25 18:45:51 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ typedef struct s_ray
 {
 	t_coords	hit[WIDTH];
 	double		len[WIDTH];
-	int			dir[WIDTH];
+	int			dir[WIDTH]; //wall
 	double		fov_start;
 	double		fov_add;
 }	t_ray;

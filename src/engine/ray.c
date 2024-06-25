@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 19:44:06 by mott              #+#    #+#             */
-/*   Updated: 2024/06/25 17:25:25 by mott             ###   ########.fr       */
+/*   Updated: 2024/06/25 18:07:44 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,8 @@ static t_coords	check_wall(t_game *game, t_coords pos, t_coords add)
 	while ((int)pos.x >> 5 >= 0 && (int)pos.x >> 5 < game->map->max.x
 		&& (int)pos.y >> 5 >= 0 && (int)pos.y >> 5 < game->map->max.y)
 	{
-		if (game->map->map[(int)pos.y >> 5][(int)pos.x >> 5] == '1')
+		if (game->map->map[(int)pos.y >> 5][(int)pos.x >> 5] == '1'
+			|| game->map->map[(int)pos.y >> 5][(int)pos.x >> 5] == 'D')
 			break ;
 		else
 		{

@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 16:28:04 by mott              #+#    #+#             */
-/*   Updated: 2024/06/25 17:49:33 by mott             ###   ########.fr       */
+/*   Updated: 2024/06/25 18:07:03 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void	draw_wall(t_game *game, double radian, int x)
 	int			y;
 	int			i;
 
-	// fisheye(game, radian, x);
+	fisheye(game, radian, x);
 	texture_x_calculation(game, &tex, x);
 	texture_y_calculation(game, &tex, x);
 	dir = game->ray->dir[x];
