@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 16:28:04 by mott              #+#    #+#             */
-/*   Updated: 2024/06/24 16:47:45 by mott             ###   ########.fr       */
+/*   Updated: 2024/06/25 12:08:22 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,16 +19,16 @@ static void	texture_x_calculation(t_game *game, t_texture *tex, int x)
 	scale_x = (double)game->map->wall[game->ray->dir[x]]->width / F_SIZE;
 	if (game->ray->dir[x] == EAST)
 		tex->pos.x = scale_x * (game->ray->hit[x].y
-				- (((int)game->ray->hit[x].y >> 6) << 6));
+				- (((int)game->ray->hit[x].y >> 5) << 5));
 	else if (game->ray->dir[x] == NORTH)
 		tex->pos.x = scale_x * (game->ray->hit[x].x
-				- (((int)game->ray->hit[x].x >> 6) << 6));
+				- (((int)game->ray->hit[x].x >> 5) << 5));
 	else if (game->ray->dir[x] == WEST)
 		tex->pos.x = scale_x * (F_SIZE - (game->ray->hit[x].y
-					- (((int)game->ray->hit[x].y >> 6) << 6)));
+					- (((int)game->ray->hit[x].y >> 5) << 5)));
 	else if (game->ray->dir[x] == SOUTH)
 		tex->pos.x = scale_x * (F_SIZE - (game->ray->hit[x].x
-					- (((int)game->ray->hit[x].x >> 6) << 6)));
+					- (((int)game->ray->hit[x].x >> 5) << 5)));
 }
 
 static void	texture_y_calculation(t_game *game, t_texture *tex, int x)

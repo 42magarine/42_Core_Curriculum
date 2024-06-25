@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 17:11:55 by mott              #+#    #+#             */
-/*   Updated: 2024/06/24 16:39:27 by mott             ###   ########.fr       */
+/*   Updated: 2024/06/25 13:55:23 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@
 
 # define WIDTH			1920
 # define HEIGHT			1080
-# define F_SIZE			64
+# define F_SIZE			32
 # define P_SIZE			5
 # define FOV			60.0
 # define ONE_PI			3.141592
@@ -120,6 +120,7 @@ typedef struct s_game
 	t_parse		*parsed;
 	t_ray		*ray;
 	bool		recalculate;
+	bool		minimap;
 	bool		mouse_down;
 	int32_t		mouse_x;
 	int32_t		mouse_y;
@@ -143,7 +144,7 @@ void	init_game(t_game *game);
 void	loop_hook(void *param);
 
 // key.c
-void	key_hook(t_game	*game);
+void	key_hook(mlx_key_data_t keydata, void *param);
 // mouse.c
 void	mouse_hook(t_game *game);
 

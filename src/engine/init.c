@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 15:31:03 by mott              #+#    #+#             */
-/*   Updated: 2024/06/24 16:39:12 by mott             ###   ########.fr       */
+/*   Updated: 2024/06/25 13:52:22 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,14 +73,15 @@ void	loop_hook(void *param)
 {
 	t_game	*game;
 
-	game = (t_game *)param;
+	game = param;
 	if (game->recalculate == true)
 	{
 		draw_background(game);
 		ray_caster(game);
-		draw_minimap(game);
+		if (game->minimap == true)
+			draw_minimap(game);
 		game->recalculate = false;
 	}
-	key_hook(game);
+	// key_hook(game);
 	// mouse_hook(game);
 }
