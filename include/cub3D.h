@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 17:11:55 by mott              #+#    #+#             */
-/*   Updated: 2024/06/24 18:22:56 by fwahl            ###   ########.fr       */
+/*   Updated: 2024/06/25 17:36:06 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@
 
 # define WIDTH			1920
 # define HEIGHT			1080
-# define F_SIZE			64
+# define F_SIZE			32
 # define P_SIZE			5
 # define FOV			60.0
 # define ONE_PI			3.141592
@@ -122,6 +122,7 @@ typedef struct s_game
 	t_parse		*parsed;
 	t_ray		*ray;
 	bool		recalculate;
+	bool		minimap;
 	bool		mouse_rotate;
 }	t_game;
 
@@ -131,18 +132,23 @@ int		main(int argc, char **argv);
 // engine
 // draw_game.c
 void	draw_background(t_game *game);
-void	draw_wall(t_game *game, int x);
+void	draw_wall(t_game *game, double radian, int x);
 
 // draw_minimap.c
 void	draw_minimap(t_game *game);
 
 // init.c
 int		get_rgba(int r, int g, int b, int a);
+double	pi_overflow(double radian);
 void	init_game(t_game *game);
 void	loop_hook(void *param);
 
 // key.c
-void	key_hook(t_game	*game);
+// void	key_hook(mlx_key_data_t keydata, void *param);
+void	key_hook(void *param);
+void	minimap(mlx_key_data_t keydata, void *param);
+void	rotate_player(t_game *game, char dir);
+
 // mouse.c
 void	mouse_hook(t_game *game);
 

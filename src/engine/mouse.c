@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mouse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/22 16:12:34 by fwahl             #+#    #+#             */
-/*   Updated: 2024/06/24 15:57:24 by fwahl            ###   ########.fr       */
+/*   Updated: 2024/06/25 17:37:22 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ void	mouse_move_cb(double x, double y, void *param)
 {
 	t_game	*game;
 	double	dx;
+	char	dir;
 
 	(void)y;
 	game = (t_game *)param;
@@ -34,13 +35,10 @@ void	mouse_move_cb(double x, double y, void *param)
 	{
 		dx = x - WIDTH / 2;
 		if (dx < 0)
-			game->player->dir += ROTATION_SPEED;
+			dir = 'L';
 		else if (dx > 0)
-			game->player->dir -= ROTATION_SPEED;
-		if (game->player->dir < 0)
-			game->player->dir += TWO_PI;
-		else if (game->player->dir >= TWO_PI)
-			game->player->dir -= TWO_PI;
+			dir = 'R';
+		rotate_player(game, dir);
 		mlx_set_mouse_pos(game->window->mlx, WIDTH / 2, HEIGHT / 2);
 		game->recalculate = true;
 	}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 15:31:03 by mott              #+#    #+#             */
-/*   Updated: 2024/06/24 15:11:13 by fwahl            ###   ########.fr       */
+/*   Updated: 2024/06/25 17:24:26 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,15 @@
 int	get_rgba(int r, int g, int b, int a)
 {
 	return (r << 24 | g << 16 | b << 8 | a);
+}
+
+double	pi_overflow(double radian)
+{
+	if (radian < 0)
+		radian += TWO_PI;
+	else if (radian >= TWO_PI)
+		radian -= TWO_PI;
+	return (radian);
 }
 
 // window->width		= 1920
@@ -49,17 +58,13 @@ static void	ray_caster(t_game *game)
 	double	radian;
 	int		x;
 
-	radian = game->player->dir + game->ray->fov_start;
+	radian = pi_overflow(game->player->dir + game->ray->fov_start);
 	x = 0;
 	while (x < WIDTH)
 	{
-		if (radian < 0)
-			radian += TWO_PI;
-		else if (radian >= TWO_PI)
-			radian -= TWO_PI;
 		ray_calculation(game, radian, x);
-		draw_wall(game, x);
-		radian -= game->ray->fov_add;
+		draw_wall(game, radian, x);
+		radian = pi_overflow(radian - game->ray->fov_add);
 		x++;
 	}
 }
@@ -68,12 +73,13 @@ void	loop_hook(void *param)
 {
 	t_game	*game;
 
-	game = (t_game *)param;
+	game = param;
 	if (game->recalculate == true)
 	{
 		draw_background(game);
 		ray_caster(game);
-		draw_minimap(game);
+		if (game->minimap == true)
+			draw_minimap(game);
 		game->recalculate = false;
 	}
 	key_hook(game);

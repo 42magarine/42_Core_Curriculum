@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 16:28:04 by mott              #+#    #+#             */
-/*   Updated: 2024/06/23 15:58:12 by mott             ###   ########.fr       */
+/*   Updated: 2024/06/25 17:49:33 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,16 +19,16 @@ static void	texture_x_calculation(t_game *game, t_texture *tex, int x)
 	scale_x = (double)game->map->wall[game->ray->dir[x]]->width / F_SIZE;
 	if (game->ray->dir[x] == EAST)
 		tex->pos.x = scale_x * (game->ray->hit[x].y
-				- (((int)game->ray->hit[x].y >> 6) << 6));
+				- (((int)game->ray->hit[x].y >> 5) << 5));
 	else if (game->ray->dir[x] == NORTH)
 		tex->pos.x = scale_x * (game->ray->hit[x].x
-				- (((int)game->ray->hit[x].x >> 6) << 6));
+				- (((int)game->ray->hit[x].x >> 5) << 5));
 	else if (game->ray->dir[x] == WEST)
 		tex->pos.x = scale_x * (F_SIZE - (game->ray->hit[x].y
-					- (((int)game->ray->hit[x].y >> 6) << 6)));
+					- (((int)game->ray->hit[x].y >> 5) << 5)));
 	else if (game->ray->dir[x] == SOUTH)
 		tex->pos.x = scale_x * (F_SIZE - (game->ray->hit[x].x
-					- (((int)game->ray->hit[x].x >> 6) << 6)));
+					- (((int)game->ray->hit[x].x >> 5) << 5)));
 }
 
 static void	texture_y_calculation(t_game *game, t_texture *tex, int x)
@@ -46,15 +46,24 @@ static void	texture_y_calculation(t_game *game, t_texture *tex, int x)
 	tex->wall_offset = (HEIGHT - tex->wall_height) >> 1;
 }
 
+static void	fisheye(t_game *game, double radian, int x)
+{
+	double fish_radian;
+
+	fish_radian = pi_overflow(radian - game->player->dir);
+	game->ray->len[x] = game->ray->len[x] * cos(fish_radian);
+}
+
 // y_scale < 0 = texture_height < wall_height = scaling up
 // y_scale > 0 = texture_height > wall_height = scaling down
-void	draw_wall(t_game *game, int x)
+void	draw_wall(t_game *game, double radian, int x)
 {
 	t_texture	tex;
 	int			dir;
 	int			y;
 	int			i;
 
+	// fisheye(game, radian, x);
 	texture_x_calculation(game, &tex, x);
 	texture_y_calculation(game, &tex, x);
 	dir = game->ray->dir[x];
