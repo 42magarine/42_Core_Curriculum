@@ -6,7 +6,7 @@
 /*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 16:59:11 by fwahl             #+#    #+#             */
-/*   Updated: 2024/06/24 18:33:28 by fwahl            ###   ########.fr       */
+/*   Updated: 2024/06/26 16:40:57 by fwahl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,6 @@ static void	debug_map(t_map *map)
 		printf("South wall texture loaded\n");
 	if (map->wall[3] != NULL)
 		printf("West  wall texture loaded\n");
-	if (map->door[0] != NULL)
-		printf("Door closed texture loaded\n");
-	if (map->door[1] != NULL)
-		printf("Door open   texture loaded\n");
 	printf("\n");
 	printf("Mapsize		X: %f	Y: %f\n", map->max.x, map->max.y);
 	printf("\n");

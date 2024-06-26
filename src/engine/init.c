@@ -3,32 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
+/*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 15:31:03 by mott              #+#    #+#             */
-/*   Updated: 2024/06/25 17:24:26 by mott             ###   ########.fr       */
+/*   Updated: 2024/06/26 16:43:30 by fwahl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3D.h"
 
-int	get_rgba(int r, int g, int b, int a)
-{
-	return (r << 24 | g << 16 | b << 8 | a);
-}
-
-double	pi_overflow(double radian)
-{
-	if (radian < 0)
-		radian += TWO_PI;
-	else if (radian >= TWO_PI)
-		radian -= TWO_PI;
-	return (radian);
-}
-
 // window->width		= 1920
 // window->fov			= 60
 // angle between rays	= 60/1920
+
+static void	init_door(t_game *game)
+{
+	game->map->wall[4] = set_texture(game, "./textures/door_closed.png");
+	game->map->wall[5] = game->map->wall[4];
+	game->map->wall[6] = game->map->wall[4];
+	game->map->wall[7] = game->map->wall[4];
+}
+
 void	init_game(t_game *game)
 {
 	t_window	*window;
@@ -51,6 +46,7 @@ void	init_game(t_game *game)
 	game->ray = ray;
 	ray->fov_start = FOV / 2 * ONE_PI / 180;
 	ray->fov_add = FOV / WIDTH * ONE_PI / 180;
+	init_door(game);
 }
 
 static void	ray_caster(t_game *game)

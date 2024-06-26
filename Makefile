@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+         #
+#    By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/04 17:02:41 by mott              #+#    #+#              #
-#    Updated: 2024/06/25 14:32:17 by mott             ###   ########.fr        #
+#    Updated: 2024/06/26 16:40:31 by fwahl            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,7 @@ SRCS	=	./src/main.c \
 			./src/parser/parse_textures.c \
 			./src/parser/map_validation.c \
 			./src/utils/bools.c \
-			./src/utils/error.c \
+			./src/utils/utils.c \
 			./src/utils/free.c \
 			./src/utils/debug.c \
 			./src/engine/draw_game.c \

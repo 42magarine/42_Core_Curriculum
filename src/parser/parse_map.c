@@ -6,7 +6,7 @@
 /*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 17:14:11 by fwahl             #+#    #+#             */
-/*   Updated: 2024/06/24 18:24:07 by fwahl            ###   ########.fr       */
+/*   Updated: 2024/06/26 16:37:41 by fwahl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,7 @@ void	parse_mapfile(t_game *game, char *filename)
 	while (line != NULL)
 	{
 		cut_next_line(line);
-		if (!game->parsed->walls || !game->parsed->doors)
+		if (!game->parsed->walls)
 			parse_tex(game, line);
 		if (!game->parsed->floor_ceiling)
 			parse_floor_ceiling(game, line);

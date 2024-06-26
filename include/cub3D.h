@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
+/*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 17:11:55 by mott              #+#    #+#             */
-/*   Updated: 2024/06/25 17:36:06 by mott             ###   ########.fr       */
+/*   Updated: 2024/06/26 16:36:48 by fwahl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,8 +77,7 @@ typedef struct s_map
 	t_coords		max;
 	int				floor;
 	int				ceiling;
-	mlx_texture_t	*wall[4];
-	mlx_texture_t	*door[2];
+	mlx_texture_t	*wall[8];
 }	t_map;
 
 typedef struct s_player
@@ -138,8 +137,6 @@ void	draw_wall(t_game *game, double radian, int x);
 void	draw_minimap(t_game *game);
 
 // init.c
-int		get_rgba(int r, int g, int b, int a);
-double	pi_overflow(double radian);
 void	init_game(t_game *game);
 void	loop_hook(void *param);
 
@@ -163,8 +160,10 @@ void	parse_floor_ceiling(t_game *game, char *line);
 void	parse_mapfile(t_game *game, char *filename);
 
 // utils
-// error.c
+mlx_texture_t	*set_texture(t_game *game, char *line);
 void	ft_error(t_game *game, const char *errormsg);
+int		get_rgba(int r, int g, int b, int a);
+double	pi_overflow(double radian);
 
 //free.c
 void	free_game(t_game *game);
