@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 17:11:55 by mott              #+#    #+#             */
-/*   Updated: 2024/06/25 18:45:51 by mott             ###   ########.fr       */
+/*   Updated: 2024/06/26 16:45:50 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,10 @@
 # define NORTH			1
 # define WEST			2
 # define SOUTH			3
+# define DOOR_EAST		4
+# define DOOR_NORTH		5
+# define DOOR_WEST		6
+# define DOOR_SOUTH		7
 # define MOVE_SPEED		1.75
 # define ROTATION_SPEED	0.034907
 
@@ -77,8 +81,7 @@ typedef struct s_map
 	t_coords		max;
 	int				floor;
 	int				ceiling;
-	mlx_texture_t	*wall[4];
-	mlx_texture_t	*door[2];
+	mlx_texture_t	*wall[5];
 }	t_map;
 
 typedef struct s_player
@@ -100,7 +103,7 @@ typedef struct s_ray
 {
 	t_coords	hit[WIDTH];
 	double		len[WIDTH];
-	int			dir[WIDTH]; //wall
+	int			wall[WIDTH];
 	double		fov_start;
 	double		fov_add;
 }	t_ray;
@@ -143,11 +146,12 @@ double	pi_overflow(double radian);
 void	init_game(t_game *game);
 void	loop_hook(void *param);
 
-// key.c
-// void	key_hook(mlx_key_data_t keydata, void *param);
-void	key_hook(void *param);
-void	minimap(mlx_key_data_t keydata, void *param);
+// key_movement.c
+void	key_hook(t_game *game);
 void	rotate_player(t_game *game, char dir);
+
+// key_special.c
+void	special_key_hook(mlx_key_data_t keydata, void *param);
 
 // mouse.c
 void	mouse_hook(t_game *game);

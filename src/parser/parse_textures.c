@@ -107,11 +107,13 @@ void	parse_tex(t_game *game, char *line)
 	else if (ft_strncmp(&line[i], "WE", 2) == 0)
 		map->wall[3] = set_texture(game, &line[i + 2]);
 	else if (ft_strncmp(&line[i], "DC", 2) == 0)
-		map->door[0] = set_texture(game, &line[i + 2]);
-	else if (ft_strncmp(&line[i], "DO", 2) == 0)
-		map->door[1] = set_texture(game, &line[i + 2]);
+		// map->door[0] = set_texture(game, &line[i + 2]);
+		map->wall[4] = set_texture(game, &line[i + 2]);
+	// else if (ft_strncmp(&line[i], "DO", 2) == 0)
+		// map->door[1] = set_texture(game, &line[i + 2]);
+		// map->wall[5] = set_texture(game, &line[i + 2]);
 	if (map->wall[0] && map->wall[1] && map->wall[2] && map->wall[3])
 		game->parsed->walls = true;
-	if (map->door[0] && map->door[1])
-		game->parsed->doors = true;
+	// if (map->door[0] && map->door[1])
+	// 	game->parsed->doors = true;
 }

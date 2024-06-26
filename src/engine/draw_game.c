@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 16:28:04 by mott              #+#    #+#             */
-/*   Updated: 2024/06/25 18:07:03 by mott             ###   ########.fr       */
+/*   Updated: 2024/06/26 16:35:03 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,17 +16,17 @@ static void	texture_x_calculation(t_game *game, t_texture *tex, int x)
 {
 	double	scale_x;
 
-	scale_x = (double)game->map->wall[game->ray->dir[x]]->width / F_SIZE;
-	if (game->ray->dir[x] == EAST)
+	scale_x = (double)game->map->wall[game->ray->wall[x]]->width / F_SIZE;
+	if (game->ray->wall[x] == EAST || game->ray->wall[x] == DOOR_EAST)
 		tex->pos.x = scale_x * (game->ray->hit[x].y
 				- (((int)game->ray->hit[x].y >> 5) << 5));
-	else if (game->ray->dir[x] == NORTH)
+	else if (game->ray->wall[x] == NORTH || game->ray->wall[x] == DOOR_NORTH)
 		tex->pos.x = scale_x * (game->ray->hit[x].x
 				- (((int)game->ray->hit[x].x >> 5) << 5));
-	else if (game->ray->dir[x] == WEST)
+	else if (game->ray->wall[x] == WEST || game->ray->wall[x] == DOOR_WEST)
 		tex->pos.x = scale_x * (F_SIZE - (game->ray->hit[x].y
 					- (((int)game->ray->hit[x].y >> 5) << 5)));
-	else if (game->ray->dir[x] == SOUTH)
+	else if (game->ray->wall[x] == SOUTH || game->ray->wall[x] == DOOR_SOUTH)
 		tex->pos.x = scale_x * (F_SIZE - (game->ray->hit[x].x
 					- (((int)game->ray->hit[x].x >> 5) << 5)));
 }
@@ -34,7 +34,7 @@ static void	texture_x_calculation(t_game *game, t_texture *tex, int x)
 static void	texture_y_calculation(t_game *game, t_texture *tex, int x)
 {
 	tex->wall_height = F_SIZE * HEIGHT / game->ray->len[x];
-	tex->y_scale = (double)game->map->wall[game->ray->dir[x]]->height
+	tex->y_scale = (double)game->map->wall[game->ray->wall[x]]->height
 		/ tex->wall_height;
 	tex->y_offset = 0.0;
 	if (tex->wall_height > HEIGHT)
@@ -48,7 +48,7 @@ static void	texture_y_calculation(t_game *game, t_texture *tex, int x)
 
 static void	fisheye(t_game *game, double radian, int x)
 {
-	double fish_radian;
+	double	fish_radian;
 
 	fish_radian = pi_overflow(radian - game->player->dir);
 	game->ray->len[x] = game->ray->len[x] * cos(fish_radian);
@@ -66,7 +66,7 @@ void	draw_wall(t_game *game, double radian, int x)
 	fisheye(game, radian, x);
 	texture_x_calculation(game, &tex, x);
 	texture_y_calculation(game, &tex, x);
-	dir = game->ray->dir[x];
+	dir = game->ray->wall[x];
 	y = 0;
 	while (y < tex.wall_height)
 	{

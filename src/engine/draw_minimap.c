@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 13:37:56 by mott              #+#    #+#             */
-/*   Updated: 2024/06/25 15:39:22 by mott             ###   ########.fr       */
+/*   Updated: 2024/06/26 16:37:15 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,6 @@ static void	draw_map(t_game *game)
 		while (game->map->map[y][x] != '\0')
 		{
 			if (mini_x + (x << 5) < WIDTH && 2 * mini_y + (y << 5) < HEIGHT)
-			// if (mini_x + (x << 5) >= 0 && mini_x + (x << 5) < WIDTH
-			// 	&& mini_y + (y << 5) >= 0 && mini_y + (y << 5) < HEIGHT)
 			{
 				if (game->map->map[y][x] == '1')
 					draw_square(game, (t_coords){mini_x + (x << 5), mini_y + (y << 5)}, F_SIZE, GRAY);
@@ -67,19 +65,17 @@ static void	draw_map(t_game *game)
 static void	draw_player(t_game *game)
 {
 	t_coords	player;
-	int	mini_x;
-	int	mini_y;
+	int			mini_x;
+	int			mini_y;
 
 	mini_x = WIDTH - game->map->max.x * F_SIZE - F_SIZE;
 	if (mini_x < F_SIZE)
 		mini_x = F_SIZE;
 	mini_y = F_SIZE;
-
 	// player.x = game->player->pos.x - (P_SIZE >> 1);
 	// player.y = game->player->pos.y - (P_SIZE >> 1);
 	player.x = mini_x + game->player->pos.x - (P_SIZE >> 1);
 	player.y = mini_y + game->player->pos.y - (P_SIZE >> 1);
-	// printf("px:%f py:%f\n", player.x, player.y);
 	if (player.x < WIDTH && player.y < HEIGHT)
 		draw_square(game, player, P_SIZE, YELLOW);
 }

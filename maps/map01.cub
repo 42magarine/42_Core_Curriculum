@@ -3,6 +3,9 @@ SO ./textures/orb2.png
 WE ./textures/orb3.png
 EA ./textures/orb4.png
 
+DC ./textures/door_closed.png
+DO ./textures/door_open.png
+
 F 220, 100, 0
 C 225,  30, 0
 

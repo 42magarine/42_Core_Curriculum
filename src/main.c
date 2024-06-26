@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 17:06:47 by fwahl             #+#    #+#             */
-/*   Updated: 2024/06/25 17:23:58 by mott             ###   ########.fr       */
+/*   Updated: 2024/06/26 16:34:33 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,9 @@ int	main(int argc, char **argv)
 		ft_error(game, "missing mapfile (argv[1])");
 	init_map(game, argv[1]);
 	init_game(game);
-	// mlx_key_hook(game->window->mlx, &key_hook, game);
-	mlx_key_hook(game->window->mlx, &minimap, game);
+	mlx_key_hook(game->window->mlx, &special_key_hook, game);
 	mlx_loop_hook(game->window->mlx, &loop_hook, game);
 	mlx_loop(game->window->mlx);
-	// free_game(game);
+	free_game(game);
 	return (EXIT_SUCCESS);
 }
