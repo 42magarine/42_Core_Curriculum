@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 16:44:18 by mott              #+#    #+#             */
-/*   Updated: 2024/06/26 17:31:46 by mott             ###   ########.fr       */
+/*   Updated: 2024/06/26 17:48:54 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,18 @@ static void	door_open_close(t_game *game)
 
 	x = (int)game->player->pos.x >> 5;
 	y = (int)game->player->pos.y >> 5;
-	if (game->ray->wall[WIDTH >> 1] == DOOR_EAST || game->ray->wall[WIDTH >> 1] == EAST)
+	if (game->ray->wall[WIDTH >> 1] == W_EAST
+		|| game->ray->wall[WIDTH >> 1] == D_EAST)
 		x++;
-	else if (game->ray->wall[WIDTH >> 1] == DOOR_NORTH || game->ray->wall[WIDTH >> 1] == NORTH)
+	else if (game->ray->wall[WIDTH >> 1] == W_NORTH
+		|| game->ray->wall[WIDTH >> 1] == D_NORTH)
 		y--;
-	else if (game->ray->wall[WIDTH >> 1] == DOOR_WEST || game->ray->wall[WIDTH >> 1] == WEST)
+	else if (game->ray->wall[WIDTH >> 1] == W_WEST
+		|| game->ray->wall[WIDTH >> 1] == D_WEST)
 		x--;
-	else if (game->ray->wall[WIDTH >> 1] == DOOR_SOUTH || game->ray->wall[WIDTH >> 1] == SOUTH)
+	else if (game->ray->wall[WIDTH >> 1] == W_SOUTH
+		|| game->ray->wall[WIDTH >> 1] == D_SOUTH)
 		y++;
-	printf("x: %d y:%d map:%c\n", x, y, game->map->map[y][x]);
 	if (game->map->map[y][x] == 'D')
 		game->map->map[y][x] = 'd';
 	else if (game->map->map[y][x] == 'd')

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+         #
+#    By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/04 17:02:41 by mott              #+#    #+#              #
-#    Updated: 2024/06/26 17:07:54 by fwahl            ###   ########.fr        #
+#    Updated: 2024/06/26 18:06:06 by mott             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,9 +29,10 @@ SRCS	=	./src/main.c \
 			./src/engine/draw_game.c \
 			./src/engine/draw_minimap.c \
 			./src/engine/init.c \
-			./src/engine/mouse.c \
 			./src/engine/key_movement.c \
 			./src/engine/key_special.c \
+			./src/engine/loop.c \
+			./src/engine/mouse.c \
 			./src/engine/ray.c
 OBJS	=	$(SRCS:.c=.o)
 HEADERS	=	./include/cub3D.h

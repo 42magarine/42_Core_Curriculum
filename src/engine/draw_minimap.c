@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 13:37:56 by mott              #+#    #+#             */
-/*   Updated: 2024/06/26 16:37:15 by mott             ###   ########.fr       */
+/*   Updated: 2024/06/26 18:47:34 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ static void	draw_map(t_game *game)
 	int	y;
 	int	mini_x;
 	int	mini_y;
+	double	factor;
+
 
 	mini_x = WIDTH - game->map->max.x * F_SIZE - F_SIZE;
 	if (mini_x < F_SIZE)
