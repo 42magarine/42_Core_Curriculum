@@ -6,7 +6,7 @@
 /*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 15:31:03 by mott              #+#    #+#             */
-/*   Updated: 2024/06/26 16:43:30 by fwahl            ###   ########.fr       */
+/*   Updated: 2024/06/26 20:56:50 by fwahl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,12 +47,13 @@ void	init_game(t_game *game)
 	ray->fov_start = FOV / 2 * ONE_PI / 180;
 	ray->fov_add = FOV / WIDTH * ONE_PI / 180;
 	init_door(game);
+	init_orb(game);
 }
 
 static void	ray_caster(t_game *game)
 {
-	double	radian;
-	int		x;
+	double		radian;
+	int			x;
 
 	radian = pi_overflow(game->player->dir + game->ray->fov_start);
 	x = 0;
@@ -63,6 +64,8 @@ static void	ray_caster(t_game *game)
 		radian = pi_overflow(radian - game->ray->fov_add);
 		x++;
 	}
+	swap_orb_tex(game);
+
 }
 
 void	loop_hook(void *param)
@@ -70,14 +73,14 @@ void	loop_hook(void *param)
 	t_game	*game;
 
 	game = param;
-	if (game->recalculate == true)
-	{
+	// if (game->recalculate == true)
+	// {
 		draw_background(game);
 		ray_caster(game);
 		if (game->minimap == true)
 			draw_minimap(game);
 		game->recalculate = false;
-	}
+	// }
 	key_hook(game);
 	mouse_hook(game);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
+/*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 19:44:06 by mott              #+#    #+#             */
-/*   Updated: 2024/06/26 16:41:08 by mott             ###   ########.fr       */
+/*   Updated: 2024/06/26 20:07:25 by fwahl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,11 @@ static t_coords	check_wall(t_game *game, t_coords pos, t_coords add, int *wall)
 		else if (game->map->map[(int)pos.y >> 5][(int)pos.x >> 5] == 'D')
 		{
 			*wall += 4;
+			break ;
+		}
+		else if (game->map->map[(int)pos.y >> 5][(int)pos.x >> 5] == 'P')
+		{
+			*wall += 8;
 			break ;
 		}
 		else

@@ -6,7 +6,7 @@
 /*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 17:11:55 by mott              #+#    #+#             */
-/*   Updated: 2024/06/26 17:10:00 by fwahl            ###   ########.fr       */
+/*   Updated: 2024/06/26 20:57:08 by fwahl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,10 @@
 # define DOOR_NORTH		5
 # define DOOR_WEST		6
 # define DOOR_SOUTH		7
+# define E_ORB			8
+# define N_ORB			9
+# define W_ORB			10
+# define S_ORB			11
 # define MOVE_SPEED		1.75
 # define ROTATION_SPEED	0.034907
 
@@ -81,7 +85,8 @@ typedef struct s_map
 	t_coords		max;
 	int				floor;
 	int				ceiling;
-	mlx_texture_t	*wall[8];
+	mlx_texture_t	*wall[12];
+	mlx_texture_t	*orb[10];
 }	t_map;
 
 typedef struct s_player
@@ -110,11 +115,11 @@ typedef struct s_ray
 
 typedef struct s_texture
 {
-	t_coords	pos;
-	double		y_scale;
-	double		y_offset;
-	int			wall_height;
-	int			wall_offset;
+	t_coords		pos;
+	double			y_scale;
+	double			y_offset;
+	int				wall_height;
+	int				wall_offset;
 }	t_texture;
 
 typedef struct s_game
@@ -156,6 +161,10 @@ void	mouse_hook(t_game *game);
 
 // ray.c
 void	ray_calculation(t_game *game, double radian, int x);
+
+//orb.c
+void	init_orb(t_game *game);
+void swap_orb_tex(t_game *game);
 
 // parser
 // parsing

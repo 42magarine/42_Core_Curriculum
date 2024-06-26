@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_game.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
+/*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 16:28:04 by mott              #+#    #+#             */
-/*   Updated: 2024/06/26 16:35:03 by mott             ###   ########.fr       */
+/*   Updated: 2024/06/26 20:22:29 by fwahl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,16 +17,16 @@ static void	texture_x_calculation(t_game *game, t_texture *tex, int x)
 	double	scale_x;
 
 	scale_x = (double)game->map->wall[game->ray->wall[x]]->width / F_SIZE;
-	if (game->ray->wall[x] == EAST || game->ray->wall[x] == DOOR_EAST)
+	if (game->ray->wall[x] == EAST || game->ray->wall[x] == DOOR_EAST || game->ray->wall[x] == E_ORB)
 		tex->pos.x = scale_x * (game->ray->hit[x].y
 				- (((int)game->ray->hit[x].y >> 5) << 5));
-	else if (game->ray->wall[x] == NORTH || game->ray->wall[x] == DOOR_NORTH)
+	else if (game->ray->wall[x] == NORTH || game->ray->wall[x] == DOOR_NORTH || game->ray->wall[x] == N_ORB)
 		tex->pos.x = scale_x * (game->ray->hit[x].x
 				- (((int)game->ray->hit[x].x >> 5) << 5));
-	else if (game->ray->wall[x] == WEST || game->ray->wall[x] == DOOR_WEST)
+	else if (game->ray->wall[x] == WEST || game->ray->wall[x] == DOOR_WEST || game->ray->wall[x] == W_ORB)
 		tex->pos.x = scale_x * (F_SIZE - (game->ray->hit[x].y
 					- (((int)game->ray->hit[x].y >> 5) << 5)));
-	else if (game->ray->wall[x] == SOUTH || game->ray->wall[x] == DOOR_SOUTH)
+	else if (game->ray->wall[x] == SOUTH || game->ray->wall[x] == DOOR_SOUTH || game->ray->wall[x] == S_ORB)
 		tex->pos.x = scale_x * (F_SIZE - (game->ray->hit[x].x
 					- (((int)game->ray->hit[x].x >> 5) << 5)));
 }
@@ -62,6 +62,7 @@ void	draw_wall(t_game *game, double radian, int x)
 	int			dir;
 	int			y;
 	int			i;
+	unsigned int	color;
 
 	fisheye(game, radian, x);
 	texture_x_calculation(game, &tex, x);
@@ -71,11 +72,12 @@ void	draw_wall(t_game *game, double radian, int x)
 	while (y < tex.wall_height)
 	{
 		i = ((int)tex.pos.y * game->map->wall[dir]->width + (int)tex.pos.x) * 4;
-		mlx_put_pixel(game->window->image, x, y + tex.wall_offset,
-			get_rgba(game->map->wall[dir]->pixels[i + 0],
+		color = get_rgba(game->map->wall[dir]->pixels[i + 0],
 				game->map->wall[dir]->pixels[i + 1],
 				game->map->wall[dir]->pixels[i + 2],
-				game->map->wall[dir]->pixels[i + 3]));
+				game->map->wall[dir]->pixels[i + 3]);
+		if (color != MAGENTA)
+			mlx_put_pixel(game->window->image, x, y + tex.wall_offset, color);
 		tex.pos.y += tex.y_scale;
 		y++;
 	}
