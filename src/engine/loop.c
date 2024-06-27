@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 18:03:44 by mott              #+#    #+#             */
-/*   Updated: 2024/06/26 18:05:12 by mott             ###   ########.fr       */
+/*   Updated: 2024/06/27 12:27:40 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	loop_hook(void *param)
 	{
 		draw_background(game);
 		ray_caster(game);
-		if (game->minimap == true)
+		if (game->minimap->show == true)
 			draw_minimap(game);
 		game->recalculate = false;
 	}

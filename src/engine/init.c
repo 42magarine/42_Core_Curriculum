@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 15:31:03 by mott              #+#    #+#             */
-/*   Updated: 2024/06/26 18:10:21 by mott             ###   ########.fr       */
+/*   Updated: 2024/06/27 14:08:12 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static void	init_door(t_game *game)
 // angle between rays	= 60/1920
 static void	init_ray(t_game *game)
 {
-	t_ray		*ray;
+	t_ray	*ray;
 
 	ray = ft_calloc(1, sizeof(t_ray));
 	game->ray = ray;
@@ -49,12 +49,27 @@ static void	init_window(t_game *game)
 		ft_error(game, mlx_strerror(mlx_errno));
 }
 
+static void	init_minimap(t_game *game)
+{
+	t_minimap	*minimap;
+
+	minimap = ft_calloc(1, sizeof(t_minimap));
+	game->minimap = minimap;
+	if (game->map->max.x > game->map->max.y)
+		minimap->factor = MM_WIDTH / game->map->max.x;
+	else
+		minimap->factor = MM_WIDTH / game->map->max.y;
+	minimap->start.x = WIDTH - MM_WIDTH - minimap->factor;
+	minimap->start.y = minimap->factor;
+}
+
 void	init_game(t_game *game)
 {
 	init_window(game);
 	init_ray(game);
 	init_door(game);
+	init_minimap(game);
 	game->recalculate = true;
-	game->player->pos.x = game->player->pos.x * F_SIZE + F_SIZE / 2;
-	game->player->pos.y = game->player->pos.y * F_SIZE + F_SIZE / 2;
+	game->player->pos.x = game->player->pos.x * SIZE;
+	game->player->pos.y = game->player->pos.y * SIZE;
 }

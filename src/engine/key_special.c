@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 16:44:18 by mott              #+#    #+#             */
-/*   Updated: 2024/06/26 17:48:54 by mott             ###   ########.fr       */
+/*   Updated: 2024/06/27 12:27:21 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static void	door_open_close(t_game *game)
 
 static void	minimap_on_off(t_game *game)
 {
-	game->minimap = !game->minimap;
+	game->minimap->show = !game->minimap->show;
 	game->recalculate = true;
 }
 

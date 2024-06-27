@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 16:28:04 by mott              #+#    #+#             */
-/*   Updated: 2024/06/26 17:49:40 by mott             ###   ########.fr       */
+/*   Updated: 2024/06/27 14:18:15 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,24 +16,24 @@ static void	texture_x_calculation(t_game *game, t_texture *tex, int x)
 {
 	double	scale_x;
 
-	scale_x = (double)game->map->wall[game->ray->wall[x]]->width / F_SIZE;
+	scale_x = (double)game->map->wall[game->ray->wall[x]]->width / SIZE;
 	if (game->ray->wall[x] == W_EAST || game->ray->wall[x] == D_EAST)
 		tex->pos.x = scale_x * (game->ray->hit[x].y
-				- (((int)game->ray->hit[x].y >> 5) << 5));
+				- (((int)game->ray->hit[x].y >> 6) << 6));
 	else if (game->ray->wall[x] == W_NORTH || game->ray->wall[x] == D_NORTH)
 		tex->pos.x = scale_x * (game->ray->hit[x].x
-				- (((int)game->ray->hit[x].x >> 5) << 5));
+				- (((int)game->ray->hit[x].x >> 6) << 6));
 	else if (game->ray->wall[x] == W_WEST || game->ray->wall[x] == D_WEST)
-		tex->pos.x = scale_x * (F_SIZE - (game->ray->hit[x].y
-					- (((int)game->ray->hit[x].y >> 5) << 5)));
+		tex->pos.x = scale_x * (SIZE - (game->ray->hit[x].y
+					- (((int)game->ray->hit[x].y >> 6) << 6)));
 	else if (game->ray->wall[x] == W_SOUTH || game->ray->wall[x] == D_SOUTH)
-		tex->pos.x = scale_x * (F_SIZE - (game->ray->hit[x].x
-					- (((int)game->ray->hit[x].x >> 5) << 5)));
+		tex->pos.x = scale_x * (SIZE - (game->ray->hit[x].x
+					- (((int)game->ray->hit[x].x >> 6) << 6)));
 }
 
 static void	texture_y_calculation(t_game *game, t_texture *tex, int x)
 {
-	tex->wall_height = F_SIZE * HEIGHT / game->ray->len[x];
+	tex->wall_height = SIZE * HEIGHT / game->ray->len[x];
 	tex->y_scale = (double)game->map->wall[game->ray->wall[x]]->height
 		/ tex->wall_height;
 	tex->y_offset = 0.0;
