@@ -6,7 +6,7 @@
 /*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 17:55:44 by fwahl             #+#    #+#             */
-/*   Updated: 2024/06/23 19:00:57 by fwahl            ###   ########.fr       */
+/*   Updated: 2024/06/27 18:40:50 by fwahl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static bool	is_valid_start(t_map *map, int x, int y, char filler)
 {
 	if (x < 0 || x >= (int)ft_strlen(map->map[y]) || y < 0 || y >= map->max.y)
 		return (false);
-	if (map->map[y][x] == '1' || map->map[y][x] == filler)
+	if (map->map[y][x] == '1' || map->map[y][x] == 'P' || map->map[y][x] == filler)
 		return (false);
 	if (ft_isspace(map->map[y][x]))
 		return (false);
@@ -52,7 +52,8 @@ static bool	flood_fill(t_map *map, int x, int y, char filler)
 
 	if (x < 0 || x >= (int)ft_strlen(map->map[y]) || y < 0 || y >= map->max.y)
 		return (false);
-	if (map->map[y][x] == '1' || map->map[y][x] == filler || map->map[y][x] == ' ')
+	if (map->map[y][x] == '1' || map->map[y][x] == 'P'
+		|| map->map[y][x] == filler || map->map[y][x] == ' ')
 		return (true);
 	map->map[y][x] = filler;
 	up = flood_fill(map, x, y - 1, filler);

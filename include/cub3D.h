@@ -6,7 +6,7 @@
 /*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 17:11:55 by mott              #+#    #+#             */
-/*   Updated: 2024/06/27 18:15:48 by fwahl            ###   ########.fr       */
+/*   Updated: 2024/06/27 19:20:05 by fwahl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,18 +50,18 @@
 # define TWO_PI			6.283185
 # define HALF_PI		1.570796
 # define THREE_HALF_PI	4.712388
-# define W_EAST			0
-# define W_NORTH		1
-# define W_WEST			2
-# define W_SOUTH		3
-# define D_EAST			4
-# define D_NORTH		5
-# define D_WEST			6
-# define D_SOUTH		7
-# define O_EAST			8
-# define O_NORTH		9
-# define O_WEST			10
-# define O_SOUTH		11
+# define E_WALL			0
+# define N_WALL			1
+# define W_WALL			2
+# define S_WALL			3
+# define E_DOOR			4
+# define N_DOOR			5
+# define W_DOOR			6
+# define S_DOOR			7
+# define E_PORTAL		8
+# define N_PORTAL		9
+# define W_PORTAL		10
+# define S_PORTAL		11
 # define MOVE_SPEED		2.75
 # define ROTATION_SPEED	0.034907
 
@@ -151,7 +151,7 @@ int		main(int argc, char **argv);
 // engine
 // draw_game.c
 void	draw_background(t_game *game);
-void	draw_wall(t_game *game, double radian, int x);
+void	draN_WALL(t_game *game, double radian, int x);
 
 // draw_minimap.c
 void	draw_minimap(t_game *game);
@@ -170,9 +170,10 @@ void	special_key_hook(mlx_key_data_t keydata, void *param);
 // mouse.c
 void	mouse_hook(t_game *game);
 
-// orb.c
-void	init_orb(t_game *game);
-void	swap_orb_tex(t_game *game);
+// portal.c
+void	init_portal(t_game *game, char *line);
+void	portal_tex(t_game *game);
+void	portal_animation(t_game *game);
 
 // ray.c
 void	ray_calculation(t_game *game, double radian, int x);
@@ -197,7 +198,8 @@ void	free_game(t_game *game);
 bool	is_map_char(char c);
 bool	is_map_line(char *line);
 bool	is_player_char(char c);
-bool	is_player_start(char *line);
+bool	is_player(char *line);
+bool	is_portal(char *line);
 
 // debug.c
 void	debug_parse(t_game *game);

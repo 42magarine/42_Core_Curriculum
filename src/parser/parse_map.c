@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   parse_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
+/*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 17:14:11 by fwahl             #+#    #+#             */
-/*   Updated: 2024/06/26 17:46:16 by mott             ###   ########.fr       */
+/*   Updated: 2024/06/27 19:16:13 by fwahl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3D.h"
 
-//   0° = W_EAST  = 0
-//  90° = W_NORTH = PI_HALF
+//   0° = E_WALL  = 0
+//  90° = N_WALL = PI_HALF
 // 180°	= west  = PI_ONE
 // 270° = south = PI_THREE_HALF
 static void	init_player(t_game	*game, char *line)
@@ -56,8 +56,10 @@ static bool	set_map_size(t_game *game, char *line)
 		start = true;
 		if ((int)ft_strlen(line) > game->map->max.x)
 			game->map->max.x = ft_strlen(line);
-		if (is_player_start(line))
+		if (is_player(line))
 			init_player(game, line);
+		if (is_portal(line))
+			init_portal(game, line);
 		game->map->max.y++;
 	}
 	return (false);

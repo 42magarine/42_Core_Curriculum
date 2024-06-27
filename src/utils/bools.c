@@ -6,7 +6,7 @@
 /*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/16 20:41:35 by fwahl             #+#    #+#             */
-/*   Updated: 2024/06/27 18:12:04 by fwahl            ###   ########.fr       */
+/*   Updated: 2024/06/27 19:13:14 by fwahl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ bool	is_player_char(char c)
 	return (c == 'N' || c == 'E' || c == 'S' || c == 'W');
 }
 
-bool	is_player_start(char *line)
+bool	is_player(char *line)
 {
 	int	i;
 
@@ -56,9 +56,21 @@ bool	is_player_start(char *line)
 	while (line[i] != '\0' && is_map_line(line))
 	{
 		if (is_player_char(line[i]))
-		{
 			return (true);
-		}
+		i++;
+	}
+	return (false);
+}
+
+bool	is_portal(char *line)
+{
+	int	i;
+
+	i = 0;
+	while (line[i] != '\0' && is_map_line(line))
+	{
+		if (line[i] == 'P')
+			return (true);
 		i++;
 	}
 	return (false);

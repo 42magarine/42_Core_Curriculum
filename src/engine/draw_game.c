@@ -6,7 +6,7 @@
 /*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 16:28:04 by mott              #+#    #+#             */
-/*   Updated: 2024/06/27 18:23:15 by fwahl            ###   ########.fr       */
+/*   Updated: 2024/06/27 19:20:01 by fwahl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,20 +17,20 @@ static void	texture_x_calculation(t_game *game, t_texture *tex, int x)
 	double	scale_x;
 
 	scale_x = (double)game->map->wall[game->ray->wall[x]]->width / SIZE;
-	if (game->ray->wall[x] == W_EAST || game->ray->wall[x] == D_EAST
-		|| game->ray->wall[x] == O_EAST)
+	if (game->ray->wall[x] == E_WALL || game->ray->wall[x] == E_DOOR
+		|| game->ray->wall[x] == E_PORTAL)
 		tex->pos.x = scale_x * (game->ray->hit[x].y
 				- (((int)game->ray->hit[x].y >> 6) << 6));
-	else if (game->ray->wall[x] == W_NORTH || game->ray->wall[x] == D_NORTH
-		|| game->ray->wall[x] == O_NORTH)
+	else if (game->ray->wall[x] == N_WALL || game->ray->wall[x] == N_DOOR
+		|| game->ray->wall[x] == N_PORTAL)
 		tex->pos.x = scale_x * (game->ray->hit[x].x
 				- (((int)game->ray->hit[x].x >> 6) << 6));
-	else if (game->ray->wall[x] == W_WEST || game->ray->wall[x] == D_WEST
-		|| game->ray->wall[x] == O_WEST)
+	else if (game->ray->wall[x] == W_WALL || game->ray->wall[x] == W_DOOR
+		|| game->ray->wall[x] == W_PORTAL)
 		tex->pos.x = scale_x * (SIZE - (game->ray->hit[x].y
 					- (((int)game->ray->hit[x].y >> 6) << 6)));
-	else if (game->ray->wall[x] == W_SOUTH || game->ray->wall[x] == D_SOUTH
-		|| game->ray->wall[x] == O_SOUTH)
+	else if (game->ray->wall[x] == S_WALL || game->ray->wall[x] == S_DOOR
+		|| game->ray->wall[x] == S_PORTAL)
 		tex->pos.x = scale_x * (SIZE - (game->ray->hit[x].x
 					- (((int)game->ray->hit[x].x >> 6) << 6)));
 }
@@ -60,7 +60,7 @@ static void	fisheye(t_game *game, double radian, int x)
 
 // y_scale < 0 = texture_height < wall_height = scaling up
 // y_scale > 0 = texture_height > wall_height = scaling down
-void	draw_wall(t_game *game, double radian, int x)
+void	draN_WALL(t_game *game, double radian, int x)
 {
 	t_texture	tex;
 	int			dir;

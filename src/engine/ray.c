@@ -6,7 +6,7 @@
 /*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 19:44:06 by mott              #+#    #+#             */
-/*   Updated: 2024/06/27 18:11:40 by fwahl            ###   ########.fr       */
+/*   Updated: 2024/06/27 19:16:53 by fwahl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ static t_coords	horizontal_line(t_game *game, double radian, int *wall)
 			+ game->player->pos.x;
 		pos_add.y = -SIZE;
 		pos_add.x = SIZE / tan(radian);
-		*wall = W_NORTH;
+		*wall = N_WALL;
 		return (check_wall(game, pos, pos_add, wall));
 	}
 	else if (radian > ONE_PI && radian < TWO_PI)
@@ -74,10 +74,10 @@ static t_coords	horizontal_line(t_game *game, double radian, int *wall)
 			+ game->player->pos.x;
 		pos_add.y = SIZE;
 		pos_add.x = -SIZE / tan(radian);
-		*wall = W_SOUTH;
+		*wall = S_WALL;
 		return (check_wall(game, pos, pos_add, wall));
 	}
-	*wall = W_NORTH;
+	*wall = N_WALL;
 	return ((t_coords){game->player->pos.x, game->player->pos.y});
 }
 
@@ -95,7 +95,7 @@ static t_coords	vertical_line(t_game *game, double radian, int *wall)
 			+ game->player->pos.y;
 		pos_add.x = SIZE;
 		pos_add.y = -SIZE * tan(radian);
-		*wall = W_EAST;
+		*wall = E_WALL;
 		return (check_wall(game, pos, pos_add, wall));
 	}
 	else if (radian > HALF_PI && radian < THREE_HALF_PI)
@@ -105,10 +105,10 @@ static t_coords	vertical_line(t_game *game, double radian, int *wall)
 			+ game->player->pos.y;
 		pos_add.x = -SIZE;
 		pos_add.y = SIZE * tan(radian);
-		*wall = W_WEST;
+		*wall = W_WALL;
 		return (check_wall(game, pos, pos_add, wall));
 	}
-	*wall = W_EAST;
+	*wall = E_WALL;
 	return ((t_coords){game->player->pos.x, game->player->pos.y});
 }
 

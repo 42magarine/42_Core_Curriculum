@@ -6,7 +6,7 @@
 /*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 15:31:03 by mott              #+#    #+#             */
-/*   Updated: 2024/06/27 18:10:27 by fwahl            ###   ########.fr       */
+/*   Updated: 2024/06/27 19:12:18 by fwahl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void	init_game(t_game *game)
 	init_window(game);
 	init_ray(game);
 	init_door(game);
-	init_orb(game);
+	portal_tex(game);
 	init_minimap(game);
 	game->player->pos.x = game->player->pos.x * SIZE + (SIZE >> 1);
 	game->player->pos.y = game->player->pos.y * SIZE + (SIZE >> 1);

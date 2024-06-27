@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   key_special.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
+/*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 16:44:18 by mott              #+#    #+#             */
-/*   Updated: 2024/06/27 16:34:46 by mott             ###   ########.fr       */
+/*   Updated: 2024/06/27 19:18:40 by fwahl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,17 +19,17 @@ static void	door_open_close(t_game *game)
 
 	x = (int)game->player->pos.x >> 6;
 	y = (int)game->player->pos.y >> 6;
-	if (game->ray->wall[WIDTH >> 1] == W_EAST
-		|| game->ray->wall[WIDTH >> 1] == D_EAST)
+	if (game->ray->wall[WIDTH >> 1] == E_WALL
+		|| game->ray->wall[WIDTH >> 1] == E_DOOR)
 		x++;
-	else if (game->ray->wall[WIDTH >> 1] == W_NORTH
-		|| game->ray->wall[WIDTH >> 1] == D_NORTH)
+	else if (game->ray->wall[WIDTH >> 1] == N_WALL
+		|| game->ray->wall[WIDTH >> 1] == N_DOOR)
 		y--;
-	else if (game->ray->wall[WIDTH >> 1] == W_WEST
-		|| game->ray->wall[WIDTH >> 1] == D_WEST)
+	else if (game->ray->wall[WIDTH >> 1] == W_WALL
+		|| game->ray->wall[WIDTH >> 1] == W_DOOR)
 		x--;
-	else if (game->ray->wall[WIDTH >> 1] == W_SOUTH
-		|| game->ray->wall[WIDTH >> 1] == D_SOUTH)
+	else if (game->ray->wall[WIDTH >> 1] == S_WALL
+		|| game->ray->wall[WIDTH >> 1] == S_DOOR)
 		y++;
 	if (game->map->map[y][x] == 'D')
 		game->map->map[y][x] = 'd';
