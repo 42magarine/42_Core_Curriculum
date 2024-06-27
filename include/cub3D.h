@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 17:11:55 by mott              #+#    #+#             */
-/*   Updated: 2024/06/27 18:15:48 by fwahl            ###   ########.fr       */
+/*   Updated: 2024/06/27 19:59:20 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,8 +94,6 @@ typedef struct s_map
 	int				ceiling;
 	t_coords		p_one;
 	t_coords		p_two;
-	int				p_one_dir;
-	int				p_two_dir;
 	mlx_texture_t	*wall[12]; //move to t_game
 	mlx_texture_t	*orb[10];
 }	t_map;
@@ -158,7 +156,6 @@ void	draw_minimap(t_game *game);
 
 // init.c
 void	init_game(t_game *game);
-void	loop_hook(void *param);
 
 // key_movement.c
 void	key_hook(t_game *game);
@@ -167,15 +164,21 @@ void	rotate_player(t_game *game, char dir);
 // key_special.c
 void	special_key_hook(mlx_key_data_t keydata, void *param);
 
+// loop.c
+void	loop_hook(void *param);
+
 // mouse.c
 void	mouse_hook(t_game *game);
 
-// orb.c
+// portal.c
 void	init_orb(t_game *game);
 void	swap_orb_tex(t_game *game);
 
 // ray.c
 void	ray_calculation(t_game *game, double radian, int x);
+
+// teleport.c
+void	teleport_player(t_game *game, double move_x, double move_y);
 
 // parser
 // parsing

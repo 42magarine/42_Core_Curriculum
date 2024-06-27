@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+         #
+#    By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/04 17:02:41 by mott              #+#    #+#              #
-#    Updated: 2024/06/27 18:18:14 by fwahl            ###   ########.fr        #
+#    Updated: 2024/06/27 19:57:24 by mott             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,7 +34,8 @@ SRCS	=	./src/main.c \
 			./src/engine/key_special.c \
 			./src/engine/loop.c \
 			./src/engine/mouse.c \
-			./src/engine/ray.c
+			./src/engine/ray.c \
+			./src/engine/teleport.c
 OBJS	=	$(SRCS:.c=.o)
 HEADERS	=	./include/cub3D.h
 
