@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 13:37:56 by mott              #+#    #+#             */
-/*   Updated: 2024/06/27 14:13:04 by mott             ###   ########.fr       */
+/*   Updated: 2024/06/27 16:12:34 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,9 @@ static void	draw_element(t_game *game, int x, int y)
 {
 	t_coords	pos;
 
-	pos.x = game->minimap->start.x + game->minimap->factor * x;
-	pos.y = game->minimap->start.y + game->minimap->factor * y;
-	if (game->map->map[y][x] == '0'
-		|| is_player_char(game->map->map[y][x]) == true)
+	pos.x = game->minimap->start.x + (int)game->minimap->factor * x;
+	pos.y = game->minimap->start.y + (int)game->minimap->factor * y;
+	if (game->map->map[y][x] == '0' || is_player_char(game->map->map[y][x]))
 		draw_square(game, pos, (int)game->minimap->factor, SILVER);
 	else if (game->map->map[y][x] == '1')
 		draw_square(game, pos, (int)game->minimap->factor, GRAY);
@@ -69,14 +68,12 @@ static void	draw_map(t_game *game)
 
 static void	draw_player(t_game *game)
 {
-	t_coords	player;
-
-	player.x = game->minimap->start.x
-		+ game->player->pos.x / SIZE * game->minimap->factor;
-	player.y = game->minimap->start.y
-		+ game->player->pos.y / SIZE * game->minimap->factor;
-	if (player.x < WIDTH && player.y < HEIGHT)
-		draw_square(game, player, 3, YELLOW);
+	game->minimap->player.x = game->minimap->start.x
+		+ game->player->pos.x / SIZE * game->minimap->factor - 1;
+	game->minimap->player.y = game->minimap->start.y
+		+ game->player->pos.y / SIZE * game->minimap->factor - 1;
+	draw_square(game, (t_coords){game->minimap->player.x - 1,
+		game->minimap->player.y - 1}, 3, YELLOW);
 }
 
 static void	draw_ray(t_game *game, t_coords player, t_coords wall)
@@ -85,10 +82,6 @@ static void	draw_ray(t_game *game, t_coords player, t_coords wall)
 	double	dy;
 	int		i;
 
-	player.x = game->minimap->start.x
-		+ game->player->pos.x / SIZE * game->minimap->factor;
-	player.y = game->minimap->start.y
-		+ game->player->pos.y / SIZE * game->minimap->factor;
 	dx = (wall.x - game->player->pos.x) / SIZE * game->minimap->factor;
 	dy = (wall.y - game->player->pos.y) / SIZE * game->minimap->factor;
 	if (fabs(dx) > fabs(dy))
@@ -99,10 +92,7 @@ static void	draw_ray(t_game *game, t_coords player, t_coords wall)
 	dy /= i;
 	while (i > 0)
 	{
-		if (player.x >= 0 && player.x < WIDTH && player.y >= 0 && player.y < HEIGHT)
-		{
-			mlx_put_pixel(game->window->image, (int)player.x, (int)player.y, BLACK);
-		}
+		mlx_put_pixel(game->window->image, player.x, player.y, BLACK);
 		player.x += dx;
 		player.y += dy;
 		i--;
@@ -118,7 +108,7 @@ void	draw_minimap(t_game *game)
 	i = 0;
 	while (i < WIDTH)
 	{
-		draw_ray(game, game->player->pos, game->ray->hit[i]);
+		draw_ray(game, game->minimap->player, game->ray->hit[i]);
 		i += 1;
 	}
 }

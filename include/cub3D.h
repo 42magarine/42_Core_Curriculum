@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 17:11:55 by mott              #+#    #+#             */
-/*   Updated: 2024/06/27 14:21:46 by mott             ###   ########.fr       */
+/*   Updated: 2024/06/27 16:18:16 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,16 +18,13 @@
 # include <stdio.h>		// printf, perror
 # include <stdlib.h>	// malloc, free, exit
 # include <string.h>	// strerror
+# include <math.h>
 # include <stdbool.h>
-# include <stdint.h>
-# include <math.h>
 # include "../libft/libft.h"
-# include <math.h>
 # include "../MLX42/include/MLX42/MLX42.h"
 
 # define BLACK			0x000000FF	// (0, 0, 0, 255)
 # define WHITE			0xFFFFFFFF	// (255, 255, 255, 255)
-# define WHITE_SMOKE	0xF5F5F5FF	// (245, 245, 245, 255)
 # define RED			0xFF0000FF	// (255, 0, 0, 255)
 # define LIME			0x00FF00FF	// (0, 255, 0, 255)
 # define BLUE			0x0000FFFF	// (0, 0, 255, 255)
@@ -65,7 +62,7 @@
 # define O_NORTH		9
 # define O_WEST			10
 # define O_SOUTH		11
-# define MOVE_SPEED		1.75
+# define MOVE_SPEED		2.75
 # define ROTATION_SPEED	0.034907
 
 typedef struct s_coords
@@ -76,11 +73,11 @@ typedef struct s_coords
 
 typedef struct s_parse
 {
-	bool		walls;
-	bool		doors;
-	bool		floor_ceiling;
-	bool		map;
-	bool		player;
+	bool	walls;
+	bool	doors;
+	bool	floor_ceiling;
+	bool	map;
+	bool	player;
 }	t_parse;
 
 typedef struct s_window
@@ -95,13 +92,13 @@ typedef struct s_map
 	t_coords		max;
 	int				floor;
 	int				ceiling;
-	mlx_texture_t	*wall[8]; //move to t_game
+	mlx_texture_t	*wall[12]; //move to t_game
+	mlx_texture_t	*orb[10];
 }	t_map;
 
 typedef struct s_player
 {
 	t_coords	pos;
-	t_coords	mm_pos;
 	double		dir;
 }	t_player;
 
@@ -125,7 +122,8 @@ typedef struct s_texture
 
 typedef struct s_minimap
 {
-	double		factor;
+	// double		factor;
+	int			factor;
 	t_coords	start;
 	t_coords	player;
 	bool		show;
@@ -169,6 +167,10 @@ void	special_key_hook(mlx_key_data_t keydata, void *param);
 
 // mouse.c
 void	mouse_hook(t_game *game);
+
+// orb.c
+void	init_orb(t_game *game);
+void	swap_orb_tex(t_game *game);
 
 // ray.c
 void	ray_calculation(t_game *game, double radian, int x);

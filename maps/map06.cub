@@ -1,7 +1,7 @@
-NO ./textures/orb5.png
-SO ./textures/orb6.png
-WE ./textures/orb3.png
-EA ./textures/orb8.png
+EA ./textures/east.png
+NO ./textures/north.png
+WE ./textures/west.png
+SO ./textures/south.png
 
 C 135, 206, 250
 F 210, 105, 30
@@ -11,7 +11,7 @@ F 210, 105, 30
 10000000001
 10000000001
 10000000001
-10000000001
+10000P00001
 10000000001
 10000000001
 11111111111

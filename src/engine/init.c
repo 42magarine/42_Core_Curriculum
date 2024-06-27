@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 15:31:03 by mott              #+#    #+#             */
-/*   Updated: 2024/06/27 14:08:12 by mott             ###   ########.fr       */
+/*   Updated: 2024/06/27 16:20:22 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,8 +68,9 @@ void	init_game(t_game *game)
 	init_window(game);
 	init_ray(game);
 	init_door(game);
+	init_orb(game);
 	init_minimap(game);
 	game->recalculate = true;
-	game->player->pos.x = game->player->pos.x * SIZE;
-	game->player->pos.y = game->player->pos.y * SIZE;
+	game->player->pos.x = game->player->pos.x * SIZE + (SIZE >> 1);
+	game->player->pos.y = game->player->pos.y * SIZE + (SIZE >> 1);
 }

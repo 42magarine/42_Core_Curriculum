@@ -6,7 +6,7 @@
 #    By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/04 17:02:41 by mott              #+#    #+#              #
-#    Updated: 2024/06/27 13:05:00 by mott             ###   ########.fr        #
+#    Updated: 2024/06/27 16:18:43 by mott             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,6 +33,7 @@ SRCS	=	./src/main.c \
 			./src/engine/key_special.c \
 			./src/engine/loop.c \
 			./src/engine/mouse.c \
+			./src/engine/orb.c \
 			./src/engine/ray.c
 OBJS	=	$(SRCS:.c=.o)
 HEADERS	=	./include/cub3D.h

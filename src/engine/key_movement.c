@@ -6,11 +6,17 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 14:08:58 by mott              #+#    #+#             */
-/*   Updated: 2024/06/27 14:19:13 by mott             ###   ########.fr       */
+/*   Updated: 2024/06/27 15:22:55 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3D.h"
+
+static void	portal_teleport(t_game *game)
+{
+	(void)game;
+	printf("hello portal\n");
+}
 
 // sin (0°)		=  0	cos (0°)	=  1
 // sin (90°)	=  1	cos (90°)	=  0
@@ -38,6 +44,9 @@ static void	move_player(t_game *game, char key, double move_x, double move_y)
 		&& game->map->map[(int)(game->player->pos.y + move_y) >> 6]
 		[(int)game->player->pos.x >> 6] != 'D')
 		game->player->pos.y += move_y;
+	if (game->map->map[(int)game->player->pos.y >> 6]
+		[(int)(game->player->pos.x) >> 6] == 'P')
+		portal_teleport(game);
 	game->recalculate = true;
 }
 

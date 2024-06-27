@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   bools.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/16 20:41:35 by fwahl             #+#    #+#             */
-/*   Updated: 2024/06/24 18:27:34 by fwahl            ###   ########.fr       */
+/*   Updated: 2024/06/27 16:27:48 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 bool	is_map_char(char c)
 {
-	return (c == '0' || c == '1' || c == ' ' || c == 'D' || c == 'd' ||
-		is_player_char(c));
+	return (c == '0' || c == '1' || c == ' ' || c == 'D' || c == 'd' || c == 'P'
+		|| is_player_char(c));
 }
 
 bool	is_map_line(char *line)
