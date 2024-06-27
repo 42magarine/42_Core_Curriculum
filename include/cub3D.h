@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 17:11:55 by mott              #+#    #+#             */
-/*   Updated: 2024/06/26 17:10:00 by fwahl            ###   ########.fr       */
+/*   Updated: 2024/06/27 14:21:46 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,21 +45,26 @@
 
 # define WIDTH			1920
 # define HEIGHT			1080
-# define F_SIZE			32
-# define P_SIZE			5
+# define MM_WIDTH		448
+# define MM_HEIGHT		448
+# define SIZE			64
 # define FOV			60.0
 # define ONE_PI			3.141592
 # define TWO_PI			6.283185
 # define HALF_PI		1.570796
 # define THREE_HALF_PI	4.712388
-# define EAST			0
-# define NORTH			1
-# define WEST			2
-# define SOUTH			3
-# define DOOR_EAST		4
-# define DOOR_NORTH		5
-# define DOOR_WEST		6
-# define DOOR_SOUTH		7
+# define W_EAST			0
+# define W_NORTH		1
+# define W_WEST			2
+# define W_SOUTH		3
+# define D_EAST			4
+# define D_NORTH		5
+# define D_WEST			6
+# define D_SOUTH		7
+# define O_EAST			8
+# define O_NORTH		9
+# define O_WEST			10
+# define O_SOUTH		11
 # define MOVE_SPEED		1.75
 # define ROTATION_SPEED	0.034907
 
@@ -68,6 +73,15 @@ typedef struct s_coords
 	double	x;
 	double	y;
 }	t_coords;
+
+typedef struct s_parse
+{
+	bool		walls;
+	bool		doors;
+	bool		floor_ceiling;
+	bool		map;
+	bool		player;
+}	t_parse;
 
 typedef struct s_window
 {
@@ -81,23 +95,15 @@ typedef struct s_map
 	t_coords		max;
 	int				floor;
 	int				ceiling;
-	mlx_texture_t	*wall[8];
+	mlx_texture_t	*wall[8]; //move to t_game
 }	t_map;
 
 typedef struct s_player
 {
 	t_coords	pos;
+	t_coords	mm_pos;
 	double		dir;
 }	t_player;
-
-typedef struct s_parse
-{
-	bool		walls;
-	bool		doors;
-	bool		floor_ceiling;
-	bool		map;
-	bool		player;
-}	t_parse;
 
 typedef struct s_ray
 {
@@ -117,15 +123,25 @@ typedef struct s_texture
 	int			wall_offset;
 }	t_texture;
 
+typedef struct s_minimap
+{
+	double		factor;
+	t_coords	start;
+	t_coords	player;
+	bool		show;
+
+}	t_minimap;
+
 typedef struct s_game
 {
 	t_window	*window;
 	t_map		*map;
 	t_player	*player;
-	t_parse		*parsed;
+	t_parse		*parsed; // raus
 	t_ray		*ray;
+	t_texture	*tex;
+	t_minimap	*minimap;
 	bool		recalculate;
-	bool		minimap;
 	bool		mouse_rotate;
 }	t_game;
 

@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   parse_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 17:14:11 by fwahl             #+#    #+#             */
-/*   Updated: 2024/06/26 16:37:41 by fwahl            ###   ########.fr       */
+/*   Updated: 2024/06/26 17:46:16 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3D.h"
 
-//   0° = east  = 0
-//  90° = north = PI_HALF
+//   0° = W_EAST  = 0
+//  90° = W_NORTH = PI_HALF
 // 180°	= west  = PI_ONE
 // 270° = south = PI_THREE_HALF
 static void	init_player(t_game	*game, char *line)
