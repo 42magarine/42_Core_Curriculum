@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   orb.c                                              :+:      :+:    :+:   */
+/*   portal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/26 19:43:28 by fwahl             #+#    #+#             */
-/*   Updated: 2024/06/26 20:56:59 by fwahl            ###   ########.fr       */
+/*   Created: 2024/06/27 18:17:32 by fwahl             #+#    #+#             */
+/*   Updated: 2024/06/27 18:17:35 by fwahl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,13 @@ void	init_orb(t_game *game)
 	game->map->wall[9] = game->map->orb[0];
 	game->map->wall[10] = game->map->orb[0];
 	game->map->wall[11] = game->map->orb[0];
+	game->map->p_one = (t_coords){2, 2};
+	game->map->p_one_dir = O_WEST;
+	game->map->p_two = (t_coords){7, 7};
+	game->map->p_two_dir = O_EAST;
 }
 
-void swap_orb_tex(t_game *game)
+void	swap_orb_tex(t_game *game)
 {
 	static int	count = 0;
 

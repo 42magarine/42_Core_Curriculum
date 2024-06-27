@@ -6,7 +6,7 @@
 /*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 19:44:06 by mott              #+#    #+#             */
-/*   Updated: 2024/06/26 20:07:25 by fwahl            ###   ########.fr       */
+/*   Updated: 2024/06/27 18:11:40 by fwahl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,17 +26,17 @@ static double	ray_length(t_game *game, t_coords ray_hit)
 
 static t_coords	check_wall(t_game *game, t_coords pos, t_coords add, int *wall)
 {
-	while ((int)pos.x >> 5 >= 0 && (int)pos.x >> 5 < game->map->max.x
-		&& (int)pos.y >> 5 >= 0 && (int)pos.y >> 5 < game->map->max.y)
+	while ((int)pos.x >> 6 >= 0 && (int)pos.x >> 6 < game->map->max.x
+		&& (int)pos.y >> 6 >= 0 && (int)pos.y >> 6 < game->map->max.y)
 	{
-		if (game->map->map[(int)pos.y >> 5][(int)pos.x >> 5] == '1')
+		if (game->map->map[(int)pos.y >> 6][(int)pos.x >> 6] == '1')
 			break ;
-		else if (game->map->map[(int)pos.y >> 5][(int)pos.x >> 5] == 'D')
+		else if (game->map->map[(int)pos.y >> 6][(int)pos.x >> 6] == 'D')
 		{
 			*wall += 4;
 			break ;
 		}
-		else if (game->map->map[(int)pos.y >> 5][(int)pos.x >> 5] == 'P')
+		else if (game->map->map[(int)pos.y >> 6][(int)pos.x >> 6] == 'P')
 		{
 			*wall += 8;
 			break ;
@@ -59,25 +59,25 @@ static t_coords	horizontal_line(t_game *game, double radian, int *wall)
 
 	if (radian > 0 && radian < ONE_PI)
 	{
-		pos.y = (((int)game->player->pos.y >> 5) << 5) - 0.0001;
+		pos.y = (((int)game->player->pos.y >> 6) << 6) - 0.000001;
 		pos.x = (game->player->pos.y - pos.y) / tan(radian)
 			+ game->player->pos.x;
-		pos_add.y = -F_SIZE;
-		pos_add.x = F_SIZE / tan(radian);
-		*wall = NORTH;
+		pos_add.y = -SIZE;
+		pos_add.x = SIZE / tan(radian);
+		*wall = W_NORTH;
 		return (check_wall(game, pos, pos_add, wall));
 	}
 	else if (radian > ONE_PI && radian < TWO_PI)
 	{
-		pos.y = (((int)game->player->pos.y >> 5) << 5) + F_SIZE;
+		pos.y = (((int)game->player->pos.y >> 6) << 6) + SIZE;
 		pos.x = (game->player->pos.y - pos.y) / tan(radian)
 			+ game->player->pos.x;
-		pos_add.y = F_SIZE;
-		pos_add.x = -F_SIZE / tan(radian);
-		*wall = SOUTH;
+		pos_add.y = SIZE;
+		pos_add.x = -SIZE / tan(radian);
+		*wall = W_SOUTH;
 		return (check_wall(game, pos, pos_add, wall));
 	}
-	*wall = NORTH;
+	*wall = W_NORTH;
 	return ((t_coords){game->player->pos.x, game->player->pos.y});
 }
 
@@ -90,25 +90,25 @@ static t_coords	vertical_line(t_game *game, double radian, int *wall)
 
 	if (radian < HALF_PI || radian > THREE_HALF_PI)
 	{
-		pos.x = (((int)game->player->pos.x >> 5) << 5) + F_SIZE;
+		pos.x = (((int)game->player->pos.x >> 6) << 6) + SIZE;
 		pos.y = (game->player->pos.x - pos.x) * tan(radian)
 			+ game->player->pos.y;
-		pos_add.x = F_SIZE;
-		pos_add.y = -F_SIZE * tan(radian);
-		*wall = EAST;
+		pos_add.x = SIZE;
+		pos_add.y = -SIZE * tan(radian);
+		*wall = W_EAST;
 		return (check_wall(game, pos, pos_add, wall));
 	}
 	else if (radian > HALF_PI && radian < THREE_HALF_PI)
 	{
-		pos.x = (((int)game->player->pos.x >> 5) << 5) - 0.0001;
+		pos.x = (((int)game->player->pos.x >> 6) << 6) - 0.000001;
 		pos.y = (game->player->pos.x - pos.x) * tan(radian)
 			+ game->player->pos.y;
-		pos_add.x = -F_SIZE;
-		pos_add.y = F_SIZE * tan(radian);
-		*wall = WEST;
+		pos_add.x = -SIZE;
+		pos_add.y = SIZE * tan(radian);
+		*wall = W_WEST;
 		return (check_wall(game, pos, pos_add, wall));
 	}
-	*wall = EAST;
+	*wall = W_EAST;
 	return ((t_coords){game->player->pos.x, game->player->pos.y});
 }
 

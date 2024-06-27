@@ -6,14 +6,14 @@
 #    By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/04 17:02:41 by mott              #+#    #+#              #
-#    Updated: 2024/06/26 20:52:55 by fwahl            ###   ########.fr        #
+#    Updated: 2024/06/27 18:18:14 by fwahl            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC		=	cc
 CFLAGS	=	-Wall -Wextra -Werror
 # CFLAGS	+=	-Ofast
-CFLAGS	+=	-fsanitize=address -g
+# CFLAGS	+=	-fsanitize=address -g
 LDFLAGS	=	-ldl -lglfw -pthread -lm
 RM		=	rm -rf
 
@@ -28,11 +28,12 @@ SRCS	=	./src/main.c \
 			./src/utils/debug.c \
 			./src/engine/draw_game.c \
 			./src/engine/draw_minimap.c \
-			./src/engine/orb.c \
+			./src/engine/portal.c \
 			./src/engine/init.c \
-			./src/engine/mouse.c \
 			./src/engine/key_movement.c \
 			./src/engine/key_special.c \
+			./src/engine/loop.c \
+			./src/engine/mouse.c \
 			./src/engine/ray.c
 OBJS	=	$(SRCS:.c=.o)
 HEADERS	=	./include/cub3D.h

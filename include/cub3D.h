@@ -6,7 +6,7 @@
 /*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 17:11:55 by mott              #+#    #+#             */
-/*   Updated: 2024/06/26 20:57:08 by fwahl            ###   ########.fr       */
+/*   Updated: 2024/06/27 18:15:48 by fwahl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,16 +18,13 @@
 # include <stdio.h>		// printf, perror
 # include <stdlib.h>	// malloc, free, exit
 # include <string.h>	// strerror
+# include <math.h>
 # include <stdbool.h>
-# include <stdint.h>
-# include <math.h>
 # include "../libft/libft.h"
-# include <math.h>
 # include "../MLX42/include/MLX42/MLX42.h"
 
 # define BLACK			0x000000FF	// (0, 0, 0, 255)
 # define WHITE			0xFFFFFFFF	// (255, 255, 255, 255)
-# define WHITE_SMOKE	0xF5F5F5FF	// (245, 245, 245, 255)
 # define RED			0xFF0000FF	// (255, 0, 0, 255)
 # define LIME			0x00FF00FF	// (0, 255, 0, 255)
 # define BLUE			0x0000FFFF	// (0, 0, 255, 255)
@@ -45,26 +42,27 @@
 
 # define WIDTH			1920
 # define HEIGHT			1080
-# define F_SIZE			32
-# define P_SIZE			5
+# define MM_WIDTH		448
+# define MM_HEIGHT		448
+# define SIZE			64
 # define FOV			60.0
 # define ONE_PI			3.141592
 # define TWO_PI			6.283185
 # define HALF_PI		1.570796
 # define THREE_HALF_PI	4.712388
-# define EAST			0
-# define NORTH			1
-# define WEST			2
-# define SOUTH			3
-# define DOOR_EAST		4
-# define DOOR_NORTH		5
-# define DOOR_WEST		6
-# define DOOR_SOUTH		7
-# define E_ORB			8
-# define N_ORB			9
-# define W_ORB			10
-# define S_ORB			11
-# define MOVE_SPEED		1.75
+# define W_EAST			0
+# define W_NORTH		1
+# define W_WEST			2
+# define W_SOUTH		3
+# define D_EAST			4
+# define D_NORTH		5
+# define D_WEST			6
+# define D_SOUTH		7
+# define O_EAST			8
+# define O_NORTH		9
+# define O_WEST			10
+# define O_SOUTH		11
+# define MOVE_SPEED		2.75
 # define ROTATION_SPEED	0.034907
 
 typedef struct s_coords
@@ -72,6 +70,15 @@ typedef struct s_coords
 	double	x;
 	double	y;
 }	t_coords;
+
+typedef struct s_parse
+{
+	bool	walls;
+	bool	doors;
+	bool	floor_ceiling;
+	bool	map;
+	bool	player;
+}	t_parse;
 
 typedef struct s_window
 {
@@ -85,7 +92,11 @@ typedef struct s_map
 	t_coords		max;
 	int				floor;
 	int				ceiling;
-	mlx_texture_t	*wall[12];
+	t_coords		p_one;
+	t_coords		p_two;
+	int				p_one_dir;
+	int				p_two_dir;
+	mlx_texture_t	*wall[12]; //move to t_game
 	mlx_texture_t	*orb[10];
 }	t_map;
 
@@ -94,15 +105,6 @@ typedef struct s_player
 	t_coords	pos;
 	double		dir;
 }	t_player;
-
-typedef struct s_parse
-{
-	bool		walls;
-	bool		doors;
-	bool		floor_ceiling;
-	bool		map;
-	bool		player;
-}	t_parse;
 
 typedef struct s_ray
 {
@@ -122,15 +124,24 @@ typedef struct s_texture
 	int				wall_offset;
 }	t_texture;
 
+typedef struct s_minimap
+{
+	int			factor;
+	t_coords	start;
+	t_coords	player;
+	bool		show;
+
+}	t_minimap;
+
 typedef struct s_game
 {
 	t_window	*window;
 	t_map		*map;
 	t_player	*player;
-	t_parse		*parsed;
+	t_parse		*parsed; // raus
 	t_ray		*ray;
-	bool		recalculate;
-	bool		minimap;
+	t_texture	*tex;
+	t_minimap	*minimap;
 	bool		mouse_rotate;
 }	t_game;
 
@@ -159,12 +170,12 @@ void	special_key_hook(mlx_key_data_t keydata, void *param);
 // mouse.c
 void	mouse_hook(t_game *game);
 
+// orb.c
+void	init_orb(t_game *game);
+void	swap_orb_tex(t_game *game);
+
 // ray.c
 void	ray_calculation(t_game *game, double radian, int x);
-
-//orb.c
-void	init_orb(t_game *game);
-void swap_orb_tex(t_game *game);
 
 // parser
 // parsing

@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/22 16:12:34 by fwahl             #+#    #+#             */
-/*   Updated: 2024/06/26 16:48:40 by mott             ###   ########.fr       */
+/*   Updated: 2024/06/27 16:34:56 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ void	mouse_move_cb(double x, double y, void *param)
 			dir = 'R';
 		rotate_player(game, dir);
 		mlx_set_mouse_pos(game->window->mlx, WIDTH / 2, HEIGHT / 2);
-		game->recalculate = true;
 	}
 }
 
