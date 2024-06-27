@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 16:44:18 by mott              #+#    #+#             */
-/*   Updated: 2024/06/27 15:14:17 by mott             ###   ########.fr       */
+/*   Updated: 2024/06/27 16:34:46 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,13 +35,11 @@ static void	door_open_close(t_game *game)
 		game->map->map[y][x] = 'd';
 	else if (game->map->map[y][x] == 'd')
 		game->map->map[y][x] = 'D';
-	game->recalculate = true;
 }
 
 static void	minimap_on_off(t_game *game)
 {
 	game->minimap->show = !game->minimap->show;
-	game->recalculate = true;
 }
 
 void	special_key_hook(mlx_key_data_t keydata, void *param)

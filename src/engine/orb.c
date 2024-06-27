@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 16:14:18 by mott              #+#    #+#             */
-/*   Updated: 2024/06/27 16:18:23 by mott             ###   ########.fr       */
+/*   Updated: 2024/06/27 17:53:51 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,10 @@ void	init_orb(t_game *game)
 	game->map->wall[9] = game->map->orb[0];
 	game->map->wall[10] = game->map->orb[0];
 	game->map->wall[11] = game->map->orb[0];
+	game->map->p_one = (t_coords){2, 2};
+	game->map->p_one_dir = O_WEST;
+	game->map->p_two = (t_coords){7, 7};
+	game->map->p_two_dir = O_EAST;
 }
 
 void	swap_orb_tex(t_game *game)

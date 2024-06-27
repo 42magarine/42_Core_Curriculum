@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 17:11:55 by mott              #+#    #+#             */
-/*   Updated: 2024/06/27 16:18:16 by mott             ###   ########.fr       */
+/*   Updated: 2024/06/27 17:14:23 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,10 @@ typedef struct s_map
 	t_coords		max;
 	int				floor;
 	int				ceiling;
+	t_coords		p_one;
+	t_coords		p_two;
+	int				p_one_dir;
+	int				p_two_dir;
 	mlx_texture_t	*wall[12]; //move to t_game
 	mlx_texture_t	*orb[10];
 }	t_map;
@@ -122,7 +126,6 @@ typedef struct s_texture
 
 typedef struct s_minimap
 {
-	// double		factor;
 	int			factor;
 	t_coords	start;
 	t_coords	player;
@@ -139,7 +142,6 @@ typedef struct s_game
 	t_ray		*ray;
 	t_texture	*tex;
 	t_minimap	*minimap;
-	bool		recalculate;
 	bool		mouse_rotate;
 }	t_game;
 

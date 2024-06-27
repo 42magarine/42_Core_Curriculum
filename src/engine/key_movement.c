@@ -6,15 +6,33 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 14:08:58 by mott              #+#    #+#             */
-/*   Updated: 2024/06/27 15:22:55 by mott             ###   ########.fr       */
+/*   Updated: 2024/06/27 17:54:00 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3D.h"
 
-static void	portal_teleport(t_game *game)
+// static void teleport_destination(t_game *game, t_coords destination)
+// {
+
+// }
+
+static void	teleport_player(t_game *game)
 {
-	(void)game;
+	if ((int)game->player->pos.x >> 6 == game->map->p_one.x
+		&& (int)game->player->pos.y >> 6 == game->map->p_one.y)
+	{
+		game->player->pos.x = ((int)(game->map->p_two.x - 1) << 6) + SIZE;
+		game->player->pos.y = ((int)game->map->p_two.y << 6) + (SIZE >> 1);
+		game->player->dir = ONE_PI;
+	}
+	else if ((int)game->player->pos.x >> 6 == game->map->p_two.x
+		&& (int)game->player->pos.y >> 6 == game->map->p_two.y)
+	{
+		game->player->pos.x = (int)(game->map->p_one.x + 1) << 6;
+		game->player->pos.y = ((int)game->map->p_one.y << 6) + (SIZE >> 1);
+		game->player->dir = 0;
+	}
 	printf("hello portal\n");
 }
 
@@ -46,8 +64,7 @@ static void	move_player(t_game *game, char key, double move_x, double move_y)
 		game->player->pos.y += move_y;
 	if (game->map->map[(int)game->player->pos.y >> 6]
 		[(int)(game->player->pos.x) >> 6] == 'P')
-		portal_teleport(game);
-	game->recalculate = true;
+	teleport_player(game);
 }
 
 void	rotate_player(t_game *game, char dir)
@@ -56,7 +73,6 @@ void	rotate_player(t_game *game, char dir)
 		game->player->dir = pi_overflow(game->player->dir + ROTATION_SPEED);
 	else if (dir == 'R')
 		game->player->dir = pi_overflow(game->player->dir - ROTATION_SPEED);
-	game->recalculate = true;
 }
 
 void	key_hook(t_game *game)
