@@ -6,7 +6,7 @@
 /*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 17:21:47 by fwahl             #+#    #+#             */
-/*   Updated: 2024/06/26 16:35:57 by fwahl            ###   ########.fr       */
+/*   Updated: 2024/06/28 20:48:22 by fwahl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ mlx_texture_t	*set_texture(t_game *game, char *line)
 	filepath = ft_strdup(&line[i]);
 	texture = mlx_load_png(filepath);
 	if (texture == NULL)
-		ft_error(game, "parse_texture error - invalid file");
+		ft_error(game, mlx_strerror(mlx_errno));
 	free(filepath);
 	return (texture);
 }
