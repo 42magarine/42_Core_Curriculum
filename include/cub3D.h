@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 17:11:55 by mott              #+#    #+#             */
-/*   Updated: 2024/06/27 19:20:05 by fwahl            ###   ########.fr       */
+/*   Updated: 2024/06/28 13:50:00 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ typedef struct s_window
 {
 	mlx_t		*mlx;
 	mlx_image_t	*image;
+	bool		mouse_rotate;
 }	t_window;
 
 typedef struct s_map
@@ -94,8 +95,6 @@ typedef struct s_map
 	int				ceiling;
 	t_coords		p_one;
 	t_coords		p_two;
-	int				p_one_dir;
-	int				p_two_dir;
 	mlx_texture_t	*wall[12]; //move to t_game
 	mlx_texture_t	*orb[10];
 }	t_map;
@@ -117,11 +116,11 @@ typedef struct s_ray
 
 typedef struct s_texture
 {
-	t_coords		pos;
-	double			y_scale;
-	double			y_offset;
-	int				wall_height;
-	int				wall_offset;
+	t_coords	pos;
+	double		y_scale;
+	double		y_offset;
+	int			wall_height;
+	int			wall_offset;
 }	t_texture;
 
 typedef struct s_minimap
@@ -130,7 +129,6 @@ typedef struct s_minimap
 	t_coords	start;
 	t_coords	player;
 	bool		show;
-
 }	t_minimap;
 
 typedef struct s_game
@@ -142,7 +140,6 @@ typedef struct s_game
 	t_ray		*ray;
 	t_texture	*tex;
 	t_minimap	*minimap;
-	bool		mouse_rotate;
 }	t_game;
 
 // main.c
@@ -151,14 +148,15 @@ int		main(int argc, char **argv);
 // engine
 // draw_game.c
 void	draw_background(t_game *game);
-void	draN_WALL(t_game *game, double radian, int x);
+void	draw_wall(t_game *game, double radian, int x);
 
 // draw_minimap.c
 void	draw_minimap(t_game *game);
+void	draw_player(t_game *game);
+void	draw_ray(t_game *game, t_coords player, t_coords wall);
 
 // init.c
 void	init_game(t_game *game);
-void	loop_hook(void *param);
 
 // key_movement.c
 void	key_hook(t_game *game);
@@ -166,6 +164,9 @@ void	rotate_player(t_game *game, char dir);
 
 // key_special.c
 void	special_key_hook(mlx_key_data_t keydata, void *param);
+
+// loop.c
+void	loop_hook(void *param);
 
 // mouse.c
 void	mouse_hook(t_game *game);
@@ -177,6 +178,11 @@ void	portal_animation(t_game *game);
 
 // ray.c
 void	ray_calculation(t_game *game, double radian, int x);
+
+// teleport.c
+void	teleport_player(t_game *game, double move_x, double move_y);
+void	teleport_x(t_game *game, t_coords dest, double x, double y);
+void	teleport_y(t_game *game, t_coords dest, double x, double y);
 
 // parser
 // parsing

@@ -3,35 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 15:31:03 by mott              #+#    #+#             */
-/*   Updated: 2024/06/27 19:12:18 by fwahl            ###   ########.fr       */
+/*   Updated: 2024/06/28 13:36:10 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3D.h"
-
-static void	init_door(t_game *game)
-{
-	game->map->wall[4] = set_texture(game, "./textures/door.png");
-	game->map->wall[5] = game->map->wall[4];
-	game->map->wall[6] = game->map->wall[4];
-	game->map->wall[7] = game->map->wall[4];
-}
-
-// window->width		= 1920
-// window->fov			= 60
-// angle between rays	= 60/1920
-static void	init_ray(t_game *game)
-{
-	t_ray	*ray;
-
-	ray = ft_calloc(1, sizeof(t_ray));
-	game->ray = ray;
-	ray->fov_start = FOV / 2 * ONE_PI / 180;
-	ray->fov_add = FOV / WIDTH * ONE_PI / 180;
-}
 
 static void	init_window(t_game *game)
 {
@@ -47,6 +26,27 @@ static void	init_window(t_game *game)
 		ft_error(game, mlx_strerror(mlx_errno));
 	if (mlx_image_to_window(window->mlx, window->image, 0, 0) == -1)
 		ft_error(game, mlx_strerror(mlx_errno));
+}
+
+// window->width		= 1920
+// window->fov			= 60
+// angle between rays	= 60/1920
+static void	init_ray(t_game *game)
+{
+	t_ray	*ray;
+
+	ray = ft_calloc(1, sizeof(t_ray));
+	game->ray = ray;
+	ray->fov_start = FOV / 2 * ONE_PI / 180;
+	ray->fov_add = FOV / WIDTH * ONE_PI / 180;
+}
+
+static void	init_door(t_game *game)
+{
+	game->map->wall[4] = set_texture(game, "./textures/door.png");
+	game->map->wall[5] = game->map->wall[4];
+	game->map->wall[6] = game->map->wall[4];
+	game->map->wall[7] = game->map->wall[4];
 }
 
 static void	init_minimap(t_game *game)

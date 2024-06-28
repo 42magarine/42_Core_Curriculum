@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 13:37:56 by mott              #+#    #+#             */
-/*   Updated: 2024/06/27 16:12:34 by mott             ###   ########.fr       */
+/*   Updated: 2024/06/28 13:41:57 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static void	draw_element(t_game *game, int x, int y)
 		draw_square(game, pos, (int)game->minimap->factor, BLUE);
 }
 
-static void	draw_map(t_game *game)
+void	draw_minimap(t_game *game)
 {
 	int	x;
 	int	y;
@@ -66,17 +66,17 @@ static void	draw_map(t_game *game)
 	}
 }
 
-static void	draw_player(t_game *game)
+void	draw_player(t_game *game)
 {
 	game->minimap->player.x = game->minimap->start.x
-		+ game->player->pos.x / SIZE * game->minimap->factor - 1;
+		+ game->player->pos.x / SIZE * game->minimap->factor;
 	game->minimap->player.y = game->minimap->start.y
-		+ game->player->pos.y / SIZE * game->minimap->factor - 1;
+		+ game->player->pos.y / SIZE * game->minimap->factor;
 	draw_square(game, (t_coords){game->minimap->player.x - 1,
 		game->minimap->player.y - 1}, 3, YELLOW);
 }
 
-static void	draw_ray(t_game *game, t_coords player, t_coords wall)
+void	draw_ray(t_game *game, t_coords player, t_coords wall)
 {
 	double	dx;
 	double	dy;
@@ -96,19 +96,5 @@ static void	draw_ray(t_game *game, t_coords player, t_coords wall)
 		player.x += dx;
 		player.y += dy;
 		i--;
-	}
-}
-
-void	draw_minimap(t_game *game)
-{
-	int	i;
-
-	draw_map(game);
-	draw_player(game);
-	i = 0;
-	while (i < WIDTH)
-	{
-		draw_ray(game, game->minimap->player, game->ray->hit[i]);
-		i += 1;
 	}
 }

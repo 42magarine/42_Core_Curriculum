@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 19:44:06 by mott              #+#    #+#             */
-/*   Updated: 2024/06/27 19:16:53 by fwahl            ###   ########.fr       */
+/*   Updated: 2024/06/28 13:29:46 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ static t_coords	horizontal_line(t_game *game, double radian, int *wall)
 
 	if (radian > 0 && radian < ONE_PI)
 	{
-		pos.y = (((int)game->player->pos.y >> 6) << 6) - 0.000001;
+		pos.y = (((int)game->player->pos.y >> 6) << 6) - 0.0001;
 		pos.x = (game->player->pos.y - pos.y) / tan(radian)
 			+ game->player->pos.x;
 		pos_add.y = -SIZE;
@@ -100,7 +100,7 @@ static t_coords	vertical_line(t_game *game, double radian, int *wall)
 	}
 	else if (radian > HALF_PI && radian < THREE_HALF_PI)
 	{
-		pos.x = (((int)game->player->pos.x >> 6) << 6) - 0.000001;
+		pos.x = (((int)game->player->pos.x >> 6) << 6) - 0.0001;
 		pos.y = (game->player->pos.x - pos.x) * tan(radian)
 			+ game->player->pos.y;
 		pos_add.x = -SIZE;

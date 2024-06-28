@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 16:59:11 by fwahl             #+#    #+#             */
-/*   Updated: 2024/06/27 13:31:05 by mott             ###   ########.fr       */
+/*   Updated: 2024/06/28 13:57:35 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,11 @@ static void	debug_player(t_player *player)
 	if (player->pos.x > 0 && player->pos.y > 0)
 		printf("Player Pos	X: %f	Y: %f\n", player->pos.x, player->pos.y);
 	else
-		printf("Player Pos missing");
+		printf("Player Pos missing\n");
 	if (player->dir)
 		printf("Player Dir	%f\n", player->dir);
 	else
-		printf("Player Dir missing");
+		printf("Player Dir missing\n");
 }
 
 static void	debug_map(t_map *map)

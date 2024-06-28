@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_game.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 16:28:04 by mott              #+#    #+#             */
-/*   Updated: 2024/06/27 19:20:01 by fwahl            ###   ########.fr       */
+/*   Updated: 2024/06/28 13:33:19 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ static void	fisheye(t_game *game, double radian, int x)
 
 // y_scale < 0 = texture_height < wall_height = scaling up
 // y_scale > 0 = texture_height > wall_height = scaling down
-void	draN_WALL(t_game *game, double radian, int x)
+void	draw_wall(t_game *game, double radian, int x)
 {
 	t_texture	tex;
 	int			dir;

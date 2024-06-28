@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   portal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 18:17:32 by fwahl             #+#    #+#             */
-/*   Updated: 2024/06/27 19:12:18 by fwahl            ###   ########.fr       */
+/*   Updated: 2024/06/28 13:59:39 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	portal_tex(t_game *game)
 
 void	portal_animation(t_game *game)
 {
-	static int	count = 0;
+	static int	count;
 
 	if (count % 5 == 0)
 	{
@@ -48,16 +48,17 @@ void	portal_animation(t_game *game)
 
 void	init_portal(t_game *game, char *line)
 {
-	static int	p = 0;
-	int			i = 0;
+	static int	p;
+	int			i;
 
 	p++;
 	if (p > 2)
-		ft_error(game, "too many portals on the map");
+		ft_error(game, "too many portals on the map\n");
 	if (p == 1)
 		game->map->p_one.y = game->map->max.y;
 	if (p == 2)
 		game->map->p_two.y = game->map->max.y;
+	i = 0;
 	while (line[i] != '\0')
 	{
 		if (line[i] == 'P')
