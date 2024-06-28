@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   debug.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
+/*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 16:59:11 by fwahl             #+#    #+#             */
-/*   Updated: 2024/06/28 13:57:35 by mott             ###   ########.fr       */
+/*   Updated: 2024/06/28 17:41:24 by fwahl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static void	debug_player(t_player *player)
 		printf("Player Pos	X: %f	Y: %f\n", player->pos.x, player->pos.y);
 	else
 		printf("Player Pos missing\n");
-	if (player->dir)
+	if (player->dir == 0 || player->dir)
 		printf("Player Dir	%f\n", player->dir);
 	else
 		printf("Player Dir missing\n");

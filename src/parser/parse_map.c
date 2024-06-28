@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
+/*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 17:14:11 by fwahl             #+#    #+#             */
-/*   Updated: 2024/06/28 14:29:51 by mott             ###   ########.fr       */
+/*   Updated: 2024/06/28 17:52:19 by fwahl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static void	init_player(t_game	*game, char *line)
 	int	i;
 
 	i = 0;
-	if (game->player)
+	if (game->parsed->player)
 		ft_error(game, "multiple players in map");
 	game->player = ft_calloc(1, sizeof(t_player));
 	game->player->pos.y = game->map->max.y;
@@ -104,6 +104,21 @@ static void	alloc_map(t_game *game, char *filename)
 	game->map->map = ft_calloc(game->map->max.y + 1, sizeof(char *));
 }
 
+static void	parse_loop(t_game *game, char *line)
+{
+	if (game->parsed->map && line != NULL)
+	{
+		free(line);
+		ft_error(game, "invalid map file");
+	}
+	if (!game->parsed->walls)
+		parse_tex(game, line);
+	if (!game->parsed->floor_ceiling)
+		parse_floor_ceiling(game, line);
+	if (!game->parsed->map)
+		parse_map(game, line);
+}
+
 void	parse_mapfile(t_game *game, char *filename)
 {
 	int		fd;
@@ -118,12 +133,7 @@ void	parse_mapfile(t_game *game, char *filename)
 	while (line != NULL)
 	{
 		cut_next_line(line);
-		if (!game->parsed->walls)
-			parse_tex(game, line);
-		if (!game->parsed->floor_ceiling)
-			parse_floor_ceiling(game, line);
-		if (!game->parsed->map)
-			parse_map(game, line);
+		parse_loop(game, line);
 		free(line);
 		line = get_next_line(fd);
 	}

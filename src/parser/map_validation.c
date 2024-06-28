@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_validation.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
+/*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 17:55:44 by fwahl             #+#    #+#             */
-/*   Updated: 2024/06/28 14:58:05 by mott             ###   ########.fr       */
+/*   Updated: 2024/06/28 17:54:43 by fwahl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,23 +27,21 @@ static bool	all_parsed(t_game *game, t_parse *parse)
 		ft_error(game, "walls not parsed correctly");
 	if (parse->floor_ceiling && parse->map && parse->player && parse->walls)
 		all_parsed = true;
-	if (all_parsed)
-		free(parse);
 	return (all_parsed);
 }
 
-static bool	is_valid_start(t_map *map, int x, int y, char filler)
+static bool	is_valid_start(t_map *map, int x, int y, char c)
 {
 	if (x < 0 || x >= (int)ft_strlen(map->map[y]) || y < 0 || y >= map->max.y)
 		return (false);
-	if (map->map[y][x] == '1' || map->map[y][x] == 'P' || map->map[y][x] == filler)
+	if (map->map[y][x] == '1' || map->map[y][x] == 'P' || map->map[y][x] == c)
 		return (false);
 	if (ft_isspace(map->map[y][x]))
 		return (false);
 	return (true);
 }
 
-static bool	flood_fill(t_map *map, int x, int y, char filler)
+static bool	flood_fill(t_map *map, int x, int y, char c)
 {
 	bool	up;
 	bool	down;
@@ -52,14 +50,13 @@ static bool	flood_fill(t_map *map, int x, int y, char filler)
 
 	if (x < 0 || x >= (int)ft_strlen(map->map[y]) || y < 0 || y >= map->max.y)
 		return (false);
-	if (map->map[y][x] == '1' || map->map[y][x] == 'P'
-		|| map->map[y][x] == filler || map->map[y][x] == ' ')
+	if (map->map[y][x] == '1' || map->map[y][x] == c || map->map[y][x] == ' ')
 		return (true);
-	map->map[y][x] = filler;
-	up = flood_fill(map, x, y - 1, filler);
-	down = flood_fill(map, x, y + 1, filler);
-	left = flood_fill(map, x - 1, y, filler);
-	right = flood_fill(map, x + 1, y, filler);
+	map->map[y][x] = c;
+	up = flood_fill(map, x, y - 1, c);
+	down = flood_fill(map, x, y + 1, c);
+	left = flood_fill(map, x - 1, y, c);
+	right = flood_fill(map, x + 1, y, c);
 	return (up && down && left && right);
 }
 
