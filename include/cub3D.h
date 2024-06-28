@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 17:11:55 by mott              #+#    #+#             */
-/*   Updated: 2024/06/27 19:59:20 by mott             ###   ########.fr       */
+/*   Updated: 2024/06/28 12:37:59 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -179,6 +179,8 @@ void	ray_calculation(t_game *game, double radian, int x);
 
 // teleport.c
 void	teleport_player(t_game *game, double move_x, double move_y);
+void	teleport_x(t_game *game, t_coords dest, double x, double y);
+void	teleport_y(t_game *game, t_coords dest, double x, double y);
 
 // parser
 // parsing
