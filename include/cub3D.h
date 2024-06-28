@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
+/*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 17:11:55 by mott              #+#    #+#             */
-/*   Updated: 2024/06/28 14:51:21 by mott             ###   ########.fr       */
+/*   Updated: 2024/06/28 18:50:56 by fwahl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ typedef struct s_map
 	t_coords		p_one;
 	t_coords		p_two;
 	mlx_texture_t	*wall[12]; //move to t_game
-	mlx_texture_t	*orb[10];
+	mlx_texture_t	*portal[40];
 }	t_map;
 
 typedef struct s_player
