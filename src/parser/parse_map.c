@@ -6,44 +6,11 @@
 /*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 17:14:11 by fwahl             #+#    #+#             */
-/*   Updated: 2024/06/28 17:52:19 by fwahl            ###   ########.fr       */
+/*   Updated: 2024/06/28 20:15:50 by fwahl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3D.h"
-
-//   0° = E_WALL  = 0
-//  90° = N_WALL = PI_HALF
-// 180°	= west  = PI_ONE
-// 270° = south = PI_THREE_HALF
-static void	init_player(t_game	*game, char *line)
-{
-	int	i;
-
-	i = 0;
-	if (game->parsed->player)
-		ft_error(game, "multiple players in map");
-	game->player = ft_calloc(1, sizeof(t_player));
-	game->player->pos.y = game->map->max.y;
-	while (line[i] != '\0')
-	{
-		if (is_player_char(line[i]))
-		{
-			game->player->pos.x = i;
-			if (line[i] == 'E')
-				game->player->dir = 0;
-			if (line[i] == 'N')
-				game->player->dir = HALF_PI;
-			if (line[i] == 'W')
-				game->player->dir = ONE_PI;
-			if (line[i] == 'S')
-				game->player->dir = THREE_HALF_PI;
-		}
-		i++;
-	}
-	if (game->player->pos.x > 0 && game->player->pos.y > 0)
-		game->parsed->player = true;
-}
 
 static bool	set_map_size(t_game *game, char *line)
 {

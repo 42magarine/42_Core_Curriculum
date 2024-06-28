@@ -6,15 +6,14 @@
 /*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 18:17:32 by fwahl             #+#    #+#             */
-/*   Updated: 2024/06/28 19:25:00 by fwahl            ###   ########.fr       */
+/*   Updated: 2024/06/28 20:13:35 by fwahl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3D.h"
 
-void	portal_tex(t_game *game)
+static void	portal_tex_east_north(t_game *game)
 {
-	//east
 	game->map->portal[0] = set_texture(game, "./textures/e_portal1.png");
 	game->map->portal[1] = set_texture(game, "./textures/e_portal2.png");
 	game->map->portal[2] = set_texture(game, "./textures/e_portal3.png");
@@ -25,7 +24,6 @@ void	portal_tex(t_game *game)
 	game->map->portal[7] = set_texture(game, "./textures/e_portal9.png");
 	game->map->portal[8] = set_texture(game, "./textures/e_portal9.png");
 	game->map->portal[9] = set_texture(game, "./textures/e_portal10.png");
-	//north
 	game->map->portal[10] = set_texture(game, "./textures/n_portal1.png");
 	game->map->portal[11] = set_texture(game, "./textures/n_portal2.png");
 	game->map->portal[12] = set_texture(game, "./textures/n_portal3.png");
@@ -36,7 +34,10 @@ void	portal_tex(t_game *game)
 	game->map->portal[17] = set_texture(game, "./textures/n_portal9.png");
 	game->map->portal[18] = set_texture(game, "./textures/n_portal9.png");
 	game->map->portal[19] = set_texture(game, "./textures/n_portal10.png");
-	//west
+}
+
+static void	portal_tex_west_south(t_game *game)
+{
 	game->map->portal[20] = set_texture(game, "./textures/w_portal1.png");
 	game->map->portal[21] = set_texture(game, "./textures/w_portal2.png");
 	game->map->portal[22] = set_texture(game, "./textures/w_portal3.png");
@@ -47,7 +48,6 @@ void	portal_tex(t_game *game)
 	game->map->portal[27] = set_texture(game, "./textures/w_portal9.png");
 	game->map->portal[28] = set_texture(game, "./textures/w_portal9.png");
 	game->map->portal[29] = set_texture(game, "./textures/w_portal10.png");
-	//west
 	game->map->portal[30] = set_texture(game, "./textures/s_portal1.png");
 	game->map->portal[31] = set_texture(game, "./textures/s_portal2.png");
 	game->map->portal[32] = set_texture(game, "./textures/s_portal3.png");
@@ -58,7 +58,12 @@ void	portal_tex(t_game *game)
 	game->map->portal[37] = set_texture(game, "./textures/s_portal9.png");
 	game->map->portal[38] = set_texture(game, "./textures/s_portal9.png");
 	game->map->portal[39] = set_texture(game, "./textures/s_portal10.png");
+}
 
+void	portal_tex(t_game *game)
+{
+	portal_tex_east_north(game);
+	portal_tex_west_south(game);
 	game->map->wall[8] = game->map->portal[0];
 	game->map->wall[9] = game->map->portal[10];
 	game->map->wall[10] = game->map->portal[20];

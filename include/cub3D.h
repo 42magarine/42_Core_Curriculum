@@ -6,7 +6,7 @@
 /*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 17:11:55 by mott              #+#    #+#             */
-/*   Updated: 2024/06/28 18:50:56 by fwahl            ###   ########.fr       */
+/*   Updated: 2024/06/28 20:15:01 by fwahl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -187,6 +187,7 @@ void	teleport_y(t_game *game, t_coords dest, double x, double y);
 // parser
 // parsing
 void	init_map(t_game *game, char *filename);
+void	init_player(t_game	*game, char *line);
 void	parse_tex(t_game *game, char *line);
 void	parse_floor_ceiling(t_game *game, char *line);
 void	parse_mapfile(t_game *game, char *filename);

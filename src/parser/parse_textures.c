@@ -37,9 +37,7 @@ static void	parse_rgb(t_game *game, char *line, u_int8_t rgb[3])
 	}
 	while (ft_isspace(line[i]))
 		i++;
-	if (j < 3)
-		ft_error(game, "parse_floor_ceiling - incorrect rgb values");
-	if (ft_strlen(&line[i]) > 0)
+	if (ft_strlen(&line[i]) > 0 || j < 3)
 		ft_error(game, "parse_rgb error - line too long");
 }
 
@@ -74,14 +72,43 @@ void	parse_tex(t_game *game, char *line)
 	i = 0;
 	while (ft_isspace(line[i]))
 		i++;
-	if (ft_strncmp(&line[i], "NO", 2) == 0)
+	if (ft_strncmp(&line[i], "EA", 2) == 0)
 		map->wall[0] = set_texture(game, &line[i + 2]);
-	else if (ft_strncmp(&line[i], "EA", 2) == 0)
+	else if (ft_strncmp(&line[i], "NO", 2) == 0)
 		map->wall[1] = set_texture(game, &line[i + 2]);
-	else if (ft_strncmp(&line[i], "SO", 2) == 0)
-		map->wall[2] = set_texture(game, &line[i + 2]);
 	else if (ft_strncmp(&line[i], "WE", 2) == 0)
+		map->wall[2] = set_texture(game, &line[i + 2]);
+	else if (ft_strncmp(&line[i], "SO", 2) == 0)
 		map->wall[3] = set_texture(game, &line[i + 2]);
 	if (map->wall[0] && map->wall[1] && map->wall[2] && map->wall[3])
 		game->parsed->walls = true;
+}
+
+void	init_player(t_game	*game, char *line)
+{
+	int	i;
+
+	i = 0;
+	if (game->parsed->player)
+		ft_error(game, "multiple players in map");
+	game->player = ft_calloc(1, sizeof(t_player));
+	game->player->pos.y = game->map->max.y;
+	while (line[i] != '\0')
+	{
+		if (is_player_char(line[i]))
+		{
+			game->player->pos.x = i;
+			if (line[i] == 'E')
+				game->player->dir = 0;
+			if (line[i] == 'N')
+				game->player->dir = HALF_PI;
+			if (line[i] == 'W')
+				game->player->dir = ONE_PI;
+			if (line[i] == 'S')
+				game->player->dir = THREE_HALF_PI;
+		}
+		i++;
+	}
+	if (game->player->pos.x > 0 && game->player->pos.y > 0)
+		game->parsed->player = true;
 }
