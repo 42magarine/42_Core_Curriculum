@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 17:06:47 by fwahl             #+#    #+#             */
-/*   Updated: 2024/06/26 17:26:34 by mott             ###   ########.fr       */
+/*   Updated: 2024/06/28 15:51:22 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,12 @@
 int	main(int argc, char **argv)
 {
 	t_game	*game;
+
+	#ifdef BONUS
+	printf("hello BONUS\n");
+	#else
+	printf("hello\n");
+	#endif
 
 	game = ft_calloc(1, sizeof(t_game));
 	if (argc != 2)

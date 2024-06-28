@@ -14,9 +14,9 @@
 
 static void	parse_rgb(t_game *game, char *line, u_int8_t rgb[3])
 {
-	int		i;
-	int		j;
-	int		value;
+	int	i;
+	int	j;
+	int	value;
 
 	i = 0;
 	j = 0;

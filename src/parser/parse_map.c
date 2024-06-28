@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 17:14:11 by fwahl             #+#    #+#             */
-/*   Updated: 2024/06/27 19:16:13 by fwahl            ###   ########.fr       */
+/*   Updated: 2024/06/28 14:29:51 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,8 @@ static bool	set_map_size(t_game *game, char *line)
 
 static void	parse_map(t_game *game, char *line)
 {
-	static int		i = 0;
-	static bool		start = false;
+	static int	i;
+	static bool	start = false;
 
 	if (is_map_line(line) && i <= game->map->max.y)
 	{

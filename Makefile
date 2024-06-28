@@ -6,7 +6,7 @@
 #    By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/04 17:02:41 by mott              #+#    #+#              #
-#    Updated: 2024/06/28 13:55:56 by mott             ###   ########.fr        #
+#    Updated: 2024/06/28 15:55:42 by mott             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -65,6 +65,9 @@ $(LIBFT):
 $(MLX42):
 	@cmake ./MLX42 -B ./MLX42/build
 	@cmake --build ./MLX42/build
+
+bonus: CFLAGS += -D BONUS=1
+bonus: all
 
 clean:
 	@$(RM) $(OBJS)

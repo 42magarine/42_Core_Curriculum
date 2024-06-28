@@ -6,13 +6,14 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/22 16:12:34 by fwahl             #+#    #+#             */
-/*   Updated: 2024/06/28 13:54:37 by mott             ###   ########.fr       */
+/*   Updated: 2024/06/28 14:54:17 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3D.h"
 
-static void	mouse_button_cb(mouse_key_t button, action_t action, modifier_key_t mods, void *param)
+static void	mouse_button_cb(mouse_key_t button, action_t action,
+	modifier_key_t mods, void *param)
 {
 	t_game	*game;
 
