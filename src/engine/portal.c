@@ -6,7 +6,7 @@
 /*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 18:17:32 by fwahl             #+#    #+#             */
-/*   Updated: 2024/06/28 20:13:35 by fwahl            ###   ########.fr       */
+/*   Updated: 2024/06/28 20:19:27 by fwahl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,13 +74,13 @@ void	portal_animation(t_game *game)
 {
 	static int	count;
 
-	if (count % 5 == 0)
+	if (count % 4 == 0)
 	{
-		game->map->wall[8] = game->map->portal[count / 5];
-		game->map->wall[9] = game->map->portal[count / 5 + 10];
-		game->map->wall[10] = game->map->portal[count / 5 + 20];
-		game->map->wall[11] = game->map->portal[count / 5 + 30];
-		if (count == 45)
+		game->map->wall[8] = game->map->portal[count / 4];
+		game->map->wall[9] = game->map->portal[count / 4 + 10];
+		game->map->wall[10] = game->map->portal[count / 4 + 20];
+		game->map->wall[11] = game->map->portal[count / 4 + 30];
+		if (count == 36)
 			count = 0;
 	}
 	count++;
