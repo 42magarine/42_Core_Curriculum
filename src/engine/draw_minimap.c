@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 13:37:56 by mott              #+#    #+#             */
-/*   Updated: 2024/06/27 16:12:34 by mott             ###   ########.fr       */
+/*   Updated: 2024/06/28 13:24:27 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,9 +69,9 @@ static void	draw_map(t_game *game)
 static void	draw_player(t_game *game)
 {
 	game->minimap->player.x = game->minimap->start.x
-		+ game->player->pos.x / SIZE * game->minimap->factor - 1;
+		+ game->player->pos.x / SIZE * game->minimap->factor;
 	game->minimap->player.y = game->minimap->start.y
-		+ game->player->pos.y / SIZE * game->minimap->factor - 1;
+		+ game->player->pos.y / SIZE * game->minimap->factor;
 	draw_square(game, (t_coords){game->minimap->player.x - 1,
 		game->minimap->player.y - 1}, 3, YELLOW);
 }

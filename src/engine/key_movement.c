@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 14:08:58 by mott              #+#    #+#             */
-/*   Updated: 2024/06/28 12:09:09 by mott             ###   ########.fr       */
+/*   Updated: 2024/06/28 13:22:51 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,20 +21,22 @@ static void	move_player(t_game *game, char key, double move_x, double move_y)
 {
 	if (key == 'W' || key == 'S')
 	{
-		move_x *= round(MOVE_SPEED * cos(game->player->dir));
-		move_y *= round(MOVE_SPEED * sin(game->player->dir));
+		move_x *= MOVE_SPEED * cos(game->player->dir);
+		move_y *= MOVE_SPEED * sin(game->player->dir);
 	}
 	else if (key == 'A' || key == 'D')
 	{
-		move_x *= round(MOVE_SPEED * sin(game->player->dir));
-		move_y *= round(MOVE_SPEED * cos(game->player->dir));
+		move_x *= MOVE_SPEED * sin(game->player->dir);
+		move_y *= MOVE_SPEED * cos(game->player->dir);
 	}
 	teleport_player(game, move_x, move_y);
 	if (game->map->map[(int)game->player->pos.y >> 6]
 		[(int)(game->player->pos.x + move_x) >> 6] != '1'
 		&& game->map->map[(int)game->player->pos.y >> 6]
 		[(int)(game->player->pos.x + move_x) >> 6] != 'D')
-		game->player->pos.x += move_x;
+		{
+			game->player->pos.x += move_x;
+		}
 	if (game->map->map[(int)(game->player->pos.y + move_y) >> 6]
 		[(int)game->player->pos.x >> 6] != '1'
 		&& game->map->map[(int)(game->player->pos.y + move_y) >> 6]
