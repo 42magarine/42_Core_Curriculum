@@ -6,7 +6,7 @@
 /*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 18:17:32 by fwahl             #+#    #+#             */
-/*   Updated: 2024/06/28 20:19:27 by fwahl            ###   ########.fr       */
+/*   Updated: 2024/06/29 15:06:23 by fwahl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,9 +91,6 @@ void	init_portal(t_game *game, char *line)
 	static int	p;
 	int			i;
 
-	p++;
-	if (p > 2)
-		ft_error(game, "too many portals on the map\n");
 	if (p == 1)
 		game->map->p_one.y = game->map->max.y;
 	if (p == 2)
@@ -103,10 +100,13 @@ void	init_portal(t_game *game, char *line)
 	{
 		if (line[i] == 'P')
 		{
+			p++;
 			if (p == 1)
 				game->map->p_one.x = i;
 			if (p == 2)
 				game->map->p_two.x = i;
+			if (p > 2)
+				ft_error(game, "too many portals on the map\n");
 		}
 		i++;
 	}

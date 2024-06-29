@@ -6,7 +6,7 @@
 /*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 17:55:44 by fwahl             #+#    #+#             */
-/*   Updated: 2024/06/28 17:54:43 by fwahl            ###   ########.fr       */
+/*   Updated: 2024/06/29 16:21:33 by fwahl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,10 @@ static bool	flood_fill(t_map *map, int x, int y, char c)
 
 	if (x < 0 || x >= (int)ft_strlen(map->map[y]) || y < 0 || y >= map->max.y)
 		return (false);
-	if (map->map[y][x] == '1' || map->map[y][x] == c || map->map[y][x] == ' ')
+	if (map->map[y][x] == '1' || map->map[y][x] == c)
 		return (true);
+	if (map->map[y][x] == ' ')
+		return (false);
 	map->map[y][x] = c;
 	up = flood_fill(map, x, y - 1, c);
 	down = flood_fill(map, x, y + 1, c);
