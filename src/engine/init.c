@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 15:31:03 by mott              #+#    #+#             */
-/*   Updated: 2024/06/28 13:36:10 by mott             ###   ########.fr       */
+/*   Updated: 2024/06/29 16:28:01 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,8 @@ static void	init_minimap(t_game *game)
 	if (game->map->max.x > game->map->max.y)
 		minimap->factor = MM_WIDTH / game->map->max.x;
 	else
-		minimap->factor = MM_WIDTH / game->map->max.y;
-	minimap->start.x = WIDTH - MM_WIDTH - minimap->factor;
+		minimap->factor = MM_HEIGHT / game->map->max.y;
+	minimap->start.x = WIDTH - minimap->factor * (game->map->max.x + 1);
 	minimap->start.y = minimap->factor;
 }
 

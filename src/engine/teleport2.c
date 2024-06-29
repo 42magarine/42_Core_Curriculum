@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/29 14:17:30 by mott              #+#    #+#             */
-/*   Updated: 2024/06/29 14:17:43 by mott             ###   ########.fr       */
+/*   Updated: 2024/06/29 14:36:18 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,9 @@ static void	teleport_order_x(t_game *game, t_coords dest, double x)
 	}
 	else if (x >= 0)
 	{
-		if (teleport_west(game, dest))
-			return ;
 		if (teleport_east(game, dest))
+			return ;
+		if (teleport_west(game, dest))
 			return ;
 		if (teleport_north(game, dest))
 			return ;
@@ -42,24 +42,24 @@ static void	teleport_order_y(t_game *game, t_coords dest, double y)
 {
 	if (y < 0)
 	{
-		if (teleport_west(game, dest))
-			return ;
-		if (teleport_east(game, dest))
-			return ;
 		if (teleport_north(game, dest))
 			return ;
 		if (teleport_south(game, dest))
+			return ;
+		if (teleport_west(game, dest))
+			return ;
+		if (teleport_east(game, dest))
 			return ;
 	}
 	else if (y >= 0)
 	{
-		if (teleport_west(game, dest))
-			return ;
-		if (teleport_east(game, dest))
+		if (teleport_south(game, dest))
 			return ;
 		if (teleport_north(game, dest))
 			return ;
-		if (teleport_south(game, dest))
+		if (teleport_west(game, dest))
+			return ;
+		if (teleport_east(game, dest))
 			return ;
 	}
 }

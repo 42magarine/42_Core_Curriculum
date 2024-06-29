@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 17:11:55 by mott              #+#    #+#             */
-/*   Updated: 2024/06/29 14:28:39 by mott             ###   ########.fr       */
+/*   Updated: 2024/06/29 16:31:47 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@
 # define W_PORTAL		10
 # define S_PORTAL		11
 # define MOVE_SPEED		2.75
-# define ROTATION_SPEED	0.134907
+# define ROTATION_SPEED	0.069813
 
 typedef struct s_coords
 {

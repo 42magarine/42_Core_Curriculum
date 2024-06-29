@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   debug.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 16:59:11 by fwahl             #+#    #+#             */
-/*   Updated: 2024/06/28 17:41:24 by fwahl            ###   ########.fr       */
+/*   Updated: 2024/06/29 15:02:13 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,8 @@ static void	debug_map(t_map *map)
 			printf("map_line[%d]: %s\n", y, map->map[y]);
 		y++;
 	}
+	printf("Portal1		X: %f	Y: %f\n", map->p_one.x, map->p_one.y);
+	printf("Portal2		X: %f	Y: %f\n", map->p_two.x, map->p_two.y);
 }
 
 void	debug_parse(t_game *game)
