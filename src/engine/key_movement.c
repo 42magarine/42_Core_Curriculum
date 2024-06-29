@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 14:08:58 by mott              #+#    #+#             */
-/*   Updated: 2024/06/28 14:52:56 by mott             ###   ########.fr       */
+/*   Updated: 2024/06/29 14:17:45 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,30 +16,33 @@
 // sin (90°)	=  1	cos (90°)	=  0
 // sin (180°)	=  0	cos (180°)	= -1
 // sin (270°)	= -1	cos (270°)	=  0
-
-static void	move_player(t_game *game, char key, double move_x, double move_y)
+static void	move_player(t_game *game, char key, double x, double y)
 {
 	if (key == 'W' || key == 'S')
 	{
-		move_x *= MOVE_SPEED * cos(game->player->dir);
-		move_y *= MOVE_SPEED * sin(game->player->dir);
+		x *= MOVE_SPEED * cos(game->player->dir);
+		y *= MOVE_SPEED * sin(game->player->dir);
 	}
 	else if (key == 'A' || key == 'D')
 	{
-		move_x *= MOVE_SPEED * sin(game->player->dir);
-		move_y *= MOVE_SPEED * cos(game->player->dir);
+		x *= MOVE_SPEED * sin(game->player->dir);
+		y *= MOVE_SPEED * cos(game->player->dir);
 	}
-	teleport_player(game, move_x, move_y);
+	teleport_check(game, x, y);
 	if (game->map->map[(int)game->player->pos.y >> 6]
-		[(int)(game->player->pos.x + move_x) >> 6] != '1'
+		[(int)(game->player->pos.x + x) >> 6] != '1'
 		&& game->map->map[(int)game->player->pos.y >> 6]
-		[(int)(game->player->pos.x + move_x) >> 6] != 'D')
-		game->player->pos.x += move_x;
-	if (game->map->map[(int)(game->player->pos.y + move_y) >> 6]
+		[(int)(game->player->pos.x + x) >> 6] != 'D'
+		&& game->map->map[(int)game->player->pos.y >> 6]
+		[(int)(game->player->pos.x + x) >> 6] != 'P')
+		game->player->pos.x += x;
+	if (game->map->map[(int)(game->player->pos.y + y) >> 6]
 		[(int)game->player->pos.x >> 6] != '1'
-		&& game->map->map[(int)(game->player->pos.y + move_y) >> 6]
-		[(int)game->player->pos.x >> 6] != 'D')
-		game->player->pos.y += move_y;
+		&& game->map->map[(int)(game->player->pos.y + y) >> 6]
+		[(int)game->player->pos.x >> 6] != 'D'
+		&& game->map->map[(int)(game->player->pos.y + y) >> 6]
+		[(int)game->player->pos.x >> 6] != 'P')
+		game->player->pos.y += y;
 }
 
 void	rotate_player(t_game *game, char dir)
