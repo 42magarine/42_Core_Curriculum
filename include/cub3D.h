@@ -6,7 +6,7 @@
 /*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 17:11:55 by mott              #+#    #+#             */
-/*   Updated: 2024/06/29 14:54:00 by fwahl            ###   ########.fr       */
+/*   Updated: 2024/06/29 18:08:21 by fwahl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@
 # define W_PORTAL		10
 # define S_PORTAL		11
 # define MOVE_SPEED		2.75
-# define ROTATION_SPEED	0.134907
+# define ROTATION_SPEED	0.069813
 
 typedef struct s_coords
 {

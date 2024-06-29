@@ -6,7 +6,7 @@
 /*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 16:59:11 by fwahl             #+#    #+#             */
-/*   Updated: 2024/06/29 18:06:08 by fwahl            ###   ########.fr       */
+/*   Updated: 2024/06/29 18:09:10 by fwahl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,8 @@ static void	debug_map(t_map *map)
 			printf("map_line[%d]: %s\n", y, map->map[y]);
 		y++;
 	}
+	printf("Portal1		X: %f	Y: %f\n", map->p_one.x, map->p_one.y);
+	printf("Portal2		X: %f	Y: %f\n", map->p_two.x, map->p_two.y);
 }
 
 void	debug_parse(t_game *game)
