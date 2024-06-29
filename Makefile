@@ -6,7 +6,7 @@
 #    By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/04 17:02:41 by mott              #+#    #+#              #
-#    Updated: 2024/06/28 15:55:42 by mott             ###   ########.fr        #
+#    Updated: 2024/06/29 14:17:59 by mott             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,7 +35,8 @@ SRCS	=	./src/main.c \
 			./src/engine/mouse.c \
 			./src/engine/portal.c \
 			./src/engine/ray.c \
-			./src/engine/teleport.c
+			./src/engine/teleport.c \
+			./src/engine/teleport2.c
 OBJS	=	$(SRCS:.c=.o)
 HEADERS	=	./include/cub3D.h
 

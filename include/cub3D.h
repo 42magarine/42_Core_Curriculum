@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 17:11:55 by mott              #+#    #+#             */
-/*   Updated: 2024/06/28 20:15:01 by fwahl            ###   ########.fr       */
+/*   Updated: 2024/06/29 14:28:39 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@
 # define W_PORTAL		10
 # define S_PORTAL		11
 # define MOVE_SPEED		2.75
-# define ROTATION_SPEED	0.034907
+# define ROTATION_SPEED	0.134907
 
 typedef struct s_coords
 {
@@ -180,9 +180,13 @@ void	portal_animation(t_game *game);
 void	ray_calculation(t_game *game, double radian, int x);
 
 // teleport.c
-void	teleport_player(t_game *game, double move_x, double move_y);
-void	teleport_x(t_game *game, t_coords dest, double x, double y);
-void	teleport_y(t_game *game, t_coords dest, double x, double y);
+bool	teleport_east(t_game *game, t_coords dest);
+bool	teleport_west(t_game *game, t_coords dest);
+bool	teleport_north(t_game *game, t_coords dest);
+bool	teleport_south(t_game *game, t_coords dest);
+
+// teleport2.c
+void	teleport_check(t_game *game, double x, double y);
 
 // parser
 // parsing
