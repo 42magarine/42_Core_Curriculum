@@ -91,7 +91,6 @@ void	init_player(t_game	*game, char *line)
 	i = 0;
 	if (game->parsed->player)
 		ft_error(game, "multiple players in map");
-	game->player = ft_calloc(1, sizeof(t_player));
 	game->player->pos.y = game->map->max.y;
 	while (line[i] != '\0')
 	{

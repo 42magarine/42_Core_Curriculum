@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 15:31:03 by mott              #+#    #+#             */
-/*   Updated: 2024/06/29 17:20:28 by mott             ###   ########.fr       */
+/*   Updated: 2024/06/29 17:59:37 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,13 @@
 
 static void	init_window(t_game *game)
 {
-	t_window	*window;
-
-	window = ft_calloc(1, sizeof(t_window));
-	game->window = window;
-	window->mlx = mlx_init(WIDTH, HEIGHT, "cub3D", false);
-	if (window->mlx == NULL)
+	game->window->mlx = mlx_init(WIDTH, HEIGHT, "cub3D", false);
+	if (game->window->mlx == NULL)
 		ft_error(game, mlx_strerror(mlx_errno));
-	window->image = mlx_new_image(window->mlx, WIDTH, HEIGHT);
-	if (window->image == NULL)
+	game->window->image = mlx_new_image(game->window->mlx, WIDTH, HEIGHT);
+	if (game->window->image == NULL)
 		ft_error(game, mlx_strerror(mlx_errno));
-	if (mlx_image_to_window(window->mlx, window->image, 0, 0) == -1)
+	if (mlx_image_to_window(game->window->mlx, game->window->image, 0, 0) == -1)
 		ft_error(game, mlx_strerror(mlx_errno));
 }
 
@@ -33,12 +29,8 @@ static void	init_window(t_game *game)
 // angle between rays	= 60/1920
 static void	init_ray(t_game *game)
 {
-	t_ray	*ray;
-
-	ray = ft_calloc(1, sizeof(t_ray));
-	game->ray = ray;
-	ray->fov_start = FOV / 2 * ONE_PI / 180;
-	ray->fov_add = FOV / WIDTH * ONE_PI / 180;
+	game->ray->fov_start = FOV / 2 * ONE_PI / 180;
+	game->ray->fov_add = FOV / WIDTH * ONE_PI / 180;
 }
 
 static void	init_door(t_game *game)
@@ -51,16 +43,12 @@ static void	init_door(t_game *game)
 
 static void	init_minimap(t_game *game)
 {
-	t_minimap	*minimap;
-
-	minimap = ft_calloc(1, sizeof(t_minimap));
-	game->minimap = minimap;
 	if (game->map->max.x > game->map->max.y)
-		minimap->factor = MM_WIDTH / game->map->max.x;
+		game->minimap->factor = MM_WIDTH / game->map->max.x;
 	else
-		minimap->factor = MM_HEIGHT / game->map->max.y;
-	minimap->start.x = WIDTH - minimap->factor * (game->map->max.x + 1);
-	minimap->start.y = minimap->factor;
+		game->minimap->factor = MM_HEIGHT / game->map->max.y;
+	game->minimap->start.x = WIDTH - game->minimap->factor * (game->map->max.x + 1);
+	game->minimap->start.y = game->minimap->factor;
 }
 
 void	init_game(t_game *game)
