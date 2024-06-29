@@ -6,7 +6,7 @@
 /*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 17:11:55 by mott              #+#    #+#             */
-/*   Updated: 2024/06/28 20:15:01 by fwahl            ###   ########.fr       */
+/*   Updated: 2024/06/29 14:49:21 by fwahl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,9 +90,9 @@ typedef struct s_window
 typedef struct s_map
 {
 	char			**map;
-	t_coords		max;
 	int				floor;
 	int				ceiling;
+	t_coords		max;
 	t_coords		p_one;
 	t_coords		p_two;
 	mlx_texture_t	*wall[12]; //move to t_game
@@ -108,8 +108,8 @@ typedef struct s_player
 typedef struct s_ray
 {
 	t_coords	hit[WIDTH];
-	double		len[WIDTH];
 	int			wall[WIDTH];
+	double		len[WIDTH];
 	double		fov_start;
 	double		fov_add;
 }	t_ray;
@@ -125,9 +125,9 @@ typedef struct s_texture
 
 typedef struct s_minimap
 {
-	int			factor;
 	t_coords	start;
 	t_coords	player;
+	int			factor;
 	bool		show;
 }	t_minimap;
 
@@ -136,10 +136,10 @@ typedef struct s_game
 	t_window	*window;
 	t_map		*map;
 	t_player	*player;
-	t_parse		*parsed; // raus
 	t_ray		*ray;
 	t_texture	*tex;
 	t_minimap	*minimap;
+	t_parse		*parsed; // raus
 }	t_game;
 
 // main.c
