@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 15:31:03 by mott              #+#    #+#             */
-/*   Updated: 2024/06/29 16:28:01 by mott             ###   ########.fr       */
+/*   Updated: 2024/06/29 17:20:28 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,10 @@ static void	init_ray(t_game *game)
 
 static void	init_door(t_game *game)
 {
-	game->map->wall[4] = set_texture(game, "./textures/door.png");
-	game->map->wall[5] = game->map->wall[4];
-	game->map->wall[6] = game->map->wall[4];
-	game->map->wall[7] = game->map->wall[4];
+	game->tex->wall[4] = set_texture(game, "./textures/door.png");
+	game->tex->wall[5] = game->tex->wall[4];
+	game->tex->wall[6] = game->tex->wall[4];
+	game->tex->wall[7] = game->tex->wall[4];
 }
 
 static void	init_minimap(t_game *game)

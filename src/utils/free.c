@@ -3,35 +3,40 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 00:55:16 by fwahl             #+#    #+#             */
-/*   Updated: 2024/06/29 14:18:00 by fwahl            ###   ########.fr       */
+/*   Updated: 2024/06/29 17:18:00 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3D.h"
 
-static void	free_map(t_map *map)
+static void	free_texture(t_texture *tex)
 {
 	int	i;
 
-	if (map->map)
-		ft_free_strarray(map->map);
 	i = 0;
-	while (i < 4)
+	while (i < 4) // < 5 ??????????????????????
 	{
-		if (map->wall[i])
-			mlx_delete_texture(map->wall[i]);
+		if (tex->wall[i])
+			mlx_delete_texture(tex->wall[i]);
 		i++;
 	}
 	i = 0;
 	while (i < 40)
 	{
-		if (map->portal[i])
-			mlx_delete_texture(map->portal[i]);
+		if (tex->portal[i])
+			mlx_delete_texture(tex->portal[i]);
 		i++;
 	}
+}
+
+static void	free_map(t_map *map)
+{
+	if (map->map)
+		ft_free_strarray(map->map);
+
 	free(map);
 }
 
@@ -54,4 +59,6 @@ void	free_game(t_game *game)
 		free(game->parsed);
 	if (game->window)
 		free_window(game->window);
+	if (game->tex)
+		free_texture(game->tex);
 }

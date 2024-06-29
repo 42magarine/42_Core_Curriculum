@@ -65,22 +65,22 @@ void	parse_floor_ceiling(t_game *game, char *line)
 
 void	parse_tex(t_game *game, char *line)
 {
-	t_map	*map;
-	int		i;
+	t_texture	*tex;
+	int			i;
 
-	map = game->map;
+	tex = game->tex;
 	i = 0;
 	while (ft_isspace(line[i]))
 		i++;
 	if (ft_strncmp(&line[i], "EA", 2) == 0)
-		map->wall[0] = set_texture(game, &line[i + 2]);
+		tex->wall[0] = set_texture(game, &line[i + 2]);
 	else if (ft_strncmp(&line[i], "NO", 2) == 0)
-		map->wall[1] = set_texture(game, &line[i + 2]);
+		tex->wall[1] = set_texture(game, &line[i + 2]);
 	else if (ft_strncmp(&line[i], "WE", 2) == 0)
-		map->wall[2] = set_texture(game, &line[i + 2]);
+		tex->wall[2] = set_texture(game, &line[i + 2]);
 	else if (ft_strncmp(&line[i], "SO", 2) == 0)
-		map->wall[3] = set_texture(game, &line[i + 2]);
-	if (map->wall[0] && map->wall[1] && map->wall[2] && map->wall[3])
+		tex->wall[3] = set_texture(game, &line[i + 2]);
+	if (tex->wall[0] && tex->wall[1] && tex->wall[2] && tex->wall[3])
 		game->parsed->walls = true;
 }
 
