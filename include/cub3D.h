@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 17:11:55 by mott              #+#    #+#             */
-/*   Updated: 2024/06/29 18:08:21 by fwahl            ###   ########.fr       */
+/*   Updated: 2024/06/29 18:32:47 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,8 +95,6 @@ typedef struct s_map
 	t_coords		max;
 	t_coords		p_one;
 	t_coords		p_two;
-	mlx_texture_t	*wall[12]; //move to t_game
-	mlx_texture_t	*portal[40];
 }	t_map;
 
 typedef struct s_player
@@ -116,11 +114,13 @@ typedef struct s_ray
 
 typedef struct s_texture
 {
-	t_coords	pos;
-	double		y_scale;
-	double		y_offset;
-	int			wall_height;
-	int			wall_offset;
+	mlx_texture_t	*wall[12];
+	mlx_texture_t	*portal[40];
+	t_coords		pos;
+	double			y_scale;
+	double			y_offset;
+	int				wall_height;
+	int				wall_offset;
 }	t_texture;
 
 typedef struct s_minimap
@@ -139,7 +139,7 @@ typedef struct s_game
 	t_ray		*ray;
 	t_texture	*tex;
 	t_minimap	*minimap;
-	t_parse		*parsed; // raus
+	t_parse		*parsed;
 }	t_game;
 
 // main.c

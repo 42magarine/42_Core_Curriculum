@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   debug.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 16:59:11 by fwahl             #+#    #+#             */
-/*   Updated: 2024/06/29 18:09:10 by fwahl            ###   ########.fr       */
+/*   Updated: 2024/06/29 18:33:35 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,20 +24,20 @@ static void	debug_player(t_player *player)
 		printf("Player Dir missing\n");
 }
 
-static void	debug_map(t_map *map)
+static void	debug_map(t_game *game, t_map *map)
 {
 	int	y;
 
 	printf("Floor   color: %d\n", map->floor);
 	printf("Ceiling color: %d\n", map->ceiling);
 	printf("\n");
-	if (map->wall[0] != NULL)
+	if (game->tex->wall[0] != NULL)
 		printf("North wall texture loaded\n");
-	if (map->wall[1] != NULL)
+	if (game->tex->wall[1] != NULL)
 		printf("East  wall texture loaded\n");
-	if (map->wall[2] != NULL)
+	if (game->tex->wall[2] != NULL)
 		printf("South wall texture loaded\n");
-	if (map->wall[3] != NULL)
+	if (game->tex->wall[3] != NULL)
 		printf("West  wall texture loaded\n");
 	printf("\n");
 	printf("Mapsize		X: %f	Y: %f\n", map->max.x, map->max.y);
@@ -57,6 +57,6 @@ static void	debug_map(t_map *map)
 
 void	debug_parse(t_game *game)
 {
-	debug_map(game->map);
+	debug_map(game, game->map);
 	debug_player(game->player);
 }

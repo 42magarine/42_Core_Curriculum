@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 17:14:11 by fwahl             #+#    #+#             */
-/*   Updated: 2024/06/28 20:15:50 by fwahl            ###   ########.fr       */
+/*   Updated: 2024/06/29 17:50:47 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,6 @@ static void	alloc_map(t_game *game, char *filename)
 	bool	stop;
 
 	stop = false;
-	game->map = ft_calloc(1, sizeof(t_map));
 	fd = open(filename, O_RDONLY);
 	if (fd == -1)
 		ft_error(game, "filename error (argv[1])");
@@ -91,7 +90,6 @@ void	parse_mapfile(t_game *game, char *filename)
 	int		fd;
 	char	*line;
 
-	game->parsed = ft_calloc(1, sizeof(t_parse));
 	alloc_map(game, filename);
 	fd = open(filename, O_RDONLY);
 	if (fd == -1)

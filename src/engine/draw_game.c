@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 16:28:04 by mott              #+#    #+#             */
-/*   Updated: 2024/06/28 13:33:19 by mott             ###   ########.fr       */
+/*   Updated: 2024/06/29 17:19:58 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static void	texture_x_calculation(t_game *game, t_texture *tex, int x)
 {
 	double	scale_x;
 
-	scale_x = (double)game->map->wall[game->ray->wall[x]]->width / SIZE;
+	scale_x = (double)game->tex->wall[game->ray->wall[x]]->width / SIZE;
 	if (game->ray->wall[x] == E_WALL || game->ray->wall[x] == E_DOOR
 		|| game->ray->wall[x] == E_PORTAL)
 		tex->pos.x = scale_x * (game->ray->hit[x].y
@@ -38,7 +38,7 @@ static void	texture_x_calculation(t_game *game, t_texture *tex, int x)
 static void	texture_y_calculation(t_game *game, t_texture *tex, int x)
 {
 	tex->wall_height = SIZE * HEIGHT / game->ray->len[x];
-	tex->y_scale = (double)game->map->wall[game->ray->wall[x]]->height
+	tex->y_scale = (double)game->tex->wall[game->ray->wall[x]]->height
 		/ tex->wall_height;
 	tex->y_offset = 0.0;
 	if (tex->wall_height > HEIGHT)
@@ -74,12 +74,12 @@ void	draw_wall(t_game *game, double radian, int x)
 	y = 0;
 	while (y < tex.wall_height)
 	{
-		i = ((int)tex.pos.y * game->map->wall[dir]->width + (int)tex.pos.x) * 4;
+		i = ((int)tex.pos.y * game->tex->wall[dir]->width + (int)tex.pos.x) * 4;
 		mlx_put_pixel(game->window->image, x, y + tex.wall_offset,
-			get_rgba(game->map->wall[dir]->pixels[i + 0],
-				game->map->wall[dir]->pixels[i + 1],
-				game->map->wall[dir]->pixels[i + 2],
-				game->map->wall[dir]->pixels[i + 3]));
+			get_rgba(game->tex->wall[dir]->pixels[i + 0],
+				game->tex->wall[dir]->pixels[i + 1],
+				game->tex->wall[dir]->pixels[i + 2],
+				game->tex->wall[dir]->pixels[i + 3]));
 		tex.pos.y += tex.y_scale;
 		y++;
 	}
