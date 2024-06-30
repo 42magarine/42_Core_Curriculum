@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
+/*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 17:11:55 by mott              #+#    #+#             */
-/*   Updated: 2024/06/29 18:32:47 by mott             ###   ########.fr       */
+/*   Updated: 2024/06/30 17:07:47 by fwahl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -211,6 +211,8 @@ bool	is_map_line(char *line);
 bool	is_player_char(char c);
 bool	is_player(char *line);
 bool	is_portal(char *line);
+bool	is_start(t_map *map, int x, int y, char c);
+bool	all_parsed(t_game *game, t_parse *parse);
 
 // debug.c
 void	debug_parse(t_game *game);

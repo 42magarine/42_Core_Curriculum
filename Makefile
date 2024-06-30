@@ -6,7 +6,7 @@
 #    By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/04 17:02:41 by mott              #+#    #+#              #
-#    Updated: 2024/06/29 19:58:48 by fwahl            ###   ########.fr        #
+#    Updated: 2024/06/30 17:08:48 by fwahl            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,6 +23,7 @@ SRCS	=	./src/main.c \
 			./src/parser/parse_textures.c \
 			./src/parser/map_validation.c \
 			./src/utils/bools.c \
+			./src/utils/bools2.c \
 			./src/utils/utils.c \
 			./src/utils/free.c \
 			./src/utils/debug.c \

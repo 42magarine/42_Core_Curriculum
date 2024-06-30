@@ -6,40 +6,11 @@
 /*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 17:55:44 by fwahl             #+#    #+#             */
-/*   Updated: 2024/06/29 20:02:56 by fwahl            ###   ########.fr       */
+/*   Updated: 2024/06/30 17:08:09 by fwahl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3D.h"
-
-static bool	all_parsed(t_game *game, t_parse *parse)
-{
-	bool	all_parsed;
-
-	all_parsed = false;
-	if (!parse->floor_ceiling)
-		ft_error(game, "floor_ceiling not parsed correctly");
-	if (!parse->map)
-		ft_error(game, "map not parsed correctly");
-	if (!parse->player)
-		ft_error(game, "player not parsed correctly");
-	if (!parse->walls)
-		ft_error(game, "walls not parsed correctly");
-	if (parse->floor_ceiling && parse->map && parse->player && parse->walls)
-		all_parsed = true;
-	return (all_parsed);
-}
-
-static bool	is_valid_start(t_map *map, int x, int y, char c)
-{
-	if (x < 0 || x >= (int)ft_strlen(map->map[y]) || y < 0 || y >= map->max.y)
-		return (false);
-	if (map->map[y][x] == '1' || map->map[y][x] == 'P' || map->map[y][x] == c)
-		return (false);
-	if (ft_isspace(map->map[y][x]))
-		return (false);
-	return (true);
-}
 
 static bool	flood_fill(t_map *map, int x, int y, char c)
 {
@@ -75,26 +46,47 @@ static void	reset_map(t_game *game, char **temp)
 	}
 }
 
+#ifdef BONUS
+
 static void	validate_map(t_game *game)
 {
 	char	**temp;
 
 	if (!all_parsed(game, game->parsed))
 		ft_error(game, "values not parsed correctly");
-	if (!is_valid_start(game->map, game->player->pos.x, game->player->pos.y, '2'))
+	if (!is_start(game->map, game->player->pos.x, game->player->pos.y, '2'))
 		ft_error(game, "invalid player start position");
 	temp = ft_strarray_dup(game->map->map);
 	if (!flood_fill(game->map, game->player->pos.x, game->player->pos.y, '2'))
 		ft_error(game, "flood_fill - invalid map (player)");
 	reset_map(game, temp);
-	if (!flood_fill(game->map, game->map->p_one.x,  game->map->p_one.y, '2'))
+	if (!flood_fill(game->map, game->map->p_one.x, game->map->p_one.y, '2'))
 		ft_error(game, "flood_fill - invalid map (portal 1)");
 	reset_map(game, temp);
-	if (!flood_fill(game->map, game->map->p_two.x,  game->map->p_two.y, '2'))
+	if (!flood_fill(game->map, game->map->p_two.x, game->map->p_two.y, '2'))
 		ft_error(game, "flood_fill - invalid map (portal 2)");
 	reset_map(game, temp);
 	free(temp);
 }
+
+#else
+
+static void	validate_map(t_game *game)
+{
+	char	**temp;
+
+	if (!all_parsed(game, game->parsed))
+		ft_error(game, "values not parsed correctly");
+	if (!is_start(game->map, game->player->pos.x, game->player->pos.y, '2'))
+		ft_error(game, "invalid player start position");
+	temp = ft_strarray_dup(game->map->map);
+	if (!flood_fill(game->map, game->player->pos.x, game->player->pos.y, '2'))
+		ft_error(game, "flood_fill - invalid map (player)");
+	reset_map(game, temp);
+	free(temp);
+}
+
+#endif
 
 void	init_map(t_game *game, char *filename)
 {
