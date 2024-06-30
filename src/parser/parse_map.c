@@ -3,14 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   parse_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
+/*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 17:14:11 by fwahl             #+#    #+#             */
-/*   Updated: 2024/06/29 17:50:47 by mott             ###   ########.fr       */
+/*   Updated: 2024/06/30 17:12:37 by fwahl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3D.h"
+
+#ifdef BONUS
 
 static bool	set_map_size(t_game *game, char *line)
 {
@@ -31,6 +33,28 @@ static bool	set_map_size(t_game *game, char *line)
 	}
 	return (false);
 }
+
+#else
+
+static bool	set_map_size(t_game *game, char *line)
+{
+	static bool	start = false;
+
+	if (start == true && (!is_map_line(line) || line[0] == '\0'))
+		return (true);
+	if (line[0] != '\0' && is_map_line(line))
+	{
+		start = true;
+		if ((int)ft_strlen(line) > game->map->max.x)
+			game->map->max.x = ft_strlen(line);
+		if (is_player(line))
+			init_player(game, line);
+		game->map->max.y++;
+	}
+	return (false);
+}
+
+#endif
 
 static void	parse_map(t_game *game, char *line)
 {

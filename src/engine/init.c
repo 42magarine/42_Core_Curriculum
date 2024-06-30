@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
+/*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 15:31:03 by mott              #+#    #+#             */
-/*   Updated: 2024/06/29 17:59:37 by mott             ###   ########.fr       */
+/*   Updated: 2024/06/30 17:16:03 by fwahl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ static void	init_ray(t_game *game)
 	game->ray->fov_start = FOV / 2 * ONE_PI / 180;
 	game->ray->fov_add = FOV / WIDTH * ONE_PI / 180;
 }
+
+#ifdef BONUS
 
 static void	init_door(t_game *game)
 {
@@ -61,3 +63,15 @@ void	init_game(t_game *game)
 	game->player->pos.x = game->player->pos.x * SIZE + (SIZE >> 1);
 	game->player->pos.y = game->player->pos.y * SIZE + (SIZE >> 1);
 }
+
+#else
+
+void	init_game(t_game *game)
+{
+	init_window(game);
+	init_ray(game);
+	game->player->pos.x = game->player->pos.x * SIZE + (SIZE >> 1);
+	game->player->pos.y = game->player->pos.y * SIZE + (SIZE >> 1);
+}
+
+#endif
