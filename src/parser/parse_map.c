@@ -3,16 +3,44 @@
 /*                                                        :::      ::::::::   */
 /*   parse_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 17:14:11 by fwahl             #+#    #+#             */
-/*   Updated: 2024/06/30 17:12:37 by fwahl            ###   ########.fr       */
+/*   Updated: 2024/07/01 12:51:04 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3D.h"
 
 #ifdef BONUS
+
+static void	init_portal(t_game *game, char *line) // parse portals?
+{
+	static int	p;
+	int			i;
+
+	i = 0;
+	while (line[i] != '\0')
+	{
+		if (line[i] == 'P')
+		{
+			p++;
+			if (p == 1)
+			{
+				game->map->p_one.x = i;
+				game->map->p_one.y = game->map->max.y;
+			}
+			if (p == 2)
+			{
+				game->map->p_two.x = i;
+				game->map->p_two.y = game->map->max.y;
+			}
+			if (p > 2)
+				ft_error(game, "too many portals on the map\n");
+		}
+		i++;
+	}
+}
 
 static bool	set_map_size(t_game *game, char *line)
 {
@@ -26,7 +54,7 @@ static bool	set_map_size(t_game *game, char *line)
 		if ((int)ft_strlen(line) > game->map->max.x)
 			game->map->max.x = ft_strlen(line);
 		if (is_player(line))
-			init_player(game, line);
+			parse_player(game, line);
 		if (is_portal(line))
 			init_portal(game, line);
 		game->map->max.y++;
@@ -48,7 +76,7 @@ static bool	set_map_size(t_game *game, char *line)
 		if ((int)ft_strlen(line) > game->map->max.x)
 			game->map->max.x = ft_strlen(line);
 		if (is_player(line))
-			init_player(game, line);
+			parse_player(game, line);
 		game->map->max.y++;
 	}
 	return (false);

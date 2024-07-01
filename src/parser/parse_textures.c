@@ -84,7 +84,7 @@ void	parse_tex(t_game *game, char *line)
 		game->parsed->walls = true;
 }
 
-void	init_player(t_game	*game, char *line)
+void	parse_player(t_game *game, char *line)
 {
 	int	i;
 
@@ -95,17 +95,7 @@ void	init_player(t_game	*game, char *line)
 	while (line[i] != '\0')
 	{
 		if (is_player_char(line[i]))
-		{
 			game->player->pos.x = i;
-			if (line[i] == 'E')
-				game->player->dir = 0;
-			if (line[i] == 'N')
-				game->player->dir = HALF_PI;
-			if (line[i] == 'W')
-				game->player->dir = ONE_PI;
-			if (line[i] == 'S')
-				game->player->dir = THREE_HALF_PI;
-		}
 		i++;
 	}
 	if (game->player->pos.x > 0 && game->player->pos.y > 0)

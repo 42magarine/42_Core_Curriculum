@@ -6,13 +6,13 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 15:31:03 by mott              #+#    #+#             */
-/*   Updated: 2024/07/01 12:01:14 by mott             ###   ########.fr       */
+/*   Updated: 2024/07/01 12:53:54 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3D.h"
 
-static void	init_window(t_game *game)
+void	init_window(t_game *game)
 {
 	game->window->mlx = mlx_init(WIDTH, HEIGHT, "cub3D", false);
 	if (game->window->mlx == NULL)
@@ -24,55 +24,42 @@ static void	init_window(t_game *game)
 		ft_error(game, mlx_strerror(mlx_errno));
 }
 
-// window->width		= 1920
-// window->fov			= 60
-// angle between rays	= 60/1920
-static void	init_ray(t_game *game)
+void	init_player(t_map *map, t_player *player)
 {
-	game->ray->fov_start = FOV / 2 * ONE_PI / 180;
-	game->ray->fov_add = FOV / WIDTH * ONE_PI / 180;
+	if (map->map[(int)player->pos.y][(int)player->pos.x] == 'E')
+		player->dir = 0;
+	else if (map->map[(int)player->pos.y][(int)player->pos.x] == 'N')
+		player->dir = HALF_PI;
+	else if (map->map[(int)player->pos.y][(int)player->pos.x] == 'W')
+		player->dir = ONE_PI;
+	else if (map->map[(int)player->pos.y][(int)player->pos.x] == 'S')
+		player->dir = THREE_HALF_PI;
+	player->pos.x = player->pos.x * SIZE + (SIZE >> 1);
+	player->pos.y = player->pos.y * SIZE + (SIZE >> 1);
 }
 
-#ifdef BONUS
-
-static void	init_door(t_game *game)
+void	init_door_tex(t_game *game)
 {
-	game->tex->wall[4] = set_texture(game, "./textures/door.png");
+	game->tex->wall[4] = mlx_load_png("./textures/door.png");
+	if (game->tex->wall[4] == NULL)
+		ft_error(game, mlx_strerror(mlx_errno));
 	game->tex->wall[5] = game->tex->wall[4];
 	game->tex->wall[6] = game->tex->wall[4];
 	game->tex->wall[7] = game->tex->wall[4];
 }
 
-static void	init_minimap(t_game *game)
+void	init_ray(t_ray *ray)
 {
-	if (game->map->max.x > game->map->max.y)
-		game->minimap->factor = MM_WIDTH / game->map->max.x;
+	ray->fov_start = FOV / 2 * ONE_PI / 180;
+	ray->fov_add = FOV / WIDTH * ONE_PI / 180;
+}
+
+void	init_minimap(t_map *map, t_minimap *minimap)
+{
+	if (map->max.x > map->max.y)
+		minimap->factor = MM_WIDTH / map->max.x;
 	else
-		game->minimap->factor = MM_HEIGHT / game->map->max.y;
-	game->minimap->start.x = WIDTH - game->minimap->factor * (game->map->max.x + 1);
-	game->minimap->start.y = game->minimap->factor;
+		minimap->factor = MM_HEIGHT / map->max.y;
+	minimap->start.x = WIDTH - minimap->factor * (map->max.x + 1);
+	minimap->start.y = minimap->factor;
 }
-
-void	init_game(t_game *game)
-{
-	init_window(game);
-	init_ray(game);
-	init_door(game);
-	// portal_tex(game);
-	init_portal_tex(game);
-	init_minimap(game);
-	game->player->pos.x = game->player->pos.x * SIZE + (SIZE >> 1);
-	game->player->pos.y = game->player->pos.y * SIZE + (SIZE >> 1);
-}
-
-#else
-
-void	init_game(t_game *game)
-{
-	init_window(game);
-	init_ray(game);
-	game->player->pos.x = game->player->pos.x * SIZE + (SIZE >> 1);
-	game->player->pos.y = game->player->pos.y * SIZE + (SIZE >> 1);
-}
-
-#endif

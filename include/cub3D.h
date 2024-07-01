@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 17:11:55 by mott              #+#    #+#             */
-/*   Updated: 2024/07/01 12:00:29 by mott             ###   ########.fr       */
+/*   Updated: 2024/07/01 12:55:04 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,8 +155,7 @@ void	draw_minimap(t_game *game);
 void	draw_player(t_game *game);
 void	draw_ray(t_game *game, t_coords player, t_coords wall);
 
-// init.c
-void	init_game(t_game *game);
+
 
 // key_movement.c
 void	key_hook(t_game *game);
@@ -171,11 +170,6 @@ void	loop_hook(void *param);
 // mouse.c
 void	mouse_hook(t_game *game);
 
-// portal.c
-void	init_portal(t_game *game, char *line);
-void	portal_tex(t_game *game);
-void	portal_animation(t_game *game);
-
 // ray.c
 void	ray_calculation(t_game *game, double radian, int x);
 
@@ -189,13 +183,20 @@ bool	teleport_south(t_game *game, t_coords dest);
 void	teleport_check(t_game *game, double x, double y);
 
 // init
+// init_game.c
+void	init_window(t_game *game);
+void	init_player(t_map *map, t_player *player);
+void	init_door_tex(t_game *game);
+void	init_ray(t_ray *ray);
+void	init_minimap(t_map *map, t_minimap *minimap);
+
 // init_portal.c
 void	init_portal_tex(t_game *game);
 
 // parser
 // parsing
 void	init_map(t_game *game, char *filename);
-void	init_player(t_game	*game, char *line);
+void	parse_player(t_game	*game, char *line);
 void	parse_tex(t_game *game, char *line);
 void	parse_floor_ceiling(t_game *game, char *line);
 void	parse_mapfile(t_game *game, char *filename);

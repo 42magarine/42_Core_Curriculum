@@ -6,11 +6,27 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 18:03:44 by mott              #+#    #+#             */
-/*   Updated: 2024/06/28 13:52:14 by mott             ###   ########.fr       */
+/*   Updated: 2024/07/01 13:01:35 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3D.h"
+
+static void	swap_portal_animation(t_texture *tex)
+{
+	static int	count;
+
+	if (count % 4 == 0)
+	{
+		tex->wall[8] = tex->portal[(count >> 2) + 0];
+		tex->wall[9] = tex->portal[(count >> 2) + 10];
+		tex->wall[10] = tex->portal[(count >> 2) + 20];
+		tex->wall[11] = tex->portal[(count >> 2) + 30];
+		if (count == 36)
+			count = 0;
+	}
+	count++;
+}
 
 static void	ray_caster(t_game *game)
 {
@@ -36,7 +52,6 @@ void	loop_hook(void *param)
 	game = param;
 	draw_background(game);
 	ray_caster(game);
-	portal_animation(game);
 	if (game->minimap->show == true)
 	{
 		draw_minimap(game);
@@ -48,6 +63,7 @@ void	loop_hook(void *param)
 			i += 1;
 		}
 	}
+	swap_portal_animation(game->tex);
 	key_hook(game);
 	mouse_hook(game);
 }
