@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 17:06:47 by fwahl             #+#    #+#             */
-/*   Updated: 2024/07/01 15:55:01 by mott             ###   ########.fr       */
+/*   Updated: 2024/07/01 17:30:49 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ static void	init_game(t_game *game)
 	init_portal_tex(game);
 	init_ray(game->ray);
 	init_minimap(game->map, game->minimap);
+	init_mouse(game);
 }
 
 static void	init_map(t_game *game, char *filename)

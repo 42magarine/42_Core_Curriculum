@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 17:11:55 by mott              #+#    #+#             */
-/*   Updated: 2024/07/01 16:55:04 by mott             ###   ########.fr       */
+/*   Updated: 2024/07/01 17:36:25 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -156,6 +156,7 @@ void	loop_hook(void *param);
 
 // mouse.c
 void	mouse_hook(t_game *game);
+void	init_mouse(t_game *game);
 
 // ray.c
 void	ray_calculation(t_game *game, float radian, int x);

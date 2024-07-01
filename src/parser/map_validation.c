@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 17:55:44 by fwahl             #+#    #+#             */
-/*   Updated: 2024/07/01 15:27:29 by mott             ###   ########.fr       */
+/*   Updated: 2024/07/01 17:44:17 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static void	reset_map(t_game *game, char **temp)
 
 #ifdef BONUS
 
-static void	validate_map(t_game *game)
+void	validate_map(t_game *game)
 {
 	char	**temp;
 
