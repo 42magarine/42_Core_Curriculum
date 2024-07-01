@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 17:21:47 by fwahl             #+#    #+#             */
-/*   Updated: 2024/07/01 11:50:11 by mott             ###   ########.fr       */
+/*   Updated: 2024/07/01 16:02:25 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	get_rgba(int r, int g, int b, int a)
 	return (r << 24 | g << 16 | b << 8 | a);
 }
 
-double	pi_overflow(double radian)
+float	pi_overflow(float radian)
 {
 	if (radian < 0)
 		radian += TWO_PI;

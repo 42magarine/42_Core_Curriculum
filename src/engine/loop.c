@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 18:03:44 by mott              #+#    #+#             */
-/*   Updated: 2024/07/01 13:08:48 by mott             ###   ########.fr       */
+/*   Updated: 2024/07/01 16:02:25 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static void	swap_portal_animation(t_texture *tex)
 
 static void	ray_caster(t_game *game)
 {
-	double	radian;
+	float	radian;
 	int		x;
 
 	radian = pi_overflow(game->player->dir + game->ray->fov_start);
