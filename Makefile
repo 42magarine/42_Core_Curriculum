@@ -3,22 +3,24 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+         #
+#    By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/04 17:02:41 by mott              #+#    #+#              #
-#    Updated: 2024/06/30 17:08:48 by fwahl            ###   ########.fr        #
+#    Updated: 2024/07/01 13:29:17 by mott             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC		=	cc
 CFLAGS	=	-Wall -Wextra -Werror
 # CFLAGS	+=	-Ofast
-CFLAGS	+=	-fsanitize=address -g
+# CFLAGS	+=	-fsanitize=address -g
 LDFLAGS	=	-ldl -lglfw -pthread -lm
 RM		=	rm -rf
 
 NAME	=	cub3D
 SRCS	=	./src/main.c \
+			./src/init/init_game.c \
+			./src/init/init_portal.c \
 			./src/parser/parse_map.c \
 			./src/parser/parse_textures.c \
 			./src/parser/map_validation.c \
@@ -29,15 +31,13 @@ SRCS	=	./src/main.c \
 			./src/utils/debug.c \
 			./src/engine/draw_game.c \
 			./src/engine/draw_minimap.c \
-			./src/engine/init.c \
 			./src/engine/key_movement.c \
 			./src/engine/key_special.c \
 			./src/engine/loop.c \
 			./src/engine/mouse.c \
-			./src/engine/portal.c \
 			./src/engine/ray.c \
-			./src/engine/teleport.c \
-			./src/engine/teleport2.c
+			./src/engine/teleport_check.c \
+			./src/engine/teleport_dir.c
 OBJS	=	$(SRCS:.c=.o)
 HEADERS	=	./include/cub3D.h
 

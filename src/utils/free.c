@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 00:55:16 by fwahl             #+#    #+#             */
-/*   Updated: 2024/06/29 18:35:00 by mott             ###   ########.fr       */
+/*   Updated: 2024/06/29 19:21:57 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ static void	free_map(t_map *map)
 {
 	if (map->map)
 		ft_free_strarray(map->map);
-
 	free(map);
 }
 
@@ -51,19 +50,19 @@ static void	free_window(t_window *window)
 
 void	free_game(t_game *game)
 {
+	if (game->window)
+		free_window(game->window);
 	if (game->map)
 		free_map(game->map);
 	if (game->player)
 		free(game->player);
-	if (game->parsed)
-		free(game->parsed);
-	if (game->window)
-		free_window(game->window);
 	if (game->ray)
 		free(game->ray);
-	if (game->minimap)
-		free(game->minimap);
 	if (game->tex)
 		free_texture(game->tex);
+	if (game->minimap)
+		free(game->minimap);
+	if (game->parsed)
+		free(game->parsed);
 	free(game);
 }

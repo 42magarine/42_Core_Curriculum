@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 17:06:47 by fwahl             #+#    #+#             */
-/*   Updated: 2024/06/29 17:57:51 by mott             ###   ########.fr       */
+/*   Updated: 2024/07/01 12:53:14 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,16 @@
 // #else
 // printf("hello\n");
 // #endif
+
+static void	init_game(t_game *game)
+{
+	init_window(game);
+	init_player(game->map, game->player);
+	init_door_tex(game);
+	init_portal_tex(game);
+	init_ray(game->ray);
+	init_minimap(game->map, game->minimap);
+}
 
 static t_game	*init_game_struct(void)
 {
@@ -46,5 +56,6 @@ int	main(int argc, char **argv)
 	mlx_loop_hook(game->window->mlx, &loop_hook, game);
 	mlx_loop(game->window->mlx);
 	free_game(game);
+	system("leaks cub3D");
 	return (EXIT_SUCCESS);
 }

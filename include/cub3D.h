@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 17:11:55 by mott              #+#    #+#             */
-/*   Updated: 2024/06/30 17:07:47 by fwahl            ###   ########.fr       */
+/*   Updated: 2024/07/01 13:35:10 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,7 @@
 
 # define WIDTH			1920
 # define HEIGHT			1080
-# define MM_WIDTH		448
-# define MM_HEIGHT		448
+# define MM_SIZE		448
 # define SIZE			64
 # define FOV			60.0
 # define ONE_PI			3.141592
@@ -89,12 +88,11 @@ typedef struct s_window
 
 typedef struct s_map
 {
-	char			**map;
-	int				floor;
-	int				ceiling;
-	t_coords		max;
-	t_coords		p_one;
-	t_coords		p_two;
+	char		**map;
+	int			floor;
+	int			ceiling;
+	t_coords	max;
+	t_coords	portal[2];
 }	t_map;
 
 typedef struct s_player
@@ -155,9 +153,6 @@ void	draw_minimap(t_game *game);
 void	draw_player(t_game *game);
 void	draw_ray(t_game *game, t_coords player, t_coords wall);
 
-// init.c
-void	init_game(t_game *game);
-
 // key_movement.c
 void	key_hook(t_game *game);
 void	rotate_player(t_game *game, char dir);
@@ -171,36 +166,42 @@ void	loop_hook(void *param);
 // mouse.c
 void	mouse_hook(t_game *game);
 
-// portal.c
-void	init_portal(t_game *game, char *line);
-void	portal_tex(t_game *game);
-void	portal_animation(t_game *game);
-
 // ray.c
 void	ray_calculation(t_game *game, double radian, int x);
 
-// teleport.c
+// teleport_check.c
+void	teleport_check(t_game *game, double x, double y);
+
+// teleport_dir.c
 bool	teleport_east(t_game *game, t_coords dest);
 bool	teleport_west(t_game *game, t_coords dest);
 bool	teleport_north(t_game *game, t_coords dest);
 bool	teleport_south(t_game *game, t_coords dest);
 
-// teleport2.c
-void	teleport_check(t_game *game, double x, double y);
+// init
+// init_game.c
+void	init_window(t_game *game);
+void	init_player(t_map *map, t_player *player);
+void	init_door_tex(t_game *game);
+void	init_ray(t_ray *ray);
+void	init_minimap(t_map *map, t_minimap *minimap);
+
+// init_portal.c
+void	init_portal_tex(t_game *game);
 
 // parser
 // parsing
 void	init_map(t_game *game, char *filename);
-void	init_player(t_game	*game, char *line);
+void	parse_player(t_game	*game, char *line);
 void	parse_tex(t_game *game, char *line);
 void	parse_floor_ceiling(t_game *game, char *line);
 void	parse_mapfile(t_game *game, char *filename);
 
 // utils
 mlx_texture_t	*set_texture(t_game *game, char *line);
-void	ft_error(t_game *game, const char *errormsg);
-int		get_rgba(int r, int g, int b, int a);
-double	pi_overflow(double radian);
+void			ft_error(t_game *game, const char *error);
+int				get_rgba(int r, int g, int b, int a);
+double			pi_overflow(double radian);
 
 //free.c
 void	free_game(t_game *game);

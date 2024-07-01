@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/29 14:17:30 by mott              #+#    #+#             */
-/*   Updated: 2024/06/29 14:36:18 by mott             ###   ########.fr       */
+/*   Updated: 2024/07/01 13:27:23 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,16 +66,16 @@ static void	teleport_order_y(t_game *game, t_coords dest, double y)
 
 void	teleport_check(t_game *game, double x, double y)
 {
-	if ((int)(game->player->pos.x + x) >> 6 == game->map->p_one.x
-		&& (int)(game->player->pos.y) >> 6 == game->map->p_one.y)
-		teleport_order_x(game, game->map->p_two, x);
-	else if ((int)(game->player->pos.x + x) >> 6 == game->map->p_two.x
-		&& (int)(game->player->pos.y) >> 6 == game->map->p_two.y)
-		teleport_order_x(game, game->map->p_one, x);
-	else if ((int)(game->player->pos.x) >> 6 == game->map->p_one.x
-		&& (int)(game->player->pos.y + y) >> 6 == game->map->p_one.y)
-		teleport_order_y(game, game->map->p_two, y);
-	else if ((int)(game->player->pos.x) >> 6 == game->map->p_two.x
-		&& (int)(game->player->pos.y + y) >> 6 == game->map->p_two.y)
-		teleport_order_y(game, game->map->p_one, y);
+	if ((int)(game->player->pos.x + x) >> 6 == game->map->portal[0].x
+		&& (int)(game->player->pos.y) >> 6 == game->map->portal[0].y)
+		teleport_order_x(game, game->map->portal[1], x);
+	else if ((int)(game->player->pos.x + x) >> 6 == game->map->portal[1].x
+		&& (int)(game->player->pos.y) >> 6 == game->map->portal[1].y)
+		teleport_order_x(game, game->map->portal[0], x);
+	else if ((int)(game->player->pos.x) >> 6 == game->map->portal[0].x
+		&& (int)(game->player->pos.y + y) >> 6 == game->map->portal[0].y)
+		teleport_order_y(game, game->map->portal[1], y);
+	else if ((int)(game->player->pos.x) >> 6 == game->map->portal[1].x
+		&& (int)(game->player->pos.y + y) >> 6 == game->map->portal[1].y)
+		teleport_order_y(game, game->map->portal[0], y);
 }
