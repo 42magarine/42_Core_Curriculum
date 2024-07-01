@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 18:03:44 by mott              #+#    #+#             */
-/*   Updated: 2024/07/01 13:01:35 by mott             ###   ########.fr       */
+/*   Updated: 2024/07/01 13:08:48 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static void	swap_portal_animation(t_texture *tex)
 
 	if (count % 4 == 0)
 	{
-		tex->wall[8] = tex->portal[(count >> 2) + 0];
+		tex->wall[8] = tex->portal[count >> 2];
 		tex->wall[9] = tex->portal[(count >> 2) + 10];
 		tex->wall[10] = tex->portal[(count >> 2) + 20];
 		tex->wall[11] = tex->portal[(count >> 2) + 30];

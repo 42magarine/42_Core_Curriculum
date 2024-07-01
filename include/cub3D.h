@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 17:11:55 by mott              #+#    #+#             */
-/*   Updated: 2024/07/01 12:55:04 by mott             ###   ########.fr       */
+/*   Updated: 2024/07/01 13:29:49 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,8 +93,7 @@ typedef struct s_map
 	int				floor;
 	int				ceiling;
 	t_coords		max;
-	t_coords		p_one;
-	t_coords		p_two;
+	t_coords		portal[2];
 }	t_map;
 
 typedef struct s_player
@@ -155,8 +154,6 @@ void	draw_minimap(t_game *game);
 void	draw_player(t_game *game);
 void	draw_ray(t_game *game, t_coords player, t_coords wall);
 
-
-
 // key_movement.c
 void	key_hook(t_game *game);
 void	rotate_player(t_game *game, char dir);
@@ -173,14 +170,14 @@ void	mouse_hook(t_game *game);
 // ray.c
 void	ray_calculation(t_game *game, double radian, int x);
 
-// teleport.c
+// teleport_check.c
+void	teleport_check(t_game *game, double x, double y);
+
+// teleport_dir.c
 bool	teleport_east(t_game *game, t_coords dest);
 bool	teleport_west(t_game *game, t_coords dest);
 bool	teleport_north(t_game *game, t_coords dest);
 bool	teleport_south(t_game *game, t_coords dest);
-
-// teleport2.c
-void	teleport_check(t_game *game, double x, double y);
 
 // init
 // init_game.c

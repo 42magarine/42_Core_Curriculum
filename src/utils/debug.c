@@ -6,22 +6,19 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 16:59:11 by fwahl             #+#    #+#             */
-/*   Updated: 2024/06/29 18:33:35 by mott             ###   ########.fr       */
+/*   Updated: 2024/07/01 13:26:12 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3D.h"
 
-static void	debug_player(t_player *player)
+static void	debug_player(t_map *map, t_player *player)
 {
 	if (player->pos.x > 0 && player->pos.y > 0)
-		printf("Player Pos	X: %f	Y: %f\n", player->pos.x, player->pos.y);
+		printf("Player Pos	x:%f	y:%f\n", player->pos.x, player->pos.y);
 	else
 		printf("Player Pos missing\n");
-	if (player->dir == 0 || player->dir)
-		printf("Player Dir	%f\n", player->dir);
-	else
-		printf("Player Dir missing\n");
+	printf("Player Dir:%c\n", map->map[(int)player->pos.y][(int)player->pos.x]);
 }
 
 static void	debug_map(t_game *game, t_map *map)
@@ -51,12 +48,12 @@ static void	debug_map(t_game *game, t_map *map)
 			printf("map_line[%d]: %s\n", y, map->map[y]);
 		y++;
 	}
-	printf("Portal1		X: %f	Y: %f\n", map->p_one.x, map->p_one.y);
-	printf("Portal2		X: %f	Y: %f\n", map->p_two.x, map->p_two.y);
+	printf("Portal1		X:%f	Y:%f\n", map->portal[0].x, map->portal[0].y);
+	printf("Portal2		X:%f	Y:%f\n", map->portal[1].x, map->portal[1].y);
 }
 
 void	debug_parse(t_game *game)
 {
 	debug_map(game, game->map);
-	debug_player(game->player);
+	debug_player(game->map, game->player);
 }
