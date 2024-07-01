@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 17:11:55 by mott              #+#    #+#             */
-/*   Updated: 2024/07/01 13:29:49 by mott             ###   ########.fr       */
+/*   Updated: 2024/07/01 13:35:10 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,7 @@
 
 # define WIDTH			1920
 # define HEIGHT			1080
-# define MM_WIDTH		448
-# define MM_HEIGHT		448
+# define MM_SIZE		448
 # define SIZE			64
 # define FOV			60.0
 # define ONE_PI			3.141592
@@ -89,11 +88,11 @@ typedef struct s_window
 
 typedef struct s_map
 {
-	char			**map;
-	int				floor;
-	int				ceiling;
-	t_coords		max;
-	t_coords		portal[2];
+	char		**map;
+	int			floor;
+	int			ceiling;
+	t_coords	max;
+	t_coords	portal[2];
 }	t_map;
 
 typedef struct s_player
@@ -200,9 +199,9 @@ void	parse_mapfile(t_game *game, char *filename);
 
 // utils
 mlx_texture_t	*set_texture(t_game *game, char *line);
-void	ft_error(t_game *game, const char *error);
-int		get_rgba(int r, int g, int b, int a);
-double	pi_overflow(double radian);
+void			ft_error(t_game *game, const char *error);
+int				get_rgba(int r, int g, int b, int a);
+double			pi_overflow(double radian);
 
 //free.c
 void	free_game(t_game *game);

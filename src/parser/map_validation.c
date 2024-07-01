@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_validation.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 17:55:44 by fwahl             #+#    #+#             */
-/*   Updated: 2024/06/30 17:08:09 by fwahl            ###   ########.fr       */
+/*   Updated: 2024/07/01 14:09:04 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,10 +60,10 @@ static void	validate_map(t_game *game)
 	if (!flood_fill(game->map, game->player->pos.x, game->player->pos.y, '2'))
 		ft_error(game, "flood_fill - invalid map (player)");
 	reset_map(game, temp);
-	if (!flood_fill(game->map, game->map->p_one.x, game->map->p_one.y, '2'))
+	if (!flood_fill(game->map, game->map->portal[0].x, game->map->portal[0].y, '2'))
 		ft_error(game, "flood_fill - invalid map (portal 1)");
 	reset_map(game, temp);
-	if (!flood_fill(game->map, game->map->p_two.x, game->map->p_two.y, '2'))
+	if (!flood_fill(game->map, game->map->portal[1].x, game->map->portal[1].y, '2'))
 		ft_error(game, "flood_fill - invalid map (portal 2)");
 	reset_map(game, temp);
 	free(temp);
@@ -91,6 +91,7 @@ static void	validate_map(t_game *game)
 void	init_map(t_game *game, char *filename)
 {
 	parse_mapfile(game, filename);
+	// printf("Player Pos	x:%f	y:%f\n", game->player->pos.x, game->player->pos.y);
 	validate_map(game);
 	debug_parse(game);
 }

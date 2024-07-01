@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 17:14:11 by fwahl             #+#    #+#             */
-/*   Updated: 2024/07/01 12:51:04 by mott             ###   ########.fr       */
+/*   Updated: 2024/07/01 13:43:54 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 #ifdef BONUS
 
-static void	init_portal(t_game *game, char *line) // parse portals?
+static void	parse_portal(t_game *game, char *line)
 {
 	static int	p;
 	int			i;
@@ -25,18 +25,13 @@ static void	init_portal(t_game *game, char *line) // parse portals?
 		if (line[i] == 'P')
 		{
 			p++;
-			if (p == 1)
-			{
-				game->map->p_one.x = i;
-				game->map->p_one.y = game->map->max.y;
-			}
-			if (p == 2)
-			{
-				game->map->p_two.x = i;
-				game->map->p_two.y = game->map->max.y;
-			}
 			if (p > 2)
-				ft_error(game, "too many portals on the map\n");
+				return (ft_error(game, "too many portals on the map\n"));
+			else
+			{
+				game->map->portal[p].x = i;
+				game->map->portal[p].y = game->map->max.y;
+			}
 		}
 		i++;
 	}
@@ -56,7 +51,7 @@ static bool	set_map_size(t_game *game, char *line)
 		if (is_player(line))
 			parse_player(game, line);
 		if (is_portal(line))
-			init_portal(game, line);
+			parse_portal(game, line);
 		game->map->max.y++;
 	}
 	return (false);

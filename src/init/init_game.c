@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init.c                                             :+:      :+:    :+:   */
+/*   init_game.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 15:31:03 by mott              #+#    #+#             */
-/*   Updated: 2024/07/01 12:53:54 by mott             ###   ########.fr       */
+/*   Updated: 2024/07/01 13:34:14 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,9 +57,9 @@ void	init_ray(t_ray *ray)
 void	init_minimap(t_map *map, t_minimap *minimap)
 {
 	if (map->max.x > map->max.y)
-		minimap->factor = MM_WIDTH / map->max.x;
+		minimap->factor = MM_SIZE / map->max.x;
 	else
-		minimap->factor = MM_HEIGHT / map->max.y;
+		minimap->factor = MM_SIZE / map->max.y;
 	minimap->start.x = WIDTH - minimap->factor * (map->max.x + 1);
 	minimap->start.y = minimap->factor;
 }
