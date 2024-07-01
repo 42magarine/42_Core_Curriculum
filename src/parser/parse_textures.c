@@ -25,10 +25,10 @@ static void	parse_rgb(t_game *game, char *line, u_int8_t rgb[3])
 		while (ft_isspace(line[i]) || line[i] == ',')
 			i++;
 		if (!ft_isdigit(line[i]))
-			ft_error(game, "parse_rgb error - invalid chars");
+			ft_error_parse(game, line, "parse_rgb error - invalid chars");
 		value = ft_atoi(&line[i]);
 		if (value < 0 || value > 255)
-			ft_error(game, "parse_rgb error - invalid range(uint8_t)");
+			ft_error_parse(game, line, "parse_rgb error - invalid range");
 		else
 			rgb[j] = value;
 		while (ft_isdigit(line[i]))
@@ -38,7 +38,7 @@ static void	parse_rgb(t_game *game, char *line, u_int8_t rgb[3])
 	while (ft_isspace(line[i]))
 		i++;
 	if (ft_strlen(&line[i]) > 0 || j < 3)
-		ft_error(game, "parse_rgb error - line too long");
+		ft_error_parse(game, line, "parse_rgb error - line too long");
 }
 
 void	parse_floor_ceiling(t_game *game, char *line)
@@ -72,13 +72,13 @@ void	parse_tex(t_game *game, char *line)
 	i = 0;
 	while (ft_isspace(line[i]))
 		i++;
-	if (ft_strncmp(&line[i], "EA", 2) == 0)
+	if (ft_strncmp(&line[i], "EA", 2) == 0 && tex->wall[0] == NULL)
 		tex->wall[0] = set_texture(game, &line[i + 2]);
-	else if (ft_strncmp(&line[i], "NO", 2) == 0)
+	else if (ft_strncmp(&line[i], "NO", 2 ) == 0 && tex->wall[1] == NULL)
 		tex->wall[1] = set_texture(game, &line[i + 2]);
-	else if (ft_strncmp(&line[i], "WE", 2) == 0)
+	else if (ft_strncmp(&line[i], "WE", 2) == 0 && tex->wall[2] == NULL)
 		tex->wall[2] = set_texture(game, &line[i + 2]);
-	else if (ft_strncmp(&line[i], "SO", 2) == 0)
+	else if (ft_strncmp(&line[i], "SO", 2) == 0 && tex->wall[3] == NULL)
 		tex->wall[3] = set_texture(game, &line[i + 2]);
 	if (tex->wall[0] && tex->wall[1] && tex->wall[2] && tex->wall[3])
 		game->parsed->walls = true;
@@ -90,7 +90,7 @@ void	parse_player(t_game *game, char *line)
 
 	i = 0;
 	if (game->parsed->player)
-		ft_error(game, "multiple players in map");
+		ft_error_parse(game, line, "multiple players in map");
 	game->player->pos.y = game->map->max.y;
 	while (line[i] != '\0')
 	{

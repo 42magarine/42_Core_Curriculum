@@ -6,7 +6,7 @@
 /*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/01 16:13:07 by fwahl             #+#    #+#             */
-/*   Updated: 2024/07/01 16:16:41 by fwahl            ###   ########.fr       */
+/*   Updated: 2024/07/01 20:15:48 by fwahl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,7 @@
 static void	parse_loop(t_game *game, char *line)
 {
 	if (game->parsed->map && line != NULL)
-	{
-		free(line);
-		ft_error(game, "invalid map file");
-	}
+		ft_error_parse(game, line, "input after map has been parsed");
 	if (!game->parsed->walls)
 		parse_tex(game, line);
 	if (!game->parsed->floor_ceiling)

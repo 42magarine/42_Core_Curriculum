@@ -6,13 +6,13 @@
 #    By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/04 17:02:41 by mott              #+#    #+#              #
-#    Updated: 2024/07/01 16:15:49 by fwahl            ###   ########.fr        #
+#    Updated: 2024/07/01 20:22:50 by fwahl            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC		=	cc
-# CFLAGS	=	-Wall -Wextra -Werror
-# CFLAGS	+=	-Ofast
+CFLAGS	=	-Wall -Wextra -Werror
+CFLAGS	+=	-Ofast
 # CFLAGS	+=	-fsanitize=address -g
 LDFLAGS	=	-ldl -lglfw -pthread -lm
 RM		=	rm -rf
@@ -27,6 +27,7 @@ SRCS	=	./src/main.c \
 			./src/parser/map_validation.c \
 			./src/utils/bools.c \
 			./src/utils/bools2.c \
+			./src/utils/error.c \
 			./src/utils/utils.c \
 			./src/utils/free.c \
 			./src/utils/debug.c \

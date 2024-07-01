@@ -6,7 +6,7 @@
 /*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 17:55:44 by fwahl             #+#    #+#             */
-/*   Updated: 2024/07/01 17:43:24 by fwahl            ###   ########.fr       */
+/*   Updated: 2024/07/01 20:17:24 by fwahl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,13 +60,13 @@ void	validate_map(t_game *game)
 		ft_error(game, "invalid player start position");
 	temp = ft_strarray_dup(map->map);
 	if (!flood_fill(map, game->player->pos.x, game->player->pos.y, '2'))
-		ft_error(game, "flood_fill - invalid map (player)");
+		ft_error_floodfill(game, temp, "flood_fill - invalid map (player)");
 	reset_map(game, temp);
 	if (!flood_fill(map, map->portal[0].x, map->portal[0].y, '2'))
-		ft_error(game, "flood_fill - invalid map (portal 1)");
+		ft_error_floodfill(game, temp, "flood_fill - invalid map (portal 1)");
 	reset_map(game, temp);
 	if (!flood_fill(map, map->portal[1].x, map->portal[1].y, '2'))
-		ft_error(game, "flood_fill - invalid map (portal 2)");
+		ft_error_floodfill(game, temp, "flood_fill - invalid map (portal 2)");
 	reset_map(game, temp);
 	ft_free_strarray(temp);
 }
@@ -83,7 +83,7 @@ void	validate_map(t_game *game)
 		ft_error(game, "invalid player start position");
 	temp = ft_strarray_dup(game->map->map);
 	if (!flood_fill(game->map, game->player->pos.x, game->player->pos.y, '2'))
-		ft_error(game, "flood_fill - invalid map (player)");
+		ft_error_floodfill(game, temp, "flood_fill - invalid map (player)");
 	reset_map(game, temp);
 	ft_free_strarray(temp);
 }

@@ -3,23 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
+/*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 17:21:47 by fwahl             #+#    #+#             */
-/*   Updated: 2024/07/01 11:50:11 by mott             ###   ########.fr       */
+/*   Updated: 2024/07/01 20:21:07 by fwahl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3D.h"
-
-void	ft_error(t_game *game, const char *error)
-{
-	printf("Error\n");
-	printf("%s\n", error);
-	if (game)
-		free_game(game);
-	exit(EXIT_FAILURE);
-}
 
 int	get_rgba(int r, int g, int b, int a)
 {

@@ -6,7 +6,7 @@
 /*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 17:14:11 by fwahl             #+#    #+#             */
-/*   Updated: 2024/07/01 17:47:48 by fwahl            ###   ########.fr       */
+/*   Updated: 2024/07/01 20:12:34 by fwahl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static void	parse_portal(t_game *game, char *line)
 		if (line[i] == 'P')
 		{
 			if (p > 2)
-				return (ft_error(game, "too many portals on the map\n"));
+				return (ft_error_parse(game, line, "too many portals\n"));
 			else
 			{
 				game->map->portal[p].x = i;
@@ -119,4 +119,3 @@ void	parse_mapsize(t_game *game, char *filename)
 	close(fd);
 	game->map->map = ft_calloc(game->map->max.y + 1, sizeof(char *));
 }
-
