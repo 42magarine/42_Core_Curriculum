@@ -1,7 +1,7 @@
-NO ./textures/portal1.png
-SO ./textures/portal2.png
-WE ./textures/portal3.png
-EA ./textures/portal4.png
+EA ./textures/east.png
+NO ./textures/north.png
+WE ./textures/west.png
+SO ./textures/south.png
 
 C 135, 206, 250
 F 210, 105, 30

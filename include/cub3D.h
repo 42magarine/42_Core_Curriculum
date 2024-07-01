@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 17:11:55 by mott              #+#    #+#             */
-/*   Updated: 2024/07/01 13:35:10 by mott             ###   ########.fr       */
+/*   Updated: 2024/07/01 15:24:57 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -191,11 +191,11 @@ void	init_portal_tex(t_game *game);
 
 // parser
 // parsing
-void	init_map(t_game *game, char *filename);
 void	parse_player(t_game	*game, char *line);
 void	parse_tex(t_game *game, char *line);
 void	parse_floor_ceiling(t_game *game, char *line);
 void	parse_mapfile(t_game *game, char *filename);
+void	validate_map(t_game *game);
 
 // utils
 mlx_texture_t	*set_texture(t_game *game, char *line);

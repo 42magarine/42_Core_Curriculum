@@ -6,17 +6,12 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 17:06:47 by fwahl             #+#    #+#             */
-/*   Updated: 2024/07/01 12:53:14 by mott             ###   ########.fr       */
+/*   Updated: 2024/07/01 15:22:06 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3D.h"
 
-// #ifdef BONUS
-// printf("hello BONUS\n");
-// #else
-// printf("hello\n");
-// #endif
 
 static void	init_game(t_game *game)
 {
@@ -26,6 +21,13 @@ static void	init_game(t_game *game)
 	init_portal_tex(game);
 	init_ray(game->ray);
 	init_minimap(game->map, game->minimap);
+}
+
+static void	init_map(t_game *game, char *filename)
+{
+	parse_mapfile(game, filename);
+	validate_map(game);
+	debug_parse(game);
 }
 
 static t_game	*init_game_struct(void)
