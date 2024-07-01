@@ -6,7 +6,7 @@
 /*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 17:11:55 by mott              #+#    #+#             */
-/*   Updated: 2024/07/01 20:11:04 by fwahl            ###   ########.fr       */
+/*   Updated: 2024/07/01 20:28:05 by fwahl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,22 +23,13 @@
 # include "../libft/libft.h"
 # include "../MLX42/include/MLX42/MLX42.h"
 
-# define BLACK			0x000000FF	// (0, 0, 0, 255)
-# define WHITE			0xFFFFFFFF	// (255, 255, 255, 255)
-# define RED			0xFF0000FF	// (255, 0, 0, 255)
-# define LIME			0x00FF00FF	// (0, 255, 0, 255)
-# define BLUE			0x0000FFFF	// (0, 0, 255, 255)
-# define YELLOW			0xFFFF00FF	// (255, 255, 0, 255)
-# define CYAN			0x00FFFFFF	// (0, 255, 255, 255)
-# define MAGENTA		0xFF00FFFF	// (255, 0, 255, 255)
-# define SILVER			0xC0C0C0FF	// (192, 192, 192, 255)
-# define GRAY			0x808080FF	// (128, 128, 128, 255)
-# define MAROON			0x800000FF	// (128, 0, 0, 255)
-# define OLIVE			0x808000FF	// (128, 128, 0, 255)
-# define GREEN			0x008000FF	// (0, 128, 0, 255)
-# define PURPLE			0x800080FF	// (128, 0, 128, 255)
-# define TEAL			0x008080FF	// (0, 128, 128, 255)
-# define NAVY			0x000080FF	// (0, 0, 128, 255)
+# define MM_BLUE		0x224fbcff	// (34, 79, 188, 255)
+# define MM_WHITE		0xffffffff	// (255, 255, 255, 255)
+# define MM_GOLD		0xffd700ff	// (255, 215, 0, 255)
+# define MM_ORANGE		0xffa500ff	// (255, 165, 0, 255)
+# define MM_RED			0x800080ff	// (128, 0, 32, 255)
+# define MM_ROSE		0x9b1b30ff	// (155, 27, 48, 255)
+# define MM_GRAY		0x696969ff	// (105, 105, 105, 255)
 
 # define WIDTH			1920
 # define HEIGHT			1080
@@ -66,8 +57,8 @@
 
 typedef struct s_coords
 {
-	double	x;
-	double	y;
+	float	x;
+	float	y;
 }	t_coords;
 
 typedef struct s_parse
@@ -98,16 +89,16 @@ typedef struct s_map
 typedef struct s_player
 {
 	t_coords	pos;
-	double		dir;
+	float		dir;
 }	t_player;
 
 typedef struct s_ray
 {
 	t_coords	hit[WIDTH];
 	int			wall[WIDTH];
-	double		len[WIDTH];
-	double		fov_start;
-	double		fov_add;
+	float		len[WIDTH];
+	float		fov_start;
+	float		fov_add;
 }	t_ray;
 
 typedef struct s_texture
@@ -115,8 +106,8 @@ typedef struct s_texture
 	mlx_texture_t	*wall[12];
 	mlx_texture_t	*portal[40];
 	t_coords		pos;
-	double			y_scale;
-	double			y_offset;
+	float			y_scale;
+	float			y_offset;
 	int				wall_height;
 	int				wall_offset;
 }	t_texture;
@@ -146,7 +137,7 @@ int		main(int argc, char **argv);
 // engine
 // draw_game.c
 void	draw_background(t_game *game);
-void	draw_wall(t_game *game, double radian, int x);
+void	draw_wall(t_game *game, float radian, int x);
 
 // draw_minimap.c
 void	draw_minimap(t_game *game);
@@ -165,12 +156,13 @@ void	loop_hook(void *param);
 
 // mouse.c
 void	mouse_hook(t_game *game);
+void	init_mouse(t_game *game);
 
 // ray.c
-void	ray_calculation(t_game *game, double radian, int x);
+void	ray_calculation(t_game *game, float radian, int x);
 
 // teleport_check.c
-void	teleport_check(t_game *game, double x, double y);
+void	teleport_check(t_game *game, float x, float y);
 
 // teleport_dir.c
 bool	teleport_east(t_game *game, t_coords dest);
