@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_validation.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
+/*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 17:55:44 by fwahl             #+#    #+#             */
-/*   Updated: 2024/07/01 15:27:29 by mott             ###   ########.fr       */
+/*   Updated: 2024/07/01 17:43:24 by fwahl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,22 +48,24 @@ static void	reset_map(t_game *game, char **temp)
 
 #ifdef BONUS
 
-static void	validate_map(t_game *game)
+void	validate_map(t_game *game)
 {
+	t_map	*map;
 	char	**temp;
 
+	map = game->map;
 	if (!all_parsed(game, game->parsed))
 		ft_error(game, "values not parsed correctly");
-	if (!is_start(game->map, game->player->pos.x, game->player->pos.y, '2'))
+	if (!is_start(map, game->player->pos.x, game->player->pos.y, '2'))
 		ft_error(game, "invalid player start position");
-	temp = ft_strarray_dup(game->map->map);
-	if (!flood_fill(game->map, game->player->pos.x, game->player->pos.y, '2'))
+	temp = ft_strarray_dup(map->map);
+	if (!flood_fill(map, game->player->pos.x, game->player->pos.y, '2'))
 		ft_error(game, "flood_fill - invalid map (player)");
 	reset_map(game, temp);
-	if (!flood_fill(game->map, game->map->portal[0].x, game->map->portal[0].y, '2'))
+	if (!flood_fill(map, map->portal[0].x, map->portal[0].y, '2'))
 		ft_error(game, "flood_fill - invalid map (portal 1)");
 	reset_map(game, temp);
-	if (!flood_fill(game->map, game->map->portal[1].x, game->map->portal[1].y, '2'))
+	if (!flood_fill(map, map->portal[1].x, map->portal[1].y, '2'))
 		ft_error(game, "flood_fill - invalid map (portal 2)");
 	reset_map(game, temp);
 	ft_free_strarray(temp);

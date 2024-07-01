@@ -6,7 +6,7 @@
 /*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 17:14:11 by fwahl             #+#    #+#             */
-/*   Updated: 2024/07/01 16:16:54 by fwahl            ###   ########.fr       */
+/*   Updated: 2024/07/01 17:47:48 by fwahl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ static void	parse_portal(t_game *game, char *line)
 	{
 		if (line[i] == 'P')
 		{
-			p++;
 			if (p > 2)
 				return (ft_error(game, "too many portals on the map\n"));
 			else
@@ -32,6 +31,7 @@ static void	parse_portal(t_game *game, char *line)
 				game->map->portal[p].x = i;
 				game->map->portal[p].y = game->map->max.y;
 			}
+			p++;
 		}
 		i++;
 	}
@@ -96,10 +96,13 @@ void	parse_map(t_game *game, char *line)
 
 void	parse_mapsize(t_game *game, char *filename)
 {
-	int		fd;
-	char	*line;
-	bool	stop;
+	int			fd;
+	char		*line;
+	bool		stop;
+	const char	*ext = ft_strrchr(filename, '.');
 
+	if (!ext || ext == filename || ft_strcmp(ext, ".cub") != 0)
+		ft_error(game, "file not ending in .cub");
 	stop = false;
 	fd = open(filename, O_RDONLY);
 	if (fd == -1)
