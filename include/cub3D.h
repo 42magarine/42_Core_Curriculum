@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
+/*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 17:11:55 by mott              #+#    #+#             */
-/*   Updated: 2024/07/01 15:24:57 by mott             ###   ########.fr       */
+/*   Updated: 2024/07/01 16:17:05 by fwahl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -191,6 +191,8 @@ void	init_portal_tex(t_game *game);
 
 // parser
 // parsing
+void	parse_mapsize(t_game *game, char *filename);
+void	parse_map(t_game *game, char *line);
 void	parse_player(t_game	*game, char *line);
 void	parse_tex(t_game *game, char *line);
 void	parse_floor_ceiling(t_game *game, char *line);

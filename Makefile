@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+         #
+#    By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/04 17:02:41 by mott              #+#    #+#              #
-#    Updated: 2024/07/01 15:21:06 by mott             ###   ########.fr        #
+#    Updated: 2024/07/01 16:15:49 by fwahl            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,6 +22,7 @@ SRCS	=	./src/main.c \
 			./src/init/init_game.c \
 			./src/init/init_portal.c \
 			./src/parser/parse_map.c \
+			./src/parser/parse_mapsize.c \
 			./src/parser/parse_textures.c \
 			./src/parser/map_validation.c \
 			./src/utils/bools.c \

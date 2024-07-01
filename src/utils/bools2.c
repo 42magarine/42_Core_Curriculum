@@ -6,7 +6,7 @@
 /*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/30 16:56:38 by fwahl             #+#    #+#             */
-/*   Updated: 2024/06/30 17:07:22 by fwahl            ###   ########.fr       */
+/*   Updated: 2024/07/01 16:05:38 by fwahl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,3 +40,21 @@ bool	is_start(t_map *map, int x, int y, char c)
 		return (false);
 	return (true);
 }
+
+#ifdef BONUS
+
+bool	is_portal(char *line)
+{
+	int	i;
+
+	i = 0;
+	while (line[i] != '\0' && is_map_line(line))
+	{
+		if (line[i] == 'P')
+			return (true);
+		i++;
+	}
+	return (false);
+}
+
+#endif

@@ -6,17 +6,28 @@
 /*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/16 20:41:35 by fwahl             #+#    #+#             */
-/*   Updated: 2024/06/27 19:13:14 by fwahl            ###   ########.fr       */
+/*   Updated: 2024/07/01 16:04:52 by fwahl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3D.h"
+
+#ifdef BONUS
 
 bool	is_map_char(char c)
 {
 	return (c == '0' || c == '1' || c == ' ' || c == 'D' || c == 'd'
 		|| c == 'P' || is_player_char(c));
 }
+
+#else
+
+bool	is_map_char(char c)
+{
+	return (c == '0' || c == '1' || c == ' ' || is_player_char(c));
+}
+
+#endif
 
 bool	is_map_line(char *line)
 {
@@ -62,16 +73,3 @@ bool	is_player(char *line)
 	return (false);
 }
 
-bool	is_portal(char *line)
-{
-	int	i;
-
-	i = 0;
-	while (line[i] != '\0' && is_map_line(line))
-	{
-		if (line[i] == 'P')
-			return (true);
-		i++;
-	}
-	return (false);
-}
