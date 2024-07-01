@@ -3,22 +3,23 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+         #
+#    By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/04 17:02:41 by mott              #+#    #+#              #
-#    Updated: 2024/06/30 17:08:48 by fwahl            ###   ########.fr        #
+#    Updated: 2024/07/01 12:02:54 by mott             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC		=	cc
 CFLAGS	=	-Wall -Wextra -Werror
 # CFLAGS	+=	-Ofast
-CFLAGS	+=	-fsanitize=address -g
+# CFLAGS	+=	-fsanitize=address -g
 LDFLAGS	=	-ldl -lglfw -pthread -lm
 RM		=	rm -rf
 
 NAME	=	cub3D
 SRCS	=	./src/main.c \
+			./src/init/init_portal.c \
 			./src/parser/parse_map.c \
 			./src/parser/parse_textures.c \
 			./src/parser/map_validation.c \

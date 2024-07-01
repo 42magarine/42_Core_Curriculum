@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 15:31:03 by mott              #+#    #+#             */
-/*   Updated: 2024/06/30 17:16:03 by fwahl            ###   ########.fr       */
+/*   Updated: 2024/07/01 12:01:14 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,8 @@ void	init_game(t_game *game)
 	init_window(game);
 	init_ray(game);
 	init_door(game);
-	portal_tex(game);
+	// portal_tex(game);
+	init_portal_tex(game);
 	init_minimap(game);
 	game->player->pos.x = game->player->pos.x * SIZE + (SIZE >> 1);
 	game->player->pos.y = game->player->pos.y * SIZE + (SIZE >> 1);

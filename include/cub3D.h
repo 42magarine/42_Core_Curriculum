@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 17:11:55 by mott              #+#    #+#             */
-/*   Updated: 2024/06/30 17:07:47 by fwahl            ###   ########.fr       */
+/*   Updated: 2024/07/01 12:00:29 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -188,6 +188,10 @@ bool	teleport_south(t_game *game, t_coords dest);
 // teleport2.c
 void	teleport_check(t_game *game, double x, double y);
 
+// init
+// init_portal.c
+void	init_portal_tex(t_game *game);
+
 // parser
 // parsing
 void	init_map(t_game *game, char *filename);
@@ -198,7 +202,7 @@ void	parse_mapfile(t_game *game, char *filename);
 
 // utils
 mlx_texture_t	*set_texture(t_game *game, char *line);
-void	ft_error(t_game *game, const char *errormsg);
+void	ft_error(t_game *game, const char *error);
 int		get_rgba(int r, int g, int b, int a);
 double	pi_overflow(double radian);
 

@@ -3,20 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 17:21:47 by fwahl             #+#    #+#             */
-/*   Updated: 2024/06/28 20:48:22 by fwahl            ###   ########.fr       */
+/*   Updated: 2024/07/01 11:50:11 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3D.h"
 
-void	ft_error(t_game *game, const char *errormsg)
+void	ft_error(t_game *game, const char *error)
 {
 	printf("Error\n");
-	printf("%s\n", errormsg);
-	free_game(game);
+	printf("%s\n", error);
+	if (game)
+		free_game(game);
 	exit(EXIT_FAILURE);
 }
 
