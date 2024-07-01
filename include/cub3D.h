@@ -6,7 +6,7 @@
 /*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 17:11:55 by mott              #+#    #+#             */
-/*   Updated: 2024/07/01 20:28:05 by fwahl            ###   ########.fr       */
+/*   Updated: 2024/07/01 20:33:02 by fwahl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -194,7 +194,7 @@ void	validate_map(t_game *game);
 // utils
 mlx_texture_t	*set_texture(t_game *game, char *line);
 int				get_rgba(int r, int g, int b, int a);
-double			pi_overflow(double radian);
+float			pi_overflow(float radian);
 
 //error.c
 void	ft_error(t_game *game, const char *error);

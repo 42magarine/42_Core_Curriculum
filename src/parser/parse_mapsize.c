@@ -6,7 +6,7 @@
 /*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 17:14:11 by fwahl             #+#    #+#             */
-/*   Updated: 2024/07/01 20:12:34 by fwahl            ###   ########.fr       */
+/*   Updated: 2024/07/01 20:30:55 by fwahl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,8 @@ static bool	set_map_size(t_game *game, char *line)
 		if (is_portal(line))
 			parse_portal(game, line);
 		game->map->max.y++;
+		if (game->map->max.y > 256 || game->map->max.x > 256)
+			ft_error_parse(game, line, "max map size 256x256")
 	}
 	return (false);
 }
