@@ -6,7 +6,7 @@
 #    By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/04 17:02:41 by mott              #+#    #+#              #
-#    Updated: 2024/06/29 17:57:01 by mott             ###   ########.fr        #
+#    Updated: 2024/07/01 11:47:55 by mott             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,6 +19,7 @@ RM		=	rm -rf
 
 NAME	=	cub3D
 SRCS	=	./src/main.c \
+			./src/init/init_portal.c \
 			./src/parser/parse_map.c \
 			./src/parser/parse_textures.c \
 			./src/parser/map_validation.c \
