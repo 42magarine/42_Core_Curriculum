@@ -6,7 +6,7 @@
 /*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 17:06:47 by fwahl             #+#    #+#             */
-/*   Updated: 2024/07/02 18:03:49 by fwahl            ###   ########.fr       */
+/*   Updated: 2024/07/02 18:19:11 by fwahl            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ static void	init_map(t_game *game, char *filename)
 {
 	parse_mapfile(game, filename);
 	validate_map(game);
-	debug_parse(game);
 }
 
 static t_game	*init_game_struct(void)

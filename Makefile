@@ -6,7 +6,7 @@
 #    By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/04 17:02:41 by mott              #+#    #+#              #
-#    Updated: 2024/07/02 17:55:31 by fwahl            ###   ########.fr        #
+#    Updated: 2024/07/02 18:19:42 by fwahl            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,6 @@ SRCS	=	./src/main.c \
 			./src/utils/error.c \
 			./src/utils/utils.c \
 			./src/utils/free.c \
-			./src/utils/debug.c \
 			./src/engine/draw_game.c \
 			./src/engine/draw_minimap.c \
 			./src/engine/key_movement.c \
