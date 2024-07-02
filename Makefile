@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+         #
+#    By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/04 17:02:41 by mott              #+#    #+#              #
-#    Updated: 2024/07/02 18:41:43 by fwahl            ###   ########.fr        #
+#    Updated: 2024/07/02 18:47:52 by mott             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -64,13 +64,9 @@ $(NAME): $(OBJS) $(HEADERS)
 	@echo "$(YELLOW)Creating object file finished.$(RESET)"
 
 $(LIBFT):
-		@if [ ! -d "./libft" ]; then \
-				git submodule init; \
-				git submodule update --remote; \
-		else \
-				git submodule update --remote; \
-		fi
-		@$(MAKE) -C ./libft
+	@git submodule init
+	@git submodule update --remote
+	@$(MAKE) -C ./libft
 
 $(MLX42):
 	@if [ ! -d "./MLX42" ]; then \
