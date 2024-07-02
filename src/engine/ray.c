@@ -6,16 +6,16 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 19:44:06 by mott              #+#    #+#             */
-/*   Updated: 2024/07/01 16:02:25 by mott             ###   ########.fr       */
+/*   Updated: 2024/07/02 16:47:38 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3D.h"
 
 // a² + b² = c²
-static float	ray_length(t_game *game, t_coords ray_hit)
+static double	ray_length(t_game *game, t_coords ray_hit)
 {
-	float	ray_len;
+	double	ray_len;
 
 	ray_len = (sqrt(pow(game->player->pos.x - ray_hit.x, 2)
 				+ pow(game->player->pos.y - ray_hit.y, 2)));
@@ -52,7 +52,7 @@ static t_coords	check_wall(t_game *game, t_coords pos, t_coords add, int *wall)
 
 // 0		<	radian	<	ONE_PI	= up
 // ONE_PI	<	radian	<	TWO_PI	= down
-static t_coords	horizontal_line(t_game *game, float radian, int *wall)
+static t_coords	horizontal_line(t_game *game, double radian, int *wall)
 {
 	t_coords	pos;
 	t_coords	pos_add;
@@ -83,7 +83,7 @@ static t_coords	horizontal_line(t_game *game, float radian, int *wall)
 
 // HALF_PI	>	radian	>	THREE_HALF_PI	= right
 // HALF_PI	<	radian	<	THREE_HALF_PI	= left
-static t_coords	vertical_line(t_game *game, float radian, int *wall)
+static t_coords	vertical_line(t_game *game, double radian, int *wall)
 {
 	t_coords	pos;
 	t_coords	pos_add;
@@ -116,10 +116,10 @@ static t_coords	vertical_line(t_game *game, float radian, int *wall)
 // tan (90°)	=  undefined
 // tan (180°)	=  0
 // tan (270°)	=  undefined
-void	ray_calculation(t_game *game, float radian, int x)
+void	ray_calculation(t_game *game, double radian, int x)
 {
 	t_coords	ray_hit[2];
-	float		ray_len[2];
+	double		ray_len[2];
 	int			ray_dir[2];
 
 	ray_hit[0] = horizontal_line(game, radian, &ray_dir[0]);

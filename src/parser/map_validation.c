@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_validation.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 17:55:44 by fwahl             #+#    #+#             */
-/*   Updated: 2024/07/01 20:28:13 by fwahl            ###   ########.fr       */
+/*   Updated: 2024/07/02 12:25:06 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,9 @@ void	validate_map(t_game *game)
 	temp = ft_strarray_dup(map->map);
 	if (!flood_fill(map, game->player->pos.x, game->player->pos.y, '2'))
 		ft_error_floodfill(game, temp, "flood_fill - invalid map (player)");
+	if (map->portal[0].x != 0 && map->portal[0].y != 0
+		&& map->portal[1].x == 0 && map->portal[1].y == 0)
+		ft_error(game, "too few portals");
 	reset_map(game, temp);
 	if (!flood_fill(map, map->portal[0].x, map->portal[0].y, '2'))
 		ft_error_floodfill(game, temp, "flood_fill - invalid map (portal 1)");

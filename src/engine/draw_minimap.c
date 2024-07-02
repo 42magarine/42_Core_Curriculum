@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 13:37:56 by mott              #+#    #+#             */
-/*   Updated: 2024/07/01 16:55:00 by mott             ###   ########.fr       */
+/*   Updated: 2024/07/02 15:21:46 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,8 +78,8 @@ void	draw_player(t_game *game)
 
 void	draw_ray(t_game *game, t_coords player, t_coords wall)
 {
-	float	dx;
-	float	dy;
+	double	dx;
+	double	dy;
 	int		i;
 
 	dx = (wall.x - game->player->pos.x) / SIZE * game->minimap->factor;

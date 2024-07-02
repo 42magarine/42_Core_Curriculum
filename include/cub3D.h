@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 17:11:55 by mott              #+#    #+#             */
-/*   Updated: 2024/07/01 20:33:02 by fwahl            ###   ########.fr       */
+/*   Updated: 2024/07/02 15:21:46 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,8 @@
 
 typedef struct s_coords
 {
-	float	x;
-	float	y;
+	double	x;
+	double	y;
 }	t_coords;
 
 typedef struct s_parse
@@ -89,16 +89,16 @@ typedef struct s_map
 typedef struct s_player
 {
 	t_coords	pos;
-	float		dir;
+	double		dir;
 }	t_player;
 
 typedef struct s_ray
 {
 	t_coords	hit[WIDTH];
 	int			wall[WIDTH];
-	float		len[WIDTH];
-	float		fov_start;
-	float		fov_add;
+	double		len[WIDTH];
+	double		fov_start;
+	double		fov_add;
 }	t_ray;
 
 typedef struct s_texture
@@ -106,8 +106,8 @@ typedef struct s_texture
 	mlx_texture_t	*wall[12];
 	mlx_texture_t	*portal[40];
 	t_coords		pos;
-	float			y_scale;
-	float			y_offset;
+	double			y_scale;
+	double			y_offset;
 	int				wall_height;
 	int				wall_offset;
 }	t_texture;
@@ -137,7 +137,7 @@ int		main(int argc, char **argv);
 // engine
 // draw_game.c
 void	draw_background(t_game *game);
-void	draw_wall(t_game *game, float radian, int x);
+void	draw_wall(t_game *game, double radian, int x);
 
 // draw_minimap.c
 void	draw_minimap(t_game *game);
@@ -159,10 +159,10 @@ void	mouse_hook(t_game *game);
 void	init_mouse(t_game *game);
 
 // ray.c
-void	ray_calculation(t_game *game, float radian, int x);
+void	ray_calculation(t_game *game, double radian, int x);
 
 // teleport_check.c
-void	teleport_check(t_game *game, float x, float y);
+void	teleport_check(t_game *game, double x, double y);
 
 // teleport_dir.c
 bool	teleport_east(t_game *game, t_coords dest);
@@ -194,7 +194,7 @@ void	validate_map(t_game *game);
 // utils
 mlx_texture_t	*set_texture(t_game *game, char *line);
 int				get_rgba(int r, int g, int b, int a);
-float			pi_overflow(float radian);
+double			pi_overflow(double radian);
 
 //error.c
 void	ft_error(t_game *game, const char *error);

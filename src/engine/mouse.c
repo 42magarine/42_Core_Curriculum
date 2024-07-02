@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/22 16:12:34 by fwahl             #+#    #+#             */
-/*   Updated: 2024/07/01 17:37:52 by mott             ###   ########.fr       */
+/*   Updated: 2024/07/02 15:21:46 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static void	mouse_button_cb(mouse_key_t button, action_t action,
 static void	mouse_move_cb(double xpos, double ypos, void *param)
 {
 	t_game	*game;
-	float	dx;
+	double	dx;
 	char	dir;
 
 	(void)ypos;

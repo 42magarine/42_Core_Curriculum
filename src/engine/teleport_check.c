@@ -6,13 +6,13 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/29 14:17:30 by mott              #+#    #+#             */
-/*   Updated: 2024/07/01 16:02:25 by mott             ###   ########.fr       */
+/*   Updated: 2024/07/02 15:21:46 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3D.h"
 
-static void	teleport_order_x(t_game *game, t_coords dest, float x)
+static void	teleport_order_x(t_game *game, t_coords dest, double x)
 {
 	if (x < 0)
 	{
@@ -38,7 +38,7 @@ static void	teleport_order_x(t_game *game, t_coords dest, float x)
 	}
 }
 
-static void	teleport_order_y(t_game *game, t_coords dest, float y)
+static void	teleport_order_y(t_game *game, t_coords dest, double y)
 {
 	if (y < 0)
 	{
@@ -64,7 +64,7 @@ static void	teleport_order_y(t_game *game, t_coords dest, float y)
 	}
 }
 
-void	teleport_check(t_game *game, float x, float y)
+void	teleport_check(t_game *game, double x, double y)
 {
 	if ((int)(game->player->pos.x + x) >> 6 == game->map->portal[0].x
 		&& (int)(game->player->pos.y) >> 6 == game->map->portal[0].y)

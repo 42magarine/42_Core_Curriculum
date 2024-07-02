@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 14:08:58 by mott              #+#    #+#             */
-/*   Updated: 2024/07/01 16:02:25 by mott             ###   ########.fr       */
+/*   Updated: 2024/07/02 16:47:05 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 // sin (90°)	=  1	cos (90°)	=  0
 // sin (180°)	=  0	cos (180°)	= -1
 // sin (270°)	= -1	cos (270°)	=  0
-static void	move_player(t_game *game, char key, float x, float y)
+static void	move_player(t_game *game, char key, double x, double y)
 {
 	if (key == 'W' || key == 'S')
 	{

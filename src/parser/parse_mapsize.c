@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_mapsize.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 17:14:11 by fwahl             #+#    #+#             */
-/*   Updated: 2024/07/01 20:30:55 by fwahl            ###   ########.fr       */
+/*   Updated: 2024/07/02 12:17:13 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ static void	parse_portal(t_game *game, char *line)
 	{
 		if (line[i] == 'P')
 		{
-			if (p > 2)
-				return (ft_error_parse(game, line, "too many portals\n"));
+			if (p >= 2)
+				return (ft_error_parse(game, line, "too many portals"));
 			else
 			{
 				game->map->portal[p].x = i;
@@ -54,7 +54,7 @@ static bool	set_map_size(t_game *game, char *line)
 			parse_portal(game, line);
 		game->map->max.y++;
 		if (game->map->max.y > 256 || game->map->max.x > 256)
-			ft_error_parse(game, line, "max map size 256x256")
+			ft_error_parse(game, line, "max map size 256x256");
 	}
 	return (false);
 }
