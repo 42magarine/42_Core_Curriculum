@@ -1,0 +1,25 @@
+
+C 135 , 206 , 250
+F 210 , 105 ,  30
+
+hello
+
+ EA  ./textures/east.png
+ NO  ./textures/north.png
+ WE  ./textures/west.png
+ SO  ./textures/south.png
+
+1111111111
+1E000000001
+101010101001
+10000000001
+1000000001
+100000001
+10000001
+1000001
+100001
+10001
+1001
+101
+11
+1
