@@ -12,7 +12,7 @@
 
 #include "../../include/cub3D.h"
 
-static void	parse_rgb(t_game *game, char *line, u_int8_t rgb[3])
+static bool	parse_rgb(char *line, u_int8_t rgb[3])
 {
 	int	i;
 	int	j;
@@ -25,12 +25,11 @@ static void	parse_rgb(t_game *game, char *line, u_int8_t rgb[3])
 		while (ft_isspace(line[i]) || line[i] == ',')
 			i++;
 		if (!ft_isdigit(line[i]))
-			ft_error_parse(game, line, "parse_rgb error - invalid chars");
+			return (false);
 		value = ft_atoi(&line[i]);
 		if (value < 0 || value > 255)
-			ft_error_parse(game, line, "parse_rgb error - invalid range");
-		else
-			rgb[j] = value;
+			return (false);
+		rgb[j] = value;
 		while (ft_isdigit(line[i]))
 			i++;
 		j++;
@@ -38,7 +37,8 @@ static void	parse_rgb(t_game *game, char *line, u_int8_t rgb[3])
 	while (ft_isspace(line[i]))
 		i++;
 	if (ft_strlen(&line[i]) > 0 || j < 3)
-		ft_error_parse(game, line, "parse_rgb error - line too long");
+		return (false);
+	return (true);
 }
 
 void	parse_floor_ceiling(t_game *game, char *line)
@@ -53,7 +53,8 @@ void	parse_floor_ceiling(t_game *game, char *line)
 		i++;
 	if (line[i] == 'F' || line[i] == 'C')
 	{
-		parse_rgb(game, line + i + 1, rgb);
+		if (!parse_rgb(line + i + 1, rgb))
+			ft_error_parse(game, line, "RGB not parsed correctly");
 		if (line[i] == 'F')
 			map->floor = get_rgba(rgb[0], rgb[1], rgb[2], 255);
 		if (line[i] == 'C')
