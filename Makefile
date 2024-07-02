@@ -6,7 +6,7 @@
 #    By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/04 17:02:41 by mott              #+#    #+#              #
-#    Updated: 2024/07/02 18:35:11 by fwahl            ###   ########.fr        #
+#    Updated: 2024/07/02 18:41:43 by fwahl            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -71,8 +71,6 @@ $(LIBFT):
 				git submodule update --remote; \
 		fi
 		@$(MAKE) -C ./libft
-# $(LIBFT):
-# 	@$(MAKE) -C ./Libft
 
 $(MLX42):
 	@if [ ! -d "./MLX42" ]; then \
