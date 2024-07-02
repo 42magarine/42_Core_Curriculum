@@ -29,8 +29,7 @@ static bool	parse_rgb(char *line, u_int8_t rgb[3])
 		value = ft_atoi(&line[i]);
 		if (value < 0 || value > 255)
 			return (false);
-		else
-			rgb[j] = value;
+		rgb[j] = value;
 		while (ft_isdigit(line[i]))
 			i++;
 		j++;
