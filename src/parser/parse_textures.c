@@ -74,7 +74,7 @@ void	parse_tex(t_game *game, char *line)
 		i++;
 	if (ft_strncmp(&line[i], "EA", 2) == 0 && tex->wall[0] == NULL)
 		tex->wall[0] = set_texture(game, &line[i + 2]);
-	else if (ft_strncmp(&line[i], "NO", 2 ) == 0 && tex->wall[1] == NULL)
+	else if (ft_strncmp(&line[i], "NO", 2) == 0 && tex->wall[1] == NULL)
 		tex->wall[1] = set_texture(game, &line[i + 2]);
 	else if (ft_strncmp(&line[i], "WE", 2) == 0 && tex->wall[2] == NULL)
 		tex->wall[2] = set_texture(game, &line[i + 2]);

@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 17:11:55 by mott              #+#    #+#             */
-/*   Updated: 2024/07/02 15:21:46 by mott             ###   ########.fr       */
+/*   Updated: 2024/07/02 17:45:44 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,64 +132,64 @@ typedef struct s_game
 }	t_game;
 
 // main.c
-int		main(int argc, char **argv);
+int				main(int argc, char **argv);
 
 // engine
 // draw_game.c
-void	draw_background(t_game *game);
-void	draw_wall(t_game *game, double radian, int x);
+void			draw_background(t_game *game);
+void			draw_wall(t_game *game, double radian, int x);
 
 // draw_minimap.c
-void	draw_minimap(t_game *game);
-void	draw_player(t_game *game);
-void	draw_ray(t_game *game, t_coords player, t_coords wall);
+void			draw_minimap(t_game *game);
+void			draw_player(t_game *game);
+void			draw_ray(t_game *game, t_coords player, t_coords wall);
 
 // key_movement.c
-void	key_hook(t_game *game);
-void	rotate_player(t_game *game, char dir);
+void			key_hook(t_game *game);
+void			rotate_player(t_game *game, char dir);
 
 // key_special.c
-void	special_key_hook(mlx_key_data_t keydata, void *param);
+void			special_key_hook(mlx_key_data_t keydata, void *param);
 
 // loop.c
-void	loop_hook(void *param);
+void			loop_hook(void *param);
 
 // mouse.c
-void	mouse_hook(t_game *game);
-void	init_mouse(t_game *game);
+void			mouse_hook(t_game *game);
+void			init_mouse(t_game *game);
 
 // ray.c
-void	ray_calculation(t_game *game, double radian, int x);
+void			ray_calculation(t_game *game, double radian, int x);
 
 // teleport_check.c
-void	teleport_check(t_game *game, double x, double y);
+void			teleport_check(t_game *game, double x, double y);
 
 // teleport_dir.c
-bool	teleport_east(t_game *game, t_coords dest);
-bool	teleport_west(t_game *game, t_coords dest);
-bool	teleport_north(t_game *game, t_coords dest);
-bool	teleport_south(t_game *game, t_coords dest);
+bool			teleport_east(t_game *game, t_coords dest);
+bool			teleport_west(t_game *game, t_coords dest);
+bool			teleport_north(t_game *game, t_coords dest);
+bool			teleport_south(t_game *game, t_coords dest);
 
 // init
 // init_game.c
-void	init_window(t_game *game);
-void	init_player(t_map *map, t_player *player);
-void	init_door_tex(t_game *game);
-void	init_ray(t_ray *ray);
-void	init_minimap(t_map *map, t_minimap *minimap);
+void			init_window(t_game *game);
+void			init_player(t_map *map, t_player *player);
+void			init_door_tex(t_game *game);
+void			init_ray(t_ray *ray);
+void			init_minimap(t_map *map, t_minimap *minimap);
 
 // init_portal.c
-void	init_portal_tex(t_game *game);
+void			init_portal_tex(t_game *game);
 
 // parser
 // parsing
-void	parse_mapsize(t_game *game, char *filename);
-void	parse_map(t_game *game, char *line);
-void	parse_player(t_game	*game, char *line);
-void	parse_tex(t_game *game, char *line);
-void	parse_floor_ceiling(t_game *game, char *line);
-void	parse_mapfile(t_game *game, char *filename);
-void	validate_map(t_game *game);
+void			parse_mapsize(t_game *game, char *filename);
+void			parse_map(t_game *game, char *line);
+void			parse_player(t_game	*game, char *line);
+void			parse_tex(t_game *game, char *line);
+void			parse_floor_ceiling(t_game *game, char *line);
+void			parse_mapfile(t_game *game, char *filename);
+void			validate_map(t_game *game);
 
 // utils
 mlx_texture_t	*set_texture(t_game *game, char *line);
@@ -197,23 +197,23 @@ int				get_rgba(int r, int g, int b, int a);
 double			pi_overflow(double radian);
 
 //error.c
-void	ft_error(t_game *game, const char *error);
-void	ft_error_parse(t_game *game, char *line, const char *error);
-void	ft_error_floodfill(t_game *game, char **temp, const char *error);
+void			ft_error(t_game *game, const char *error);
+void			ft_error_parse(t_game *game, char *line, const char *error);
+void			ft_error_ff(t_game *game, char **temp, const char *error);
 
 //free.c
-void	free_game(t_game *game);
+void			free_game(t_game *game);
 
 // bools.c
-bool	is_map_char(char c);
-bool	is_map_line(char *line);
-bool	is_player_char(char c);
-bool	is_player(char *line);
-bool	is_portal(char *line);
-bool	is_start(t_map *map, int x, int y, char c);
-bool	all_parsed(t_game *game, t_parse *parse);
+bool			is_map_char(char c);
+bool			is_map_line(char *line);
+bool			is_player_char(char c);
+bool			is_player(char *line);
+bool			is_portal(char *line);
+bool			is_start(t_map *map, int x, int y, char c);
+bool			all_parsed(t_game *game, t_parse *parse);
 
 // debug.c
-void	debug_parse(t_game *game);
+void			debug_parse(t_game *game);
 
 #endif

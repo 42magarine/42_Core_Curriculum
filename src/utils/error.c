@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/01 20:07:23 by fwahl             #+#    #+#             */
-/*   Updated: 2024/07/01 20:09:33 by fwahl            ###   ########.fr       */
+/*   Updated: 2024/07/02 17:46:42 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	ft_error_parse(t_game *game, char *line, const char *error)
 	exit(EXIT_FAILURE);
 }
 
-void	ft_error_floodfill(t_game *game, char **temp, const char *error)
+void	ft_error_ff(t_game *game, char **temp, const char *error)
 {
 	printf("Error\n");
 	printf("%s\n", error);

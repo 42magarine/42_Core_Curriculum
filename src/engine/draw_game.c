@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 16:28:04 by mott              #+#    #+#             */
-/*   Updated: 2024/07/02 15:21:46 by mott             ###   ########.fr       */
+/*   Updated: 2024/07/02 17:48:48 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,8 @@ void	draw_wall(t_game *game, double radian, int x)
 	y = 0;
 	while (y < tex.wall_height)
 	{
-		i = ((int)tex.pos.y * game->tex->wall[dir]->width + (int)tex.pos.x) << 2;
+		i = ((int)tex.pos.y * game->tex->wall[dir]->width
+				+ (int)tex.pos.x) << 2;
 		mlx_put_pixel(game->window->image, x, y + tex.wall_offset,
 			get_rgba(game->tex->wall[dir]->pixels[i],
 				game->tex->wall[dir]->pixels[i + 1],
