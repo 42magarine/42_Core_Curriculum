@@ -6,7 +6,7 @@
 #    By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/04 17:02:41 by mott              #+#    #+#              #
-#    Updated: 2024/07/02 18:19:42 by fwahl            ###   ########.fr        #
+#    Updated: 2024/07/02 18:35:11 by fwahl            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,7 +43,7 @@ SRCS	=	./src/main.c \
 OBJS	=	$(SRCS:.c=.o)
 HEADERS	=	./include/cub3D.h
 
-LIBFT	=	./Libft/libft.a
+LIBFT	=	./libft/libft.a
 MLX42	=	./MLX42/build/libmlx42.a
 
 RESET	=	\x1b[0m
@@ -64,7 +64,15 @@ $(NAME): $(OBJS) $(HEADERS)
 	@echo "$(YELLOW)Creating object file finished.$(RESET)"
 
 $(LIBFT):
-	@$(MAKE) -C ./Libft
+		@if [ ! -d "./libft" ]; then \
+				git submodule init; \
+				git submodule update --remote; \
+		else \
+				git submodule update --remote; \
+		fi
+		@$(MAKE) -C ./libft
+# $(LIBFT):
+# 	@$(MAKE) -C ./Libft
 
 $(MLX42):
 	@if [ ! -d "./MLX42" ]; then \
