@@ -6,16 +6,17 @@
 #    By: fwahl <fwahl@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/04 17:02:41 by mott              #+#    #+#              #
-#    Updated: 2024/07/02 17:35:16 by fwahl            ###   ########.fr        #
+#    Updated: 2024/07/02 17:55:31 by fwahl            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC		=	cc
 CFLAGS	=	-Wall -Wextra -Werror
 # CFLAGS	+=	-Ofast
-CFLAGS	+=	-fsanitize=address -g
+# CFLAGS	+=	-fsanitize=address -g
 LDFLAGS	=	-ldl -lglfw -pthread -lm
 RM		=	rm -rf
+MLX_URL =	https://github.com/codam-coding-college/MLX42.git
 
 NAME	=	cub3D
 SRCS	=	./src/main.c \
@@ -67,6 +68,9 @@ $(LIBFT):
 	@$(MAKE) -C ./Libft
 
 $(MLX42):
+	@if [ ! -d "./MLX42" ]; then \
+		git clone $(MLX_URL) ./MLX42; \
+	fi
 	@cmake ./MLX42 -B ./MLX42/build
 	@cmake --build ./MLX42/build
 
