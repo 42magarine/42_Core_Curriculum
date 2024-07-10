@@ -6,7 +6,7 @@
 #    By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/10 16:15:18 by mott              #+#    #+#              #
-#    Updated: 2024/07/10 17:15:50 by mott             ###   ########.fr        #
+#    Updated: 2024/07/10 18:04:15 by mott             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,8 +17,8 @@ RM			=	rm -rf
 NAME		=	phonebook
 
 SRCS		=	main.cpp \
-				contact.cpp \
-				phonebook.cpp
+				Contact.cpp \
+				PhoneBook.cpp
 OBJS		=	$(SRCS:.cpp=.o)
 DEPS		=	$(SRCS:.cpp=.d)
 

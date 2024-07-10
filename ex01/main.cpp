@@ -6,14 +6,16 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 17:11:47 by mott              #+#    #+#             */
-/*   Updated: 2024/07/10 17:31:30 by mott             ###   ########.fr       */
+/*   Updated: 2024/07/10 18:40:23 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
+#include "Contact.hpp"
 
 int main(void) {
 	std::string	command;
+	Contact		MyContact;
 
 	while (true) {
 		std::cout << "Enter a command (ADD, SEARCH, EXIT): ";
