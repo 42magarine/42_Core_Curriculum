@@ -6,12 +6,12 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 17:18:03 by mott              #+#    #+#             */
-/*   Updated: 2024/07/10 18:56:14 by mott             ###   ########.fr       */
+/*   Updated: 2024/07/10 20:05:19 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CONTACT_HPP
-#define CONTACT_HPP
+#ifndef CONTACT_H
+#define CONTACT_H
 
 #include <string>
 
@@ -19,12 +19,17 @@ class Contact {
 	public:
 		Contact();
 		~Contact();
+		std::string getFirstName() const;
+		std::string getLastName() const;
+		std::string getNickname() const;
+		std::string getPhoneNumber() const;
+		std::string getDarkestSecret() const;
 	private:
-		std::string first_name;
-		std::string last_name;
-		std::string nickname;
-		std::string phone_number;
-		std::string darkest_secret;
+		std::string _firstName;
+		std::string _lastName;
+		std::string _nickname;
+		std::string _phoneNumber;
+		std::string _darkestSecret;
 };
 
 #endif

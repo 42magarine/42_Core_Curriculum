@@ -6,12 +6,12 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 17:17:50 by mott              #+#    #+#             */
-/*   Updated: 2024/07/10 18:55:50 by mott             ###   ########.fr       */
+/*   Updated: 2024/07/10 19:44:06 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PHONEBOOK_HPP
-#define PHONEBOOK_HPP
+#ifndef PHONEBOOK_H
+#define PHONEBOOK_H
 
 #include "Contact.hpp"
 
@@ -20,7 +20,7 @@ class PhoneBook {
 		PhoneBook();
 		~PhoneBook();
 	private:
-		Contact	Contact[8];
+		Contact	_contact[8];
 };
 
 #endif
