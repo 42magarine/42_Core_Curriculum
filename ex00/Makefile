@@ -6,7 +6,7 @@
 #    By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/10 14:08:44 by mott              #+#    #+#              #
-#    Updated: 2024/07/10 14:37:03 by mott             ###   ########.fr        #
+#    Updated: 2024/07/10 14:49:32 by mott             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,4 +44,13 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all clean fclean re
+t1: all
+	./$(NAME) "shhhhh... I think the students are asleep..."
+
+t2: all
+	./$(NAME) Damnit " ! " "Sorry students, I thought this thing was off."
+
+t3: all
+	./$(NAME)
+
+.PHONY: all clean fclean re t1 t2 t3
