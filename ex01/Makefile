@@ -6,7 +6,7 @@
 #    By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/10 16:15:18 by mott              #+#    #+#              #
-#    Updated: 2024/07/10 16:37:06 by mott             ###   ########.fr        #
+#    Updated: 2024/07/10 17:15:50 by mott             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,9 @@ CPPFLAGS	+=	-std=c++98
 RM			=	rm -rf
 NAME		=	phonebook
 
-SRCS		=	phonebook.cpp
+SRCS		=	main.cpp \
+				contact.cpp \
+				phonebook.cpp
 OBJS		=	$(SRCS:.cpp=.o)
 DEPS		=	$(SRCS:.cpp=.d)
 
