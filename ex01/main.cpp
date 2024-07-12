@@ -6,28 +6,33 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 17:11:47 by mott              #+#    #+#             */
-/*   Updated: 2024/07/10 20:16:36 by mott             ###   ########.fr       */
+/*   Updated: 2024/07/12 18:41:55 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
+#include <string>
 #include "PhoneBook.hpp"
 
 int main(void) {
+	PhoneBook	phonebook;
 	std::string	command;
-	PhoneBook	phone_book;
 
 	while (true) {
-		std::cout << "Enter a command (ADD, SEARCH or EXIT): ";
+		std::cout << std::string(43, '-') << std::endl;
+		std::cout << "Enter a command (ADD, SEARCH, EXIT): ";
 		std::getline(std::cin, command);
 		if (command == "ADD") {
-			std::cout << "add" << std::endl;
+			phonebook.addContact();
 		}
 		else if (command == "SEARCH") {
-			std::cout << "search" << std::endl;
+			phonebook.searchContact();
 		}
 		else if (command == "EXIT") {
 			break;
+		}
+		else {
+			std::cout << "Invalid command." << std::endl;
 		}
 	}
 	return 0;
