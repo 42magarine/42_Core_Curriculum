@@ -6,12 +6,12 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/14 13:53:08 by mott              #+#    #+#             */
-/*   Updated: 2024/07/15 17:13:55 by mott             ###   ########.fr       */
+/*   Updated: 2024/07/15 17:35:22 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Zombie.hpp"
 
-Zombie	*newZombie(std::string name) {
+Zombie *newZombie(std::string name) {
 	return new Zombie(name);
 }
