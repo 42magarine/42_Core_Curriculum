@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 17:17:50 by mott              #+#    #+#             */
-/*   Updated: 2024/07/12 18:32:24 by mott             ###   ########.fr       */
+/*   Updated: 2024/07/15 17:39:13 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,16 +20,16 @@ class PhoneBook {
 	public:
 		PhoneBook();
 		~PhoneBook();
-		void				addContact();
-		void				searchContact();
+		void addContact();
+		void searchContact();
 
 	private:
-		void				displayFullContact(int i);
-		std::string			truncateString(std::string output);
-		int					_index;
-		int					_totalContacts;
-		static const int	_maxContacts = 8;
-		Contact				_contact[_maxContacts];
+		void displayFullContact(int i);
+		std::string truncateString(std::string output);
+		int _index;
+		int _totalContacts;
+		static const int _maxContacts = 8;
+		Contact _contact[_maxContacts];
 };
 
 #endif

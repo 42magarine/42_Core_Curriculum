@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 17:11:47 by mott              #+#    #+#             */
-/*   Updated: 2024/07/12 18:41:55 by mott             ###   ########.fr       */
+/*   Updated: 2024/07/15 17:39:26 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 #include "PhoneBook.hpp"
 
 int main(void) {
-	PhoneBook	phonebook;
-	std::string	command;
+	PhoneBook phonebook;
+	std::string command;
 
 	while (true) {
 		std::cout << std::string(43, '-') << std::endl;

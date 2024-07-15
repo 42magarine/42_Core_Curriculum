@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   phonebook.cpp                                      :+:      :+:    :+:   */
+/*   PhoneBook.cpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 17:12:08 by mott              #+#    #+#             */
-/*   Updated: 2024/07/12 18:40:47 by mott             ###   ########.fr       */
+/*   Updated: 2024/07/15 17:38:33 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ PhoneBook::PhoneBook() : _index(0), _totalContacts(0) {}
 
 PhoneBook::~PhoneBook() {}
 
-void	PhoneBook::addContact() {
+void PhoneBook::addContact() {
 	_contact[_index].setFirstName();
 	_contact[_index].setLastName();
 	_contact[_index].setNickname();
@@ -31,7 +31,7 @@ void	PhoneBook::addContact() {
 	}
 }
 
-void	PhoneBook::searchContact() {
+void PhoneBook::searchContact() {
 	std::string	input;
 	int			i;
 
@@ -71,7 +71,7 @@ void	PhoneBook::searchContact() {
 	}
 }
 
-void	PhoneBook::displayFullContact(int i) {
+void PhoneBook::displayFullContact(int i) {
 		std::cout << std::string(43, '-') << std::endl;
 		std::cout << "First Name: " << _contact[i].getFirstName() << std::endl;
 		std::cout << "Last Name: " << _contact[i].getLastName() << std::endl;
@@ -80,7 +80,7 @@ void	PhoneBook::displayFullContact(int i) {
 		std::cout << "Darkest Secret: " << _contact[i].getDarkestSecret() << std::endl;
 }
 
-std::string	PhoneBook::truncateString(std::string output) {
+std::string PhoneBook::truncateString(std::string output) {
 	if (output.length() > 10) {
 		return output.substr(0, 9) + ".";
 	}

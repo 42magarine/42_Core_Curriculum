@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   contact.cpp                                        :+:      :+:    :+:   */
+/*   Contact.cpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 18:44:09 by mott              #+#    #+#             */
-/*   Updated: 2024/07/12 18:39:04 by mott             ###   ########.fr       */
+/*   Updated: 2024/07/15 17:37:30 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ Contact::Contact() {}
 
 Contact::~Contact() {}
 
-void	Contact::setFirstName() {
+void Contact::setFirstName() {
 	do {
 		std::cout << "Enter first name: ";
 		std::getline(std::cin, _input);
@@ -25,7 +25,7 @@ void	Contact::setFirstName() {
 	_firstName = _input;
 }
 
-void	Contact::setLastName() {
+void Contact::setLastName() {
 	do {
 		std::cout << "Enter last name: ";
 		std::getline(std::cin, _input);
@@ -33,7 +33,7 @@ void	Contact::setLastName() {
 	_lastName = _input;
 }
 
-void	Contact::setNickname() {
+void Contact::setNickname() {
 	do {
 		std::cout << "Enter nickname: ";
 		std::getline(std::cin, _input);
@@ -41,7 +41,7 @@ void	Contact::setNickname() {
 	_nickname = _input;
 }
 
-void	Contact::setPhoneNumber() {
+void Contact::setPhoneNumber() {
 	do {
 		std::cout << "Enter phone number: ";
 		std::getline(std::cin, _input);
@@ -49,7 +49,7 @@ void	Contact::setPhoneNumber() {
 	_phoneNumber = _input;
 }
 
-void	Contact::setDarkestSecret() {
+void Contact::setDarkestSecret() {
 	do {
 		std::cout << "Enter darkest secret: ";
 		std::getline(std::cin, _input);

@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/13 12:52:33 by mott              #+#    #+#             */
-/*   Updated: 2024/07/13 18:32:45 by mott             ###   ########.fr       */
+/*   Updated: 2024/07/15 17:36:38 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,23 +35,23 @@ Account::~Account() {
 			  << "closed" << std::endl;
 }
 
-int	Account::getNbAccounts() {
+int Account::getNbAccounts() {
 	return _nbAccounts;
 }
 
-int	Account::getTotalAmount() {
+int Account::getTotalAmount() {
 	return _totalAmount;
 }
 
-int	Account::getNbDeposits() {
+int Account::getNbDeposits() {
 	return _totalNbDeposits;
 }
 
-int	Account::getNbWithdrawals() {
+int Account::getNbWithdrawals() {
 	return _totalNbWithdrawals;
 }
 
-void	Account::displayAccountsInfos() {
+void Account::displayAccountsInfos() {
 	_displayTimestamp();
 	std::cout << "accounts:" << getNbAccounts() << ";"
 			  << "amount:" << getTotalAmount() << ";"
@@ -59,7 +59,7 @@ void	Account::displayAccountsInfos() {
 			  << "withdrawals:" << getNbWithdrawals() << std::endl;
 }
 
-void	Account::makeDeposit(int deposit) {
+void Account::makeDeposit(int deposit) {
 	_displayTimestamp();
 	std::cout << "index:" << _accountIndex << ";"
 			  << "p_amount:" << checkAmount() << ";"
@@ -72,7 +72,7 @@ void	Account::makeDeposit(int deposit) {
 			  << "nb_deposits:" << _nbDeposits << std::endl;
 }
 
-bool	Account::makeWithdrawal(int withdrawal) {
+bool Account::makeWithdrawal(int withdrawal) {
 	_displayTimestamp();
 	std::cout << "index:" << _accountIndex << ";"
 			  << "p_amount:" << checkAmount() << ";";
@@ -92,11 +92,11 @@ bool	Account::makeWithdrawal(int withdrawal) {
 	}
 }
 
-int	Account::checkAmount() const {
+int Account::checkAmount() const {
 	return _amount;
 }
 
-void	Account::displayStatus() const {
+void Account::displayStatus() const {
 	_displayTimestamp();
 	std::cout << "index:" << _accountIndex << ";"
 			  << "amount:" << checkAmount() << ";"
@@ -104,7 +104,7 @@ void	Account::displayStatus() const {
 			  << "withdrawals:" << _nbWithdrawals << std::endl;
 }
 
-void	Account::_displayTimestamp() {
+void Account::_displayTimestamp() {
 	std::time_t	currentTime;
 	char		buffer[18];
 
