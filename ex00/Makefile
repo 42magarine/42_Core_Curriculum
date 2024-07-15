@@ -6,7 +6,7 @@
 #    By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/14 13:53:20 by mott              #+#    #+#              #
-#    Updated: 2024/07/14 13:55:43 by mott             ###   ########.fr        #
+#    Updated: 2024/07/15 16:09:26 by mott             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ CPP			=	c++
 CPPFLAGS	=	-Wall -Wextra -Werror
 CPPFLAGS	+=	-std=c++98
 RM			=	rm -rf
-NAME		=	brainz
+NAME		=	BraiiiiiiinnnzzzZ
 
 SRCS		=	main.cpp \
 				newZombie.cpp \
