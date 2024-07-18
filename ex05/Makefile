@@ -5,8 +5,8 @@
 #                                                     +:+ +:+         +:+      #
 #    By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/07/16 17:51:39 by mott              #+#    #+#              #
-#    Updated: 2024/07/18 16:49:58 by mott             ###   ########.fr        #
+#    Created: 2024/07/18 16:56:34 by mott              #+#    #+#              #
+#    Updated: 2024/07/18 16:58:11 by mott             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,10 +14,12 @@ CPP			=	c++
 CPPFLAGS	=	-Wall -Wextra -Werror
 CPPFLAGS	+=	-std=c++98
 RM			=	rm -rf
-NAME		=	Sed_is_for_losers
+NAME		=	Harl_2.0
 
-SRCS		=	main.cpp
+SRCS		=	main.cpp \
+				Harl.cpp
 OBJS		=	$(SRCS:.cpp=.o)
+DEPS		=	$(SRCS:.cpp=.d)
 
 RESET	=	\x1b[0m
 RED		=	\x1b[31m
@@ -31,8 +33,10 @@ $(NAME): $(OBJS)
 	@echo "$(YELLOW) $(CPP) $(CPPFLAGS) $(OBJS) -o $@ $(RESET)"
 
 %.o: %.cpp
-	@$(CPP) $(CPPFLAGS) -c $< -o $@
+	@$(CPP) $(CPPFLAGS) -MMD -MP -c $< -o $@
 	@echo "$(BLUE) $(CPP) $(CPPFLAGS) -MMD -MP -c $< -o $@ $(RESET)"
+
+-include $(DEPS)
 
 clean:
 	@$(RM) $(OBJS) $(DEPS)
@@ -44,13 +48,7 @@ fclean: clean
 
 re: fclean all
 
-t1: all
-	./$(NAME) "t1.txt" "string" "doof"
-
-t2: all
-	./$(NAME) "t2.txt" "string" "doof"
-
-.PHONY: all clean fclean re t1
+.PHONY: all clean fclean re
 
 # -MMD	Dependency generation without system headers
 # -MP	Create phony targets for each dependency
