@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/16 17:52:06 by mott              #+#    #+#             */
-/*   Updated: 2024/07/18 16:09:00 by mott             ###   ########.fr       */
+/*   Updated: 2024/07/18 16:36:19 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,18 @@ int main(int argc, char **argv) {
 	// inFile >> content;
 	// inFile.rdbuf() >> content;
 	// inFile.str() >> content;
+
 	std::stringstream buffer;
 	buffer << inFile.rdbuf();
 	std::string content;
+	// std::string temp;
 	content = buffer.str();
+
+	// do {
+	// 	std::getline(inFile, temp);
+	// 	content += temp;
+	// } while (!temp.empty());
+
 	inFile.close(); // necessary?
 
 	size_t pos = 0;
