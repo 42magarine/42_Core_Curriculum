@@ -6,73 +6,49 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 18:44:09 by mott              #+#    #+#             */
-/*   Updated: 2024/07/15 17:37:30 by mott             ###   ########.fr       */
+/*   Updated: 2024/07/22 14:17:23 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
 #include "Contact.hpp"
 
-Contact::Contact() {}
-
-Contact::~Contact() {}
-
-void Contact::setFirstName() {
-	do {
-		std::cout << "Enter first name: ";
-		std::getline(std::cin, _input);
-	} while (_input.empty());
-	_firstName = _input;
+void Contact::setFirstName(const std::string &input) {
+	_firstName = input;
 }
 
-void Contact::setLastName() {
-	do {
-		std::cout << "Enter last name: ";
-		std::getline(std::cin, _input);
-	} while (_input.empty());
-	_lastName = _input;
+void Contact::setLastName(const std::string &input) {
+	_lastName = input;
 }
 
-void Contact::setNickname() {
-	do {
-		std::cout << "Enter nickname: ";
-		std::getline(std::cin, _input);
-	} while (_input.empty());
-	_nickname = _input;
+void Contact::setNickname(const std::string &input) {
+	_nickname = input;
 }
 
-void Contact::setPhoneNumber() {
-	do {
-		std::cout << "Enter phone number: ";
-		std::getline(std::cin, _input);
-	} while (_input.empty());
-	_phoneNumber = _input;
+void Contact::setPhoneNumber(const std::string &input) {
+	_phoneNumber = input;
 }
 
-void Contact::setDarkestSecret() {
-	do {
-		std::cout << "Enter darkest secret: ";
-		std::getline(std::cin, _input);
-	} while (_input.empty());
-	_darkestSecret = _input;
+void Contact::setDarkestSecret(const std::string &input) {
+	_darkestSecret = input;
 }
 
-std::string Contact::getFirstName() {
+std::string Contact::getFirstName() const {
 	return _firstName;
 }
 
-std::string Contact::getLastName() {
+std::string Contact::getLastName() const {
 	return _lastName;
 }
 
-std::string Contact::getNickname() {
+std::string Contact::getNickname() const {
 	return _nickname;
 }
 
-std::string Contact::getPhoneNumber() {
+std::string Contact::getPhoneNumber() const {
 	return _phoneNumber;
 }
 
-std::string Contact::getDarkestSecret() {
+std::string Contact::getDarkestSecret() const {
 	return _darkestSecret;
 }

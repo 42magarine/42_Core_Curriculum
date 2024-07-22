@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 17:18:03 by mott              #+#    #+#             */
-/*   Updated: 2024/07/15 17:40:03 by mott             ###   ########.fr       */
+/*   Updated: 2024/07/22 14:39:02 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,21 +17,19 @@
 
 class Contact {
 	public:
-		Contact();
-		~Contact();
-		void setFirstName();
-		void setLastName();
-		void setNickname();
-		void setPhoneNumber();
-		void setDarkestSecret();
-		std::string getFirstName();
-		std::string getLastName();
-		std::string getNickname();
-		std::string getPhoneNumber();
-		std::string getDarkestSecret();
+		void setFirstName(const std::string &input);
+		void setLastName(const std::string &input);
+		void setNickname(const std::string &input);
+		void setPhoneNumber(const std::string &input);
+		void setDarkestSecret(const std::string &input);
+
+		std::string getFirstName() const;
+		std::string getLastName() const;
+		std::string getNickname() const;
+		std::string getPhoneNumber() const;
+		std::string getDarkestSecret() const;
 
 	private:
-		std::string _input;
 		std::string _firstName;
 		std::string _lastName;
 		std::string _nickname;

@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 17:11:47 by mott              #+#    #+#             */
-/*   Updated: 2024/07/15 17:39:26 by mott             ###   ########.fr       */
+/*   Updated: 2024/07/22 14:28:42 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ int main(void) {
 	std::string command;
 
 	while (true) {
-		std::cout << std::string(43, '-') << std::endl;
 		std::cout << "Enter a command (ADD, SEARCH, EXIT): ";
 		std::getline(std::cin, command);
 		if (command == "ADD") {
@@ -32,7 +31,7 @@ int main(void) {
 			break;
 		}
 		else {
-			std::cout << "Invalid command." << std::endl;
+			std::cout << "Invalid command!" << std::endl;
 		}
 	}
 	return 0;
