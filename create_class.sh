@@ -60,30 +60,30 @@ cat << EOF > $CPP_FILE
 
 // Default constructor
 $CLASS_NAME::$CLASS_NAME() {
-	// Initialization code
 	std::cout << "Default constructor called" << std::endl;
+	// Initialization code
 }
 
 // Copy constructor
-$CLASS_NAME::$CLASS_NAME(const $CLASS_NAME& other) {
-	// Copy initialization code
+$CLASS_NAME::$CLASS_NAME(const $CLASS_NAME &other) {
 	std::cout << "Copy constructor called" << std::endl;
+	// Copy initialization code
 }
 
 // Copy assignment operator
-$CLASS_NAME& $CLASS_NAME::operator=(const $CLASS_NAME& other) {
+$CLASS_NAME& $CLASS_NAME::operator=(const $CLASS_NAME &other) {
 	// self-assignment check
 	if (this != &other) {
-		// Copy assignment code
 		std::cout << "Copy assignment operator called" << std::endl;
+		// Copy assignment code
 	}
 	return *this;
 }
 
 // Destructor
 $CLASS_NAME::~$CLASS_NAME() {
-	// Cleanup code
 	std::cout << "Destructor called" << std::endl;
+	// Cleanup code
 }
 EOF
 
