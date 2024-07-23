@@ -72,10 +72,11 @@ $CLASS_NAME::$CLASS_NAME(const $CLASS_NAME& other) {
 
 // Copy assignment operator
 $CLASS_NAME& $CLASS_NAME::operator=(const $CLASS_NAME& other) {
-	if (this != &other) { // self-assignment check
+	// self-assignment check
+	if (this != &other) {
 		// Copy assignment code
+		std::cout << "Copy assignment operator called" << std::endl;
 	}
-	std::cout << "Copy assignment operator called" << std::endl;
 	return *this;
 }
 

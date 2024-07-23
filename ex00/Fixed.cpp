@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/23 15:26:43 by mott              #+#    #+#             */
-/*   Updated: 2024/07/23 15:26:44 by mott             ###   ########.fr       */
+/*   Created: 2024/07/23 15:42:45 by mott              #+#    #+#             */
+/*   Updated: 2024/07/23 15:42:46 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,11 @@ Fixed::Fixed(const Fixed& other) {
 
 // Copy assignment operator
 Fixed& Fixed::operator=(const Fixed& other) {
-	if (this != &other) { // self-assignment check
+	// self-assignment check
+	if (this != &other) {
 		// Copy assignment code
+		std::cout << "Copy assignment operator called" << std::endl;
 	}
-	std::cout << "Copy assignment operator called" << std::endl;
 	return *this;
 }
 
