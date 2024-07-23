@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 15:42:42 by mott              #+#    #+#             */
-/*   Updated: 2024/07/23 15:42:43 by mott             ###   ########.fr       */
+/*   Updated: 2024/07/23 16:26:57 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,20 +15,17 @@
 
 class Fixed {
 	public:
-		// Default constructor
 		Fixed();
-
-		// Copy constructor
 		Fixed(const Fixed &other);
-
-		// Copy assignment operator
 		Fixed& operator=(const Fixed &other);
-
-		// Destructor
 		~Fixed();
 
+		int getRawBits() const;
+		void setRawBits(const int raw);
+
 	private:
-		// Class members
+		int _fixed_point_number;
+		static const int _fractional_bits = 8;
 };
 
 #endif // FIXED_H

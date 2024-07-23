@@ -30,3 +30,6 @@
 *.exe
 *.out
 *.app
+
+# my own
+ex00/my_first_class_in_orthodox_canonical_form
