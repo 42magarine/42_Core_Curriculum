@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 15:42:45 by mott              #+#    #+#             */
-/*   Updated: 2024/07/23 21:01:30 by mott             ###   ########.fr       */
+/*   Updated: 2024/08/09 14:51:43 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,16 +32,16 @@ Fixed::Fixed(const Fixed &other) {
 	*this = other;
 }
 
+Fixed::~Fixed() {
+	std::cout << "Destructor called" << std::endl;
+}
+
 Fixed& Fixed::operator=(const Fixed &other) {
 	if (this != &other) {
 		std::cout << "Copy assignment operator called" << std::endl;
-		_fixed_point_number = other.getRawBits();
+		_fixed_point_number = other._fixed_point_number;
 	}
 	return *this;
-}
-
-Fixed::~Fixed() {
-	std::cout << "Destructor called" << std::endl;
 }
 
 int Fixed::getRawBits() const {
@@ -58,6 +58,84 @@ float Fixed::toFloat() const {
 
 int Fixed::toInt() const {
 	return _fixed_point_number >> _fractional_bits;
+}
+
+bool Fixed::operator>(const Fixed &other) const {
+	return _fixed_point_number > other._fixed_point_number;
+}
+
+bool Fixed::operator<(const Fixed &other) const {
+	return _fixed_point_number < other._fixed_point_number;
+}
+
+bool Fixed::operator>=(const Fixed &other) const {
+	return _fixed_point_number >= other._fixed_point_number;
+}
+;
+bool Fixed::operator<=(const Fixed &other) const {
+	return _fixed_point_number <= other._fixed_point_number;
+}
+;
+bool Fixed::operator==(const Fixed &other) const {
+	return _fixed_point_number == other._fixed_point_number;
+}
+;
+bool Fixed::operator!=(const Fixed &other) const {
+	return _fixed_point_number != other._fixed_point_number;
+}
+
+Fixed Fixed::operator+(const Fixed &other) const {
+	return Fixed(this->toFloat() + other.toFloat());
+}
+
+Fixed Fixed::operator-(const Fixed &other) const {
+	return Fixed(this->toFloat() - other.toFloat());
+}
+
+Fixed Fixed::operator*(const Fixed &other) const {
+	return Fixed(this->toFloat() * other.toFloat());
+}
+
+Fixed Fixed::operator/(const Fixed &other) const {
+	return Fixed(this->toFloat() / other.toFloat());
+}
+
+Fixed& Fixed::operator++() {	// Pre-increment
+	_fixed_point_number++;
+	return *this;
+}
+
+Fixed Fixed::operator++(int) {	// Post-increment
+	Fixed temp = *this;
+	_fixed_point_number++;
+	return temp;
+}
+
+Fixed& Fixed::operator--() {	// Pre-decrement
+	_fixed_point_number--;
+	return *this;
+}
+
+Fixed Fixed::operator--(int) {	// Post-decrement
+	Fixed temp = *this;
+	_fixed_point_number--;
+	return temp;
+}
+
+Fixed& Fixed::min(Fixed &a, Fixed &b) {
+	return (a < b) ? a : b;
+}
+
+const Fixed& Fixed::min(const Fixed &a, const Fixed &b) {
+	return (a < b) ? a : b;
+}
+
+Fixed& Fixed::max(Fixed &a, Fixed &b) {
+	return (a > b) ? a : b;
+}
+
+const Fixed& Fixed::max(const Fixed &a, const Fixed &b) {
+	return (a > b) ? a : b;
 }
 
 std::ostream& operator<<(std::ostream &os, const Fixed &fixed) {
