@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 15:42:45 by mott              #+#    #+#             */
-/*   Updated: 2024/08/09 14:51:43 by mott             ###   ########.fr       */
+/*   Updated: 2024/08/09 16:05:35 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,23 +100,23 @@ Fixed Fixed::operator/(const Fixed &other) const {
 	return Fixed(this->toFloat() / other.toFloat());
 }
 
-Fixed& Fixed::operator++() {	// Pre-increment
+Fixed& Fixed::operator++() {	// Pre-increment ++obj
 	_fixed_point_number++;
 	return *this;
 }
 
-Fixed Fixed::operator++(int) {	// Post-increment
+Fixed Fixed::operator++(int) {	// Post-increment obj++
 	Fixed temp = *this;
 	_fixed_point_number++;
 	return temp;
 }
 
-Fixed& Fixed::operator--() {	// Pre-decrement
+Fixed& Fixed::operator--() {	// Pre-decrement --obj
 	_fixed_point_number--;
 	return *this;
 }
 
-Fixed Fixed::operator--(int) {	// Post-decrement
+Fixed Fixed::operator--(int) {	// Post-decrement obj--
 	Fixed temp = *this;
 	_fixed_point_number--;
 	return temp;
