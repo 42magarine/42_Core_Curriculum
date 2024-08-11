@@ -1,4 +1,5 @@
 String class
+
 Strings are objects that represent sequences of characters.
 
 The standard string class provides support for such objects with an interface similar to that of a standard container of bytes, but adding features specifically designed to operate with strings of single-byte characters.
