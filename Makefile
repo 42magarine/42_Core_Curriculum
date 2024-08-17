@@ -6,12 +6,12 @@
 #    By: mott <mott@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/26 14:56:48 by mott              #+#    #+#              #
-#    Updated: 2024/02/10 13:32:29 by mott             ###   ########.fr        #
+#    Updated: 2024/02/12 12:13:27 by mott             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -g
+CFLAGS = -Wall -Wextra -Werror
 NAME = push_swap
 NAME_B = checker
 
@@ -77,7 +77,7 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all clean fclean re
+.PHONY: all bonus clean fclean re
 
 DEFAULT = \033[0m
 RED = \033[0;31m
