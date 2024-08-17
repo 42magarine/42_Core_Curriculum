@@ -6,7 +6,7 @@
 #    By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/11 16:34:56 by mott              #+#    #+#              #
-#    Updated: 2024/08/11 16:38:08 by mott             ###   ########.fr        #
+#    Updated: 2024/08/17 18:17:47 by mott             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,9 +14,11 @@ CPP			=	c++
 CPPFLAGS	=	-Wall -Wextra -Werror
 CPPFLAGS	+=	-std=c++98
 RM			=	rm -rf
-NAME		=
+NAME		=	ClapTrap2
 
 SRCS		=	main.cpp \
+				ClapTrap.cpp \
+				ScavTrap.cpp
 OBJS		=	$(SRCS:.cpp=.o)
 DEPS		=	$(SRCS:.cpp=.d)
 
