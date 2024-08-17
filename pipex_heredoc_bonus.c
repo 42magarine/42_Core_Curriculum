@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/21 12:35:04 by mott              #+#    #+#             */
-/*   Updated: 2024/01/23 15:21:52 by mott             ###   ########.fr       */
+/*   Updated: 2024/03/26 19:59:08 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	ft_handle_here_doc(char *limiter)
 	char	*line;
 
 	if (pipe(fd_pipe) == -1)
-		ft_error("piep", ERR_SYSTEM);
+		ft_error("pipe", ERR_SYSTEM);
 	limiter = ft_strjoin(limiter, "\n");
 	if (limiter == NULL)
 		ft_error("malloc", ERR_SYSTEM);
