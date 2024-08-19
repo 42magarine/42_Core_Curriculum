@@ -34,20 +34,14 @@ cat << EOF > $HPP_FILE
 
 class $CLASS_NAME {
 	public:
-		// Default constructor
 		$CLASS_NAME();
-
-		// Copy constructor
 		$CLASS_NAME(const $CLASS_NAME &other);
 
-		// Copy assignment operator
-		$CLASS_NAME& operator=(const $CLASS_NAME &other);
-
-		// Destructor
 		~$CLASS_NAME();
 
+		$CLASS_NAME& operator=(const $CLASS_NAME &other);
+
 	private:
-		// Class members
 };
 
 #endif // ${CLASS_NAME_UPPER}_H
@@ -58,32 +52,23 @@ cat << EOF > $CPP_FILE
 #include "${CLASS_NAME}.hpp"
 #include <iostream>
 
-// Default constructor
 $CLASS_NAME::$CLASS_NAME() {
 	std::cout << "Default constructor called" << std::endl;
-	// Initialization code
 }
 
-// Copy constructor
 $CLASS_NAME::$CLASS_NAME(const $CLASS_NAME &other) {
 	std::cout << "Copy constructor called" << std::endl;
-	// Copy initialization code
 }
 
-// Copy assignment operator
-$CLASS_NAME& $CLASS_NAME::operator=(const $CLASS_NAME &other) {
-	// self-assignment check
-	if (this != &other) {
-		std::cout << "Copy assignment operator called" << std::endl;
-		// Copy assignment code
-	}
-	return *this;
-}
-
-// Destructor
 $CLASS_NAME::~$CLASS_NAME() {
 	std::cout << "Destructor called" << std::endl;
-	// Cleanup code
+}
+
+$CLASS_NAME& $CLASS_NAME::operator=(const $CLASS_NAME &other) {
+	std::cout << "Copy assignment operator called" << std::endl;
+	if (this != &other) {
+	}
+	return *this;
 }
 EOF
 
