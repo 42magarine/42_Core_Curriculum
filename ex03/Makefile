@@ -6,7 +6,7 @@
 #    By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/11 16:35:15 by mott              #+#    #+#              #
-#    Updated: 2024/08/21 19:07:07 by mott             ###   ########.fr        #
+#    Updated: 2024/08/21 19:16:22 by mott             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,6 +14,8 @@ CPP			=	c++
 CPPFLAGS	=	-Wall -Wextra -Werror
 # CPPFLAGS	+=	-std=c++98
 CPPFLAGS	+=	-std=c++17
+CPPFLAGS	+=	-Wshadow
+# CPPFLAGS	+=	-Wno-shadow
 RM			=	rm -rf
 NAME		=	DiamondTrap
 

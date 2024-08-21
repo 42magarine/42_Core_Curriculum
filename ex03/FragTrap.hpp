@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 18:07:36 by mott              #+#    #+#             */
-/*   Updated: 2024/08/21 18:52:40 by mott             ###   ########.fr       */
+/*   Updated: 2024/08/21 20:19:58 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@
 #include <iostream>
 #include <string>
 
-class FragTrap : public ClapTrap {
+// class FragTrap : public ClapTrap {
+class FragTrap : virtual public ClapTrap {
 	public:
 		FragTrap();
 		FragTrap(std::string name);

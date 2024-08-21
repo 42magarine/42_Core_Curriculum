@@ -1,37 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   DiamondTrap.hpp                                    :+:      :+:    :+:   */
+/*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/21 19:07:55 by mott              #+#    #+#             */
-/*   Updated: 2024/08/21 19:35:53 by mott             ###   ########.fr       */
+/*   Created: 2024/08/21 19:09:11 by mott              #+#    #+#             */
+/*   Updated: 2024/08/21 20:40:17 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef DIAMONDTRAP_H
-#define DIAMONDTRAP_H
-
+#include "ClapTrap.hpp"
 #include "ScavTrap.hpp"
 #include "FragTrap.hpp"
-#include <iostream>
-#include <string>
+#include "DiamondTrap.hpp"
 
-class DiamondTrap : public ScavTrap, public FragTrap {
-	public:
-		DiamondTrap();
-		DiamondTrap(std::string name);
-		DiamondTrap(const DiamondTrap &other);
+int main() {
+	DiamondTrap dt_default;
+	DiamondTrap dt_name("diamond with a name");
+	std::cout << std::endl;
 
-		~DiamondTrap();
+	dt_default.attack("target1");
+	dt_default.guardGate();
+	dt_default.highFivesGuys();
+	dt_default.whoAmI();
+	std::cout << std::endl;
 
-		DiamondTrap& operator=(const DiamondTrap &other);
+	dt_name.attack("target2");
+	dt_name.guardGate();
+	dt_name.highFivesGuys();
+	dt_name.whoAmI();
+	std::cout << std::endl;
 
-		void whoAmI();
-
-	private:
-		std::string _name;
-};
-
-#endif // DIAMONDTRAP_H
+	return 0;
+}
