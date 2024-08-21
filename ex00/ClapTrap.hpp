@@ -6,13 +6,14 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 16:50:49 by mott              #+#    #+#             */
-/*   Updated: 2024/08/19 19:53:10 by mott             ###   ########.fr       */
+/*   Updated: 2024/08/21 12:30:14 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CLAPTRAP_H
 #define CLAPTRAP_H
 
+#include <iostream>
 #include <string>
 
 class ClapTrap {
