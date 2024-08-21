@@ -1,35 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ScavTrap.hpp                                       :+:      :+:    :+:   */
+/*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/21 14:30:11 by mott              #+#    #+#             */
-/*   Updated: 2024/08/21 18:02:54 by mott             ###   ########.fr       */
+/*   Created: 2024/08/21 15:33:40 by mott              #+#    #+#             */
+/*   Updated: 2024/08/21 18:00:26 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SCAVTRAP_H
-#define SCAVTRAP_H
-
 #include "ClapTrap.hpp"
-#include <iostream>
-#include <string>
+#include "ScavTrap.hpp"
 
-class ScavTrap : public ClapTrap {
-	public:
-		ScavTrap();
-		ScavTrap(std::string name);
-		ScavTrap(const ScavTrap &other);
+int main() {
+	ScavTrap st_default;
+	ScavTrap st_name("scav with a name");
+	ScavTrap st_copy(st_name);
+	ScavTrap st_assignment;
+	st_assignment = st_default;
+	std::cout << std::endl;
 
-		~ScavTrap();
+	st_name.attack("target1");
+	st_name.guardGate();
+	std::cout << std::endl;
 
-		ScavTrap& operator=(const ScavTrap &other);
+	ClapTrap *pointer = &st_name;
+	pointer->attack("target2");
+	std::cout << std::endl;
 
-		void attack(const std::string &target) override;
-		// void attack(const std::string &target);
-		void guardGate();
-};
-
-#endif // SCAVTRAP_H
+	return 0;
+}

@@ -6,13 +6,14 @@
 #    By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/11 16:34:56 by mott              #+#    #+#              #
-#    Updated: 2024/08/21 14:28:58 by mott             ###   ########.fr        #
+#    Updated: 2024/08/21 17:44:42 by mott             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CPP			=	c++
 CPPFLAGS	=	-Wall -Wextra -Werror
 # CPPFLAGS	+=	-std=c++98
+CPPFLAGS	+=	-std=c++17
 RM			=	rm -rf
 NAME		=	ScavTrap
 
