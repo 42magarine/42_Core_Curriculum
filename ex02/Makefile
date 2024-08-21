@@ -6,17 +6,21 @@
 #    By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/11 16:35:06 by mott              #+#    #+#              #
-#    Updated: 2024/08/11 16:38:11 by mott             ###   ########.fr        #
+#    Updated: 2024/08/21 18:08:05 by mott             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CPP			=	c++
 CPPFLAGS	=	-Wall -Wextra -Werror
-CPPFLAGS	+=	-std=c++98
+# CPPFLAGS	+=	-std=c++98
+CPPFLAGS	+=	-std=c++17
 RM			=	rm -rf
-NAME		=
+NAME		=	FragTrap
 
 SRCS		=	main.cpp \
+				ClapTrap.cpp \
+				ScavTrap.cpp \
+				FragTrap.cpp
 OBJS		=	$(SRCS:.cpp=.o)
 DEPS		=	$(SRCS:.cpp=.d)
 
