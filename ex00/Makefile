@@ -6,17 +6,21 @@
 #    By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/11 16:36:25 by mott              #+#    #+#              #
-#    Updated: 2024/08/11 16:38:17 by mott             ###   ########.fr        #
+#    Updated: 2024/08/22 18:36:00 by mott             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CPP			=	c++
 CPPFLAGS	=	-Wall -Wextra -Werror
-CPPFLAGS	+=	-std=c++98
+# CPPFLAGS	+=	-std=c++98
+CPPFLAGS	+=	-std=c++17
 RM			=	rm -rf
-NAME		=
+NAME		=	animal
 
 SRCS		=	main.cpp \
+				Animal.cpp \
+				Cat.cpp \
+				Dog.cpp
 OBJS		=	$(SRCS:.cpp=.o)
 DEPS		=	$(SRCS:.cpp=.d)
 

@@ -1,35 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   Dog.hpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/11 16:28:38 by mott              #+#    #+#             */
-/*   Updated: 2024/08/22 18:25:31 by mott             ###   ########.fr       */
+/*   Created: 2024/08/22 17:31:56 by mott              #+#    #+#             */
+/*   Updated: 2024/08/22 18:29:25 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#ifndef DOG_H
+#define DOG_H
+
 #include "Animal.hpp"
-#include "Cat.hpp"
-#include "Dog.hpp"
+#include <iostream>
+#include <string>
 
-int main() {
+class Dog : public Animal {
+	public:
+		Dog();
+		Dog(const Dog &other);
 
-	const Animal* meta = new Animal();
-	const Animal* j = new Dog();
-	const Animal* i = new Cat();
+		~Dog();
 
-	std::cout << j->getType() << " " << std::endl;
-	std::cout << i->getType() << " " << std::endl;
+		Dog& operator=(const Dog &other);
 
-	i->makeSound(); //will output the cat sound!
-	j->makeSound();
-	meta->makeSound();
+		void makeSound() const override;
+};
 
-	delete meta;
-	delete j;
-	delete i;
-	system("leaks Animal");
-	return 0;
-}
+#endif // DOG_H
