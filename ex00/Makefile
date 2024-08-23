@@ -6,7 +6,7 @@
 #    By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/11 16:36:25 by mott              #+#    #+#              #
-#    Updated: 2024/08/22 18:36:00 by mott             ###   ########.fr        #
+#    Updated: 2024/08/23 13:53:30 by mott             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,9 @@ NAME		=	animal
 SRCS		=	main.cpp \
 				Animal.cpp \
 				Cat.cpp \
-				Dog.cpp
+				Dog.cpp \
+				WrongAnimal.cpp \
+				WrongCat.cpp
 OBJS		=	$(SRCS:.cpp=.o)
 DEPS		=	$(SRCS:.cpp=.d)
 
