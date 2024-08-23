@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 17:31:56 by mott              #+#    #+#             */
-/*   Updated: 2024/08/22 18:29:25 by mott             ###   ########.fr       */
+/*   Updated: 2024/08/23 15:49:16 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #define DOG_H
 
 #include "Animal.hpp"
+#include "Brain.hpp"
 #include <iostream>
 #include <string>
 
@@ -27,6 +28,9 @@ class Dog : public Animal {
 		Dog& operator=(const Dog &other);
 
 		void makeSound() const override;
+
+	// private:
+		Brain* _pointer;
 };
 
 #endif // DOG_H

@@ -1,36 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Cat.hpp                                            :+:      :+:    :+:   */
+/*   Brain.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/22 17:31:50 by mott              #+#    #+#             */
-/*   Updated: 2024/08/23 15:49:21 by mott             ###   ########.fr       */
+/*   Created: 2024/08/23 14:02:09 by mott              #+#    #+#             */
+/*   Updated: 2024/08/23 15:47:51 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CAT_H
-#define CAT_H
+#ifndef BRAIN_H
+#define BRAIN_H
 
-#include "Animal.hpp"
-#include "Brain.hpp"
 #include <iostream>
 #include <string>
 
-class Cat : public Animal {
+class Brain {
 	public:
-		Cat();
-		Cat(const Cat &other);
+		Brain();
+		Brain(const Brain &other);
 
-		~Cat();
+		~Brain();
 
-		Cat& operator=(const Cat &other);
-
-		void makeSound() const override;
+		Brain& operator=(const Brain &other);
 
 	// private:
-		Brain* _pointer;
+		std::string _ideas[100];
 };
 
-#endif // CAT_H
+#endif // BRAIN_H

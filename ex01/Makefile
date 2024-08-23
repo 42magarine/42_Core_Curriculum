@@ -6,17 +6,24 @@
 #    By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/11 16:36:34 by mott              #+#    #+#              #
-#    Updated: 2024/08/11 16:38:20 by mott             ###   ########.fr        #
+#    Updated: 2024/08/23 14:03:12 by mott             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CPP			=	c++
 CPPFLAGS	=	-Wall -Wextra -Werror
-CPPFLAGS	+=	-std=c++98
+# CPPFLAGS	+=	-std=c++98
+CPPFLAGS	+=	-std=c++17
 RM			=	rm -rf
-NAME		=
+NAME		=	brain
 
 SRCS		=	main.cpp \
+				Animal.cpp \
+				Cat.cpp \
+				Dog.cpp \
+				WrongAnimal.cpp \
+				WrongCat.cpp \
+				Brain.cpp
 OBJS		=	$(SRCS:.cpp=.o)
 DEPS		=	$(SRCS:.cpp=.d)
 
