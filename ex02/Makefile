@@ -6,7 +6,7 @@
 #    By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/13 12:52:30 by mott              #+#    #+#              #
-#    Updated: 2024/08/26 15:15:52 by mott             ###   ########.fr        #
+#    Updated: 2024/08/26 15:44:48 by mott             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ CPPFLAGS	=	-Wall -Wextra -Werror
 CPPFLAGS	+=	-std=c++98
 # CPPFLAGS	+=	-std=c++17
 RM			=	rm -rf
-NAME		=	recreate
+NAME		=	account
 
 SRCS		=	tests.cpp \
 				Account.cpp
