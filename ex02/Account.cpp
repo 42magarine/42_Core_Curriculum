@@ -6,13 +6,13 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/13 12:52:33 by mott              #+#    #+#             */
-/*   Updated: 2024/07/15 17:36:38 by mott             ###   ########.fr       */
+/*   Updated: 2024/08/26 15:19:20 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "Account.hpp"
 #include <iostream>
 #include <ctime>
-#include "Account.hpp"
 
 int Account::_nbAccounts = 0;
 int Account::_totalAmount = 0;

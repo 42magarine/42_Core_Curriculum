@@ -6,13 +6,14 @@
 #    By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/10 16:15:18 by mott              #+#    #+#              #
-#    Updated: 2024/07/10 18:04:15 by mott             ###   ########.fr        #
+#    Updated: 2024/08/26 12:31:28 by mott             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CPP			=	c++
 CPPFLAGS	=	-Wall -Wextra -Werror
-CPPFLAGS	+=	-std=c++98
+# CPPFLAGS	+=	-std=c++98
+CPPFLAGS	+=	-std=c++17
 RM			=	rm -rf
 NAME		=	phonebook
 

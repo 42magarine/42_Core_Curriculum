@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 17:18:03 by mott              #+#    #+#             */
-/*   Updated: 2024/07/22 14:39:02 by mott             ###   ########.fr       */
+/*   Updated: 2024/08/26 13:20:47 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,11 @@ class Contact {
 		std::string getDarkestSecret() const;
 
 	private:
-		std::string _firstName;
-		std::string _lastName;
+		std::string _first_name;
+		std::string _last_name;
 		std::string _nickname;
-		std::string _phoneNumber;
-		std::string _darkestSecret;
+		std::string _phone_number;
+		std::string _darkest_secret;
 };
 
 #endif

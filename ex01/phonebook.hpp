@@ -1,20 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   PhoneBook.hpp                                      :+:      :+:    :+:   */
+/*   Phonebook.hpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 17:17:50 by mott              #+#    #+#             */
-/*   Updated: 2024/07/22 15:12:35 by mott             ###   ########.fr       */
+/*   Updated: 2024/08/26 14:51:20 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PHONEBOOK_H
 #define PHONEBOOK_H
 
-#include <string>
 #include "Contact.hpp"
+#include <iostream>
+#include <string>
+#include <iomanip>
 
 class PhoneBook {
 	public:
@@ -22,14 +24,13 @@ class PhoneBook {
 
 		void addContact();
 		void searchContact() const;
-		void displayContact(int index) const;
 
 	private:
 		std::string cutString(std::string output) const;
+		void displayContact(int index) const;
 
-		static const int _maxContacts = 8;
-		Contact _contact[_maxContacts];
-		int _totalContacts;
+		Contact _contacts[8];
+		int _contact_counter;
 		int _index;
 };
 

@@ -1,93 +1,84 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   PhoneBook.cpp                                      :+:      :+:    :+:   */
+/*   Phonebook.cpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 17:12:08 by mott              #+#    #+#             */
-/*   Updated: 2024/07/22 15:40:34 by mott             ###   ########.fr       */
+/*   Updated: 2024/08/26 14:55:29 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <iostream>
-#include <iomanip>
 #include "PhoneBook.hpp"
 
-PhoneBook::PhoneBook() : _totalContacts(0), _index(0) {}
+PhoneBook::PhoneBook() : _contact_counter(0), _index(0) {}
 
 void PhoneBook::addContact() {
-	Contact contact;
-	std::string firstName, lastName, nickname, phoneNumber, darkestSecret;
+	std::string first_name, last_name, nickname, phone_number, darkest_secret;
 
 	std::cout << "Enter first name: ";
-	std::getline(std::cin, firstName);
+	std::getline(std::cin, first_name);
 	std::cout << "Enter last name: ";
-	std::getline(std::cin, lastName);
+	std::getline(std::cin, last_name);
 	std::cout << "Enter nickname: ";
 	std::getline(std::cin, nickname);
 	std::cout << "Enter phone number: ";
-	std::getline(std::cin, phoneNumber);
+	std::getline(std::cin, phone_number);
 	std::cout << "Enter darkest secret: ";
-	std::getline(std::cin, darkestSecret);
+	std::getline(std::cin, darkest_secret);
 
-	if (firstName.empty() || lastName.empty() || nickname.empty() || phoneNumber.empty() || darkestSecret.empty()) {
-		std::cout << "A contact cant't have empty fields!" << std::endl;
+	if (first_name.empty() || last_name.empty() || nickname.empty() || phone_number.empty() || darkest_secret.empty()) {
+		std::cout << "A contact cannot have empty fields." << std::endl;
 		return;
 	}
 
-	_contact[_index].setFirstName(firstName);
-	_contact[_index].setLastName(lastName);
-	_contact[_index].setNickname(nickname);
-	_contact[_index].setPhoneNumber(phoneNumber);
-	_contact[_index].setDarkestSecret(darkestSecret);
+	_contacts[_index].setFirstName(first_name);
+	_contacts[_index].setLastName(last_name);
+	_contacts[_index].setNickname(nickname);
+	_contacts[_index].setPhoneNumber(phone_number);
+	_contacts[_index].setDarkestSecret(darkest_secret);
 
-	_index = (_index + 1) % _maxContacts;
-	if (_totalContacts < _maxContacts) {
-		_totalContacts++;
+	_index = (_index + 1) % 8;
+
+	if (_contact_counter < 8) {
+		_contact_counter++;
 	}
 }
 
 void PhoneBook::searchContact() const {
-	if (_totalContacts == 0) {
-		std::cout << "No contacts!" << std::endl;
+	if (_contact_counter == 0) {
+		std::cout << "The phonebook is empty." << std::endl;
 		return;
 	}
 
-	std::cout << std::setw(10) << "index" << "|"
-			  << std::setw(10) << "first name" << "|"
-			  << std::setw(10) << "last name" << "|"
-			  << std::setw(10) << "nickname" << std::endl;
+	std::cout << "|" << std::setw(10) << "index";
+	std::cout << "|" << std::setw(10) << "first name";
+	std::cout << "|" << std::setw(10) << "last name";
+	std::cout << "|" << std::setw(10) << "nickname";
+	std::cout << "|" << std::endl;
 
-	for (int i = 0; i < _totalContacts; ++i) {
-		std::cout << std::setw(10) << i << "|"
-				  << std::setw(10) << cutString(_contact[i].getFirstName()) << "|"
-		 		  << std::setw(10) << cutString(_contact[i].getLastName()) << "|"
-				  << std::setw(10) << cutString(_contact[i].getNickname()) << std::endl;
+	for (int i = 0; i < _contact_counter; i++) {
+		std::cout << "|" << std::setw(10) << i;
+		std::cout << "|" << std::setw(10) << cutString(_contacts[i].getFirstName());
+		std::cout << "|" << std::setw(10) << cutString(_contacts[i].getLastName());
+		std::cout << "|" << std::setw(10) << cutString(_contacts[i].getNickname());
+		std::cout << "|" << std::endl;
 	}
 
 	int index;
-	std::cout << "Enter an index: ";
-	if (!(std::cin >> index)) {
-		std::cout << "Invalid index!" << std::endl;
+	std::cout << "Enter an index of an entry to display: ";
+	std::cin >> index;
+
+	if (std::cin.fail() || index < 0 || index > _contact_counter) {
 		std::cin.clear();
 		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-		return;
-	}
-	std::cin.ignore();
-	if (index < 0 || index >= _totalContacts) {
 		std::cout << "Invalid index." << std::endl;
-		return;
 	}
-	displayContact(index);
-}
-
-void PhoneBook::displayContact(int index) const {
-		std::cout << "First Name: " << _contact[index].getFirstName() << std::endl;
-		std::cout << "Last Name: " << _contact[index].getLastName() << std::endl;
-		std::cout << "Nickname: " << _contact[index].getNickname() << std::endl;
-		std::cout << "Phone Number: " << _contact[index].getPhoneNumber() << std::endl;
-		std::cout << "Darkest Secret: " << _contact[index].getDarkestSecret() << std::endl;
+	else {
+		displayContact(index);
+	}
+	std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 }
 
 std::string PhoneBook::cutString(std::string output) const {
@@ -95,4 +86,12 @@ std::string PhoneBook::cutString(std::string output) const {
 		return output.substr(0, 9) + ".";
 	}
 	return output;
+}
+
+void PhoneBook::displayContact(int index) const {
+		std::cout << "First Name: " << _contacts[index].getFirstName() << std::endl;
+		std::cout << "Last Name: " << _contacts[index].getLastName() << std::endl;
+		std::cout << "Nickname: " << _contacts[index].getNickname() << std::endl;
+		std::cout << "Phone Number: " << _contacts[index].getPhoneNumber() << std::endl;
+		std::cout << "Darkest Secret: " << _contacts[index].getDarkestSecret() << std::endl;
 }

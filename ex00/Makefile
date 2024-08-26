@@ -6,13 +6,14 @@
 #    By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/10 14:08:44 by mott              #+#    #+#              #
-#    Updated: 2024/07/10 14:49:32 by mott             ###   ########.fr        #
+#    Updated: 2024/08/26 12:31:18 by mott             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CPP			=	c++
 CPPFLAGS	=	-Wall -Wextra -Werror
-CPPFLAGS	+=	-std=c++98
+# CPPFLAGS	+=	-std=c++98
+CPPFLAGS	+=	-std=c++17
 RM			=	rm -rf
 NAME		=	megaphone
 
