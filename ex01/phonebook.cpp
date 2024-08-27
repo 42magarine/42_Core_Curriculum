@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Phonebook.cpp                                      :+:      :+:    :+:   */
+/*   PhoneBook.cpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 17:12:08 by mott              #+#    #+#             */
-/*   Updated: 2024/08/26 14:55:29 by mott             ###   ########.fr       */
+/*   Updated: 2024/08/27 15:32:45 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,29 @@ void PhoneBook::addContact() {
 
 	std::cout << "Enter first name: ";
 	std::getline(std::cin, first_name);
+	if (std::cin.eof()) {
+		exit(0);
+	}
 	std::cout << "Enter last name: ";
 	std::getline(std::cin, last_name);
+	if (std::cin.eof()) {
+		exit(0);
+	}
 	std::cout << "Enter nickname: ";
 	std::getline(std::cin, nickname);
+	if (std::cin.eof()) {
+		exit(0);
+	}
 	std::cout << "Enter phone number: ";
 	std::getline(std::cin, phone_number);
+	if (std::cin.eof()) {
+		exit(0);
+	}
 	std::cout << "Enter darkest secret: ";
 	std::getline(std::cin, darkest_secret);
+	if (std::cin.eof()) {
+		exit(0);
+	}
 
 	if (first_name.empty() || last_name.empty() || nickname.empty() || phone_number.empty() || darkest_secret.empty()) {
 		std::cout << "A contact cannot have empty fields." << std::endl;
@@ -70,15 +85,15 @@ void PhoneBook::searchContact() const {
 	std::cout << "Enter an index of an entry to display: ";
 	std::cin >> index;
 
-	if (std::cin.fail() || index < 0 || index > _contact_counter) {
+	if (std::cin.fail() || index < 0 || index >= _contact_counter) {
 		std::cin.clear();
 		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 		std::cout << "Invalid index." << std::endl;
 	}
 	else {
+		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 		displayContact(index);
 	}
-	std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 }
 
 std::string PhoneBook::cutString(std::string output) const {

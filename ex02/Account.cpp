@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/13 12:52:33 by mott              #+#    #+#             */
-/*   Updated: 2024/08/26 15:19:20 by mott             ###   ########.fr       */
+/*   Updated: 2024/08/27 16:28:57 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int Account::getNbWithdrawals() {
 void Account::displayAccountsInfos() {
 	_displayTimestamp();
 	std::cout << "accounts:" << getNbAccounts() << ";"
-			  << "amount:" << getTotalAmount() << ";"
+			  << "total:" << getTotalAmount() << ";"
 			  << "deposits:" << getNbDeposits() << ";"
 			  << "withdrawals:" << getNbWithdrawals() << std::endl;
 }
@@ -83,7 +83,7 @@ bool Account::makeWithdrawal(int withdrawal) {
 		_totalNbWithdrawals++;
 		std::cout << "withdrawal:" << withdrawal << ";"
 				  << "amount:" << checkAmount() << ";"
-				  << "nbwithdrawal:" << _nbWithdrawals << std::endl;
+				  << "nb_withdrawals:" << _nbWithdrawals << std::endl;
 		return true;
 	}
 	else {
