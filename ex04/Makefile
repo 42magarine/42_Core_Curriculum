@@ -6,15 +6,16 @@
 #    By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/16 17:51:39 by mott              #+#    #+#              #
-#    Updated: 2024/07/18 16:49:58 by mott             ###   ########.fr        #
+#    Updated: 2024/08/28 17:31:43 by mott             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CPP			=	c++
 CPPFLAGS	=	-Wall -Wextra -Werror
-CPPFLAGS	+=	-std=c++98
+# CPPFLAGS	+=	-std=c++98
+CPPFLAGS	+=	-std=c++17
 RM			=	rm -rf
-NAME		=	Sed_is_for_losers
+NAME		=	loser
 
 SRCS		=	main.cpp
 OBJS		=	$(SRCS:.cpp=.o)

@@ -6,11 +6,10 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 18:49:52 by mott              #+#    #+#             */
-/*   Updated: 2024/07/19 14:31:41 by mott             ###   ########.fr       */
+/*   Updated: 2024/08/28 19:13:12 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <iostream>
 #include "Harl.hpp"
 
 Harl::Harl() {
@@ -63,10 +62,13 @@ void Harl::complain(std::string level) {
 	switch (i) {
 		case 0:
 			(this->*function[0])();
+			[[fallthrough]];
 		case 1:
 			(this->*function[1])();
+			[[fallthrough]];
 		case 2:
 			(this->*function[2])();
+			[[fallthrough]];
 		case 3:
 			(this->*function[3])();
 			break;

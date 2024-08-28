@@ -6,16 +6,15 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/16 15:00:00 by mott              #+#    #+#             */
-/*   Updated: 2024/07/16 17:48:50 by mott             ###   ########.fr       */
+/*   Updated: 2024/08/28 17:10:49 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "Weapon.hpp"
 #include "HumanA.hpp"
 #include "HumanB.hpp"
-#include "Weapon.hpp"
 
-int main()
-{
+int main() {
 	{
 		Weapon club = Weapon("crude spiked club");
 
@@ -33,7 +32,6 @@ int main()
 		club.setType("some other type of club");
 		jim.attack();
 	}
-
-	// system("leaks Unnecessary_violence");
+	system("leaks violence");
 	return 0;
 }

@@ -6,19 +6,19 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/14 13:53:17 by mott              #+#    #+#             */
-/*   Updated: 2024/07/15 17:27:42 by mott             ###   ########.fr       */
+/*   Updated: 2024/08/28 16:53:26 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Zombie.hpp"
 
 int main() {
-	Zombie *heapZombie = newZombie("heapZombie");
-	heapZombie->announce();
-	delete heapZombie;
+	Zombie* heap_zombie = newZombie("heap_zombie");
+	heap_zombie->announce();
+	delete heap_zombie;
 
-	randomChump("stackZombie");
+	randomChump("stack_zombie");
 
-	// system("leaks BraiiiiiiinnnzzzZ");
+	system("leaks zombie");
 	return 0;
 }

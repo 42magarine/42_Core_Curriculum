@@ -6,11 +6,10 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 16:56:45 by mott              #+#    #+#             */
-/*   Updated: 2024/07/18 18:39:26 by mott             ###   ########.fr       */
+/*   Updated: 2024/08/28 18:49:49 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <iostream>
 #include "Harl.hpp"
 
 Harl::Harl() {
@@ -51,7 +50,7 @@ void Harl::error() {
 }
 
 void Harl::complain(std::string level) {
-	for (int i = 0; i < 4; ++i) {
+	for (int i = 0; i < 4; i++) {
 		if (level == _level[i]) {
 			(this->*function[i])();
 			return;

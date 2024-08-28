@@ -6,15 +6,16 @@
 #    By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/16 14:29:17 by mott              #+#    #+#              #
-#    Updated: 2024/07/16 14:30:17 by mott             ###   ########.fr        #
+#    Updated: 2024/08/27 18:40:48 by mott             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CPP			=	c++
 CPPFLAGS	=	-Wall -Wextra -Werror
-CPPFLAGS	+=	-std=c++98
+# CPPFLAGS	+=	-std=c++98
+CPPFLAGS	+=	-std=c++17
 RM			=	rm -rf
-NAME		=	HI_THIS_IS_BRAIN
+NAME		=	brain
 
 SRCS		=	main.cpp
 OBJS		=	$(SRCS:.cpp=.o)

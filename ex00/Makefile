@@ -6,15 +6,16 @@
 #    By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/14 13:53:20 by mott              #+#    #+#              #
-#    Updated: 2024/07/15 16:09:26 by mott             ###   ########.fr        #
+#    Updated: 2024/08/28 16:53:13 by mott             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CPP			=	c++
 CPPFLAGS	=	-Wall -Wextra -Werror
-CPPFLAGS	+=	-std=c++98
+# CPPFLAGS	+=	-std=c++98
+CPPFLAGS	+=	-std=c++17
 RM			=	rm -rf
-NAME		=	BraiiiiiiinnnzzzZ
+NAME		=	zombie
 
 SRCS		=	main.cpp \
 				newZombie.cpp \

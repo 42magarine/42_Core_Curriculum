@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/16 17:52:06 by mott              #+#    #+#             */
-/*   Updated: 2024/07/22 16:36:50 by mott             ###   ########.fr       */
+/*   Updated: 2024/08/28 17:35:35 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,17 +37,17 @@ int main(int argc, char **argv) {
 		return 1;
 	}
 
-	std::ifstream inFile(filename);
-	if (!inFile.is_open()) {
+	std::ifstream in_file(filename);
+	if (!in_file.is_open()) {
 		std::cerr << "Could not open " << filename << std::endl;
 		return 1;
 	}
 
 	std::stringstream buffer;
-	buffer << inFile.rdbuf();
+	buffer << in_file.rdbuf();
 	std::string content;
 	content = buffer.str();
-	inFile.close();
+	in_file.close();
 
 	size_t pos = 0;
 	while ((pos = content.find(s1, pos)) != std::string::npos) {
@@ -56,14 +56,14 @@ int main(int argc, char **argv) {
 		pos += s2.length();
 	}
 
-	std::ofstream outFile(filename + ".replace");
-	if (!outFile.is_open()) {
+	std::ofstream out_file(filename + ".replace");
+	if (!out_file.is_open()) {
 		std::cerr << "Could not create " << filename << ".replace" << std::endl;
 		return 1;
 	}
-	outFile << content;
-	outFile.close();
+	out_file << content;
+	out_file.close();
 
-	// system("leaks Sed_is_for_losers");
+	system("leaks loser");
 	return 0;
 }

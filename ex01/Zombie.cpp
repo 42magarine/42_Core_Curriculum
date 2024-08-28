@@ -6,25 +6,28 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/15 17:45:15 by mott              #+#    #+#             */
-/*   Updated: 2024/07/16 13:23:47 by mott             ###   ########.fr       */
+/*   Updated: 2024/08/27 18:26:57 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <iostream>
 #include "Zombie.hpp"
 
-Zombie::Zombie() {}
-
-Zombie::Zombie(std::string name) : name(name) {}
-
-Zombie::~Zombie() {
-	std::cout << name << " destroyed." << std::endl;
+Zombie::Zombie() {
+	std::cout << "default constructor: " << std::endl;
 }
 
-void Zombie::setName(std::string name) {
-	this->name = name;
+Zombie::Zombie(std::string name) : _name(name) {
+	std::cout << "constructor: " << YELLOW << _name << RESET << std::endl;
+}
+
+Zombie::~Zombie() {
+	std::cout << "destructor: " << YELLOW << _name << RESET << std::endl;
 }
 
 void Zombie::announce() {
-	std::cout << name << ": BraiiiiiiinnnzzzZ..." << std::endl;
+	std::cout << _name << ": BraiiiiiiinnnzzzZ..." << std::endl;
+}
+
+void Zombie::setName(std::string name) {
+	_name = name;
 }

@@ -6,15 +6,16 @@
 #    By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/18 16:56:34 by mott              #+#    #+#              #
-#    Updated: 2024/07/18 16:58:11 by mott             ###   ########.fr        #
+#    Updated: 2024/08/28 18:45:16 by mott             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CPP			=	c++
 CPPFLAGS	=	-Wall -Wextra -Werror
-CPPFLAGS	+=	-std=c++98
+# CPPFLAGS	+=	-std=c++98
+CPPFLAGS	+=	-std=c++17
 RM			=	rm -rf
-NAME		=	Harl_2.0
+NAME		=	harl
 
 SRCS		=	main.cpp \
 				Harl.cpp
