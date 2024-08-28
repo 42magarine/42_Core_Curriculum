@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 17:12:08 by mott              #+#    #+#             */
-/*   Updated: 2024/08/27 15:32:45 by mott             ###   ########.fr       */
+/*   Updated: 2024/08/28 16:48:58 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,8 +84,10 @@ void PhoneBook::searchContact() const {
 	int index;
 	std::cout << "Enter an index of an entry to display: ";
 	std::cin >> index;
-
-	if (std::cin.fail() || index < 0 || index >= _contact_counter) {
+	if (std::cin.eof()) {
+		exit(0);
+	}
+	else if (std::cin.fail() || index < 0 || index >= _contact_counter) {
 		std::cin.clear();
 		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 		std::cout << "Invalid index." << std::endl;
