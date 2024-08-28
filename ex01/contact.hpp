@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 17:18:03 by mott              #+#    #+#             */
-/*   Updated: 2024/08/26 13:20:47 by mott             ###   ########.fr       */
+/*   Updated: 2024/08/27 18:39:05 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,4 +37,4 @@ class Contact {
 		std::string _darkest_secret;
 };
 
-#endif
+#endif // CONTACT_H
