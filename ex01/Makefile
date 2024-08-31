@@ -6,15 +6,16 @@
 #    By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/23 16:06:50 by mott              #+#    #+#              #
-#    Updated: 2024/07/23 16:44:14 by mott             ###   ########.fr        #
+#    Updated: 2024/08/28 19:33:14 by mott             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CPP			=	c++
 CPPFLAGS	=	-Wall -Wextra -Werror
-CPPFLAGS	+=	-std=c++98
+# CPPFLAGS	+=	-std=c++98
+CPPFLAGS	+=	-std=c++17
 RM			=	rm -rf
-NAME		=	towards_a_more_useful_fixed-point_number_class
+NAME		=	fixed_point
 
 SRCS		=	main.cpp \
 				Fixed.cpp

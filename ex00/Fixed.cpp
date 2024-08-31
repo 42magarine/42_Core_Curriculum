@@ -6,32 +6,30 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 15:42:45 by mott              #+#    #+#             */
-/*   Updated: 2024/07/23 16:33:10 by mott             ###   ########.fr       */
+/*   Updated: 2024/08/31 14:08:34 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Fixed.hpp"
-#include <iostream>
 
 Fixed::Fixed() : _fixed_point_number(0) {
-	std::cout << "Default constructor called" << std::endl;
+	std::cout << YELLOW << "Default constructor called" << RESET << std::endl;
 }
 
-Fixed::Fixed(const Fixed& other) {
-	std::cout << "Copy constructor called" << std::endl;
-	*this = other;
+Fixed::Fixed(const Fixed& other) : _fixed_point_number(other.getRawBits()) {
+	std::cout << YELLOW << "Copy constructor called" << RESET << std::endl;
+}
+
+Fixed::~Fixed() {
+	std::cout << YELLOW << "Destructor called" << RESET << std::endl;
 }
 
 Fixed& Fixed::operator=(const Fixed& other) {
 	if (this != &other) {
-		std::cout << "Copy assignment operator called" << std::endl;
+		std::cout << YELLOW << "Copy assignment operator called" << RESET << std::endl;
 		_fixed_point_number = other.getRawBits();
 	}
 	return *this;
-}
-
-Fixed::~Fixed() {
-	std::cout << "Destructor called" << std::endl;
 }
 
 int Fixed::getRawBits() const {
