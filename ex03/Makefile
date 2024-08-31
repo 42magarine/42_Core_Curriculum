@@ -6,7 +6,7 @@
 #    By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/11 16:37:24 by mott              #+#    #+#              #
-#    Updated: 2024/08/28 19:33:26 by mott             ###   ########.fr        #
+#    Updated: 2024/08/31 15:43:20 by mott             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,6 +18,9 @@ RM			=	rm -rf
 NAME		=	bsp
 
 SRCS		=	main.cpp \
+				Fixed.cpp \
+				Point.cpp \
+				bsp.cpp
 OBJS		=	$(SRCS:.cpp=.o)
 DEPS		=	$(SRCS:.cpp=.d)
 
