@@ -6,37 +6,37 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 15:42:45 by mott              #+#    #+#             */
-/*   Updated: 2024/08/31 14:40:18 by mott             ###   ########.fr       */
+/*   Updated: 2024/08/31 17:38:26 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Fixed.hpp"
 
 Fixed::Fixed() : _fixed_point_number(0) {
-	std::cout << YELLOW << "Default constructor called" << RESET << std::endl;
+	std::cout << YELLOW << "(Fixed) Default constructor called" << RESET << std::endl;
 }
 
 Fixed::Fixed(const int int_number) {
-	std::cout << YELLOW << "Int constructor called" << RESET << std::endl;
+	std::cout << YELLOW << "(Fixed) Int constructor called" << RESET << std::endl;
 	_fixed_point_number = int_number << _fractional_bits;
 }
 
 Fixed::Fixed(const float float_number) {
-	std::cout << YELLOW << "Float constructor called" << RESET << std::endl;
+	std::cout << YELLOW << "(Fixed) Float constructor called" << RESET << std::endl;
 	_fixed_point_number = std::roundf(float_number * (1 << _fractional_bits));
 }
 
 Fixed::Fixed(const Fixed& other) : _fixed_point_number(other.getRawBits()) {
-	std::cout << YELLOW << "Copy constructor called" << RESET << std::endl;
+	std::cout << YELLOW << "(Fixed) Copy constructor called" << RESET << std::endl;
 }
 
 Fixed::~Fixed() {
-	std::cout << YELLOW << "Destructor called" << RESET << std::endl;
+	std::cout << YELLOW << "(Fixed) Destructor called" << RESET << std::endl;
 }
 
 Fixed& Fixed::operator=(const Fixed &other) {
 	if (this != &other) {
-		std::cout << YELLOW << "Copy assignment operator called" << RESET << std::endl;
+		std::cout << YELLOW << "(Fixed) Copy assignment operator called" << RESET << std::endl;
 		_fixed_point_number = other.getRawBits();
 	}
 	return *this;
