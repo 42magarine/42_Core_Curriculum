@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 14:29:12 by mott              #+#    #+#             */
-/*   Updated: 2024/08/21 18:02:57 by mott             ###   ########.fr       */
+/*   Updated: 2024/09/01 16:43:05 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,18 +16,21 @@
 #include <iostream>
 #include <string>
 
+#define RESET  "\033[0m"
+#define YELLOW "\033[33m"
+
 class ClapTrap {
 	public:
 		ClapTrap();
-		ClapTrap(std::string name);
-		ClapTrap(const ClapTrap &other);
+		ClapTrap(const std::string& name);
+		ClapTrap(const ClapTrap& other);
 
 		virtual ~ClapTrap();
 
-		ClapTrap& operator=(const ClapTrap &other);
+		ClapTrap& operator=(const ClapTrap& other);
 
-		virtual void attack(const std::string &target);
-		// void attack(const std::string &target);
+		virtual void attack(const std::string& target);
+		// void attack(const std::string& target);
 		void takeDamage(unsigned int amount);
 		void beRepaired(unsigned int amount);
 

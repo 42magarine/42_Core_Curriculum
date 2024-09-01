@@ -6,7 +6,7 @@
 #    By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/11 16:35:15 by mott              #+#    #+#              #
-#    Updated: 2024/08/21 19:16:22 by mott             ###   ########.fr        #
+#    Updated: 2024/09/01 17:05:58 by mott             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ CPPFLAGS	+=	-std=c++17
 CPPFLAGS	+=	-Wshadow
 # CPPFLAGS	+=	-Wno-shadow
 RM			=	rm -rf
-NAME		=	DiamondTrap
+NAME		=	diamond
 
 SRCS		=	main.cpp \
 				ClapTrap.cpp \

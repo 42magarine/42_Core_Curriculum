@@ -6,15 +6,16 @@
 #    By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/11 16:34:47 by mott              #+#    #+#              #
-#    Updated: 2024/08/15 16:39:41 by mott             ###   ########.fr        #
+#    Updated: 2024/09/01 17:05:25 by mott             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CPP			=	c++
 CPPFLAGS	=	-Wall -Wextra -Werror
 # CPPFLAGS	+=	-std=c++98
+CPPFLAGS	+=	-std=c++17
 RM			=	rm -rf
-NAME		=	ClapTrap
+NAME		=	clap
 
 SRCS		=	main.cpp \
 				ClapTrap.cpp

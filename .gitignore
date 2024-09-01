@@ -31,7 +31,7 @@
 *.out
 *.app
 
-ex00/ClapTrap
-ex01/ScavTrap
-ex02/FragTrap
-ex03/DiamondTrap
+ex00/clap
+ex01/scav
+ex02/frag
+ex03/diamond

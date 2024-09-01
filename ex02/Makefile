@@ -6,7 +6,7 @@
 #    By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/11 16:35:06 by mott              #+#    #+#              #
-#    Updated: 2024/08/21 18:08:05 by mott             ###   ########.fr        #
+#    Updated: 2024/09/01 17:05:48 by mott             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ CPPFLAGS	=	-Wall -Wextra -Werror
 # CPPFLAGS	+=	-std=c++98
 CPPFLAGS	+=	-std=c++17
 RM			=	rm -rf
-NAME		=	FragTrap
+NAME		=	frag
 
 SRCS		=	main.cpp \
 				ClapTrap.cpp \
