@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/31 15:44:46 by mott              #+#    #+#             */
-/*   Updated: 2024/08/31 17:58:09 by mott             ###   ########.fr       */
+/*   Updated: 2024/09/01 14:28:45 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,15 +28,6 @@ Point::~Point() {
 	std::cout << YELLOW << "(Point) Destructor called" << RESET << std::endl;
 }
 
-Point& Point::operator=(const Point& other) {
-	if (this != &other) {
-		std::cout << YELLOW << "(Point) Copy assignment operator called" << RESET << std::endl;
-		// _x = other._x;
-		// _y = other._y;
-	}
-	return *this;
-}
-
 const Fixed& Point::getX() const {
 	return _x;
 }
@@ -46,6 +37,6 @@ const Fixed& Point::getY() const {
 }
 
 std::ostream& operator<<(std::ostream& os, const Point& point) {
-	os << "(" << point.getX() << ", "<< point.getY() << ")";
+	os << "(" << point.getX() << ", " << point.getY() << ")";
 	return os;
 }

@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/31 15:44:51 by mott              #+#    #+#             */
-/*   Updated: 2024/08/31 18:11:06 by mott             ###   ########.fr       */
+/*   Updated: 2024/09/01 14:29:12 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ class Point {
 
 		~Point();
 
-		Point& operator=(const Point& other);
+		Point& operator=(const Point& other) = delete; // Deleted to prevent assignment
 
 		const Fixed& getX() const;
 		const Fixed& getY() const;
