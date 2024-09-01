@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 14:30:16 by mott              #+#    #+#             */
-/*   Updated: 2024/08/21 17:16:25 by mott             ###   ########.fr       */
+/*   Updated: 2024/09/01 18:50:53 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,42 +16,38 @@ ScavTrap::ScavTrap() : ClapTrap() {
 	_hit_points = 100;
 	_energy_points = 50;
 	_attack_damage = 20;
-	std::cout << "ScavTrap " << _name << " has been default-constructed." << std::endl;
+	std::cout << YELLOW << "(ScavTrap) Default constructor called with: " << _name << RESET << std::endl;
 }
 
-ScavTrap::ScavTrap(std::string name) : ClapTrap(name) {
+ScavTrap::ScavTrap(const std::string& name) : ClapTrap(name) {
 	_hit_points = 100;
 	_energy_points = 50;
 	_attack_damage = 20;
-	std::cout << "ScavTrap " << _name << " has been constructed." << std::endl;
+	std::cout << YELLOW << "(ScavTrap) Name constructor called with: " << _name << RESET << std::endl;
 }
 
-ScavTrap::ScavTrap(const ScavTrap &other) : ClapTrap(other) {
-	std::cout << "ScavTrap " << _name << " has been copy-constructed." << std::endl;
+ScavTrap::ScavTrap(const ScavTrap& other) : ClapTrap(other) {
+	std::cout << YELLOW << "(ScavTrap) Copy constructor called with: " << _name << RESET << std::endl;
 }
 
 ScavTrap::~ScavTrap() {
-	std::cout << "ScavTrap " << _name << " has been destroyed." << std::endl;
+	std::cout << YELLOW << "(ScavTrap) Destructor called with: " << _name << RESET << std::endl;
 }
 
-ScavTrap& ScavTrap::operator=(const ScavTrap &other) {
+ScavTrap& ScavTrap::operator=(const ScavTrap& other) {
 	if (this != &other) {
+		std::cout << YELLOW << "(ScavTrap) Copy assignment operator called with: " << _name << RESET << std::endl;
 		ClapTrap::operator=(other);
-		// _name = other._name;
-		// _hit_points = other._hit_points;
-		// _energy_points = other._energy_points;
-		// _attack_damage = other._attack_damage;
 	}
-	std::cout << "ScavTrap " << _name << " has been copy-assigned." << std::endl;
 	return *this;
 }
 
 void ScavTrap::attack(const std::string &target) {
 	if (_hit_points == 0) {
-		std::cout << "ScavTrap " << _name << " is out of hit points and cannot attack." << std::endl;
+		std::cout << "ScavTrap " << _name << " can't attack, because it has no hit points left." << std::endl;
 	}
 	else if (_energy_points == 0) {
-		std::cout << "ScavTrap " << _name << " has no energy left to attack." << std::endl;
+		std::cout << "ScavTrap " << _name << " can't attack, because it has no energy points left." << std::endl;
 	}
 	else {
 		_energy_points--;
