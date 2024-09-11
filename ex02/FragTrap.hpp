@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 18:07:36 by mott              #+#    #+#             */
-/*   Updated: 2024/09/01 16:23:44 by mott             ###   ########.fr       */
+/*   Updated: 2024/09/11 16:53:58 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 class FragTrap : public ClapTrap {
 	public:
 		FragTrap();
-		FragTrap(std::string name);
+		FragTrap(const std::string& name);
 		FragTrap(const FragTrap& other);
 
 		~FragTrap();
