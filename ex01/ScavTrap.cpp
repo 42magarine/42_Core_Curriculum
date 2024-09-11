@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 14:30:16 by mott              #+#    #+#             */
-/*   Updated: 2024/09/01 18:36:27 by mott             ###   ########.fr       */
+/*   Updated: 2024/09/11 18:11:29 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,8 @@ ScavTrap::~ScavTrap() {
 
 ScavTrap& ScavTrap::operator=(const ScavTrap& other) {
 	if (this != &other) {
-		std::cout << YELLOW << "(ScavTrap) Copy assignment operator called with: " << _name << RESET << std::endl;
 		ClapTrap::operator=(other);
+		std::cout << YELLOW << "(ScavTrap) Copy assignment operator called with: " << _name << RESET << std::endl;
 	}
 	return *this;
 }

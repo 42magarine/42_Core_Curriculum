@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 18:07:33 by mott              #+#    #+#             */
-/*   Updated: 2024/09/11 17:11:15 by mott             ###   ########.fr       */
+/*   Updated: 2024/09/11 18:12:01 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,8 @@ FragTrap::~FragTrap() {
 
 FragTrap& FragTrap::operator=(const FragTrap& other) {
 	if (this != &other) {
-		std::cout << YELLOW << "(FragTrap) Copy assignment operator called with: " << _name << RESET << std::endl;
 		ClapTrap::operator=(other);
+		std::cout << YELLOW << "(FragTrap) Copy assignment operator called with: " << _name << RESET << std::endl;
 	}
 	return *this;
 }

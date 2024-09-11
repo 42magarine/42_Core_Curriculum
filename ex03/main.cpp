@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 19:09:11 by mott              #+#    #+#             */
-/*   Updated: 2024/08/21 20:40:17 by mott             ###   ########.fr       */
+/*   Updated: 2024/09/11 19:02:58 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,19 +17,26 @@
 
 int main() {
 	DiamondTrap dt_default;
-	DiamondTrap dt_name("diamond with a name");
+	DiamondTrap dt_name("diamonddy");
+	DiamondTrap dt_copy(dt_name);
+	DiamondTrap dt_assignment;
+	dt_assignment = dt_default;
 	std::cout << std::endl;
 
-	dt_default.attack("target1");
-	dt_default.guardGate();
-	dt_default.highFivesGuys();
-	dt_default.whoAmI();
-	std::cout << std::endl;
-
-	dt_name.attack("target2");
+	dt_name.attack("someone");
+	dt_name.takeDamage(7);
+	dt_name.beRepaired(5);
 	dt_name.guardGate();
 	dt_name.highFivesGuys();
 	dt_name.whoAmI();
+	std::cout << std::endl;
+
+	dt_assignment.attack("someone");
+	dt_assignment.takeDamage(7);
+	dt_assignment.beRepaired(5);
+	dt_assignment.guardGate();
+	dt_assignment.highFivesGuys();
+	dt_assignment.whoAmI();
 	std::cout << std::endl;
 
 	return 0;

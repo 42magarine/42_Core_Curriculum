@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 19:07:55 by mott              #+#    #+#             */
-/*   Updated: 2024/09/01 16:24:37 by mott             ###   ########.fr       */
+/*   Updated: 2024/09/11 17:25:46 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 class DiamondTrap : public ScavTrap, public FragTrap {
 	public:
 		DiamondTrap();
-		DiamondTrap(std::string name);
+		DiamondTrap(const std::string& name);
 		DiamondTrap(const DiamondTrap& other);
 
 		~DiamondTrap();
