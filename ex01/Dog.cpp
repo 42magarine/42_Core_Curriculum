@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 17:31:53 by mott              #+#    #+#             */
-/*   Updated: 2024/09/12 15:41:13 by mott             ###   ########.fr       */
+/*   Updated: 2024/09/12 18:58:25 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,4 +37,8 @@ Dog& Dog::operator=(const Dog& other) {
 
 void Dog::makeSound() const {
 	std::cout << "Woof!" << std::endl;
+}
+
+Brain* Dog::getBrain() const {
+	return _pointer;
 }

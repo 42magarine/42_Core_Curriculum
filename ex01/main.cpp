@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 16:30:34 by mott              #+#    #+#             */
-/*   Updated: 2024/08/23 16:09:34 by mott             ###   ########.fr       */
+/*   Updated: 2024/09/12 19:16:48 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 // 	const Animal* j = new Dog();
 // 	const Animal* i = new Cat();
 
-// 	delete j;//should not create a leak
+// 	delete j;
 // 	delete i;
 
 // 	system("leaks brain");
@@ -36,31 +36,39 @@
 // 			array[i] = new Dog();
 // 	}
 
-// 	delete[] array;
+// 	for (int i = 0; i < 10; i++) {
+// 		delete array[i];
+// 	}
+
+// 	system("leaks brain");
+// 	return 0;
 // }
 
 int main() {
 	Dog doggy;
 	Dog doggy_copy = doggy;
 
-	std::cout << doggy._pointer << " " << doggy._pointer->_ideas[0] << std::endl;
-	std::cout << doggy_copy._pointer << " " << doggy_copy._pointer->_ideas[0] << std::endl;
+	std::cout << doggy.getBrain() << " " << doggy.getBrain()->getIdeas(0) << std::endl;
+	std::cout << doggy_copy.getBrain() << " " << doggy_copy.getBrain()->getIdeas(0) << std::endl;
 
-	doggy._pointer->_ideas[0] = "food";
+	doggy.getBrain()->setIdeas(0, "food");
 
-	std::cout << doggy._pointer << " " << doggy._pointer->_ideas[0] << std::endl;
-	std::cout << doggy_copy._pointer << " " << doggy_copy._pointer->_ideas[0] << std::endl;
+	std::cout << doggy.getBrain() << " " << doggy.getBrain()->getIdeas(0) << std::endl;
+	std::cout << doggy_copy.getBrain() << " " << doggy_copy.getBrain()->getIdeas(0) << std::endl;
 
 	Cat *catty = new Cat();
 	Cat *catty_copy = catty;
 
-	std::cout << catty->_pointer << " " << catty->_pointer->_ideas[0] << std::endl;
-	std::cout << catty_copy->_pointer << " " << catty_copy->_pointer->_ideas[0] << std::endl;
+	std::cout << catty->getBrain() << " " << catty->getBrain()->getIdeas(0) << std::endl;
+	std::cout << catty_copy->getBrain() << " " << catty_copy->getBrain()->getIdeas(0) << std::endl;
 
-	catty->_pointer->_ideas[0] = "chill";
+	catty->getBrain()->setIdeas(0, "chill");
 
-	std::cout << catty->_pointer << " " << catty->_pointer->_ideas[0] << std::endl;
-	std::cout << catty_copy->_pointer << " " << catty_copy->_pointer->_ideas[0] << std::endl;
+	std::cout << catty->getBrain() << " " << catty->getBrain()->getIdeas(0) << std::endl;
+	std::cout << catty_copy->getBrain() << " " << catty_copy->getBrain()->getIdeas(0) << std::endl;
 
 	delete catty;
+
+	// system("leaks brain");
+	return 0;
 }

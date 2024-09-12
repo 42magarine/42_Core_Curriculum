@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 17:31:46 by mott              #+#    #+#             */
-/*   Updated: 2024/09/12 15:38:37 by mott             ###   ########.fr       */
+/*   Updated: 2024/09/12 18:59:11 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,4 +37,8 @@ Cat& Cat::operator=(const Cat& other) {
 
 void Cat::makeSound() const {
 	std::cout << "Meow!" << std::endl;
+}
+
+Brain* Cat::getBrain() const {
+	return _pointer;
 }

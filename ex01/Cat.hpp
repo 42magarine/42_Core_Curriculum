@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 17:31:50 by mott              #+#    #+#             */
-/*   Updated: 2024/09/12 15:38:52 by mott             ###   ########.fr       */
+/*   Updated: 2024/09/12 18:58:50 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ class Cat : public Animal {
 		Cat& operator=(const Cat& other);
 
 		void makeSound() const override;
+		Brain* getBrain() const;
 
 	private:
 		Brain* _pointer;
