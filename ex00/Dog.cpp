@@ -6,34 +6,34 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 17:31:53 by mott              #+#    #+#             */
-/*   Updated: 2024/08/22 18:13:40 by mott             ###   ########.fr       */
+/*   Updated: 2024/09/12 14:15:08 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Dog.hpp"
 
 Dog::Dog() : Animal() {
-	_type = "dog";
-	std::cout << "Dog default constructor..." << std::endl;
+	_type = "Dog";
+	std::cout << YELLOW << "(Dog) Default constructor called" << RESET << std::endl;
 }
 
-Dog::Dog(const Dog &other) : Animal(other) {
-	_type = "dog";
-	std::cout << "Dog copy constructor..." << std::endl;
+Dog::Dog(const Dog& other) : Animal(other) {
+	_type = "Dog";
+	std::cout << YELLOW << "(Dog) Copy constructor called" << RESET << std::endl;
 }
 
 Dog::~Dog() {
-	std::cout << "Dog destructor..." << std::endl;
+	std::cout << YELLOW << "(Dog) Destructor called" << RESET << std::endl;
 }
 
-Dog& Dog::operator=(const Dog &other) {
+Dog& Dog::operator=(const Dog& other) {
 	if (this != &other) {
 		Animal::operator=(other);
+		std::cout << YELLOW << "(Dog) Copy assignment operator called" << RESET << std::endl;
 	}
-	std::cout << "Dog copy assignment operator..." << std::endl;
 	return *this;
 }
 
 void Dog::makeSound() const {
-	std::cout << "I'm a dog." << std::endl;
+	std::cout << "Woof!" << std::endl;
 }

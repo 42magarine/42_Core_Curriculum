@@ -6,31 +6,31 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 13:46:41 by mott              #+#    #+#             */
-/*   Updated: 2024/08/23 13:47:24 by mott             ###   ########.fr       */
+/*   Updated: 2024/09/12 14:35:03 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "WrongCat.hpp"
 
 WrongCat::WrongCat() : WrongAnimal() {
-	_type = "cat";
-	std::cout << "WrongCat default constructor..." << std::endl;
+	_type = "Cat";
+	std::cout << YELLOW << "(WrongCat) Default constructor called" << RESET << std::endl;
 }
 
-WrongCat::WrongCat(const WrongCat &other) : WrongAnimal(other) {
-	_type = "cat";
-	std::cout << "WrongCat copy constructor..." << std::endl;
+WrongCat::WrongCat(const WrongCat& other) : WrongAnimal(other) {
+	_type = "Cat";
+	std::cout << YELLOW << "(WrongCat) Copy constructor called" << RESET << std::endl;
 }
 
 WrongCat::~WrongCat() {
-	std::cout << "WrongCat destructor..." << std::endl;
+	std::cout << YELLOW << "(WrongCat) Destructor called" << RESET << std::endl;
 }
 
-WrongCat& WrongCat::operator=(const WrongCat &other) {
+WrongCat& WrongCat::operator=(const WrongCat& other) {
 	if (this != &other) {
 		WrongAnimal::operator=(other);
+		std::cout << YELLOW << "(WrongCat) Copy assignment operator called" << RESET << std::endl;
 	}
-	std::cout << "WrongCat copy assignment operator..." << std::endl;
 	return *this;
 }
 

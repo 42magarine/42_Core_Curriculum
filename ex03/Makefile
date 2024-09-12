@@ -6,13 +6,14 @@
 #    By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/11 16:36:50 by mott              #+#    #+#              #
-#    Updated: 2024/08/11 16:38:26 by mott             ###   ########.fr        #
+#    Updated: 2024/08/26 12:35:27 by mott             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CPP			=	c++
 CPPFLAGS	=	-Wall -Wextra -Werror
-CPPFLAGS	+=	-std=c++98
+# CPPFLAGS	+=	-std=c++98
+CPPFLAGS	+=	-std=c++17
 RM			=	rm -rf
 NAME		=
 

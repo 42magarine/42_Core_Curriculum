@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 17:31:37 by mott              #+#    #+#             */
-/*   Updated: 2024/08/22 18:11:40 by mott             ###   ########.fr       */
+/*   Updated: 2024/09/12 14:43:33 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,17 @@
 #include <iostream>
 #include <string>
 
+#define RESET  "\033[0m"
+#define YELLOW "\033[33m"
+
 class Animal {
 	public:
 		Animal();
-		Animal(const Animal &other);
+		Animal(const Animal& other);
 
 		virtual ~Animal();
 
-		Animal& operator=(const Animal &other);
+		Animal& operator=(const Animal& other);
 
 		virtual void makeSound() const;
 		std::string getType() const;
