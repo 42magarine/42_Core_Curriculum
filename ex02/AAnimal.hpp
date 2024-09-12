@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Animal.hpp                                         :+:      :+:    :+:   */
+/*   AAnimal.hpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 17:31:37 by mott              #+#    #+#             */
-/*   Updated: 2024/09/12 15:12:22 by mott             ###   ########.fr       */
+/*   Updated: 2024/09/12 19:57:13 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,16 +19,16 @@
 #define RESET  "\033[0m"
 #define YELLOW "\033[33m"
 
-class Animal {
+class AAnimal {
 	public:
-		Animal();
-		Animal(const Animal& other);
+		AAnimal();
+		AAnimal(const AAnimal& other);
 
-		virtual ~Animal();
+		virtual ~AAnimal();
 
-		Animal& operator=(const Animal& other);
+		AAnimal& operator=(const AAnimal& other);
 
-		virtual void makeSound() const;
+		virtual void makeSound() const = 0;
 		std::string getType() const;
 
 	protected:

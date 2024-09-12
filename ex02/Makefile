@@ -6,7 +6,7 @@
 #    By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/11 16:36:42 by mott              #+#    #+#              #
-#    Updated: 2024/09/12 13:33:07 by mott             ###   ########.fr        #
+#    Updated: 2024/09/12 19:59:20 by mott             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ RM			=	rm -rf
 NAME		=	aanimal
 
 SRCS		=	main.cpp \
-				Animal.cpp \
+				AAnimal.cpp \
 				Cat.cpp \
 				Dog.cpp \
 				WrongAnimal.cpp \

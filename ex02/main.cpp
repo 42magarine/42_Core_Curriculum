@@ -6,11 +6,11 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 16:30:34 by mott              #+#    #+#             */
-/*   Updated: 2024/09/12 19:28:00 by mott             ###   ########.fr       */
+/*   Updated: 2024/09/12 19:58:17 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Animal.hpp"
+#include "AAnimal.hpp"
 #include "Cat.hpp"
 #include "Dog.hpp"
 
@@ -74,7 +74,7 @@ int main() {
 }
 
 // int main() {
-// 	Animal animaly;
+// 	AAnimal animaly;
 
 // 	std::cout << animaly.getType() << std::endl;
 // 	animaly.makeSound();

@@ -6,18 +6,18 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 17:31:53 by mott              #+#    #+#             */
-/*   Updated: 2024/09/12 18:58:25 by mott             ###   ########.fr       */
+/*   Updated: 2024/09/12 19:58:01 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Dog.hpp"
 
-Dog::Dog() : Animal(), _pointer(new Brain()) {
+Dog::Dog() : AAnimal(), _pointer(new Brain()) {
 	_type = "Dog";
 	std::cout << YELLOW << "(Dog) Default constructor called" << RESET << std::endl;
 }
 
-Dog::Dog(const Dog& other) : Animal(other), _pointer(new Brain(*other._pointer)) {
+Dog::Dog(const Dog& other) : AAnimal(other), _pointer(new Brain(*other._pointer)) {
 	std::cout << YELLOW << "(Dog) Copy constructor called" << RESET << std::endl;
 }
 
@@ -28,7 +28,7 @@ Dog::~Dog() {
 
 Dog& Dog::operator=(const Dog& other) {
 	if (this != &other) {
-		Animal::operator=(other);
+		AAnimal::operator=(other);
 		*_pointer = *other._pointer;
 		std::cout << YELLOW << "(Dog) Copy assignment operator called" << RESET << std::endl;
 	}

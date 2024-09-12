@@ -6,14 +6,14 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 17:31:56 by mott              #+#    #+#             */
-/*   Updated: 2024/09/12 18:57:38 by mott             ###   ########.fr       */
+/*   Updated: 2024/09/12 19:59:02 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef DOG_H
 #define DOG_H
 
-#include "Animal.hpp"
+#include "AAnimal.hpp"
 #include "Brain.hpp"
 #include <iostream>
 #include <string>
@@ -21,7 +21,7 @@
 #define RESET  "\033[0m"
 #define YELLOW "\033[33m"
 
-class Dog : public Animal {
+class Dog : public AAnimal {
 	public:
 		Dog();
 		Dog(const Dog& other);
