@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 13:46:41 by mott              #+#    #+#             */
-/*   Updated: 2024/09/12 14:35:03 by mott             ###   ########.fr       */
+/*   Updated: 2024/09/12 15:34:42 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ WrongCat::WrongCat() : WrongAnimal() {
 }
 
 WrongCat::WrongCat(const WrongCat& other) : WrongAnimal(other) {
-	_type = "Cat";
 	std::cout << YELLOW << "(WrongCat) Copy constructor called" << RESET << std::endl;
 }
 

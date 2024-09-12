@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 17:31:46 by mott              #+#    #+#             */
-/*   Updated: 2024/09/12 14:14:02 by mott             ###   ########.fr       */
+/*   Updated: 2024/09/12 15:34:15 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ Cat::Cat() : Animal() {
 }
 
 Cat::Cat(const Cat& other) : Animal(other) {
-	_type = "Cat";
 	std::cout << YELLOW << "(Cat) Copy constructor called" << RESET << std::endl;
 }
 

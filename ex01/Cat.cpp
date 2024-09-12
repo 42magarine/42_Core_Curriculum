@@ -6,36 +6,35 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 17:31:46 by mott              #+#    #+#             */
-/*   Updated: 2024/08/23 14:57:29 by mott             ###   ########.fr       */
+/*   Updated: 2024/09/12 15:38:37 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Cat.hpp"
 
 Cat::Cat() : Animal(), _pointer(new Brain()) {
-	_type = "cat";
-	std::cout << "Cat default constructor..." << std::endl;
+	_type = "Cat";
+	std::cout << YELLOW << "(Cat) Default constructor called" << RESET << std::endl;
 }
 
-Cat::Cat(const Cat &other) : Animal(other), _pointer(new Brain(*other._pointer)) {
-	// _type = "cat";
-	std::cout << "Cat copy constructor..." << std::endl;
+Cat::Cat(const Cat& other) : Animal(other), _pointer(new Brain(*other._pointer)) {
+	std::cout << YELLOW << "(Cat) Copy constructor called" << RESET << std::endl;
 }
 
 Cat::~Cat() {
 	delete _pointer;
-	std::cout << "Cat destructor..." << std::endl;
+	std::cout << YELLOW << "(Cat) Destructor called" << RESET << std::endl;
 }
 
-Cat& Cat::operator=(const Cat &other) {
+Cat& Cat::operator=(const Cat& other) {
 	if (this != &other) {
 		Animal::operator=(other);
 		*_pointer = *other._pointer;
+		std::cout << YELLOW << "(Cat) Copy assignment operator called" << RESET << std::endl;
 	}
-	std::cout << "Cat copy assignment operator..." << std::endl;
 	return *this;
 }
 
 void Cat::makeSound() const {
-	std::cout << "I'm a cat." << std::endl;
+	std::cout << "Meow!" << std::endl;
 }
