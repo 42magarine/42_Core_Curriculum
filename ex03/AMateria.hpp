@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 15:14:04 by mott              #+#    #+#             */
-/*   Updated: 2024/09/14 19:11:50 by mott             ###   ########.fr       */
+/*   Updated: 2024/09/14 19:20:07 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ class AMateria {
 		const std::string& getType() const;
 
 		virtual AMateria* clone() const = 0;
-		virtual void use(ICharacter& target);
+		virtual void use(ICharacter& target) = 0; // ???
 
 	protected:
 		std::string _type;

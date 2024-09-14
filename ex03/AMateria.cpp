@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 15:14:07 by mott              #+#    #+#             */
-/*   Updated: 2024/09/14 18:26:06 by mott             ###   ########.fr       */
+/*   Updated: 2024/09/14 19:19:19 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,6 @@ const std::string& AMateria::getType() const {
 	return _type;
 };
 
-void AMateria::use(ICharacter& target) {
-	std::cout << "(AMateria) use(ICharacter& target) ???" << std::endl;
-};
+// void AMateria::use(ICharacter& target) {
+// 	std::cout << "* " << target.getName() << " *" << std::endl;
+// };

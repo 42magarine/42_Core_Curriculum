@@ -6,17 +6,17 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 15:21:24 by mott              #+#    #+#             */
-/*   Updated: 2024/09/14 17:35:19 by mott             ###   ########.fr       */
+/*   Updated: 2024/09/14 21:10:06 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Cure.hpp"
 
-Cure::Cure() : AMateria() {
+Cure::Cure() : AMateria("cure") {
 	std::cout << YELLOW << "(Cure) Default constructor called" << RESET << std::endl;
 }
 
-Cure::Cure(const Cure& other) : AMateria() {
+Cure::Cure(const Cure& other) : AMateria(other) {
 	std::cout << YELLOW << "(Cure) Copy constructor called" << RESET << std::endl;
 }
 
@@ -33,9 +33,9 @@ Cure& Cure::operator=(const Cure& other) {
 }
 
 AMateria* Cure::clone() const{
-
+	return new Cure();
 };
 
 void Cure::use(ICharacter& target) {
-	std::cout << "* heals " << target << "'s wounds *" << std::endl;
+	std::cout << "* heals " << target.getName() << "'s wounds *" << std::endl;
 };

@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 15:36:55 by mott              #+#    #+#             */
-/*   Updated: 2024/09/14 17:51:32 by mott             ###   ########.fr       */
+/*   Updated: 2024/09/14 19:37:27 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ Character::Character(const std::string& name) : _name(name) {
 }
 
 Character::Character(const Character& other) {
+	_name = other._name;
 	std::cout << YELLOW << "(Character) Copy constructor called" << RESET << std::endl;
 }
 
@@ -41,13 +42,16 @@ const std::string& Character::getName() const {
 };
 
 void Character::equip(AMateria* m) {
-
+	_slot[0] = m;
+	_slot[1] = m;
+	_slot[2] = m;
+	_slot[3] = m;
 };
 
 void Character::unequip(int idx) {
-
+	_slot[idx] = nullptr;
 };
 
 void Character::use(int idx, ICharacter& target) {
-
+	_slot[idx]->use(target);
 };
