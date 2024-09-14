@@ -6,11 +6,17 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 16:31:33 by mott              #+#    #+#             */
-/*   Updated: 2024/08/11 16:32:12 by mott             ###   ########.fr       */
+/*   Updated: 2024/09/14 16:08:14 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <iostream>
+#include "AMateria.hpp"
+#include "Character.hpp"
+#include "ICharacter.hpp"
+#include "Cure.hpp"
+#include "Ice.hpp"
+#include "MateriaSource.hpp"
+#include "IMateriaSource.hpp"
 
 int main() {
 	IMateriaSource* src = new MateriaSource();
@@ -33,6 +39,6 @@ int main() {
 	delete bob;
 	delete me;
 	delete src;
-	
+
 	return 0;
 }

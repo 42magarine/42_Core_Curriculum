@@ -1,34 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Ice.hpp                                            :+:      :+:    :+:   */
+/*   ICharacter.hpp                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/14 15:21:32 by mott              #+#    #+#             */
-/*   Updated: 2024/09/14 15:47:18 by mott             ###   ########.fr       */
+/*   Created: 2024/09/14 16:01:00 by mott              #+#    #+#             */
+/*   Updated: 2024/09/14 16:03:51 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ICE_H
-#define ICE_H
+#ifndef ICHARACTER_H
+#define ICHARACTER_H
 
 #include "AMateria.hpp"
-#include <iostream>
+#include <string>
 
-#define RESET  "\033[0m"
-#define YELLOW "\033[33m"
-
-class Ice : public AMateria {
+class ICharacter {
 	public:
-		Ice();
-		Ice(const Ice& other);
+		virtual ~ICharacter() {}
 
-		~Ice();
-
-		Ice& operator=(const Ice& other);
-
-	private:
+		virtual const std::string& getName() const = 0;
+		virtual void equip(AMateria* m) = 0;
+		virtual void unequip(int idx) = 0;
+		virtual void use(int idx, ICharacter& target) = 0;
 };
 
-#endif // ICE_H
+#endif // ICHARACTER_H

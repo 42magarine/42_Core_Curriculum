@@ -1,34 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Ice.hpp                                            :+:      :+:    :+:   */
+/*   IMateriaSource.hpp                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/14 15:21:32 by mott              #+#    #+#             */
-/*   Updated: 2024/09/14 15:47:18 by mott             ###   ########.fr       */
+/*   Created: 2024/09/14 16:04:30 by mott              #+#    #+#             */
+/*   Updated: 2024/09/14 16:05:36 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ICE_H
-#define ICE_H
+#ifndef IMATERIASOURCE_H
+#define IMATERIASOURCE_H
 
 #include "AMateria.hpp"
-#include <iostream>
+#include <string>
 
-#define RESET  "\033[0m"
-#define YELLOW "\033[33m"
-
-class Ice : public AMateria {
+class IMateriaSource {
 	public:
-		Ice();
-		Ice(const Ice& other);
+		virtual ~IMateriaSource() {}
 
-		~Ice();
-
-		Ice& operator=(const Ice& other);
-
-	private:
+		virtual void learnMateria(AMateria* m) = 0;
+		virtual AMateria* createMateria(const std::string& type) = 0;
 };
 
-#endif // ICE_H
+#endif // IMATERIASOURCE_H
