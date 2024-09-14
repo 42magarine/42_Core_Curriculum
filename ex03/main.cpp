@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 16:31:33 by mott              #+#    #+#             */
-/*   Updated: 2024/09/14 16:08:14 by mott             ###   ########.fr       */
+/*   Updated: 2024/09/14 16:11:28 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,5 +40,6 @@ int main() {
 	delete me;
 	delete src;
 
+	system("leaks name");
 	return 0;
 }

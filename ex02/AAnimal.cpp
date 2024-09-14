@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 17:31:41 by mott              #+#    #+#             */
-/*   Updated: 2024/09/12 19:57:38 by mott             ###   ########.fr       */
+/*   Updated: 2024/09/14 16:24:40 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,6 @@ AAnimal& AAnimal::operator=(const AAnimal& other) {
 		std::cout << YELLOW << "(AAnimal) Copy assignment operator called" << RESET << std::endl;
 	}
 	return *this;
-}
-
-void AAnimal::makeSound() const {
-	std::cout << "I'm an animal." << std::endl;
 }
 
 std::string AAnimal::getType() const {
