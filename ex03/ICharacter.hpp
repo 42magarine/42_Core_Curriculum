@@ -6,15 +6,17 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 16:01:00 by mott              #+#    #+#             */
-/*   Updated: 2024/09/14 16:03:51 by mott             ###   ########.fr       */
+/*   Updated: 2024/09/14 19:10:49 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef ICHARACTER_H
 #define ICHARACTER_H
 
-#include "AMateria.hpp"
+// #include "AMateria.hpp"
 #include <string>
+
+class AMateria; // ???
 
 class ICharacter {
 	public:

@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 15:21:32 by mott              #+#    #+#             */
-/*   Updated: 2024/09/14 15:47:18 by mott             ###   ########.fr       */
+/*   Updated: 2024/09/14 17:31:06 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #define ICE_H
 
 #include "AMateria.hpp"
+#include "ICharacter.hpp"
 #include <iostream>
 
 #define RESET  "\033[0m"
@@ -27,6 +28,9 @@ class Ice : public AMateria {
 		~Ice();
 
 		Ice& operator=(const Ice& other);
+
+		AMateria* clone() const;
+		void use(ICharacter& target);
 
 	private:
 };

@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 15:14:07 by mott              #+#    #+#             */
-/*   Updated: 2024/09/14 16:33:11 by mott             ###   ########.fr       */
+/*   Updated: 2024/09/14 18:26:06 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ AMateria& AMateria::operator=(const AMateria& other) {
 		std::cout << YELLOW << "(AMateria) Copy assignment operator called" << RESET << std::endl;
 	}
 	return *this;
-}
+} // delete old object first?
 
 const std::string& AMateria::getType() const {
 	return _type;
