@@ -6,20 +6,22 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 15:37:02 by mott              #+#    #+#             */
-/*   Updated: 2024/09/14 21:21:00 by mott             ###   ########.fr       */
+/*   Updated: 2024/09/15 17:15:34 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "MateriaSource.hpp"
 
 MateriaSource::MateriaSource() {
-	// pointer auf null setzen?!
+	for (int i = 0; i < 4; i++) {
+		_template[i] = nullptr;
+	}
 	std::cout << YELLOW << "(MateriaSource) Default constructor called" << RESET << std::endl;
 }
 
 MateriaSource::MateriaSource(const MateriaSource& other) {
 	for (int i = 0; i < 4; i++) {
-		_slot[i] = other._slot[i]; // deep copy?
+		_template[i] = other._template[i]; // deep copy?
 	}
 	std::cout << YELLOW << "(MateriaSource) Copy constructor called" << RESET << std::endl;
 }
@@ -37,19 +39,23 @@ MateriaSource& MateriaSource::operator=(const MateriaSource& other) {
 }
 
 void MateriaSource::learnMateria(AMateria* m) {
-	_slot[0] = m;
-	_slot[1] = m;
-	_slot[2] = m;
-	_slot[3] = m;
+	if (m == nullptr) {
+		return;
+	}
+
+	for (int i = 0; i < 4; i++) {
+		if (_template[i] == nullptr) {
+			_template[i] = m;
+			return;
+		}
+	}
 };
 
 AMateria* MateriaSource::createMateria(const std::string& type) {
 	for (int i = 0; i < 4; i++) {
-		if (type == _slot[i]->getType()) {
-			return _slot[i]->clone();
+		if (_template[i] != nullptr && type == _template[i]->getType()) {
+			return _template[i]->clone();
 		}
 	}
 	return nullptr;
-	// (void)type;
-	// return _slot[0]->clone();
 };

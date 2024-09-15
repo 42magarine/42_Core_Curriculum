@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 15:36:58 by mott              #+#    #+#             */
-/*   Updated: 2024/09/14 19:24:23 by mott             ###   ########.fr       */
+/*   Updated: 2024/09/15 15:11:47 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ class Character : public ICharacter {
 
 	private:
 		std::string _name;
-		AMateria* _slot[4];
+		AMateria* _inventory[4];
 };
 
 #endif // CHARACTER_H

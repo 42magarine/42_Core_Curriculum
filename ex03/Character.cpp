@@ -6,33 +6,41 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 15:36:55 by mott              #+#    #+#             */
-/*   Updated: 2024/09/14 19:37:27 by mott             ###   ########.fr       */
+/*   Updated: 2024/09/15 17:35:15 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Character.hpp"
 
-Character::Character() {
-	std::cout << YELLOW << "(Character) Default constructor called" << RESET << std::endl;
+Character::Character() : _name("default") {
+	for (int i = 0; i < 4; i++) {
+		_inventory[i] = nullptr;
+	}
+	std::cout << YELLOW << "(Character) Default constructor called with " << _name << RESET << std::endl;
 }
 
 Character::Character(const std::string& name) : _name(name) {
-	std::cout << YELLOW << "(Character) Name constructor called" << RESET << std::endl;
+	for (int i = 0; i < 4; i++) {
+		_inventory[i] = nullptr;
+	}
+	std::cout << YELLOW << "(Character) Name constructor called with " << _name << RESET << std::endl;
 }
 
-Character::Character(const Character& other) {
-	_name = other._name;
-	std::cout << YELLOW << "(Character) Copy constructor called" << RESET << std::endl;
+Character::Character(const Character& other) : _name(other._name) {
+	// _inventory[] delete + new
+	std::cout << YELLOW << "(Character) Copy constructor called with " << _name << RESET << std::endl;
 }
 
 Character::~Character() {
-	std::cout << YELLOW << "(Character) Destructor called" << RESET << std::endl;
+	// _inventory delete
+	std::cout << YELLOW << "(Character) Destructor called with " << _name << RESET << std::endl;
 }
 
 Character& Character::operator=(const Character& other) {
 	if (this != &other) {
 		_name = other._name;
-		std::cout << YELLOW << "(Character) Copy assignment operator called" << RESET << std::endl;
+		// _inventory[] delete + new
+		std::cout << YELLOW << "(Character) Copy assignment operator called with " << _name << RESET << std::endl;
 	}
 	return *this;
 }
@@ -42,16 +50,27 @@ const std::string& Character::getName() const {
 };
 
 void Character::equip(AMateria* m) {
-	_slot[0] = m;
-	_slot[1] = m;
-	_slot[2] = m;
-	_slot[3] = m;
+	if (m == nullptr) {
+		return;
+	}
+
+	for (int i = 0; i < 4; i++) {
+		if (_inventory[i] == nullptr) {
+			_inventory[i] = m;
+			return;
+		}
+	}
 };
 
 void Character::unequip(int idx) {
-	_slot[idx] = nullptr;
+	if (idx >= 0 && idx < 4) {
+		// save pointer
+		_inventory[idx] = nullptr;
+	}
 };
 
 void Character::use(int idx, ICharacter& target) {
-	_slot[idx]->use(target);
+	if (_inventory[idx] != nullptr && idx >= 0 && idx < 4) {
+		_inventory[idx]->use(target);
+	}
 };

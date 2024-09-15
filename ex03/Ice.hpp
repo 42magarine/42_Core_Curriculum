@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 15:21:32 by mott              #+#    #+#             */
-/*   Updated: 2024/09/14 17:31:06 by mott             ###   ########.fr       */
+/*   Updated: 2024/09/15 16:15:46 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,8 @@ class Ice : public AMateria {
 
 		Ice& operator=(const Ice& other);
 
-		AMateria* clone() const;
-		void use(ICharacter& target);
-
-	private:
+		AMateria* clone() const override;
+		void use(ICharacter& target) override;
 };
 
 #endif // ICE_H

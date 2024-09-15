@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 15:21:27 by mott              #+#    #+#             */
-/*   Updated: 2024/09/14 17:28:18 by mott             ###   ########.fr       */
+/*   Updated: 2024/09/15 16:16:23 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,17 +23,14 @@
 class Cure : public AMateria {
 	public:
 		Cure();
-		// Cure(const std::string& type);
 		Cure(const Cure& other);
 
 		~Cure();
 
 		Cure& operator=(const Cure& other);
 
-		AMateria* clone() const;
-		void use(ICharacter& target);
-
-	private:
+		AMateria* clone() const override;
+		void use(ICharacter& target) override;
 };
 
 #endif // CURE_H

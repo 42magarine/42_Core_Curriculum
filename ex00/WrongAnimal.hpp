@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 13:43:46 by mott              #+#    #+#             */
-/*   Updated: 2024/09/12 14:30:45 by mott             ###   ########.fr       */
+/*   Updated: 2024/09/15 17:19:22 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ class WrongAnimal {
 		WrongAnimal();
 		WrongAnimal(const WrongAnimal& other);
 
-		~WrongAnimal();
+		~WrongAnimal(); // virtual?
 
 		WrongAnimal& operator=(const WrongAnimal& other);
 
