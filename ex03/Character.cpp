@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 15:36:55 by mott              #+#    #+#             */
-/*   Updated: 2024/09/17 13:08:34 by mott             ###   ########.fr       */
+/*   Updated: 2024/09/17 18:41:30 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,6 @@ Character::Character() : _name("default") {
 	std::cout << YELLOW << "(Character) Default constructor called with " << _name << RESET << std::endl;
 }
 
-// The inventory is empty at construction.
-
 // Your Character must have a constructor taking its name as a parameter.
 Character::Character(const std::string& name) : _name(name) {
 	for (int i = 0; i < 4; i++) {
@@ -30,20 +28,19 @@ Character::Character(const std::string& name) : _name(name) {
 	std::cout << YELLOW << "(Character) Name constructor called with " << _name << RESET << std::endl;
 }
 
-// Any copy (using copy constructor or copy assignment operator) of a Character must be deep.
 Character::Character(const Character& other) : _name(other._name) {
+	for (int i = 0; i < 4; i++) {
+		_inventory[i] = nullptr;
+	}
 	copy_inventory(other);
 	std::cout << YELLOW << "(Character) Copy constructor called with " << _name << RESET << std::endl;
 }
-
 
 // Of course, the Materias must be deleted when a Character is destroyed.
 Character::~Character() {
 	delete_inventory();
 	std::cout << YELLOW << "(Character) Destructor called with " << _name << RESET << std::endl;
 }
-
-// Any copy (using copy constructor or copy assignment operator) of a Character must be deep.
 
 // During copy, the Materias of a Character must be deleted before the new ones are added to their inventory.
 Character& Character::operator=(const Character& other) {
@@ -70,7 +67,7 @@ void Character::equip(AMateria* m) {
 
 	for (int i = 0; i < 4; i++) {
 		if (_inventory[i] == nullptr) {
-			_inventory[i] = m;
+			_inventory[i] = m->clone();
 			return;
 		}
 	}
@@ -78,15 +75,14 @@ void Character::equip(AMateria* m) {
 
 // The unequip() member function must NOT delete the Materia!
 void Character::unequip(int idx) {
-	if (_inventory[idx] != nullptr && idx >= 0 && idx < 4) {
-		// save pointer
+	if (idx >= 0 && idx < 4 && _inventory[idx] != nullptr) {
 		_inventory[idx] = nullptr;
 	}
 };
 
 // The use(int, ICharacter&) member function will have to use the Materia at the slot[idx], and pass the target parameter to the AMateria::use function.
 void Character::use(int idx, ICharacter& target) {
-	if (_inventory[idx] != nullptr && idx >= 0 && idx < 4) {
+	if (idx >= 0 && idx < 4 && _inventory[idx] != nullptr) {
 		_inventory[idx]->use(target);
 	}
 };
@@ -98,10 +94,15 @@ void Character::delete_inventory() {
 	}
 }
 
+// Any copy (using copy constructor or copy assignment operator) of a Character must be deep.
 void Character::copy_inventory(const Character& other) {
 	for (int i = 0; i < 4; i++) {
 		if (other._inventory[i] != nullptr) {
-			_inventory[i] = other._inventory[i];
+			_inventory[i] = other._inventory[i]->clone();
 		}
 	}
 }
+
+AMateria* Character::getInventory(int idx) const {
+	return _inventory[idx];
+};

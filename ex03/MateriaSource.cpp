@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 15:37:02 by mott              #+#    #+#             */
-/*   Updated: 2024/09/17 13:09:51 by mott             ###   ########.fr       */
+/*   Updated: 2024/09/17 16:00:34 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,10 +47,10 @@ void MateriaSource::learnMateria(AMateria* m) {
 	for (int i = 0; i < 4; i++) {
 		if (_template[i] == nullptr) {
 			_template[i] = m;
-			// _template[i] = m->clone();
 			return;
 		}
 	}
+	delete m;
 };
 
 // Returns a new Materia. The latter is a copy of the Materia previously learned by the MateriaSource whose type equals the one passed as parameter. Returns 0 if the type is unknown.

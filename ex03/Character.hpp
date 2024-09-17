@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 15:36:58 by mott              #+#    #+#             */
-/*   Updated: 2024/09/16 14:40:28 by mott             ###   ########.fr       */
+/*   Updated: 2024/09/17 18:57:03 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ class Character : public ICharacter {
 		void equip(AMateria* m) override;
 		void unequip(int idx) override;
 		void use(int idx, ICharacter& target) override;
+		AMateria* getInventory(int idx) const override;
 
 	private:
 		void delete_inventory();
