@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 15:14:07 by mott              #+#    #+#             */
-/*   Updated: 2024/09/15 18:07:43 by mott             ###   ########.fr       */
+/*   Updated: 2024/09/16 15:21:42 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,9 @@ AMateria::~AMateria() {
 	std::cout << YELLOW << "(AMateria) Destructor called with " << _type << RESET << std::endl;
 }
 
+// While assigning a Materia to another, copying the type doesn't make sense.
 AMateria& AMateria::operator=(const AMateria& other) {
 	if (this != &other) {
-		// _type = other._type; // ???
 		std::cout << YELLOW << "(AMateria) Copy assignment operator called with " << _type << RESET << std::endl;
 	}
 	return *this;

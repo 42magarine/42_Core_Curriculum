@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 15:21:24 by mott              #+#    #+#             */
-/*   Updated: 2024/09/15 16:58:04 by mott             ###   ########.fr       */
+/*   Updated: 2024/09/17 13:03:26 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,9 @@ Cure& Cure::operator=(const Cure& other) {
 	return *this;
 }
 
+// Of course, their member function clone() will return a new instance of the same type.
 AMateria* Cure::clone() const {
-	return new Cure();
-	// return new Cure(*this);
+	return new Cure(*this);
 };
 
 void Cure::use(ICharacter& target) {

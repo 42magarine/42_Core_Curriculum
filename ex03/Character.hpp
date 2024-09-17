@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 15:36:58 by mott              #+#    #+#             */
-/*   Updated: 2024/09/15 15:11:47 by mott             ###   ########.fr       */
+/*   Updated: 2024/09/16 14:40:28 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,9 @@ class Character : public ICharacter {
 		void use(int idx, ICharacter& target) override;
 
 	private:
+		void delete_inventory();
+		void copy_inventory(const Character& other);
+
 		std::string _name;
 		AMateria* _inventory[4];
 };

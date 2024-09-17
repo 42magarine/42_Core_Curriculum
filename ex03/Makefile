@@ -6,13 +6,13 @@
 #    By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/11 16:36:50 by mott              #+#    #+#              #
-#    Updated: 2024/09/15 16:01:15 by mott             ###   ########.fr        #
+#    Updated: 2024/09/16 15:45:37 by mott             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CPP			=	c++
 CPPFLAGS	=	-Wall -Wextra -Werror
-CPPFLAGS	+=	-g -fsanitize=address
+# CPPFLAGS	+=	-g -fsanitize=address
 # CPPFLAGS	+=	-std=c++98
 CPPFLAGS	+=	-std=c++17
 RM			=	rm -rf

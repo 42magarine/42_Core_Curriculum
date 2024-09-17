@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 15:37:04 by mott              #+#    #+#             */
-/*   Updated: 2024/09/15 17:00:01 by mott             ###   ########.fr       */
+/*   Updated: 2024/09/16 14:57:05 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,9 @@ class MateriaSource : public IMateriaSource {
 		AMateria* createMateria(const std::string& type) override;
 
 	private:
+		void delete_template();
+		void copy_template(const MateriaSource& other);
+
 		AMateria* _template[4];
 };
 
