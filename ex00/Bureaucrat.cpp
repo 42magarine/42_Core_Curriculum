@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 12:39:24 by mott              #+#    #+#             */
-/*   Updated: 2024/09/23 17:52:49 by mott             ###   ########.fr       */
+/*   Updated: 2024/09/23 18:06:02 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ Bureaucrat::Bureaucrat() : _name("default"), _grade(150) {
 	std::cout << YELLOW << "Default constructor called" << RESET << std::endl;
 }
 
-Bureaucrat::Bureaucrat(std::string name, unsigned int grade) : _name(name), _grade(grade) {
+Bureaucrat::Bureaucrat(const std::string& name, unsigned int grade) : _name(name), _grade(grade) {
 	if (_grade < 1) {
 		throw Bureaucrat::GradeTooHighException();
 	}

@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 12:39:21 by mott              #+#    #+#             */
-/*   Updated: 2024/09/23 17:39:22 by mott             ###   ########.fr       */
+/*   Updated: 2024/09/23 18:05:54 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 class Bureaucrat {
 	public:
 		Bureaucrat();
-		Bureaucrat(std::string name, unsigned int grade);
+		Bureaucrat(const std::string& name, unsigned int grade);
 		Bureaucrat(const Bureaucrat& other);
 
 		~Bureaucrat();
