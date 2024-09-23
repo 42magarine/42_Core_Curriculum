@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 12:39:24 by mott              #+#    #+#             */
-/*   Updated: 2024/09/23 13:49:24 by mott             ###   ########.fr       */
+/*   Updated: 2024/09/23 17:52:49 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,12 @@ Bureaucrat::Bureaucrat() : _name("default"), _grade(150) {
 }
 
 Bureaucrat::Bureaucrat(std::string name, unsigned int grade) : _name(name), _grade(grade) {
+	if (_grade < 1) {
+		throw Bureaucrat::GradeTooHighException();
+	}
+	if (_grade > 150) {
+		throw Bureaucrat::GradeTooLowException();
+	}
 	std::cout << YELLOW << "Name constructor called" << RESET << std::endl;
 }
 
@@ -45,11 +51,25 @@ unsigned int Bureaucrat::getGrade() const {
 }
 
 void Bureaucrat::incrementGrade() {
-	_grade--;
+	if (_grade <= 1) {
+		throw Bureaucrat::GradeTooHighException();
+	}
+		_grade--;
 }
 
 void Bureaucrat::decrementGrade() {
+	if (_grade >= 150) {
+		throw Bureaucrat::GradeTooLowException();
+	}
 	_grade++;
+}
+
+const char* Bureaucrat::GradeTooHighException::what() const noexcept {
+	return ">>> Grade is too high";
+}
+
+const char* Bureaucrat::GradeTooLowException::what() const noexcept {
+	return ">>> Grade is too low";
 }
 
 std::ostream& operator<<(std::ostream& os, const Bureaucrat& bureaucrat) {
