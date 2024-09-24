@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 18:15:56 by mott              #+#    #+#             */
-/*   Updated: 2024/09/24 19:24:50 by mott             ###   ########.fr       */
+/*   Updated: 2024/09/24 19:36:45 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@
 
 #define RESET  "\033[0m"
 #define YELLOW "\033[33m"
+
+class Bureaucrat;
 
 class Form {
 	public:

@@ -6,19 +6,22 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 12:39:21 by mott              #+#    #+#             */
-/*   Updated: 2024/09/24 19:15:43 by mott             ###   ########.fr       */
+/*   Updated: 2024/09/24 19:36:32 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef BUREAUCRAT_H
 #define BUREAUCRAT_H
 
+#include "Form.hpp"
 #include <iostream>
 #include <string>
 #include <exception>
 
 #define RESET  "\033[0m"
 #define YELLOW "\033[33m"
+
+class Form;
 
 class Bureaucrat {
 	public:
@@ -34,7 +37,7 @@ class Bureaucrat {
 		int getGrade() const;
 		void incrementGrade();
 		void decrementGrade();
-		void signForm();
+		void signForm(Form& form) const;
 
 		class GradeTooHighException : public std::exception {
 			public:

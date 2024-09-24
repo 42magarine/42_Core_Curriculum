@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 12:30:27 by mott              #+#    #+#             */
-/*   Updated: 2024/09/23 17:50:03 by mott             ###   ########.fr       */
+/*   Updated: 2024/09/24 19:45:11 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,20 +22,14 @@ int main() {
 	try {
 		a.decrementGrade();
 	}
-	catch (const Bureaucrat::GradeTooLowException& e) {
-		std::cout << e.what() << std::endl;
-	}
-	catch (const Bureaucrat::GradeTooHighException& e) {
+	catch (const std::exception& e) {
 		std::cout << e.what() << std::endl;
 	}
 
 	try {
 		b.incrementGrade();
 	}
-	catch (const Bureaucrat::GradeTooLowException& e) {
-		std::cout << e.what() << std::endl;
-	}
-	catch (const Bureaucrat::GradeTooHighException& e) {
+	catch (const std::exception& e) {
 		std::cout << e.what() << std::endl;
 	}
 
@@ -45,20 +39,14 @@ int main() {
 	try {
 		Bureaucrat c("c", 0);
 	}
-	catch (const Bureaucrat::GradeTooLowException& e) {
-		std::cout << e.what() << std::endl;
-	}
-	catch (const Bureaucrat::GradeTooHighException& e) {
+	catch (const std::exception& e) {
 		std::cout << e.what() << std::endl;
 	}
 
 	try {
 		Bureaucrat d("d", 151);
 	}
-	catch (const Bureaucrat::GradeTooLowException& e) {
-		std::cout << e.what() << std::endl;
-	}
-	catch (const Bureaucrat::GradeTooHighException& e) {
+	catch (const std::exception& e) {
 		std::cout << e.what() << std::endl;
 	}
 
