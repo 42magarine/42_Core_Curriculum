@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 12:39:24 by mott              #+#    #+#             */
-/*   Updated: 2024/09/23 18:36:39 by mott             ###   ########.fr       */
+/*   Updated: 2024/09/24 19:16:09 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,11 +65,11 @@ void Bureaucrat::decrementGrade() {
 }
 
 const char* Bureaucrat::GradeTooHighException::what() const noexcept {
-	return ">>> Grade is too high";
+	return ">>> Bureaucrat grade is too high";
 }
 
 const char* Bureaucrat::GradeTooLowException::what() const noexcept {
-	return ">>> Grade is too low";
+	return ">>> Bureaucrat grade is too low";
 }
 
 std::ostream& operator<<(std::ostream& os, const Bureaucrat& bureaucrat) {

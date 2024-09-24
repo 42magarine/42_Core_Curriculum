@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 18:16:02 by mott              #+#    #+#             */
-/*   Updated: 2024/09/23 19:09:36 by mott             ###   ########.fr       */
+/*   Updated: 2024/09/24 19:25:51 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,12 @@ Form::Form() : _name("default"), _signed(false), _grade_to_sign(150), _grade_to_
 }
 
 Form::Form(const std::string& name, int grade_to_sign, int grade_to_execute) : _name(name), _signed(false), _grade_to_sign(grade_to_sign), _grade_to_execute(grade_to_execute) {
+	if (_grade_to_sign < 1 || _grade_to_execute < 1) {
+		throw Form::GradeTooHighException();
+	}
+	if (_grade_to_sign > 150 || _grade_to_execute > 150) {
+		throw Form::GradeTooLowException();
+	}
 	std::cout << YELLOW << "Name constructor called" << RESET << std::endl;
 }
 
@@ -51,6 +57,21 @@ int Form::getGradeToSign() const {
 int Form::getGradeToExecute() const {
 	return _grade_to_execute;
 };
+
+void Form::beSigned(const Bureaucrat& bureaucrat) {
+	if (bureaucrat.getGrade() > _grade_to_sign) {
+		throw Form::GradeTooLowException();
+	}
+	_signed = true;
+}
+
+const char* Form::GradeTooHighException::what() const noexcept {
+	return ">>> Form grade is too high";
+}
+
+const char* Form::GradeTooLowException::what() const noexcept {
+	return ">>> Form grade is too low";
+}
 
 std::ostream& operator<<(std::ostream& os, const Form& form) {
 	os << "Name: " << form.getName() << std::endl

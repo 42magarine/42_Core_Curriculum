@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 12:39:21 by mott              #+#    #+#             */
-/*   Updated: 2024/09/23 18:36:59 by mott             ###   ########.fr       */
+/*   Updated: 2024/09/24 19:15:43 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,15 +34,16 @@ class Bureaucrat {
 		int getGrade() const;
 		void incrementGrade();
 		void decrementGrade();
+		void signForm();
 
 		class GradeTooHighException : public std::exception {
 			public:
-				const char* what() const noexcept;
+				const char* what() const noexcept override;
 		};
 
 		class GradeTooLowException : public std::exception {
 			public:
-				const char* what() const noexcept;
+				const char* what() const noexcept override;
 		};
 
 	private:

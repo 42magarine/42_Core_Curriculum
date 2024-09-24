@@ -6,13 +6,14 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 18:15:56 by mott              #+#    #+#             */
-/*   Updated: 2024/09/23 19:06:09 by mott             ###   ########.fr       */
+/*   Updated: 2024/09/24 19:24:50 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FORM_H
 #define FORM_H
 
+#include "Bureaucrat.hpp"
 #include <iostream>
 #include <string>
 #include <exception>
@@ -34,6 +35,17 @@ class Form {
 		bool getSigned() const;
 		int getGradeToSign() const;
 		int getGradeToExecute() const;
+		void beSigned(const Bureaucrat& bureaucrat);
+
+		class GradeTooHighException : public std::exception {
+			public:
+				const char* what() const noexcept;
+		};
+
+		class GradeTooLowException : public std::exception {
+			public:
+				const char* what() const noexcept;
+		};
 
 	private:
 		const std::string _name;
