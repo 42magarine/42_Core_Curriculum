@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 12:39:21 by mott              #+#    #+#             */
-/*   Updated: 2024/09/27 13:29:33 by mott             ###   ########.fr       */
+/*   Updated: 2024/09/27 14:00:39 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ class Bureaucrat {
 		void incrementGrade();
 		void decrementGrade();
 		void signForm(AForm& form) const;
+		void executeForm(const AForm& aform);
 
 		class GradeTooHighException : public std::exception {
 			public:
