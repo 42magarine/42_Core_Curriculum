@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 14:04:46 by mott              #+#    #+#             */
-/*   Updated: 2024/09/27 14:08:50 by mott             ###   ########.fr       */
+/*   Updated: 2024/09/27 15:00:38 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 #include "AForm.hpp"
 #include <iostream>
+#include <string>
 
 #define RESET  "\033[0m"
 #define YELLOW "\033[33m"
@@ -22,6 +23,7 @@
 class PresidentialPardonForm : public AForm {
 	public:
 		PresidentialPardonForm();
+		PresidentialPardonForm(const std::string& target);
 		PresidentialPardonForm(const PresidentialPardonForm& other);
 
 		~PresidentialPardonForm();
@@ -31,6 +33,7 @@ class PresidentialPardonForm : public AForm {
 		void execute(const Bureaucrat& bureaucrat) const override;
 
 	private:
+		std::string _target;
 };
 
 #endif // PRESIDENTIALPARDONFORM_H

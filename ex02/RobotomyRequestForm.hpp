@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 14:04:56 by mott              #+#    #+#             */
-/*   Updated: 2024/09/27 14:08:57 by mott             ###   ########.fr       */
+/*   Updated: 2024/09/27 14:59:42 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 #include "AForm.hpp"
 #include <iostream>
+#include <string>
 
 #define RESET  "\033[0m"
 #define YELLOW "\033[33m"
@@ -22,6 +23,7 @@
 class RobotomyRequestForm : public AForm {
 	public:
 		RobotomyRequestForm();
+		RobotomyRequestForm(const std::string& target);
 		RobotomyRequestForm(const RobotomyRequestForm& other);
 
 		~RobotomyRequestForm();
@@ -31,6 +33,7 @@ class RobotomyRequestForm : public AForm {
 		void execute(const Bureaucrat& bureaucrat) const override;
 
 	private:
+		std::string _target;
 };
 
 #endif // ROBOTOMYREQUESTFORM_H
