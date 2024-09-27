@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 14:05:03 by mott              #+#    #+#             */
-/*   Updated: 2024/09/27 15:15:19 by mott             ###   ########.fr       */
+/*   Updated: 2024/09/27 17:14:24 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ class ShrubberyCreationForm : public AForm {
 
 		ShrubberyCreationForm& operator=(const ShrubberyCreationForm& other);
 
-		void execute(const Bureaucrat& bureaucrat) const override;
+		void execute_form() const override;
 
 	private:
 		std::string _target;

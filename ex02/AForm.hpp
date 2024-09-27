@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 18:15:56 by mott              #+#    #+#             */
-/*   Updated: 2024/09/27 13:50:32 by mott             ###   ########.fr       */
+/*   Updated: 2024/09/27 17:08:13 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,8 @@ class AForm {
 		int getGradeToSign() const;
 		int getGradeToExecute() const;
 		void beSigned(const Bureaucrat& bureaucrat);
-		virtual void execute(const Bureaucrat& bureaucrat) const = 0;
+		void execute(const Bureaucrat& bureaucrat) const;
+		virtual void execute_form() const = 0;
 
 		class GradeTooHighException : public std::exception {
 			public:
@@ -46,6 +47,11 @@ class AForm {
 		};
 
 		class GradeTooLowException : public std::exception {
+			public:
+				const char* what() const noexcept;
+		};
+
+		class FormNotSignedException : public std::exception {
 			public:
 				const char* what() const noexcept;
 		};

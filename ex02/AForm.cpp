@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 18:16:02 by mott              #+#    #+#             */
-/*   Updated: 2024/09/27 13:31:11 by mott             ###   ########.fr       */
+/*   Updated: 2024/09/27 17:12:47 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,12 +65,26 @@ void AForm::beSigned(const Bureaucrat& bureaucrat) {
 	_signed = true;
 }
 
+void AForm::execute(const Bureaucrat& bureaucrat) const {
+	if (!_signed) {
+		throw FormNotSignedException();
+	}
+	if (bureaucrat.getGrade() > _grade_to_execute) {
+		throw GradeTooLowException();
+	}
+	execute_form();
+};
+
 const char* AForm::GradeTooHighException::what() const noexcept {
-	return ">>> AForm grade is too high";
+	return ">>> Form grade is too high";
 }
 
 const char* AForm::GradeTooLowException::what() const noexcept {
-	return ">>> AForm grade is too low";
+	return ">>> Form grade is too low";
+}
+
+const char* AForm::FormNotSignedException::what() const noexcept {
+	return ">>> Form is not signed";
 }
 
 std::ostream& operator<<(std::ostream& os, const AForm& aform) {

@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 14:04:46 by mott              #+#    #+#             */
-/*   Updated: 2024/09/27 15:00:38 by mott             ###   ########.fr       */
+/*   Updated: 2024/09/27 17:40:00 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ class PresidentialPardonForm : public AForm {
 
 		PresidentialPardonForm& operator=(const PresidentialPardonForm& other);
 
-		void execute(const Bureaucrat& bureaucrat) const override;
+		void execute_form() const override;
 
 	private:
 		std::string _target;

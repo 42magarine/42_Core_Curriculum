@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 14:05:00 by mott              #+#    #+#             */
-/*   Updated: 2024/09/27 15:19:51 by mott             ###   ########.fr       */
+/*   Updated: 2024/09/27 18:48:10 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,7 @@ ShrubberyCreationForm::ShrubberyCreationForm(const std::string& target) : AForm(
 	std::cout << YELLOW << "(ShrubberyCreationForm) Name constructor called" << RESET << std::endl;
 }
 
-ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm& other) {
-	_target = other._target;
+ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm& other) : AForm(other), _target(other._target) {
 	std::cout << YELLOW << "(ShrubberyCreationForm) Copy constructor called" << RESET << std::endl;
 }
 
@@ -31,14 +30,14 @@ ShrubberyCreationForm::~ShrubberyCreationForm() {
 
 ShrubberyCreationForm& ShrubberyCreationForm::operator=(const ShrubberyCreationForm& other) {
 	if (this != &other) {
+		AForm::operator=(other);
 		_target = other._target;
 		std::cout << YELLOW << "(ShrubberyCreationForm) Copy assignment operator called" << RESET << std::endl;
 	}
 	return *this;
 }
 
-void ShrubberyCreationForm::execute(const Bureaucrat& bureaucrat) const {
-	(void)bureaucrat;
+void ShrubberyCreationForm::execute_form() const {
 	std::ofstream file(_target + "_shrubbery");
 	if (!file.is_open()) {
 		std::cerr << "Could not create " << _target << "_shrubbery" << std::endl;

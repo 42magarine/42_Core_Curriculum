@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 12:39:24 by mott              #+#    #+#             */
-/*   Updated: 2024/09/27 14:25:00 by mott             ###   ########.fr       */
+/*   Updated: 2024/09/27 18:40:40 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ Bureaucrat::~Bureaucrat() {
 Bureaucrat& Bureaucrat::operator=(const Bureaucrat& other) {
 	if (this != &other) {
 		_grade = other._grade;
-		std::cout << YELLOW << "(Bueraucrat) Copy assignment operator called" << RESET << std::endl;
+		std::cout << YELLOW << "(Bureaucrat) Copy assignment operator called" << RESET << std::endl;
 	}
 	return *this;
 }
@@ -64,23 +64,23 @@ void Bureaucrat::decrementGrade() {
 	_grade++;
 }
 
-void Bureaucrat::signForm(AForm& aform) const {
+void Bureaucrat::signForm(AForm& form) const {
 	try {
-		aform.beSigned(*this);
-		std::cout << _name << " signed " << aform.getName() << std::endl;
+		form.beSigned(*this);
+		std::cout << _name << " signed " << form.getName() << std::endl;
 	}
 	catch (const std::exception& e) {
-		std::cout << _name << " couldn't sign " << aform.getName() << " because " << e.what() << std::endl;
+		std::cout << _name << " couldn't sign " << form.getName() << " because " << e.what() << std::endl;
 	}
 }
 
-void Bureaucrat::executeForm(const AForm& aform) {
+void Bureaucrat::executeForm(const AForm& form) {
 	try {
-		aform.execute(*this);
-		std::cout << _name << " execute " << aform.getName() << std::endl;
+		form.execute(*this);
+		std::cout << _name << " executed " << form.getName() << std::endl;
 	}
 	catch (const std::exception& e) {
-		std::cout << _name << " couldn't execute " << aform.getName() << " because " << e.what() << std::endl;
+		std::cout << _name << " couldn't execute " << form.getName() << " because " << e.what() << std::endl;
 	}
 };
 
