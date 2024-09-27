@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 12:30:27 by mott              #+#    #+#             */
-/*   Updated: 2024/09/23 19:09:01 by mott             ###   ########.fr       */
+/*   Updated: 2024/09/27 12:15:28 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,25 @@
 #include "Form.hpp"
 
 int main() {
-	Form a;
-	std::cout << a << std::endl;
+	Form form_a;
+	Form form_b("Einkommensteuer-Erklärung", 42, 42);
+	Form form_c(form_b);
+	Form form_d;
+	form_d = form_a;
 
-	Form b("Einkommensteuer-Erklärung", 42, 42);
-	std::cout << b << std::endl;
+	std::cout << form_a << std::endl;
+	std::cout << form_b << std::endl;
+	std::cout << form_c << std::endl;
+	std::cout << form_d << std::endl;
 
-	Form c(b);
-	std::cout << c << std::endl;
+	Bureaucrat bureaucrat_a("Another_Bob", 100);
+	Bureaucrat bureaucrat_b("Bob", 10);
 
-	Form d;
-	d = a;
-	std::cout << d << std::endl;
+	bureaucrat_a.signForm(form_a);
+	bureaucrat_a.signForm(form_b);
+
+	bureaucrat_b.signForm(form_c);
+	bureaucrat_b.signForm(form_d);
 
 	return 0;
 }

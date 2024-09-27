@@ -6,14 +6,14 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 18:16:02 by mott              #+#    #+#             */
-/*   Updated: 2024/09/24 19:25:51 by mott             ###   ########.fr       */
+/*   Updated: 2024/09/27 12:04:42 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Form.hpp"
 
 Form::Form() : _name("default"), _signed(false), _grade_to_sign(150), _grade_to_execute(150) {
-	std::cout << YELLOW << "Default constructor called" << RESET << std::endl;
+	std::cout << YELLOW << "(From) Default constructor called" << RESET << std::endl;
 }
 
 Form::Form(const std::string& name, int grade_to_sign, int grade_to_execute) : _name(name), _signed(false), _grade_to_sign(grade_to_sign), _grade_to_execute(grade_to_execute) {
@@ -23,21 +23,21 @@ Form::Form(const std::string& name, int grade_to_sign, int grade_to_execute) : _
 	if (_grade_to_sign > 150 || _grade_to_execute > 150) {
 		throw Form::GradeTooLowException();
 	}
-	std::cout << YELLOW << "Name constructor called" << RESET << std::endl;
+	std::cout << YELLOW << "(Form) Name constructor called" << RESET << std::endl;
 }
 
 Form::Form(const Form& other) : _name(other._name), _signed(other._signed), _grade_to_sign(other._grade_to_sign), _grade_to_execute(other._grade_to_execute) {
-	std::cout << YELLOW << "Copy constructor called" << RESET << std::endl;
+	std::cout << YELLOW << "(Form) Copy constructor called" << RESET << std::endl;
 }
 
 Form::~Form() {
-	std::cout << YELLOW << "Destructor called" << RESET << std::endl;
+	std::cout << YELLOW << "(Form) Destructor called" << RESET << std::endl;
 }
 
 Form& Form::operator=(const Form& other) {
 	if (this != &other) {
 		_signed = other._signed;
-		std::cout << YELLOW << "Copy assignment operator called" << RESET << std::endl;
+		std::cout << YELLOW << "(Form) Copy assignment operator called" << RESET << std::endl;
 	}
 	return *this;
 }

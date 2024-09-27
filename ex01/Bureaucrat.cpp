@@ -6,14 +6,14 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 12:39:24 by mott              #+#    #+#             */
-/*   Updated: 2024/09/24 19:44:45 by mott             ###   ########.fr       */
+/*   Updated: 2024/09/27 12:09:22 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Bureaucrat.hpp"
 
 Bureaucrat::Bureaucrat() : _name("default"), _grade(150) {
-	std::cout << YELLOW << "Default constructor called" << RESET << std::endl;
+	std::cout << YELLOW << "(Bureaucrat) Default constructor called" << RESET << std::endl;
 }
 
 Bureaucrat::Bureaucrat(const std::string& name, int grade) : _name(name), _grade(grade) {
@@ -23,21 +23,21 @@ Bureaucrat::Bureaucrat(const std::string& name, int grade) : _name(name), _grade
 	if (_grade > 150) {
 		throw Bureaucrat::GradeTooLowException();
 	}
-	std::cout << YELLOW << "Name constructor called" << RESET << std::endl;
+	std::cout << YELLOW << "(Bureaucrat) Name constructor called" << RESET << std::endl;
 }
 
 Bureaucrat::Bureaucrat(const Bureaucrat& other) : _name(other._name), _grade(other._grade) {
-	std::cout << YELLOW << "Copy constructor called" << RESET << std::endl;
+	std::cout << YELLOW << "(Bureaucrat) Copy constructor called" << RESET << std::endl;
 }
 
 Bureaucrat::~Bureaucrat() {
-	std::cout << YELLOW << "Destructor called" << RESET << std::endl;
+	std::cout << YELLOW << "(Bureaucrat) Destructor called" << RESET << std::endl;
 }
 
 Bureaucrat& Bureaucrat::operator=(const Bureaucrat& other) {
 	if (this != &other) {
 		_grade = other._grade;
-		std::cout << YELLOW << "Copy assignment operator called" << RESET << std::endl;
+		std::cout << YELLOW << "(Bueraucrat) Copy assignment operator called" << RESET << std::endl;
 	}
 	return *this;
 }
