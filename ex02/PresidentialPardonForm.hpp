@@ -1,12 +1,25 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   PresidentialPardonForm.hpp                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/09/27 14:04:46 by mott              #+#    #+#             */
+/*   Updated: 2024/09/27 14:08:50 by mott             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef PRESIDENTIALPARDONFORM_H
 #define PRESIDENTIALPARDONFORM_H
 
+#include "AForm.hpp"
 #include <iostream>
 
 #define RESET  "\033[0m"
 #define YELLOW "\033[33m"
 
-class PresidentialPardonForm {
+class PresidentialPardonForm : public AForm {
 	public:
 		PresidentialPardonForm();
 		PresidentialPardonForm(const PresidentialPardonForm& other);
@@ -14,6 +27,8 @@ class PresidentialPardonForm {
 		~PresidentialPardonForm();
 
 		PresidentialPardonForm& operator=(const PresidentialPardonForm& other);
+
+		void execute(const Bureaucrat& bureaucrat) const override;
 
 	private:
 };
