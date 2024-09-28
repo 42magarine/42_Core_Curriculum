@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 18:15:56 by mott              #+#    #+#             */
-/*   Updated: 2024/09/27 17:08:13 by mott             ###   ########.fr       */
+/*   Updated: 2024/09/28 10:37:40 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,17 +43,17 @@ class AForm {
 
 		class GradeTooHighException : public std::exception {
 			public:
-				const char* what() const noexcept;
+				const char* what() const noexcept override;
 		};
 
 		class GradeTooLowException : public std::exception {
 			public:
-				const char* what() const noexcept;
+				const char* what() const noexcept override;
 		};
 
 		class FormNotSignedException : public std::exception {
 			public:
-				const char* what() const noexcept;
+				const char* what() const noexcept override;
 		};
 
 	private:
