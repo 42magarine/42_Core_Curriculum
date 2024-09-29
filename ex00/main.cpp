@@ -6,11 +6,11 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/29 15:46:56 by mott              #+#    #+#             */
-/*   Updated: 2024/09/29 15:52:24 by mott             ###   ########.fr       */
+/*   Updated: 2024/09/29 17:12:10 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "whatever.hpp";
+#include "whatever.hpp"
 
 int main() {
 	int a = 2;
