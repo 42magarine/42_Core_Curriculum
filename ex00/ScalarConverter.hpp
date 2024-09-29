@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 15:14:44 by mott              #+#    #+#             */
-/*   Updated: 2024/09/28 21:00:32 by mott             ###   ########.fr       */
+/*   Updated: 2024/09/29 12:12:17 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,10 @@
 
 #include <iostream>
 #include <string>
-#include <cstdlib>
+#include <cctype>		// isprint, isdigit
+#include <cstdlib>		// strtol, strtof, strtod
+#include <limits>		// numeric_limits
+#include <iomanip>		// fixed, setprecision
 
 #define RESET  "\033[0m"
 #define YELLOW "\033[33m"
