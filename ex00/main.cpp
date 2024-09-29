@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/29 15:46:56 by mott              #+#    #+#             */
-/*   Updated: 2024/09/29 17:12:10 by mott             ###   ########.fr       */
+/*   Updated: 2024/09/29 17:22:28 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,3 +31,12 @@ int main() {
 
 	return 0;
 }
+
+// int main() {
+
+// 	std::cout << ::max(3.14f, 4.2f) << std::endl;
+// 	std::cout << ::max(3.14, 4.2) << std::endl;
+// 	std::cout << ::max<double>(3.14, 42) << std::endl;
+
+// 	return 0;
+// }
