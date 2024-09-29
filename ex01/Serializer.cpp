@@ -6,11 +6,19 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/29 12:24:51 by mott              #+#    #+#             */
-/*   Updated: 2024/09/29 12:25:16 by mott             ###   ########.fr       */
+/*   Updated: 2024/09/29 12:57:55 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Serializer.hpp"
+
+uintptr_t Serializer::serialize(Data* ptr) {
+	return reinterpret_cast<uintptr_t>(ptr);
+};
+
+Data* Serializer::deserialize(uintptr_t raw) {
+	return reinterpret_cast<Data*>(raw);
+};
 
 Serializer::Serializer() {
 	std::cout << YELLOW << "Default constructor called" << RESET << std::endl;

@@ -6,7 +6,7 @@
 #    By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/23 12:17:43 by mott              #+#    #+#              #
-#    Updated: 2024/09/29 12:21:30 by mott             ###   ########.fr        #
+#    Updated: 2024/09/29 12:54:20 by mott             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,8 @@ RM			=	rm -rf
 NAME		=	convert
 
 SRCS		=	main.cpp \
-				Serializer.cpp
+				Serializer.cpp \
+				Data.cpp
 OBJS		=	$(SRCS:.cpp=.o)
 DEPS		=	$(SRCS:.cpp=.d)
 

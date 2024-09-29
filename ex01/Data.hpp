@@ -1,37 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Serializer.hpp                                     :+:      :+:    :+:   */
+/*   Data.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/29 12:24:53 by mott              #+#    #+#             */
-/*   Updated: 2024/09/29 12:56:13 by mott             ###   ########.fr       */
+/*   Created: 2024/09/29 12:37:12 by mott              #+#    #+#             */
+/*   Updated: 2024/09/29 12:49:35 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SERIALIZER_H
-#define SERIALIZER_H
+#ifndef DATA_H
+#define DATA_H
 
-#include "Data.hpp"
 #include <iostream>
-#include <cstdint>		// uintptr_t
+#include <string>
 
 #define RESET  "\033[0m"
 #define YELLOW "\033[33m"
 
-class Serializer {
+class Data {
 	public:
-		static uintptr_t serialize(Data* ptr);
-		static Data* deserialize(uintptr_t raw);
+		Data();
+		Data(int id, const std::string& name);
+		Data(const Data& other);
+
+		~Data();
+
+		Data& operator=(const Data& other);
+
+		int getId() const;
+		const std::string& getName() const;
 
 	private:
-		Serializer();
-		Serializer(const Serializer& other);
-
-		~Serializer();
-
-		Serializer& operator=(const Serializer& other);
+		int	_id;
+		std::string _name;
 };
 
-#endif // SERIALIZER_H
+#endif // DATA_H
