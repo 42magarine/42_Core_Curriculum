@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/29 18:52:48 by mott              #+#    #+#             */
-/*   Updated: 2024/09/29 21:29:43 by mott             ###   ########.fr       */
+/*   Updated: 2024/09/30 12:15:53 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,14 @@ int main() {
 	}
 	std::cout << std::endl;
 
-	// system("leaks templates");
+	system("leaks templates");
 	return 0;
 }
+
+// int main() {
+// 	int* a = new int();
+// 	std::cout << *a << std::endl;
+// 	delete a;
+
+// 	return 0;
+// }
