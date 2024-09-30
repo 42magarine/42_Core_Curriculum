@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 19:34:33 by mott              #+#    #+#             */
-/*   Updated: 2024/09/28 10:48:53 by mott             ###   ########.fr       */
+/*   Updated: 2024/09/30 12:31:54 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ AForm* Intern::makeForm(const std::string& form, const std::string& target) {
 		}
 	}
 	throw Intern::FormNotFoundException();
-};
+}
 
 const char* Intern::FormNotFoundException::what() const noexcept {
 	return ">>> Form not found";
@@ -60,12 +60,12 @@ const char* Intern::FormNotFoundException::what() const noexcept {
 
 AForm* Intern::new_ShrubberyCreation(const std::string& target) {
 	return new ShrubberyCreationForm(target);
-};
+}
 
 AForm* Intern::new_RobotomyRequest(const std::string& target) {
 	return new RobotomyRequestForm(target);
-};
+}
 
 AForm* Intern::new_PresidentialPardon(const std::string& target) {
 	return new PresidentialPardonForm(target);
-};
+}

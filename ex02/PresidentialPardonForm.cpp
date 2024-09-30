@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 14:04:49 by mott              #+#    #+#             */
-/*   Updated: 2024/09/27 18:50:18 by mott             ###   ########.fr       */
+/*   Updated: 2024/09/30 12:32:28 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,4 +39,4 @@ PresidentialPardonForm& PresidentialPardonForm::operator=(const PresidentialPard
 
 void PresidentialPardonForm::execute_form() const {
 	std::cout << _target << " has been pardoned by Zaphod Beeblebrox" << std::endl;
-};
+}

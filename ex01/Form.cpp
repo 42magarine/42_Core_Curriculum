@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 18:16:02 by mott              #+#    #+#             */
-/*   Updated: 2024/09/27 12:04:42 by mott             ###   ########.fr       */
+/*   Updated: 2024/09/30 12:32:53 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,19 +44,19 @@ Form& Form::operator=(const Form& other) {
 
 const std::string& Form::getName() const {
 	return _name;
-};
+}
 
 bool Form::getSigned() const {
 	return _signed;
-};
+}
 
 int Form::getGradeToSign() const {
 	return _grade_to_sign;
-};
+}
 
 int Form::getGradeToExecute() const {
 	return _grade_to_execute;
-};
+}
 
 void Form::beSigned(const Bureaucrat& bureaucrat) {
 	if (bureaucrat.getGrade() > _grade_to_sign) {

@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 14:05:00 by mott              #+#    #+#             */
-/*   Updated: 2024/09/27 18:48:10 by mott             ###   ########.fr       */
+/*   Updated: 2024/09/30 12:32:01 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,4 +52,4 @@ void ShrubberyCreationForm::execute_form() const {
 		 << "      ||||\n"
 		 << "      ||||\n";
 	file.close();
-};
+}

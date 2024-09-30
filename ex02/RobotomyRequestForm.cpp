@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 14:04:52 by mott              #+#    #+#             */
-/*   Updated: 2024/09/27 19:12:14 by mott             ###   ########.fr       */
+/*   Updated: 2024/09/30 12:32:24 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,4 +43,4 @@ void RobotomyRequestForm::execute_form() const {
 		std::cout << _target << " has been robotomized successfully" << std::endl;
 	else
 		std::cout << _target << " robotomy failed" << std::endl;
-};
+}

@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 18:16:02 by mott              #+#    #+#             */
-/*   Updated: 2024/09/27 17:12:47 by mott             ###   ########.fr       */
+/*   Updated: 2024/09/30 12:32:39 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,19 +44,19 @@ AForm& AForm::operator=(const AForm& other) {
 
 const std::string& AForm::getName() const {
 	return _name;
-};
+}
 
 bool AForm::getSigned() const {
 	return _signed;
-};
+}
 
 int AForm::getGradeToSign() const {
 	return _grade_to_sign;
-};
+}
 
 int AForm::getGradeToExecute() const {
 	return _grade_to_execute;
-};
+}
 
 void AForm::beSigned(const Bureaucrat& bureaucrat) {
 	if (bureaucrat.getGrade() > _grade_to_sign) {
@@ -73,7 +73,7 @@ void AForm::execute(const Bureaucrat& bureaucrat) const {
 		throw GradeTooLowException();
 	}
 	execute_form();
-};
+}
 
 const char* AForm::GradeTooHighException::what() const noexcept {
 	return ">>> Form grade is too high";
