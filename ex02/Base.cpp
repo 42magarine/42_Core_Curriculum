@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/29 13:46:55 by mott              #+#    #+#             */
-/*   Updated: 2024/09/29 15:01:58 by mott             ###   ########.fr       */
+/*   Updated: 2024/09/30 13:53:22 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ Base* genrate() {
 	}
 
 	return nullptr;
-};
+}
 
 void identify(Base* p) {
 	A* pointer_to_a = dynamic_cast<A*>(p);
@@ -43,7 +43,7 @@ void identify(Base* p) {
 	else if (pointer_to_c) {
 		std::cout << "C" << std::endl;
 	}
-};
+}
 
 void identify(Base& p) {
 	try {
@@ -51,19 +51,19 @@ void identify(Base& p) {
 		std::cout << "A" << std::endl;
 		(void)reference_to_a;
 	}
-	catch (std::exception& e){}
+	catch (std::exception& e) {}
 
 	try {
 		B& reference_to_b = dynamic_cast<B&>(p);
 		std::cout << "B" << std::endl;
 		(void)reference_to_b;
 	}
-	catch (std::exception& e){}
+	catch (std::exception& e) {}
 
 	try {
 		C& reference_to_c = dynamic_cast<C&>(p);
 		std::cout << "C" << std::endl;
 		(void)reference_to_c;
 	}
-	catch (std::exception& e){}
-};
+	catch (std::exception& e) {}
+}

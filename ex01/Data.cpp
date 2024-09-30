@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/29 12:37:09 by mott              #+#    #+#             */
-/*   Updated: 2024/09/29 12:53:15 by mott             ###   ########.fr       */
+/*   Updated: 2024/09/30 12:31:11 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,8 @@ Data& Data::operator=(const Data& other) {
 
 int Data::getId() const {
 	return _id;
-};
+}
 
 const std::string& Data::getName() const {
 	return _name;
-};
+}
