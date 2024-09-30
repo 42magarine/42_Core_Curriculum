@@ -6,7 +6,7 @@
 #    By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/23 12:17:43 by mott              #+#    #+#              #
-#    Updated: 2024/09/29 20:06:29 by mott             ###   ########.fr        #
+#    Updated: 2024/09/30 12:59:26 by mott             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,8 +17,7 @@ CPPFLAGS	+=	-std=c++17
 RM			=	rm -rf
 NAME		=	templates
 
-SRCS		=	main.cpp \
-				Array.cpp
+SRCS		=	main.cpp
 OBJS		=	$(SRCS:.cpp=.o)
 DEPS		=	$(SRCS:.cpp=.d)
 
