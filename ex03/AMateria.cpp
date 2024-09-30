@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 15:14:07 by mott              #+#    #+#             */
-/*   Updated: 2024/09/16 15:21:42 by mott             ###   ########.fr       */
+/*   Updated: 2024/09/30 12:34:33 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,4 +38,4 @@ AMateria& AMateria::operator=(const AMateria& other) {
 
 const std::string& AMateria::getType() const {
 	return _type;
-};
+}

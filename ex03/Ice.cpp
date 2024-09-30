@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 15:21:29 by mott              #+#    #+#             */
-/*   Updated: 2024/09/17 13:03:41 by mott             ###   ########.fr       */
+/*   Updated: 2024/09/30 12:33:58 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,8 @@ Ice& Ice::operator=(const Ice& other) {
 // Of course, their member function clone() will return a new instance of the same type.
 AMateria* Ice::clone() const{
 	return new Ice(*this);
-};
+}
 
 void Ice::use(ICharacter& target) {
 	std::cout << "* shoots an ice bolt at " << target.getName() << " *" << std::endl;
-};
+}

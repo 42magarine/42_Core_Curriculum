@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 15:36:55 by mott              #+#    #+#             */
-/*   Updated: 2024/09/17 18:41:30 by mott             ###   ########.fr       */
+/*   Updated: 2024/09/30 12:34:30 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ Character& Character::operator=(const Character& other) {
 
 const std::string& Character::getName() const {
 	return _name;
-};
+}
 
 // In case they try to add a Materia to a full inventory, or use/unequip an unexisting Materia, don’t do anything.
 
@@ -71,21 +71,21 @@ void Character::equip(AMateria* m) {
 			return;
 		}
 	}
-};
+}
 
 // The unequip() member function must NOT delete the Materia!
 void Character::unequip(int idx) {
 	if (idx >= 0 && idx < 4 && _inventory[idx] != nullptr) {
 		_inventory[idx] = nullptr;
 	}
-};
+}
 
 // The use(int, ICharacter&) member function will have to use the Materia at the slot[idx], and pass the target parameter to the AMateria::use function.
 void Character::use(int idx, ICharacter& target) {
 	if (idx >= 0 && idx < 4 && _inventory[idx] != nullptr) {
 		_inventory[idx]->use(target);
 	}
-};
+}
 
 void Character::delete_inventory() {
 	for (int i = 0; i < 4; i++) {
@@ -105,4 +105,4 @@ void Character::copy_inventory(const Character& other) {
 
 AMateria* Character::getInventory(int idx) const {
 	return _inventory[idx];
-};
+}
