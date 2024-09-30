@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 15:42:45 by mott              #+#    #+#             */
-/*   Updated: 2024/08/31 17:38:26 by mott             ###   ########.fr       */
+/*   Updated: 2024/09/30 13:39:17 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,11 +73,11 @@ bool Fixed::operator>=(const Fixed& other) const {
 bool Fixed::operator<=(const Fixed& other) const {
 	return _fixed_point_number <= other._fixed_point_number;
 }
-;
+
 bool Fixed::operator==(const Fixed& other) const {
 	return _fixed_point_number == other._fixed_point_number;
 }
-;
+
 bool Fixed::operator!=(const Fixed& other) const {
 	return _fixed_point_number != other._fixed_point_number;
 }
