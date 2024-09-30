@@ -6,7 +6,21 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 14:49:41 by mott              #+#    #+#             */
-/*   Updated: 2024/09/30 14:49:42 by mott             ###   ########.fr       */
+/*   Updated: 2024/09/30 14:52:32 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+int main() {
+	Span sp = Span(5);
+
+	sp.addNumber(6);
+	sp.addNumber(3);
+	sp.addNumber(17);
+	sp.addNumber(9);
+	sp.addNumber(11);
+
+	std::cout << sp.shortestSpan() << std::endl;
+	std::cout << sp.longestSpan() << std::endl;
+
+	return 0;
+}
