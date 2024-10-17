@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 14:49:36 by mott              #+#    #+#             */
-/*   Updated: 2024/10/17 19:38:39 by mott             ###   ########.fr       */
+/*   Updated: 2024/10/17 22:25:24 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 #include <list>
 
 #define RESET  "\033[0m"
+#define RED    "\033[31m"
 #define YELLOW "\033[33m"
 #define MAX_VALUE 8
 
@@ -29,7 +30,7 @@ int main() {
 		std::cout << "Found in array: " << *easyfind(array, 9) << std::endl;
 	}
 	catch (const std::exception& e) {
-		std::cerr << e.what() << std::endl;
+		std::cerr << RED << e.what() << RESET << std::endl;
 	}
 
 	std::cout << YELLOW << "std::vector" << RESET << std::endl;
@@ -42,7 +43,7 @@ int main() {
 		std::cout << "Found in vector: " << *easyfind(vector, 9) << std::endl;
 	}
 	catch (const std::exception& e) {
-		std::cerr << e.what() << std::endl;
+		std::cerr << RED << e.what() << RESET << std::endl;
 	}
 
 	std::cout << YELLOW << "std::deque" << RESET << std::endl;
@@ -55,7 +56,7 @@ int main() {
 		std::cout << "Found in deque: " << *easyfind(deque, 9) << std::endl;
 	}
 	catch (const std::exception& e) {
-		std::cerr << e.what() << std::endl;
+		std::cerr << RED << e.what() << RESET << std::endl;
 	}
 
 	std::cout << YELLOW << "std::forward_list" << RESET << std::endl;
@@ -69,7 +70,7 @@ int main() {
 
 	}
 	catch (const std::exception& e) {
-		std::cerr << e.what() << std::endl;
+		std::cerr << RED << e.what() << RESET << std::endl;
 	}
 
 	std::cout << YELLOW << "std::list" << RESET << std::endl;
@@ -82,7 +83,7 @@ int main() {
 		std::cout << "Found in list: " << *easyfind(list, 9) << std::endl;
 	}
 	catch (const std::exception& e) {
-		std::cerr << e.what() << std::endl;
+		std::cerr << RED << e.what() << RESET << std::endl;
 	}
 
 	return 0;
