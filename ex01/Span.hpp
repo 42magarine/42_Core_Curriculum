@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 14:49:49 by mott              #+#    #+#             */
-/*   Updated: 2024/10/17 23:57:45 by mott             ###   ########.fr       */
+/*   Updated: 2024/10/18 00:35:02 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 #include <limits>
 #include <stdexcept>
 #include <cstddef>
+#include <cstdlib>
 
 #define RESET "\033[0m"
 #define RED   "\033[31m"
@@ -35,8 +36,8 @@ class Span {
 
 		void addNumber(int value);
 		void addNumber(std::vector<int> values);
-		int shortestSpan();
-		int longestSpan();
+		int shortestSpan() const;
+		int longestSpan() const;
 
 	private:
 		unsigned int _size;
