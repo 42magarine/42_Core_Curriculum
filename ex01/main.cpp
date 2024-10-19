@@ -6,11 +6,12 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 14:49:41 by mott              #+#    #+#             */
-/*   Updated: 2024/10/18 19:57:32 by mott             ###   ########.fr       */
+/*   Updated: 2024/10/19 17:27:45 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Span.hpp"
+#include <ctime>
 
 int main() {
 	Span sp = Span(5);
@@ -72,6 +73,25 @@ int main() {
 // 	catch (std::exception& e) {
 // 		std::cerr << e.what() << std::endl;
 // 	}
+
+// 	std::cout << sp.shortestSpan() << std::endl;
+// 	std::cout << sp.longestSpan() << std::endl;
+
+// 	return 0;
+// }
+
+// int main() {
+// 	std::srand(std::time(nullptr));
+
+// 	std::vector<int> random_numbers;
+// 	unsigned int size = 10000;
+
+// 	for (unsigned int i = 0; i < size; i++) {
+// 		random_numbers.push_back(std::rand() % 100000);
+// 	}
+
+// 	Span sp(size);
+// 	sp.addNumber(random_numbers);
 
 // 	std::cout << sp.shortestSpan() << std::endl;
 // 	std::cout << sp.longestSpan() << std::endl;

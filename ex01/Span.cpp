@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 14:49:46 by mott              #+#    #+#             */
-/*   Updated: 2024/10/18 18:23:05 by mott             ###   ########.fr       */
+/*   Updated: 2024/10/18 20:41:06 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,21 +31,21 @@ Span& Span::operator=(const Span& other) {
 
 void Span::addNumber(int value) {
 	if (_vector.size() >= _size) {
-		throw std::length_error(RED "Span is already full" RESET);
+		throw std::length_error(RED "Cannot add more numbers, span is full." RESET);
 	}
 	_vector.push_back(value);
 }
 
 void Span::addNumber(std::vector<int> values) {
 	if (_vector.size() + values.size() > _size) {
-		throw std::length_error(RED "Span is already full" RESET);
+		throw std::length_error(RED "Cannot add more numbers, span will exceed capacity." RESET);
 	}
 	_vector.insert(_vector.end(), values.begin(), values.end());
 }
 
 int Span::shortestSpan() const {
 	if (_vector.size() < 2) {
-		throw std::length_error(RED "Not enough numbers in span" RESET);
+		throw std::length_error(RED "Not enough numbers to find a span." RESET);
 	}
 
 	std::vector<int> sorted_vector(_vector);
@@ -61,7 +61,7 @@ int Span::shortestSpan() const {
 
 int Span::longestSpan() const {
 	if (_vector.size() < 2) {
-		throw std::length_error(RED "Not enough numbers in span" RESET);
+		throw std::length_error(RED "Not enough numbers to find a span." RESET);
 	}
 	return *std::max_element(_vector.begin(), _vector.end()) - *std::min_element(_vector.begin(), _vector.end());
 }
