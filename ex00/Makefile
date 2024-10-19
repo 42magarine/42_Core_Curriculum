@@ -6,7 +6,7 @@
 #    By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/23 12:17:43 by mott              #+#    #+#              #
-#    Updated: 2024/10/19 19:18:12 by mott             ###   ########.fr        #
+#    Updated: 2024/10/19 19:27:53 by mott             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,8 @@ CPPFLAGS	+=	-std=c++17
 RM			=	rm -rf
 NAME		=	stl
 
-SRCS		=	main.cpp
+SRCS		=	main.cpp \
+				BitcoinExchange.cpp
 OBJS		=	$(SRCS:.cpp=.o)
 DEPS		=	$(SRCS:.cpp=.d)
 
