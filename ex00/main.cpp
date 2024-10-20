@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/19 19:24:47 by mott              #+#    #+#             */
-/*   Updated: 2024/10/20 20:45:21 by mott             ###   ########.fr       */
+/*   Updated: 2024/10/20 21:05:14 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ int main(int argc, char** argv) {
 	}
 	try {
 		BitcoinExchange btc;
-		btc.print_map();
 		btc.calculate_values(argv[1]);
 	}
 	catch (const std::exception& e) {

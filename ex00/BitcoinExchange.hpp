@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/20 15:28:59 by mott              #+#    #+#             */
-/*   Updated: 2024/10/20 19:59:30 by mott             ###   ########.fr       */
+/*   Updated: 2024/10/20 21:05:11 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,7 @@ class BitcoinExchange {
 
 		BitcoinExchange& operator=(const BitcoinExchange& other);
 
-		void print_map() const;
-		void calculate_values(const std::string& argv);
+		void calculate_values(const std::string& argv) const;
 
 	private:
 		std::map<std::string, float> _data;
