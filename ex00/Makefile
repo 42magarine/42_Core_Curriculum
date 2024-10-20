@@ -6,7 +6,7 @@
 #    By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/23 12:17:43 by mott              #+#    #+#              #
-#    Updated: 2024/10/19 19:27:53 by mott             ###   ########.fr        #
+#    Updated: 2024/10/20 15:31:11 by mott             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ CPPFLAGS	=	-Wall -Wextra -Werror
 # CPPFLAGS	+=	-std=c++98
 CPPFLAGS	+=	-std=c++17
 RM			=	rm -rf
-NAME		=	stl
+NAME		=	btc
 
 SRCS		=	main.cpp \
 				BitcoinExchange.cpp
