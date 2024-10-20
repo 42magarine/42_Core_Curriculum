@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/20 15:28:59 by mott              #+#    #+#             */
-/*   Updated: 2024/10/20 18:51:31 by mott             ###   ########.fr       */
+/*   Updated: 2024/10/20 19:59:30 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,17 +26,17 @@
 
 class BitcoinExchange {
 	public:
-		BitcoinExchange() = delete;
-		BitcoinExchange(const std::string& input_file);
+		BitcoinExchange();
 		BitcoinExchange(const BitcoinExchange& other);
 
 		~BitcoinExchange();
 
 		BitcoinExchange& operator=(const BitcoinExchange& other);
 
-	private:
 		void print_map() const;
+		void calculate_values(const std::string& argv);
 
+	private:
 		std::map<std::string, float> _data;
 };
 
