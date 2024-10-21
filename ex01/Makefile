@@ -6,7 +6,7 @@
 #    By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/23 12:17:43 by mott              #+#    #+#              #
-#    Updated: 2024/10/21 18:40:12 by mott             ###   ########.fr        #
+#    Updated: 2024/10/21 19:30:22 by mott             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -72,7 +72,7 @@ t2: all
 	@./$(NAME) "3 4 + 5" || true
 
 
-.PHONY: all clean fclean re test
+.PHONY: all clean fclean re t1 t2
 
 # -MMD	Dependency generation without system headers
 # -MP	Create phony targets for each dependency

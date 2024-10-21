@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/20 15:29:16 by mott              #+#    #+#             */
-/*   Updated: 2024/10/20 15:29:17 by mott             ###   ########.fr       */
+/*   Updated: 2024/10/21 19:36:36 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,11 @@
 #define PMERGEME_H
 
 #include <iostream>
+#include <vector>
 
-#define RESET  "\033[0m"
-#define YELLOW "\033[33m"
+#define RESET	"\033[0m"
+#define RED		"\033[31m"
+#define YELLOW	"\033[33m"
 
 class PmergeMe {
 	public:

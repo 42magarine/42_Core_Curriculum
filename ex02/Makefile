@@ -6,7 +6,7 @@
 #    By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/23 12:17:43 by mott              #+#    #+#              #
-#    Updated: 2024/10/19 19:29:31 by mott             ###   ########.fr        #
+#    Updated: 2024/10/21 20:24:07 by mott             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ CPPFLAGS	=	-Wall -Wextra -Werror
 # CPPFLAGS	+=	-std=c++98
 CPPFLAGS	+=	-std=c++17
 RM			=	rm -rf
-NAME		=	stl
+NAME		=	PmergeMe
 
 SRCS		=	main.cpp \
 				PmergeMe.cpp
@@ -49,7 +49,10 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all clean fclean re
+test: all
+	@./$(NAME) `jot -r 10 1 100000`
+
+.PHONY: all clean fclean re test
 
 # -MMD	Dependency generation without system headers
 # -MP	Create phony targets for each dependency
