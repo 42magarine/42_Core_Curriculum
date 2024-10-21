@@ -6,7 +6,7 @@
 #    By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/23 12:17:43 by mott              #+#    #+#              #
-#    Updated: 2024/10/21 15:08:18 by mott             ###   ########.fr        #
+#    Updated: 2024/10/21 18:40:12 by mott             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,7 +49,30 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all clean fclean re
+t1: all
+	@printf "$(YELLOW)Running test: \"8 9 * 9 - 9 - 9 - 4 - 1 +\"\n$(RESET)"
+	@./$(NAME) "8 9 * 9 - 9 - 9 - 4 - 1 +" || true
+	@printf "$(YELLOW)Running test: \"7 7 * 7 -\"\n$(RESET)"
+	@./$(NAME) "7 7 * 7 -" || true
+	@printf "$(YELLOW)Running test: \"1 2 * 2 / 2 * 2 4 - +\"\n$(RESET)"
+	@./$(NAME) "1 2 * 2 / 2 * 2 4 - +" || true
+	@printf "$(YELLOW)Running test: \"(1 + 1)\"\n$(RESET)"
+	@./$(NAME) "(1 + 1)" || true
+
+t2: all
+	@printf "$(YELLOW)Running test: \"3 4 +\"\n$(RESET)"
+	@./$(NAME) "3 4 +" || true
+	@printf "$(YELLOW)Running test: \"5 1 2 + 4 * + 3 -\"\n$(RESET)"
+	@./$(NAME) "5 1 2 + 4 * + 3 -" || true
+	@printf "$(YELLOW)Running test: \"3 0 /\"\n$(RESET)"
+	@./$(NAME) "3 0 /" || true
+	@printf "$(YELLOW)Running test: \"3 4 a +\"\n$(RESET)"
+	@./$(NAME) "3 4 a +" || true
+	@printf "$(YELLOW)Running test: \"3 4 + 5\"\n$(RESET)"
+	@./$(NAME) "3 4 + 5" || true
+
+
+.PHONY: all clean fclean re test
 
 # -MMD	Dependency generation without system headers
 # -MP	Create phony targets for each dependency
