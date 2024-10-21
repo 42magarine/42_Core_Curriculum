@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/20 15:28:56 by mott              #+#    #+#             */
-/*   Updated: 2024/10/20 21:08:26 by mott             ###   ########.fr       */
+/*   Updated: 2024/10/21 15:04:34 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 BitcoinExchange::BitcoinExchange() {
 	std::ifstream data_file(DATA_FILE);
 	if (!data_file.is_open()) {
-		throw std::runtime_error(RED "Could not open " DATA_FILE RESET);
+		throw std::runtime_error(RED DATA_FILE ": Could not open file." RESET);
 	}
 
 	std::string header;
@@ -30,18 +30,21 @@ BitcoinExchange::BitcoinExchange() {
 		}
 
 		std::string date = line.substr(0, delim);
-		// check for valid date? YYYY-MM-DD
+		float value;
+
 		try {
-			float value = std::stof(line.substr(delim + 1));
-			if (value < 0) {
-				std::cerr << RED << DATA_FILE << ": Invalid value in line: " << line << RESET << std::endl;
-				continue;
-			}
-			_data[date] = value;
+			value = std::stof(line.substr(delim + 1));
 		}
 		catch (const std::exception& e) {
 			std::cerr << RED << DATA_FILE << ": Invalid number in line: " << line << RESET << std::endl;
+			continue;
 		}
+
+		if (value < 0) {
+			std::cerr << RED << DATA_FILE << ": Invalid value in line: " << line << RESET << std::endl;
+			continue;
+		}
+		_data[date] = value;
 	}
 	data_file.close();
 }
@@ -62,7 +65,7 @@ BitcoinExchange& BitcoinExchange::operator=(const BitcoinExchange& other) {
 void BitcoinExchange::calculate_values(const std::string& argv) const {
 	std::ifstream input_file(argv);
 	if (!input_file.is_open()) {
-		throw std::runtime_error(RED "Could not open " + argv + RESET);
+		throw std::runtime_error(RED "Error: Could not open file." + argv + RESET);
 	}
 
 	std::string header;
@@ -72,32 +75,38 @@ void BitcoinExchange::calculate_values(const std::string& argv) const {
 	while (std::getline(input_file, line)) {
 		size_t delim = line.find('|');
 		if (delim == std::string::npos) {
-			std::cerr << RED << argv << ": Invalid format in line: " << line << RESET << std::endl;
+			std::cerr << RED << "Error: bad input => " << line << RESET << std::endl;
 			continue;
 		}
 
 		std::string date = line.substr(0, delim);
-		// check for valid date? YYYY-MM-DD
 		float value;
+
 		try {
 			value = std::stof(line.substr(delim + 1));
-			if (value < 0 || value > 1000) {
-				std::cerr << RED << argv << ": Invalid value in line: " << line << RESET << std::endl;
-				continue;
-			}
 		}
 		catch (const std::exception& e) {
-			std::cerr << RED << ": Invalid number in line: " RESET << line << std::endl;
+			std::cerr << RED << argv << ": Invalid number in line: " << line << RESET << std::endl;
+			continue;
+		}
+
+		if (value < 0) {
+			std::cerr << RED << "Error: not a positive number." << RESET << std::endl;
+			continue;
+		}
+		else if (value > 1000) {
+			std::cerr << RED << "Error: too large a number." << RESET << std::endl;
+			continue;
 		}
 
 		// std::map<std::string, float>::iterator itup = _data.upper_bound(date);
 		auto itup = _data.upper_bound(date);
 		if (itup == _data.begin()) {
-			std::cout << date << " => " << value << " = " << "no value" << std::endl;
+			std::cout << date << "=> " << value << " = " << "no value" << std::endl;
 		}
 		else {
 			itup--;
-			std::cout << date << " => " << value << " = " << itup->second * value << std::endl;
+			std::cout << date << "=> " << value << " = " << itup->second * value << std::endl;
 		}
 	}
 	input_file.close();

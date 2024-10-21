@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/20 15:28:59 by mott              #+#    #+#             */
-/*   Updated: 2024/10/20 21:05:11 by mott             ###   ########.fr       */
+/*   Updated: 2024/10/21 15:05:59 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,9 @@
 #define RESET		"\033[0m"
 #define RED			"\033[31m"
 #define YELLOW		"\033[33m"
+
 #define DATA_FILE	"data.csv"
+// #define DATA_FILE	"error_data.csv"
 
 class BitcoinExchange {
 	public:
