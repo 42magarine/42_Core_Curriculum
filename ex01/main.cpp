@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/19 19:25:15 by mott              #+#    #+#             */
-/*   Updated: 2024/10/21 16:48:49 by mott             ###   ########.fr       */
+/*   Updated: 2024/10/21 17:43:35 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ int main(int argc, char** argv) {
 	}
 
 	try {
-		RPN rpn(argv[1]);
-		std::cout << YELLOW << rpn.calculate() << RESET << std::endl;
+		RPN rpn;
+		std::cout << rpn.compute_rpn(argv[1]) << std::endl;
 	}
 	catch (const std::exception& e) {
 		std::cerr << e.what() << std::endl;
@@ -29,35 +29,3 @@ int main(int argc, char** argv) {
 
 	return 0;
 }
-
-// 3 + 4				=>	3 4 +
-// (3 + 4) x 5			=>	3 4 + 5 x
-// (1 + 2) x (3 + 4)	=>	1 2 + 3 4 + x
-
-// compute_rpn(input)
-//   stack_init
-//   foreach (o in input)
-//      switch o
-//        isnumber
-//          push o
-//        isbinoperator
-//          right = pop
-//          left = pop
-//          t = compute(left, o, right)
-//          push t
-//   return pop
-
-// Beispiel: 23 2 ⋅ 4 −
-
-//            stack : []
-// o = 23     stack : [23]
-// o = 2      stack : [23,2]
-// o = *
-// right = 2  stack : [23]
-// left = 23  stack : []
-// t = 46     stack : [46]
-// o = 4      stack : [46,4]
-// o = -
-// right = 4  stack : [46]
-// left = 46  stack : []
-// t = 42     stack : [42]

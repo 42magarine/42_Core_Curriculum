@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/20 15:29:10 by mott              #+#    #+#             */
-/*   Updated: 2024/10/21 16:47:39 by mott             ###   ########.fr       */
+/*   Updated: 2024/10/21 18:09:51 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 #include <string>
 #include <stack>
 #include <deque>
+#include <cctype>
 #include <stdexcept>
 
 #define RESET	"\033[0m"
@@ -25,19 +26,20 @@
 
 class RPN {
 	public:
-		RPN() = delete;
-		RPN(const std::string& rpn_string);
-		RPN(const RPN& other);
+		RPN();
+		RPN(const RPN& other) = delete;
 
 		~RPN();
 
-		RPN& operator=(const RPN& other);
+		RPN& operator=(const RPN& other) = delete;
 
-		int calculate();
+		int compute_rpn(const std::string& argv);
 
 	private:
-		std::string _rpn_string;
-		std::stack<int> _rpn_stack;
+		bool isoperator(char c) const;
+		int compute(int left, char c, int right) const;
+
+		std::stack<int> _stack;
 };
 
 #endif // RPN_H
