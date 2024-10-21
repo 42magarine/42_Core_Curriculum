@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/20 15:29:10 by mott              #+#    #+#             */
-/*   Updated: 2024/10/20 15:29:11 by mott             ###   ########.fr       */
+/*   Updated: 2024/10/21 16:47:39 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,30 @@
 #define RPN_H
 
 #include <iostream>
+#include <string>
+#include <stack>
+#include <deque>
+#include <stdexcept>
 
-#define RESET  "\033[0m"
-#define YELLOW "\033[33m"
+#define RESET	"\033[0m"
+#define RED		"\033[31m"
+#define YELLOW	"\033[33m"
 
 class RPN {
 	public:
-		RPN();
+		RPN() = delete;
+		RPN(const std::string& rpn_string);
 		RPN(const RPN& other);
 
 		~RPN();
 
 		RPN& operator=(const RPN& other);
 
+		int calculate();
+
 	private:
+		std::string _rpn_string;
+		std::stack<int> _rpn_stack;
 };
 
 #endif // RPN_H
