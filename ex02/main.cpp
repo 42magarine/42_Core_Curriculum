@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/19 19:25:38 by mott              #+#    #+#             */
-/*   Updated: 2024/10/22 14:19:38 by mott             ###   ########.fr       */
+/*   Updated: 2024/10/22 15:36:59 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,20 +57,3 @@ int main(int argc, char** argv) {
 
 	return 0;
 }
-
-
-// shuf -i 1-100000 -n 3000 | tr "\n" " "
-// jot -r 3000 1 100000 | tr '\n' ' '
-
-
-// long long jabocsthal_number(long long i) {
-// 	if (i == 0) {
-// 		return 0;
-// 	}
-// 	else if (i == 1) {
-// 		return 1;
-// 	}
-// 	else {
-// 		return jabocsthal_number(i - 1) + 2 * jabocsthal_number(i - 2);
-// 	}
-// }

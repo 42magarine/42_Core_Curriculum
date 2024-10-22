@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/20 15:29:14 by mott              #+#    #+#             */
-/*   Updated: 2024/10/22 14:19:23 by mott             ###   ########.fr       */
+/*   Updated: 2024/10/22 15:44:09 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,12 @@
 
 PmergeMe::PmergeMe(int argc, char** argv) {
 	for (int i = 1; i < argc; i++) {
-		_vector.push_back(std::stoi(argv[i]));
+		int tmp = std::stoi(argv[i]);
+		if (tmp < 0) {
+			throw std::invalid_argument("Error: negativ number found");
+		}
+		_vector.push_back(tmp);
+		_copy.push_back(tmp);
 	}
 }
 
@@ -39,12 +44,10 @@ void PmergeMe::print() const {
 }
 
 void PmergeMe::sort() {
-	std::vector<int> copy = _vector;
-	std::sort(copy.begin(), copy.end());
+	std::sort(_copy.begin(), _copy.end());
 
-	for (int i : copy) {
+	for (int i : _copy) {
 		std::cout << i << " ";
 	}
 	std::cout << std::endl;
-
 }

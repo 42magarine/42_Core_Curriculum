@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/20 15:29:16 by mott              #+#    #+#             */
-/*   Updated: 2024/10/22 14:18:35 by mott             ###   ########.fr       */
+/*   Updated: 2024/10/22 15:29:12 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,13 @@ class PmergeMe {
 
 	private:
 		std::vector<int> _vector;
+		std::vector<int> _copy;
 };
 
 #endif // PMERGEME_H
+
+// shuf -i 1-100000 -n 3000 | tr "\n" " "
+// jot -r 3000 1 100000 | tr '\n' ' '
 
 // Seconds			s		1								Base time unit
 // Milliseconds		ms		0.001 (1/1000)					1 ms = 0.001 s
