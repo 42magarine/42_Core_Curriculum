@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/20 15:29:14 by mott              #+#    #+#             */
-/*   Updated: 2024/10/23 13:02:01 by mott             ###   ########.fr       */
+/*   Updated: 2024/10/23 13:56:04 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,45 @@ void PmergeMe::sort() {
 	std::sort(_copy.begin(), _copy.end());
 }
 
+void PmergeMe::merge_sort(std::vector<int>& vector) {
+	if (vector.size() < 2) {
+		return;
+	}
+
+	int mid = vector.size() / 2;
+	std::vector<int> left(vector.begin(), vector.begin() + mid);
+	std::vector<int> right(vector.begin() + mid, vector.end());
+
+	merge_sort(left);
+	merge_sort(right);
+
+	size_t i = 0, j = 0, k = 0;
+
+	while (i < left.size() && j < right.size()) {
+		if (left[i] < right[j]) {
+			vector[k] = left[i];
+			i++;
+		}
+		else {
+			vector[k] = right[j];
+			j++;
+		}
+		k++;
+	}
+
+	while (i < left.size()) {
+		vector[k] = left[i];
+		i++;
+		k++;
+	}
+
+	while (j < right.size()) {
+		vector[k] = right[j];
+		j++;
+		k++;
+	}
+}
+
 void PmergeMe::print(const std::vector<int>& vector) const {
 	for (int i : vector) {
 		std::cout << i << " ";
@@ -69,7 +108,7 @@ const std::vector<int>& PmergeMe::get_vector() const {
 	return _vector;
 }
 
-const std::vector<int>& PmergeMe::get_copy() const {
+std::vector<int>& PmergeMe::get_copy() {
 	return _copy;
 }
 

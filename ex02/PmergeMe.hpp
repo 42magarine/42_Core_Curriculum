@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/20 15:29:16 by mott              #+#    #+#             */
-/*   Updated: 2024/10/23 12:59:17 by mott             ###   ########.fr       */
+/*   Updated: 2024/10/23 13:56:08 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,11 @@ class PmergeMe {
 
 		void jacobsthal_numbers(int argc);
 		void sort();
+		void merge_sort(std::vector<int>& vector);
 		void print(const std::vector<int>& vector) const;
 
 		const std::vector<int>& get_vector() const;
-		const std::vector<int>& get_copy() const;
+		std::vector<int>& get_copy();
 		const std::vector<int>& get_jacobsthal() const;
 
 	private:
