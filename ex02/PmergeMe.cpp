@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/20 15:29:14 by mott              #+#    #+#             */
-/*   Updated: 2024/10/23 17:52:12 by mott             ###   ########.fr       */
+/*   Updated: 2024/10/23 21:26:52 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,44 +58,44 @@ void PmergeMe::jacobsthal_numbers(int argc) {
 // 	std::sort(_copy.begin(), _copy.end());
 // }
 
-// void PmergeMe::merge_sort(std::vector<int>& vector) {
-// 	if (vector.size() < 2) {
-// 		return;
-// 	}
+void PmergeMe::merge_sort(std::vector<std::pair<int, int>>& vector_pairs) {
+	if (vector_pairs.size() < 2) {
+		return;
+	}
 
-// 	int mid = vector.size() / 2;
-// 	std::vector<int> left(vector.begin(), vector.begin() + mid);
-// 	std::vector<int> right(vector.begin() + mid, vector.end());
+	int mid = vector_pairs.size() / 2;
+	std::vector<std::pair<int, int>> left(vector_pairs.begin(), vector_pairs.begin() + mid);
+	std::vector<std::pair<int, int>> right(vector_pairs.begin() + mid, vector_pairs.end());
 
-// 	merge_sort(left);
-// 	merge_sort(right);
+	merge_sort(left);
+	merge_sort(right);
 
-// 	size_t i = 0, j = 0, k = 0;
+	size_t i = 0, j = 0, k = 0;
 
-// 	while (i < left.size() && j < right.size()) {
-// 		if (left[i] < right[j]) {
-// 			vector[k] = left[i];
-// 			i++;
-// 		}
-// 		else {
-// 			vector[k] = right[j];
-// 			j++;
-// 		}
-// 		k++;
-// 	}
+	while (i < left.size() && j < right.size()) {
+		if (left[i].first < right[j].first) {
+			vector_pairs[k] = left[i];
+			i++;
+		}
+		else {
+			vector_pairs[k] = right[j];
+			j++;
+		}
+		k++;
+	}
 
-// 	while (i < left.size()) {
-// 		vector[k] = left[i];
-// 		i++;
-// 		k++;
-// 	}
+	while (i < left.size()) {
+		vector_pairs[k] = left[i];
+		i++;
+		k++;
+	}
 
-// 	while (j < right.size()) {
-// 		vector[k] = right[j];
-// 		j++;
-// 		k++;
-// 	}
-// }
+	while (j < right.size()) {
+		vector_pairs[k] = right[j];
+		j++;
+		k++;
+	}
+}
 
 void PmergeMe::build_pairs() {
 	if (_copy.size() % 2 != 0) {
@@ -113,7 +113,7 @@ void PmergeMe::build_pairs() {
 	// }
 }
 
-void PmergeMe::sort_pairs() {
+void PmergeMe::sort_each_pair() {
 	for (size_t i = 0; i < _vector_pairs.size(); i++) {
 		if (_vector_pairs[i].first < _vector_pairs[i].second) {
 			std::swap(_vector_pairs[i].first, _vector_pairs[i].second);
@@ -151,44 +151,6 @@ const std::vector<int>& PmergeMe::get_jacobsthal() const {
 	return _jacobsthal;
 }
 
-
-
-
-// std::vector<int> _vector = {8, 1, 6, 5, 2, 3, 4, 7};
-
-// std::pair<int, int> _pair_1_8 = {1, 8};
-// std::pair<int, int> _pair_5_6 = {5, 6};
-// std::pair<int, int> _pair_2_3 = {2, 3};
-// std::pair<int, int> _pair_4_7 = {4, 7};
-
-// std::pair<int, int> _pair_2_3 = {2, 3};
-// std::pair<int, int> _pair_5_6 = {5, 6};
-// std::pair<int, int> _pair_4_7 = {4, 7};
-// std::pair<int, int> _pair_1_8 = {1, 8};
-
-// std::vector<int> _vector = {2, 3, 6, 7, 8};
-
-// if (4 < 2)
-// else if (4 < 3)
-// else if (4 < 6)
-// else
-
-// std::vector<int> _vector = {2, 3, 4, 6, 7, 8};
-
-// if (5 < 2)
-// else if (5 < 3)
-// else if (5 < 4)
-// else
-
-// std::vector<int> _vector = {2, 3, 4, 5, 6, 7, 8};
-
-// if (1 < 5)
-// 	if (1 < 3)
-// 		if (1 < 2)
-// 		else
-// 	else if (1 < 4)
-// 	else
-// else if (1 < 7)
-// 	if (1 < 6)
-// 	else
-// else
+std::vector<std::pair<int, int>>& PmergeMe::get_vector_pairs() {
+	return _vector_pairs;
+}
