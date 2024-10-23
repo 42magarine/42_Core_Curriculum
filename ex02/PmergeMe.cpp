@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/20 15:29:14 by mott              #+#    #+#             */
-/*   Updated: 2024/10/22 18:23:03 by mott             ###   ########.fr       */
+/*   Updated: 2024/10/23 13:02:01 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,22 +36,46 @@ PmergeMe& PmergeMe::operator=(const PmergeMe& other) {
 	return *this;
 }
 
-void PmergeMe::print() const {
-	for (int i : _vector) {
-		std::cout << i << " ";
+void PmergeMe::jacobsthal_numbers(int argc) {
+	_jacobsthal.push_back(0);
+	_jacobsthal.push_back(1);
+
+	int i = 2;
+	while (true) {
+		int next = _jacobsthal[i - 1] + 2 * _jacobsthal[i - 2];
+
+		if (next < argc) {
+			_jacobsthal.push_back(next);
+			i++;
+		}
+		else {
+			break;
+		}
 	}
-	std::cout << std::endl;
 }
 
 void PmergeMe::sort() {
 	std::sort(_copy.begin(), _copy.end());
+}
 
-	for (int i : _copy) {
+void PmergeMe::print(const std::vector<int>& vector) const {
+	for (int i : vector) {
 		std::cout << i << " ";
 	}
 	std::cout << std::endl;
 }
 
+const std::vector<int>& PmergeMe::get_vector() const {
+	return _vector;
+}
+
+const std::vector<int>& PmergeMe::get_copy() const {
+	return _copy;
+}
+
+const std::vector<int>& PmergeMe::get_jacobsthal() const {
+	return _jacobsthal;
+}
 
 
 // std::vector<int> _vector = {8, 1, 6, 5, 2, 3, 4, 7};

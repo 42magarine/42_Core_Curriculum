@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/19 19:25:38 by mott              #+#    #+#             */
-/*   Updated: 2024/10/22 15:36:59 by mott             ###   ########.fr       */
+/*   Updated: 2024/10/23 13:03:16 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,11 @@ int main(int argc, char** argv) {
 
 	try {
 		PmergeMe ford_johnson(argc, argv);
-		ford_johnson.print();
+		ford_johnson.jacobsthal_numbers(argc);
 		ford_johnson.sort();
+		ford_johnson.print(ford_johnson.get_jacobsthal());
+		ford_johnson.print(ford_johnson.get_vector());
+		ford_johnson.print(ford_johnson.get_copy());
 	}
 	catch (const std::exception& e) {
 		std::cerr << RED << e.what() << RESET << std::endl;
