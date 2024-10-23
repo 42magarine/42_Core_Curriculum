@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/20 15:29:16 by mott              #+#    #+#             */
-/*   Updated: 2024/10/23 16:32:30 by mott             ###   ########.fr       */
+/*   Updated: 2024/10/23 17:41:23 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ class PmergeMe {
 		// void sort();
 		// void merge_sort(std::vector<int>& vector);
 		void build_pairs();
+		void sort_pairs();
 
 		void print(const std::vector<int>& vector) const;
 		void print_pairs() const;

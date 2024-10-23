@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/20 15:29:14 by mott              #+#    #+#             */
-/*   Updated: 2024/10/23 16:46:13 by mott             ###   ########.fr       */
+/*   Updated: 2024/10/23 17:52:12 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,6 +111,14 @@ void PmergeMe::build_pairs() {
 	// 	_vector_pairs.push_back(std::pair<int, int>(_copy[0], _copy[1]));
 	// 	_copy.erase(_copy.begin(), _copy.begin()+1);
 	// }
+}
+
+void PmergeMe::sort_pairs() {
+	for (size_t i = 0; i < _vector_pairs.size(); i++) {
+		if (_vector_pairs[i].first < _vector_pairs[i].second) {
+			std::swap(_vector_pairs[i].first, _vector_pairs[i].second);
+		}
+	}
 }
 
 void PmergeMe::print(const std::vector<int>& vector) const {
