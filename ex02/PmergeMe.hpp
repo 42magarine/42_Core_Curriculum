@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/20 15:29:16 by mott              #+#    #+#             */
-/*   Updated: 2024/10/23 15:08:31 by mott             ###   ########.fr       */
+/*   Updated: 2024/10/23 16:32:30 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 #include <chrono>
 #include <stdexcept>
 #include <algorithm>
+#include <utility>
 
 #define RESET	"\033[0m"
 #define RED		"\033[31m"
@@ -35,18 +36,24 @@ class PmergeMe {
 		PmergeMe& operator=(const PmergeMe& other);
 
 		void jacobsthal_numbers(int argc);
-		void sort();
+		// void sort();
 		// void merge_sort(std::vector<int>& vector);
+		void build_pairs();
+
 		void print(const std::vector<int>& vector) const;
+		void print_pairs() const;
 
 		const std::vector<int>& get_vector() const;
 		const std::vector<int>& get_copy() const;
 		const std::vector<int>& get_jacobsthal() const;
 
 	private:
+		std::vector<int> _jacobsthal;
+
 		std::vector<int> _vector;
 		std::vector<int> _copy;
-		std::vector<int> _jacobsthal;
+		std::vector<std::pair<int, int>> _vector_pairs;
+		int _struggler = -1;
 };
 
 #endif // PMERGEME_H

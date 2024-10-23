@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/20 15:29:14 by mott              #+#    #+#             */
-/*   Updated: 2024/10/23 14:06:28 by mott             ###   ########.fr       */
+/*   Updated: 2024/10/23 16:46:13 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,9 +54,9 @@ void PmergeMe::jacobsthal_numbers(int argc) {
 	}
 }
 
-void PmergeMe::sort() {
-	std::sort(_copy.begin(), _copy.end());
-}
+// void PmergeMe::sort() {
+// 	std::sort(_copy.begin(), _copy.end());
+// }
 
 // void PmergeMe::merge_sort(std::vector<int>& vector) {
 // 	if (vector.size() < 2) {
@@ -97,11 +97,38 @@ void PmergeMe::sort() {
 // 	}
 // }
 
+void PmergeMe::build_pairs() {
+	if (_copy.size() % 2 != 0) {
+		_struggler = _copy.back();
+		_copy.pop_back();
+	}
+
+	for (size_t i = 0; i < _copy.size(); i += 2) {
+		_vector_pairs.push_back(std::pair<int, int>(_copy[i], _copy[i + 1]));
+	}
+
+	// while (_copy.size() > 0) {
+	// 	_vector_pairs.push_back(std::pair<int, int>(_copy[0], _copy[1]));
+	// 	_copy.erase(_copy.begin(), _copy.begin()+1);
+	// }
+}
+
 void PmergeMe::print(const std::vector<int>& vector) const {
 	for (int i : vector) {
 		std::cout << i << " ";
 	}
 	std::cout << std::endl;
+}
+
+void PmergeMe::print_pairs() const {
+	for (const auto& pair : _vector_pairs) {
+		std::cout << "[" << pair.first << ", " << pair.second << "] ";
+	}
+	std::cout << std::endl;
+
+	if (_struggler != -1) {
+		std::cout << "Struggler: " << _struggler << std::endl;
+	}
 }
 
 const std::vector<int>& PmergeMe::get_vector() const {
@@ -115,6 +142,8 @@ const std::vector<int>& PmergeMe::get_copy() const {
 const std::vector<int>& PmergeMe::get_jacobsthal() const {
 	return _jacobsthal;
 }
+
+
 
 
 // std::vector<int> _vector = {8, 1, 6, 5, 2, 3, 4, 7};

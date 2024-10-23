@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/19 19:25:38 by mott              #+#    #+#             */
-/*   Updated: 2024/10/23 14:05:54 by mott             ###   ########.fr       */
+/*   Updated: 2024/10/23 16:35:48 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,10 @@ int main(int argc, char** argv) {
 		// ford_johnson.sort();
 		// ford_johnson.merge_sort(ford_johnson.get_copy());
 		// ford_johnson.print(ford_johnson.get_jacobsthal());
-		ford_johnson.print(ford_johnson.get_vector());
-		ford_johnson.print(ford_johnson.get_copy());
+		// ford_johnson.print(ford_johnson.get_vector());
+		// ford_johnson.print(ford_johnson.get_copy());
+		ford_johnson.build_pairs();
+		ford_johnson.print_pairs();
 	}
 	catch (const std::exception& e) {
 		std::cerr << RED << e.what() << RESET << std::endl;
