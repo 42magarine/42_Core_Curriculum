@@ -6,7 +6,7 @@
 #    By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/23 12:17:43 by mott              #+#    #+#              #
-#    Updated: 2024/10/25 21:20:09 by mott             ###   ########.fr        #
+#    Updated: 2024/10/25 22:02:33 by mott             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -51,7 +51,7 @@ fclean: clean
 re: fclean all
 
 test: all
-	@./$(NAME) `jot -r 1000 0 10000`
+	@./$(NAME) `jot -r 3000 0 100000`
 
 .PHONY: all clean fclean re test
 

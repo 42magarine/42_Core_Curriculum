@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/20 15:29:16 by mott              #+#    #+#             */
-/*   Updated: 2024/10/25 21:13:33 by mott             ###   ########.fr       */
+/*   Updated: 2024/10/25 21:27:59 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ class PmergeMe {
 
 		void cpp_sort();
 		void my_sort();
-		void compare();
+		void compare() const;
 		void print(const std::vector<int>& vector) const;
 		const std::vector<int>& get_vector_before() const;
 		const std::vector<int>& get_vector_after() const;

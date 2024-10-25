@@ -6,21 +6,25 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/20 15:29:14 by mott              #+#    #+#             */
-/*   Updated: 2024/10/25 21:12:55 by mott             ###   ########.fr       */
+/*   Updated: 2024/10/25 22:02:01 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "PmergeMe.hpp"
 
 PmergeMe::PmergeMe(int argc, char** argv) {
+	_vector_before.reserve(argc - 1);
+	_vector_after.reserve(argc - 1);
+	_vector_test.reserve(argc - 1);
+
 	for (int i = 1; i < argc; i++) {
-		int tmp = std::stoi(argv[i]);
-		if (tmp < 0) {
+		int n = std::stoi(argv[i]);
+		if (n < 0) {
 			throw std::invalid_argument("Error: negativ number found");
 		}
-		_vector_before.push_back(tmp);
-		_vector_after.push_back(tmp);
-		_vector_test.push_back(tmp);
+		_vector_before.push_back(n);
+		_vector_after.push_back(n);
+		_vector_test.push_back(n);
 	}
 }
 
@@ -45,14 +49,15 @@ void PmergeMe::build_pairs() {
 	}
 
 	for (size_t i = 0; i < _vector_after.size(); i += 2) {
-		_vector_pairs.push_back(std::pair<int, int>(_vector_after[i], _vector_after[i + 1]));
+		_vector_pairs.emplace_back(_vector_after[i], _vector_after[i + 1]);
 	}
+	_vector_after.clear();
 }
 
 void PmergeMe::sort_each_pair() {
-	for (size_t i = 0; i < _vector_pairs.size(); i++) {
-		if (_vector_pairs[i].first < _vector_pairs[i].second) {
-			std::swap(_vector_pairs[i].first, _vector_pairs[i].second);
+	for (auto& pair : _vector_pairs) {
+		if (pair.first < pair.second) {
+			std::swap(pair.first, pair.second);
 		}
 	}
 }
@@ -73,38 +78,30 @@ void PmergeMe::merge_sort(std::vector<std::pair<int, int>>& vector_pairs) {
 
 	while (i < left.size() && j < right.size()) {
 		if (left[i].first < right[j].first) {
-			vector_pairs[k] = left[i];
-			i++;
+			vector_pairs[k++] = left[i++];
 		}
 		else {
-			vector_pairs[k] = right[j];
-			j++;
+			vector_pairs[k++] = right[j++];
 		}
-		k++;
 	}
 
 	while (i < left.size()) {
-		vector_pairs[k] = left[i];
-		i++;
-		k++;
+		vector_pairs[k++] = left[i++];
 	}
 
 	while (j < right.size()) {
-		vector_pairs[k] = right[j];
-		j++;
-		k++;
+		vector_pairs[k++] = right[j++];
 	}
 }
 
 void PmergeMe::build_main_chain() {
-	_vector_after.clear();
-	for (auto pair : _vector_pairs) {
+	for (const auto& pair : _vector_pairs) {
 		_vector_after.push_back(pair.first);
 		_vector_tmp.push_back(pair.second);
 	}
 
-	for (int number : _vector_tmp) {
-		binary_search(number);
+	for (int n : _vector_tmp) {
+		binary_search(n);
 	}
 	if (_struggler != -1) {
 		binary_search(_struggler);
@@ -132,7 +129,7 @@ void PmergeMe::binary_search(int n) {
 	_vector_after.insert(_vector_after.begin() + begin, n);
 }
 
-// 0, 1, 1, 3, 5, 11, 21
+// 0, 1, 1, 3, 5, 11, 21, 43, 85, 171, 341, 683, 1365, 2731, 5461, ...
 void PmergeMe::jacobsthal_numbers(int argc) {
 	_jacobsthal.push_back(0);
 	_jacobsthal.push_back(1);
@@ -151,14 +148,13 @@ void PmergeMe::jacobsthal_numbers(int argc) {
 	}
 }
 
-void PmergeMe::compare() {
-	for (size_t i = 0; i < _vector_test.size(); i++) {
-		if (_vector_test[i] != _vector_after[i]) {
-			std::cerr << RED << _vector_test[i] << " != " << _vector_after[i] << RESET << std::endl;
-			return;
-		}
+void PmergeMe::compare() const {
+	if (_vector_test == _vector_after) {
+		std::cout << YELLOW << "OK" << RESET << std::endl;
 	}
-	std::cout << YELLOW << "OK" << RESET << std::endl;
+	else {
+		std::cerr << RED << "Mismatch found" << RESET << std::endl;
+	}
 }
 
 void PmergeMe::print(const std::vector<int>& vector) const {
