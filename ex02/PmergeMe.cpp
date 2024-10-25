@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/20 15:29:14 by mott              #+#    #+#             */
-/*   Updated: 2024/10/25 20:20:52 by mott             ###   ########.fr       */
+/*   Updated: 2024/10/25 21:12:55 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,67 +18,35 @@ PmergeMe::PmergeMe(int argc, char** argv) {
 		if (tmp < 0) {
 			throw std::invalid_argument("Error: negativ number found");
 		}
-		_vector.push_back(tmp);
-		_copy.push_back(tmp);
-		_copy_test.push_back(tmp);
+		_vector_before.push_back(tmp);
+		_vector_after.push_back(tmp);
+		_vector_test.push_back(tmp);
 	}
-}
-
-PmergeMe::PmergeMe(const PmergeMe& other) {
-	(void)other;
 }
 
 PmergeMe::~PmergeMe() {
 }
 
-PmergeMe& PmergeMe::operator=(const PmergeMe& other) {
-	if (this != &other) {
-	}
-	return *this;
+void PmergeMe::cpp_sort() {
+	std::sort(_vector_test.begin(), _vector_test.end());
 }
 
-void PmergeMe::sort() {
-	auto time_begin = std::chrono::high_resolution_clock::now();
-	std::sort(_copy_test.begin(), _copy_test.end());
-	auto time_end = std::chrono::high_resolution_clock::now();
-
-	std::chrono::duration<double, std::micro> time_span3 = time_end - time_begin;
-	std::cout << "time_span: " << time_span3.count() << " us" << std::endl;
-}
-
-// 0, 1, 1, 3, 5, 11, 21
-void PmergeMe::jacobsthal_numbers(int argc) {
-	_jacobsthal.push_back(0);
-	_jacobsthal.push_back(1);
-
-	int i = 2;
-	while (true) {
-		int next = _jacobsthal[i - 1] + 2 * _jacobsthal[i - 2];
-
-		if (next < argc) {
-			_jacobsthal.push_back(next);
-			i++;
-		}
-		else {
-			break;
-		}
-	}
+void PmergeMe::my_sort() {
+	build_pairs();
+	sort_each_pair();
+	merge_sort(_vector_pairs);
+	build_main_chain();
 }
 
 void PmergeMe::build_pairs() {
-	if (_copy.size() % 2 != 0) {
-		_struggler = _copy.back();
-		_copy.pop_back();
+	if (_vector_after.size() % 2 != 0) {
+		_struggler = _vector_after.back();
+		_vector_after.pop_back();
 	}
 
-	for (size_t i = 0; i < _copy.size(); i += 2) {
-		_vector_pairs.push_back(std::pair<int, int>(_copy[i], _copy[i + 1]));
+	for (size_t i = 0; i < _vector_after.size(); i += 2) {
+		_vector_pairs.push_back(std::pair<int, int>(_vector_after[i], _vector_after[i + 1]));
 	}
-
-	// while (_copy.size() > 0) {
-	// 	_vector_pairs.push_back(std::pair<int, int>(_copy[0], _copy[1]));
-	// 	_copy.erase(_copy.begin(), _copy.begin()+1);
-	// }
 }
 
 void PmergeMe::sort_each_pair() {
@@ -128,77 +96,69 @@ void PmergeMe::merge_sort(std::vector<std::pair<int, int>>& vector_pairs) {
 	}
 }
 
-void PmergeMe::build_chain() {
-	for (auto pair : _vector_pairs) {
-		_max_chain.push_back(pair.first);
-		_min_chain.push_back(pair.second);
-	}
-}
-
-void PmergeMe::binary_search(int n) {
-	int begin = 0;
-	int end = _main_chain.size() - 1;
-
-	while (begin < end) {
-		int mid = (end - begin) / 2 + begin;
-
-		if (n == _main_chain[mid]){
-			begin = mid;
-			break;
-		}
-		else if (n < _main_chain[mid]) {
-			end = mid;
-		}
-		else { // n > _main_chain[mid]
-			begin = mid + 1;
-		}
-	}
-	_main_chain.insert(_main_chain.begin() + begin, n);
-}
-
 void PmergeMe::build_main_chain() {
-	_main_chain = _max_chain;
-	// int index = 0;
-	// _main_chain.insert(_main_chain.begin(), _min_chain[index++]);
+	_vector_after.clear();
+	for (auto pair : _vector_pairs) {
+		_vector_after.push_back(pair.first);
+		_vector_tmp.push_back(pair.second);
+	}
 
-	for (int number : _min_chain) {
+	for (int number : _vector_tmp) {
 		binary_search(number);
 	}
 	if (_struggler != -1) {
 		binary_search(_struggler);
 	}
-	// for (auto next_jacobsthal : _jacobsthal) {
+}
 
-	// for (std::vector<int>::iterator next_jacobsthal = _jacobsthal.begin() + 3; next_jacobsthal < _jacobsthal.end(); next_jacobsthal++) {
+void PmergeMe::binary_search(int n) {
+	int begin = 0;
+	int end = _vector_after.size() - 1;
 
-	// 	if (_min_chain[index] < _main_chain[0]) {
-	// 		_main_chain.insert(_main_chain[0], _min_chain[index]);
-	// 	}
-	// 	_min_chain[index];
+	while (begin < end) {
+		int mid = (end - begin) / 2 + begin;
 
-	// 	// std::cout << *next_jacobsthal << " ";
-	// }
-	// std::cout << std::endl;
+		if (n == _vector_after[mid]){
+			begin = mid;
+			break;
+		}
+		else if (n < _vector_after[mid]) {
+			end = mid;
+		}
+		else { // n > _vector_after[mid]
+			begin = mid + 1;
+		}
+	}
+	_vector_after.insert(_vector_after.begin() + begin, n);
+}
 
-	// int last_jacobthal_number = next_jacobthal_number;
-	// int next_jacobthal_number = get_next_jacobthal_number(last_jacobthal_number);
+// 0, 1, 1, 3, 5, 11, 21
+void PmergeMe::jacobsthal_numbers(int argc) {
+	_jacobsthal.push_back(0);
+	_jacobsthal.push_back(1);
 
-	// while (next_jacobsthal_number > last_jacobsthal_number) {
-	// 	int index = next_jacobsthal_number;
-	// 	insert(_min_chain[index]);
-	// 	index--;
-	// }
+	int i = 2;
+	while (true) {
+		int next = _jacobsthal[i - 1] + 2 * _jacobsthal[i - 2];
+
+		if (next < argc) {
+			_jacobsthal.push_back(next);
+			i++;
+		}
+		else {
+			break;
+		}
+	}
 }
 
 void PmergeMe::compare() {
-	for (size_t i = 0; i < _copy_test.size(); i++) {
-		if (_copy_test[i] != _main_chain[i]) {
-			std::cout << "i: " << i << std::endl;
-		}
-		if (i == _copy_test.size() - 1) {
-			std::cout << "ok" << std::endl;
+	for (size_t i = 0; i < _vector_test.size(); i++) {
+		if (_vector_test[i] != _vector_after[i]) {
+			std::cerr << RED << _vector_test[i] << " != " << _vector_after[i] << RESET << std::endl;
+			return;
 		}
 	}
+	std::cout << YELLOW << "OK" << RESET << std::endl;
 }
 
 void PmergeMe::print(const std::vector<int>& vector) const {
@@ -208,44 +168,10 @@ void PmergeMe::print(const std::vector<int>& vector) const {
 	std::cout << std::endl;
 }
 
-void PmergeMe::print_pairs() const {
-	for (const auto& pair : _vector_pairs) {
-		std::cout << "[" << pair.first << ", " << pair.second << "] ";
-	}
-	std::cout << std::endl;
-
-	if (_struggler != -1) {
-		std::cout << "Struggler: " << _struggler << std::endl;
-	}
+const std::vector<int>& PmergeMe::get_vector_before() const {
+	return _vector_before;
 }
 
-const std::vector<int>& PmergeMe::get_vector() const {
-	return _vector;
-}
-
-const std::vector<int>& PmergeMe::get_copy() const {
-	return _copy;
-}
-
-const std::vector<int>& PmergeMe::get_copy_test() const {
-	return _copy_test;
-}
-const std::vector<int>& PmergeMe::get_jacobsthal() const {
-	return _jacobsthal;
-}
-
-std::vector<std::pair<int, int>>& PmergeMe::get_vector_pairs() {
-	return _vector_pairs;
-}
-
-const std::vector<int>& PmergeMe::get_max_chain() const {
-	return _max_chain;
-}
-
-const std::vector<int>& PmergeMe::get_min_chain() const {
-	return _min_chain;
-}
-
-const std::vector<int>& PmergeMe::get_main_chain() const {
-	return _main_chain;
+const std::vector<int>& PmergeMe::get_vector_after() const {
+	return _vector_after;
 }
