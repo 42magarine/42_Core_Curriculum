@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/20 15:29:16 by mott              #+#    #+#             */
-/*   Updated: 2024/10/25 15:07:53 by mott             ###   ########.fr       */
+/*   Updated: 2024/10/25 19:36:06 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,32 +35,39 @@ class PmergeMe {
 
 		PmergeMe& operator=(const PmergeMe& other);
 
-		// void sort();
+		void sort();
 		void jacobsthal_numbers(int argc);
 		void build_pairs();
 		void sort_each_pair();
 		void merge_sort(std::vector<std::pair<int, int>>& vector_pairs);
 		void build_chain();
+		void binary_search(int target);
+		void build_main_chain();
+		void compare();
 
 		void print(const std::vector<int>& vector) const;
 		void print_pairs() const;
 
 		const std::vector<int>& get_vector() const;
 		const std::vector<int>& get_copy() const;
+		const std::vector<int>& get_copy_test() const;
 		const std::vector<int>& get_jacobsthal() const;
 		std::vector<std::pair<int, int>>& get_vector_pairs();
 		const std::vector<int>& get_max_chain() const;
 		const std::vector<int>& get_min_chain() const;
+		const std::vector<int>& get_main_chain() const;
 
 	private:
 		std::vector<int> _jacobsthal;
 
 		std::vector<int> _vector;
 		std::vector<int> _copy;
+		std::vector<int> _copy_test;
 		std::vector<std::pair<int, int>> _vector_pairs;
 
 		std::vector<int> _max_chain;
 		std::vector<int> _min_chain;
+		std::vector<int> _main_chain;
 
 		int _struggler = -1;
 };

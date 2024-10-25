@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/19 19:25:38 by mott              #+#    #+#             */
-/*   Updated: 2024/10/25 15:06:28 by mott             ###   ########.fr       */
+/*   Updated: 2024/10/25 19:36:24 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,21 +21,25 @@ int main(int argc, char** argv) {
 
 	try {
 		PmergeMe ford_johnson(argc, argv);
-		// ford_johnson.jacobsthal_numbers(argc);
-		// ford_johnson.sort();
+		ford_johnson.jacobsthal_numbers(argc);
+		ford_johnson.sort();
 		// ford_johnson.merge_sort(ford_johnson.get_copy());
 		// ford_johnson.print(ford_johnson.get_jacobsthal());
 		// ford_johnson.print(ford_johnson.get_vector());
 		// ford_johnson.print(ford_johnson.get_copy());
 		ford_johnson.build_pairs();
-		ford_johnson.print_pairs();
+		// ford_johnson.print_pairs();
 		ford_johnson.sort_each_pair();
-		ford_johnson.print_pairs();
+		// ford_johnson.print_pairs();
 		ford_johnson.merge_sort(ford_johnson.get_vector_pairs());
-		ford_johnson.print_pairs();
+		// ford_johnson.print_pairs();
 		ford_johnson.build_chain();
-		ford_johnson.print(ford_johnson.get_max_chain());
-		ford_johnson.print(ford_johnson.get_min_chain());
+		// ford_johnson.print(ford_johnson.get_max_chain());
+		// ford_johnson.print(ford_johnson.get_min_chain());
+		ford_johnson.build_main_chain();
+		ford_johnson.print(ford_johnson.get_copy_test());
+		ford_johnson.print(ford_johnson.get_main_chain());
+		ford_johnson.compare();
 	}
 	catch (const std::exception& e) {
 		std::cerr << RED << e.what() << RESET << std::endl;
