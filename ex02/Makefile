@@ -6,7 +6,7 @@
 #    By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/23 12:17:43 by mott              #+#    #+#              #
-#    Updated: 2024/10/25 19:36:57 by mott             ###   ########.fr        #
+#    Updated: 2024/10/25 20:03:34 by mott             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,6 +14,7 @@ CPP			=	c++
 CPPFLAGS	=	-Wall -Wextra -Werror
 # CPPFLAGS	+=	-std=c++98
 CPPFLAGS	+=	-std=c++17
+# CPPFLAGS	+=	-Ofast
 RM			=	rm -rf
 NAME		=	PmergeMe
 
@@ -50,7 +51,7 @@ fclean: clean
 re: fclean all
 
 test: all
-	@./$(NAME) `jot -r 200 1 1000`
+	@./$(NAME) `jot -r 3001 1 5000`
 
 .PHONY: all clean fclean re test
 

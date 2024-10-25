@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/20 15:29:16 by mott              #+#    #+#             */
-/*   Updated: 2024/10/25 19:36:06 by mott             ###   ########.fr       */
+/*   Updated: 2024/10/25 20:08:51 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ class PmergeMe {
 		std::vector<int> _vector;
 		std::vector<int> _copy;
 		std::vector<int> _copy_test;
+		
 		std::vector<std::pair<int, int>> _vector_pairs;
 
 		std::vector<int> _max_chain;

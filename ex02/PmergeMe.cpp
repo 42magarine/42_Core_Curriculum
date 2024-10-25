@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/20 15:29:14 by mott              #+#    #+#             */
-/*   Updated: 2024/10/25 19:37:14 by mott             ###   ########.fr       */
+/*   Updated: 2024/10/25 20:20:52 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,12 @@ PmergeMe& PmergeMe::operator=(const PmergeMe& other) {
 }
 
 void PmergeMe::sort() {
+	auto time_begin = std::chrono::high_resolution_clock::now();
 	std::sort(_copy_test.begin(), _copy_test.end());
+	auto time_end = std::chrono::high_resolution_clock::now();
+
+	std::chrono::duration<double, std::micro> time_span3 = time_end - time_begin;
+	std::cout << "time_span: " << time_span3.count() << " us" << std::endl;
 }
 
 // 0, 1, 1, 3, 5, 11, 21
@@ -130,30 +135,25 @@ void PmergeMe::build_chain() {
 	}
 }
 
-void PmergeMe::binary_search(int target) {
+void PmergeMe::binary_search(int n) {
 	int begin = 0;
 	int end = _main_chain.size() - 1;
 
-	// std::cout << YELLOW << target << RESET << std::endl;
-
 	while (begin < end) {
 		int mid = (end - begin) / 2 + begin;
-		// std::cout << "begin: "<< begin << " " << *(_main_chain.begin() + begin) << std::endl;
-		// std::cout << "end: "<< end << " " << *(_main_chain.begin() + end) << std::endl;
-		// std::cout << "mid: "<< mid << " " << *(_main_chain.begin() + mid) << std::endl;
 
-		if (target < _main_chain[mid]) {
+		if (n == _main_chain[mid]){
+			begin = mid;
+			break;
+		}
+		else if (n < _main_chain[mid]) {
 			end = mid;
 		}
-		else if (target >= _main_chain[mid]) {
+		else { // n > _main_chain[mid]
 			begin = mid + 1;
 		}
-		// else {
-		// 	break;
-		// }
 	}
-	_main_chain.insert(_main_chain.begin() + begin, target);
-	// print(_main_chain);
+	_main_chain.insert(_main_chain.begin() + begin, n);
 }
 
 void PmergeMe::build_main_chain() {
@@ -163,6 +163,9 @@ void PmergeMe::build_main_chain() {
 
 	for (int number : _min_chain) {
 		binary_search(number);
+	}
+	if (_struggler != -1) {
+		binary_search(_struggler);
 	}
 	// for (auto next_jacobsthal : _jacobsthal) {
 
