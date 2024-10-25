@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/20 15:29:14 by mott              #+#    #+#             */
-/*   Updated: 2024/10/23 21:26:52 by mott             ###   ########.fr       */
+/*   Updated: 2024/10/25 15:06:01 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,10 @@ PmergeMe& PmergeMe::operator=(const PmergeMe& other) {
 	return *this;
 }
 
+// void PmergeMe::sort() {
+// 	std::sort(_copy.begin(), _copy.end());
+// }
+
 void PmergeMe::jacobsthal_numbers(int argc) {
 	_jacobsthal.push_back(0);
 	_jacobsthal.push_back(1);
@@ -54,9 +58,29 @@ void PmergeMe::jacobsthal_numbers(int argc) {
 	}
 }
 
-// void PmergeMe::sort() {
-// 	std::sort(_copy.begin(), _copy.end());
-// }
+void PmergeMe::build_pairs() {
+	if (_copy.size() % 2 != 0) {
+		_struggler = _copy.back();
+		_copy.pop_back();
+	}
+
+	for (size_t i = 0; i < _copy.size(); i += 2) {
+		_vector_pairs.push_back(std::pair<int, int>(_copy[i], _copy[i + 1]));
+	}
+
+	// while (_copy.size() > 0) {
+	// 	_vector_pairs.push_back(std::pair<int, int>(_copy[0], _copy[1]));
+	// 	_copy.erase(_copy.begin(), _copy.begin()+1);
+	// }
+}
+
+void PmergeMe::sort_each_pair() {
+	for (size_t i = 0; i < _vector_pairs.size(); i++) {
+		if (_vector_pairs[i].first < _vector_pairs[i].second) {
+			std::swap(_vector_pairs[i].first, _vector_pairs[i].second);
+		}
+	}
+}
 
 void PmergeMe::merge_sort(std::vector<std::pair<int, int>>& vector_pairs) {
 	if (vector_pairs.size() < 2) {
@@ -97,27 +121,10 @@ void PmergeMe::merge_sort(std::vector<std::pair<int, int>>& vector_pairs) {
 	}
 }
 
-void PmergeMe::build_pairs() {
-	if (_copy.size() % 2 != 0) {
-		_struggler = _copy.back();
-		_copy.pop_back();
-	}
-
-	for (size_t i = 0; i < _copy.size(); i += 2) {
-		_vector_pairs.push_back(std::pair<int, int>(_copy[i], _copy[i + 1]));
-	}
-
-	// while (_copy.size() > 0) {
-	// 	_vector_pairs.push_back(std::pair<int, int>(_copy[0], _copy[1]));
-	// 	_copy.erase(_copy.begin(), _copy.begin()+1);
-	// }
-}
-
-void PmergeMe::sort_each_pair() {
-	for (size_t i = 0; i < _vector_pairs.size(); i++) {
-		if (_vector_pairs[i].first < _vector_pairs[i].second) {
-			std::swap(_vector_pairs[i].first, _vector_pairs[i].second);
-		}
+void PmergeMe::build_chain() {
+	for (auto pair : _vector_pairs) {
+		_max_chain.push_back(pair.first);
+		_min_chain.push_back(pair.second);
 	}
 }
 
@@ -153,4 +160,11 @@ const std::vector<int>& PmergeMe::get_jacobsthal() const {
 
 std::vector<std::pair<int, int>>& PmergeMe::get_vector_pairs() {
 	return _vector_pairs;
+}
+
+const std::vector<int>& PmergeMe::get_max_chain() const {
+	return _max_chain;
+}
+const std::vector<int>& PmergeMe::get_min_chain() const {
+	return _min_chain;
 }

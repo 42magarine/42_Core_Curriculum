@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/19 19:25:38 by mott              #+#    #+#             */
-/*   Updated: 2024/10/23 21:14:49 by mott             ###   ########.fr       */
+/*   Updated: 2024/10/25 15:06:28 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,9 @@ int main(int argc, char** argv) {
 		ford_johnson.print_pairs();
 		ford_johnson.merge_sort(ford_johnson.get_vector_pairs());
 		ford_johnson.print_pairs();
+		ford_johnson.build_chain();
+		ford_johnson.print(ford_johnson.get_max_chain());
+		ford_johnson.print(ford_johnson.get_min_chain());
 	}
 	catch (const std::exception& e) {
 		std::cerr << RED << e.what() << RESET << std::endl;
