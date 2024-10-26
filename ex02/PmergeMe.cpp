@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/20 15:29:14 by mott              #+#    #+#             */
-/*   Updated: 2024/10/26 17:59:47 by mott             ###   ########.fr       */
+/*   Updated: 2024/10/26 18:25:13 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,18 +112,20 @@ void PmergeMe::build_main_chain() {
 	// }
 
 	int i = 3;
+	int count = 1;
 	size_t last_j = _jacobsthal[i - 1] - 1; // -1 for right index
 	size_t curr_j = _jacobsthal[i] - 1; // -1 for right index
 
 	while (last_j < curr_j && last_j < _vector_tmp.size()) {
-		std::cout << YELLOW << "index: " << curr_j << RESET << std::endl;
-		binary_search(_vector_tmp[curr_j], i + curr_j);
+		// std::cout << YELLOW << "index: " << curr_j << RESET << std::endl;
+		binary_search(_vector_tmp[curr_j], count + curr_j); // i sollte jede loop erhöht werden
 		curr_j--;
+		count++;
 		if (last_j == curr_j) {
-			i++;
+			i++; // hier muss i nur erhöht werden, wenn ich eine neue jacobsthal zahl brauche
 			last_j = _jacobsthal[i - 1] - 1;
 			curr_j = _jacobsthal[i] - 1;
-			if (curr_j > _vector_tmp.size()) {
+			if (curr_j >= _vector_tmp.size()) {
 				curr_j = _vector_tmp.size() - 1;
 			}
 		}
@@ -155,12 +157,12 @@ void PmergeMe::binary_search(int n, int end) {
 			begin = mid + 1;
 		}
 	}
-	print(_vector_after);
-	print(_vector_tmp);
+	// print(_vector_after);
+	// print(_vector_tmp);
 	_vector_after.insert(_vector_after.begin() + begin, n);
-	std::cout << YELLOW << "n: " << n << RESET << std::endl;
-	print(_vector_after);
-	std::cout << std::endl;
+	// std::cout << YELLOW << "n: " << n << RESET << std::endl;
+	// print(_vector_after);
+	// std::cout << std::endl;
 }
 
 // 0, 1, 1, 3, 5, 11, 21, 43, 85, 171, 341, 683, 1365, 2731, 5461, ...
