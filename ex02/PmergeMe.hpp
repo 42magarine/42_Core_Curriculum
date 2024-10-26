@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/20 15:29:16 by mott              #+#    #+#             */
-/*   Updated: 2024/10/25 21:27:59 by mott             ###   ########.fr       */
+/*   Updated: 2024/10/26 17:27:33 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,13 +41,15 @@ class PmergeMe {
 		void print(const std::vector<int>& vector) const;
 		const std::vector<int>& get_vector_before() const;
 		const std::vector<int>& get_vector_after() const;
+		const std::vector<int>& get_vector_test() const;
 
 	private:
 		void build_pairs();
 		void sort_each_pair();
 		void merge_sort(std::vector<std::pair<int, int>>& vector_pairs);
 		void build_main_chain();
-		void binary_search(int target);
+		// void binary_search(int n);
+		void binary_search(int n, int end);
 		void jacobsthal_numbers(int argc);
 
 		std::vector<int> _vector_before;

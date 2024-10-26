@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/19 19:25:38 by mott              #+#    #+#             */
-/*   Updated: 2024/10/25 21:19:10 by mott             ###   ########.fr       */
+/*   Updated: 2024/10/26 17:27:48 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,15 @@ int main(int argc, char** argv) {
 		ford_johnson.print(ford_johnson.get_vector_after());
 		std::cout << std::endl;
 
-		std::chrono::duration<double, std::milli> time_span_my = time_end_my - time_begin_my;
-		std::cout << "Time to process a range of " << argc - 1 << " elements with std::vector : " << time_span_my.count() << " ms" << std::endl;
+		std::cout << "Test:  ";
+		ford_johnson.print(ford_johnson.get_vector_test());
+		std::cout << std::endl;
 
-		std::chrono::duration<double, std::milli> time_span_cpp = time_end_cpp - time_begin_cpp;
-		std::cout << "Time to process a range of " << argc - 1 << " elements with std::sort() : " << time_span_cpp.count() << " ms" << std::endl;
+		std::chrono::duration<double, std::micro> time_span_my = time_end_my - time_begin_my;
+		std::cout << "Time to process a range of " << argc - 1 << " elements with std::vector : " << time_span_my.count() << " µs" << std::endl;
+
+		std::chrono::duration<double, std::micro> time_span_cpp = time_end_cpp - time_begin_cpp;
+		std::cout << "Time to process a range of " << argc - 1 << " elements with std::sort() : " << time_span_cpp.count() << " µs" << std::endl;
 	}
 	catch (const std::exception& e) {
 		std::cerr << RED << e.what() << RESET << std::endl;
