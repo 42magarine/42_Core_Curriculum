@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/20 15:29:16 by mott              #+#    #+#             */
-/*   Updated: 2024/10/26 17:27:33 by mott             ###   ########.fr       */
+/*   Updated: 2024/10/28 17:01:05 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,13 +35,13 @@ class PmergeMe {
 
 		PmergeMe& operator=(const PmergeMe& other) = delete;
 
-		void cpp_sort();
+		// void cpp_sort();
 		void my_sort();
-		void compare() const;
+		// void compare() const;
 		void print(const std::vector<int>& vector) const;
 		const std::vector<int>& get_vector_before() const;
 		const std::vector<int>& get_vector_after() const;
-		const std::vector<int>& get_vector_test() const;
+		// const std::vector<int>& get_vector_test() const;
 
 	private:
 		void build_pairs();
@@ -52,9 +52,8 @@ class PmergeMe {
 		void binary_search(int n, int end);
 		void jacobsthal_numbers(int argc);
 
-		std::vector<int> _vector_before;
-		std::vector<int> _vector_after;
-		std::vector<int> _vector_test;
+		std::vector<int> _vector_unsorted;
+		std::vector<int> _vector_sorted;
 		std::vector<int> _vector_tmp;
 
 		std::vector<int> _jacobsthal;
