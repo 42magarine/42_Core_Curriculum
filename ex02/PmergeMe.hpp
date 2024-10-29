@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/20 15:29:16 by mott              #+#    #+#             */
-/*   Updated: 2024/10/29 17:31:27 by mott             ###   ########.fr       */
+/*   Updated: 2024/10/29 21:13:57 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,8 @@ class PmergeMe {
 		void vector_merge_sort(std::vector<std::pair<int, int>>& vector_pairs);
 		void vector_jacobsthal_numbers();
 		void vector_build_main_chain();
+		void vector_handle_straggler();
+		void vector_binary_search(int n, int end);
 
 		void deque_input(int argc, char** argv);
 		void deque_build_pairs();
@@ -55,11 +57,8 @@ class PmergeMe {
 		void deque_merge_sort(std::deque<std::pair<int, int>>& deque_pairs);
 		void deque_jacobsthal_numbers();
 		void deque_build_main_chain();
-
-
-		// void binary_search(int n);
-		void binary_search(int n, int end);
-
+		void deque_handle_straggler();
+		void deque_binary_search(int n, int end);
 
 		std::vector<int> _std_unsorted;
 		std::vector<int> _std_sorted;
@@ -68,13 +67,13 @@ class PmergeMe {
 		std::vector<int> _vector_sorted;
 		std::vector<std::pair<int, int>> _vector_pairs;
 		int _vector_straggler = -1;
-		std::vector<int> _vector_jacobsthal;
+		std::vector<unsigned long> _vector_jacobsthal;
 
 		std::deque<int> _deque_unsorted;
 		std::deque<int> _deque_sorted;
 		std::deque<std::pair<int, int>> _deque_pairs;
 		int _deque_straggler = -1;
-		std::deque<int> _deque_jacobsthal;
+		std::deque<unsigned long> _deque_jacobsthal;
 };
 
 #endif // PMERGEME_H
