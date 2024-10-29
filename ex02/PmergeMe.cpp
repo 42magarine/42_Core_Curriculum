@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/20 15:29:14 by mott              #+#    #+#             */
-/*   Updated: 2024/10/29 13:35:48 by mott             ###   ########.fr       */
+/*   Updated: 2024/10/29 14:05:15 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,18 +20,16 @@ PmergeMe::~PmergeMe() {
 
 void PmergeMe::vector_sort(int argc, char** argv) {
 	vector_input(argc, argv);
-	build_pairs();
-	sort_each_pair();
+	vector_build_pairs();
+	vector_sort_pairs();
 	merge_sort(_vector_pairs);
 	build_main_chain();
 }
 
 void PmergeMe::deque_sort(int argc, char** argv) {
-	(void)argc;
-	(void)argv;
-	// deque_input();
-	// build_pairs();
-	// sort_each_pair();
+	deque_input(argc, argv);
+	deque_build_pairs();
+	deque_sort_pairs();
 	// merge_sort(_vector_pairs);
 	// build_main_chain();
 }
@@ -55,8 +53,8 @@ void PmergeMe::std_sort(int argc, char** argv) {
 void PmergeMe::vector_input(int argc, char** argv) {
 	_vector_unsorted.reserve(argc - 1);
 	_vector_sorted.reserve(argc - 1);
-
 	int number;
+
 	for (int i = 1; i < argc; i++) {
 		number = std::stoi(argv[i]);
 		if (number < 0) {
@@ -66,25 +64,56 @@ void PmergeMe::vector_input(int argc, char** argv) {
 	}
 }
 
+void PmergeMe::deque_input(int argc, char** argv) {
+	int number;
 
-void PmergeMe::build_pairs() {
+	for (int i = 1; i < argc; i++) {
+		number = std::stoi(argv[i]);
+		if (number < 0) {
+			throw std::invalid_argument("Error: negative number found");
+		}
+		_deque_unsorted.push_back(number);
+	}
+}
+
+void PmergeMe::vector_build_pairs() {
 	if (_vector_unsorted.size() % 2 != 0) {
-		_struggler = _vector_unsorted.back();
+		_vector_straggler = _vector_unsorted.back();
 		_vector_unsorted.pop_back();
 	}
 
 	for (size_t i = 0; i < _vector_unsorted.size(); i += 2) {
-		_vector_pairs.emplace_back(_vector_unsorted.at(i), _vector_unsorted.at(i + 1));
+		_vector_pairs.emplace_back(_vector_unsorted[i], _vector_unsorted[i + 1]);
 	}
 }
 
-void PmergeMe::sort_each_pair() {
+void PmergeMe::deque_build_pairs() {
+	if (_deque_unsorted.size() % 2 != 0) {
+		_deque_straggler = _deque_unsorted.back();
+		_deque_unsorted.pop_back();
+	}
+
+	for (size_t i = 0; i < _deque_unsorted.size(); i += 2) {
+		_deque_pairs.emplace_back(_deque_unsorted[i], _deque_unsorted[i + 1]);
+	}
+}
+
+void PmergeMe::vector_sort_pairs() {
 	for (auto& pair : _vector_pairs) {
 		if (pair.first < pair.second) {
 			std::swap(pair.first, pair.second);
 		}
 	}
 }
+
+void PmergeMe::deque_sort_pairs() {
+	for (auto& pair : _deque_pairs) {
+		if (pair.first < pair.second) {
+			std::swap(pair.first, pair.second);
+		}
+	}
+}
+
 
 void PmergeMe::merge_sort(std::vector<std::pair<int, int>>& vector_pairs) {
 	if (vector_pairs.size() < 2) {
@@ -156,9 +185,9 @@ void PmergeMe::build_main_chain() {
 		}
 	}
 
-	if (_struggler != -1) {
-		// binary_search(_struggler);
-		binary_search(_struggler, _vector_sorted.size());
+	if (_vector_straggler != -1) {
+		// binary_search(_vector_straggler);
+		binary_search(_vector_straggler, _vector_sorted.size());
 	}
 }
 

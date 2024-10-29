@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/19 19:25:38 by mott              #+#    #+#             */
-/*   Updated: 2024/10/29 13:33:14 by mott             ###   ########.fr       */
+/*   Updated: 2024/10/29 13:46:31 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,3 +59,8 @@ int main(int argc, char** argv) {
 
 	return 0;
 }
+
+// Seconds			s		1								Base time unit
+// Milliseconds		ms		0.001 (1/1000)					1 ms = 0.001 s
+// Microseconds		µs		0.000001 (1/1,000,000)			1 µs = 0.000001 s
+// Nanoseconds		ns		0.000000001 (1/1,000,000,000)	1 ns = 0.000000001 s

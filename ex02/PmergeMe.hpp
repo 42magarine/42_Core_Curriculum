@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/20 15:29:16 by mott              #+#    #+#             */
-/*   Updated: 2024/10/29 13:33:39 by mott             ###   ########.fr       */
+/*   Updated: 2024/10/29 14:04:09 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,12 @@
 
 #include <iostream>
 #include <vector>
+#include <deque>
 #include <string>
 #include <chrono>
-#include <stdexcept>
 #include <algorithm>
 #include <utility>
+#include <stdexcept>
 
 #define RESET	"\033[0m"
 #define RED		"\033[31m"
@@ -42,9 +43,14 @@ class PmergeMe {
 
 	private:
 		void vector_input(int argc, char** argv);
+		void vector_build_pairs();
+		void vector_sort_pairs();
 
-		void build_pairs();
-		void sort_each_pair();
+		void deque_input(int argc, char** argv);
+		void deque_build_pairs();
+		void deque_sort_pairs();
+
+
 		void merge_sort(std::vector<std::pair<int, int>>& vector_pairs);
 		void build_main_chain();
 		// void binary_search(int n);
@@ -56,23 +62,19 @@ class PmergeMe {
 
 		std::vector<int> _vector_unsorted;
 		std::vector<int> _vector_sorted;
+		std::vector<std::pair<int, int>> _vector_pairs;
 		std::vector<int> _vector_tmp;
+		int _vector_straggler = -1;
+
+		std::deque<int> _deque_unsorted;
+		std::deque<int> _deque_sorted;
+		std::deque<std::pair<int, int>> _deque_pairs;
+		int _deque_straggler = -1;
 
 		std::vector<int> _jacobsthal;
-		std::vector<std::pair<int, int>> _vector_pairs;
-		int _struggler = -1;
 };
 
 #endif // PMERGEME_H
-
-
-
-
-
-// Seconds			s		1								Base time unit
-// Milliseconds		ms		0.001 (1/1000)					1 ms = 0.001 s
-// Microseconds		µs		0.000001 (1/1,000,000)			1 µs = 0.000001 s
-// Nanoseconds		ns		0.000000001 (1/1,000,000,000)	1 ns = 0.000000001 s
 
 
 // 1. Group elements into pairs:
