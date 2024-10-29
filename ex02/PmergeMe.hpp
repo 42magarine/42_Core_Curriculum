@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/20 15:29:16 by mott              #+#    #+#             */
-/*   Updated: 2024/10/28 17:01:05 by mott             ###   ########.fr       */
+/*   Updated: 2024/10/29 13:33:39 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,23 +27,22 @@
 
 class PmergeMe {
 	public:
-		PmergeMe() = delete;
-		PmergeMe(int argc, char** argv);
+		PmergeMe();
 		PmergeMe(const PmergeMe& other) = delete;
-
 		~PmergeMe();
-
 		PmergeMe& operator=(const PmergeMe& other) = delete;
 
-		// void cpp_sort();
-		void my_sort();
-		// void compare() const;
-		void print(const std::vector<int>& vector) const;
-		const std::vector<int>& get_vector_before() const;
-		const std::vector<int>& get_vector_after() const;
-		// const std::vector<int>& get_vector_test() const;
+		void vector_sort(int argc, char** argv);
+		void deque_sort(int argc, char** argv);
+		void std_sort(int argc, char** argv);
+
+		void print_before() const;
+		void print_after() const;
+		void compare() const;
 
 	private:
+		void vector_input(int argc, char** argv);
+
 		void build_pairs();
 		void sort_each_pair();
 		void merge_sort(std::vector<std::pair<int, int>>& vector_pairs);
@@ -51,6 +50,9 @@ class PmergeMe {
 		// void binary_search(int n);
 		void binary_search(int n, int end);
 		void jacobsthal_numbers(int argc);
+
+		std::vector<int> _std_unsorted;
+		std::vector<int> _std_sorted;
 
 		std::vector<int> _vector_unsorted;
 		std::vector<int> _vector_sorted;
@@ -64,8 +66,7 @@ class PmergeMe {
 #endif // PMERGEME_H
 
 
-// shuf -i 1-100000 -n 3000 | tr "\n" " "
-// jot -r 3000 1 100000 | tr '\n' ' '
+
 
 
 // Seconds			s		1								Base time unit
