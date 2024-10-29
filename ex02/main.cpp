@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/19 19:25:38 by mott              #+#    #+#             */
-/*   Updated: 2024/10/29 13:46:31 by mott             ###   ########.fr       */
+/*   Updated: 2024/10/29 17:44:44 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,14 +33,8 @@ int main(int argc, char** argv) {
 		ford_johnson.std_sort(argc, argv);
 		auto std_time_end = std::chrono::high_resolution_clock::now();
 
-		std::cout << "Before: ";
 		ford_johnson.print_before();
-		std::cout << std::endl;
-
-		std::cout << "After:  ";
 		ford_johnson.print_after();
-		std::cout << std::endl;
-
 		ford_johnson.compare();
 
 		std::chrono::duration<double, std::micro> vector_time_span = vector_time_end - vector_time_begin;

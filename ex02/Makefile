@@ -6,7 +6,7 @@
 #    By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/23 12:17:43 by mott              #+#    #+#              #
-#    Updated: 2024/10/29 13:43:05 by mott             ###   ########.fr        #
+#    Updated: 2024/10/29 17:40:25 by mott             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ CPP			=	c++
 CPPFLAGS	=	-Wall -Wextra -Werror
 # CPPFLAGS	+=	-std=c++98
 CPPFLAGS	+=	-std=c++17
-# CPPFLAGS	+=	-g -fsanitize=address
+CPPFLAGS	+=	-g -fsanitize=address
 RM			=	rm -rf
 NAME		=	PmergeMe
 
