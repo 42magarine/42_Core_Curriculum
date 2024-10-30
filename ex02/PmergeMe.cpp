@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/20 15:29:14 by mott              #+#    #+#             */
-/*   Updated: 2024/10/29 21:16:16 by mott             ###   ########.fr       */
+/*   Updated: 2024/10/30 12:35:52 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,15 @@ PmergeMe::~PmergeMe() {
 }
 
 void PmergeMe::vector_sort(int argc, char** argv) {
-	vector_input(argc, argv);
-	vector_build_pairs();
+	vector_input(argc, argv);				// Parse input into vector
+	vector_build_pairs();					// Group elements into pairs
 	if (_vector_pairs.size() > 0) {
-		vector_sort_pairs();
-		vector_merge_sort(_vector_pairs);
-		vector_jacobsthal_numbers();
-		vector_build_main_chain();
+		vector_sort_pairs();				// Sort each pair internally
+		vector_merge_sort(_vector_pairs);	// Merge-sort pairs by larger elements
+		vector_jacobsthal_numbers();		// Generate Jacobsthal insertion order
+		vector_build_main_chain();			// Insert pairs in sorted order
 	}
-	vector_handle_straggler();
+	vector_handle_straggler();				// Insert any leftover element
 }
 
 void PmergeMe::deque_sort(int argc, char** argv) {
@@ -50,7 +50,7 @@ void PmergeMe::std_sort(int argc, char** argv) {
 	for (int i = 1; i < argc; i++) {
 		number = std::stoi(argv[i]);
 		if (number < 0) {
-			throw std::invalid_argument("Error: negativ number found");
+			throw std::invalid_argument("Error: Negative number found");
 		}
 		_std_unsorted.push_back(number);
 		_std_sorted.push_back(number);
@@ -61,24 +61,21 @@ void PmergeMe::std_sort(int argc, char** argv) {
 void PmergeMe::vector_input(int argc, char** argv) {
 	_vector_unsorted.reserve(argc - 1);
 	_vector_sorted.reserve(argc - 1);
-	int number;
 
 	for (int i = 1; i < argc; i++) {
-		number = std::stoi(argv[i]);
+		int number = std::stoi(argv[i]);
 		if (number < 0) {
-			throw std::invalid_argument("Error: negativ number found");
+			throw std::invalid_argument("Error: Negative number found");
 		}
 		_vector_unsorted.push_back(number);
 	}
 }
 
 void PmergeMe::deque_input(int argc, char** argv) {
-	int number;
-
 	for (int i = 1; i < argc; i++) {
-		number = std::stoi(argv[i]);
+		int number = std::stoi(argv[i]);
 		if (number < 0) {
-			throw std::invalid_argument("Error: negative number found");
+			throw std::invalid_argument("Error: Negative number found");
 		}
 		_deque_unsorted.push_back(number);
 	}
@@ -191,11 +188,9 @@ void PmergeMe::vector_jacobsthal_numbers() {
 	_vector_jacobsthal.push_back(0);
 	_vector_jacobsthal.push_back(1);
 
-	int next;
 	int i = 2;
-
 	while (_vector_jacobsthal.back() < _vector_pairs.size()) {
-		next = _vector_jacobsthal[i - 1] + 2 * _vector_jacobsthal[i - 2];
+		int next = _vector_jacobsthal[i - 1] + 2 * _vector_jacobsthal[i - 2];
 		_vector_jacobsthal.push_back(next);
 		i++;
 	}
@@ -279,18 +274,6 @@ void PmergeMe::deque_build_main_chain() {
 	} while (it != _deque_jacobsthal.end());
 }
 
-void PmergeMe::vector_handle_straggler() {
-	if (_vector_straggler != -1) {
-		vector_binary_search(_vector_straggler, _vector_sorted.size());
-	}
-}
-
-void PmergeMe::deque_handle_straggler() {
-	if (_deque_straggler != -1) {
-		deque_binary_search(_deque_straggler, _deque_sorted.size());
-	}
-}
-
 void PmergeMe::vector_binary_search(int number, int end) {
 	int begin = 0;
 
@@ -331,6 +314,18 @@ void PmergeMe::deque_binary_search(int number, int end) {
 	_deque_sorted.insert(_deque_sorted.begin() + begin, number);
 }
 
+void PmergeMe::vector_handle_straggler() {
+	if (_vector_straggler != -1) {
+		vector_binary_search(_vector_straggler, _vector_sorted.size());
+	}
+}
+
+void PmergeMe::deque_handle_straggler() {
+	if (_deque_straggler != -1) {
+		deque_binary_search(_deque_straggler, _deque_sorted.size());
+	}
+}
+
 void PmergeMe::compare() const {
 	if (_std_sorted == _vector_sorted) {
 		std::cout << YELLOW << "std::vector: OK" << RESET << std::endl;
@@ -357,7 +352,7 @@ void PmergeMe::print_before() const {
 
 void PmergeMe::print_after() const {
 	std::cout << YELLOW << "After: " << RESET << std::endl;
-	for (int i : _vector_unsorted) {
+	for (int i : _vector_sorted) {
 		std::cout << i << " ";
 	}
 	std::cout << std::endl;

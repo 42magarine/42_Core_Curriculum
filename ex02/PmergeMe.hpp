@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/20 15:29:16 by mott              #+#    #+#             */
-/*   Updated: 2024/10/29 21:13:57 by mott             ###   ########.fr       */
+/*   Updated: 2024/10/30 12:09:18 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,8 @@ class PmergeMe {
 		void vector_merge_sort(std::vector<std::pair<int, int>>& vector_pairs);
 		void vector_jacobsthal_numbers();
 		void vector_build_main_chain();
+		void vector_binary_search(int number, int end);
 		void vector_handle_straggler();
-		void vector_binary_search(int n, int end);
 
 		void deque_input(int argc, char** argv);
 		void deque_build_pairs();
@@ -57,8 +57,8 @@ class PmergeMe {
 		void deque_merge_sort(std::deque<std::pair<int, int>>& deque_pairs);
 		void deque_jacobsthal_numbers();
 		void deque_build_main_chain();
+		void deque_binary_search(int number, int end);
 		void deque_handle_straggler();
-		void deque_binary_search(int n, int end);
 
 		std::vector<int> _std_unsorted;
 		std::vector<int> _std_sorted;
@@ -77,28 +77,3 @@ class PmergeMe {
 };
 
 #endif // PMERGEME_H
-
-
-// 1. Group elements into pairs:
-// 	Divide the list of elements into pairs, resulting in [n/2] pairs of elements.
-
-// 2. Identify the larger element in each pair:
-// 	For each pair, determine the larger of the two elements.
-
-// 3. Recursively sort the larger elements:
-// 	Recursively apply the algorithm to the list of the larger elements obtained from the previous step.
-
-// 4. Create the main chain:
-// 	Establish the main chain that will hold the sorted elements.
-
-// 5. Generate the order of insertion using Jacobsthal numbers:
-// 	Use Jacobsthal numbers to determine the sequence in which elements will be inserted into the main chain.
-
-// 6. Insert elements into the main chain:
-// 	Insert the elements from the order determined by the Jacobsthal numbers into the main chain.
-
-// 7. Handle Stragglers:
-// 	Address any elements that did not fit into the initial pairings or order.
-
-// 7. Handle the Straggler:
-// 	If the input list contains an odd number of elements, the last unpaired element is referred to as the "straggler."

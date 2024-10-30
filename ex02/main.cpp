@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/19 19:25:38 by mott              #+#    #+#             */
-/*   Updated: 2024/10/29 20:32:29 by mott             ###   ########.fr       */
+/*   Updated: 2024/10/30 12:32:11 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,18 +33,18 @@ int main(int argc, char** argv) {
 		ford_johnson.std_sort(argc, argv);
 		auto std_time_end = std::chrono::high_resolution_clock::now();
 
-		// ford_johnson.print_before();
-		// ford_johnson.print_after();
+		ford_johnson.print_before();
+		ford_johnson.print_after();
 		ford_johnson.compare();
 
 		std::chrono::duration<double, std::micro> vector_time_span = vector_time_end - vector_time_begin;
-		std::cout << "Time to process a range of " << argc - 1 << " elements with std::vector : " << vector_time_span.count() << " µs" << std::endl;
+		std::cout << "Time to process a range of " << argc - 1 << " elements with std::vector: " << vector_time_span.count() << " µs" << std::endl;
 
 		std::chrono::duration<double, std::micro> deque_time_span = deque_time_end - deque_time_begin;
-		std::cout << "Time to process a range of " << argc - 1 << " elements with std::deque() : " << deque_time_span.count() << " µs" << std::endl;
+		std::cout << "Time to process a range of " << argc - 1 << " elements with std::deque: " << deque_time_span.count() << " µs" << std::endl;
 
 		std::chrono::duration<double, std::micro> std_time_span = std_time_end - std_time_begin;
-		std::cout << "Time to process a range of " << argc - 1 << " elements with std::sort() : " << std_time_span.count() << " µs" << std::endl;
+		std::cout << "Time to process a range of " << argc - 1 << " elements with std::sort: " << std_time_span.count() << " µs" << std::endl;
 	}
 	catch (const std::exception& e) {
 		std::cerr << RED << e.what() << RESET << std::endl;
