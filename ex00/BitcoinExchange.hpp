@@ -6,7 +6,7 @@
 /*   By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/20 15:28:59 by mott              #+#    #+#             */
-/*   Updated: 2024/10/21 15:05:59 by mott             ###   ########.fr       */
+/*   Updated: 2024/10/30 14:23:16 by mott             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@
 #define YELLOW		"\033[33m"
 
 #define DATA_FILE	"data.csv"
-// #define DATA_FILE	"error_data.csv"
 
 class BitcoinExchange {
 	public:
@@ -38,6 +37,8 @@ class BitcoinExchange {
 		void calculate_values(const std::string& argv) const;
 
 	private:
+		bool isvalid_date(const std::string& date) const;
+
 		std::map<std::string, float> _data;
 };
 
