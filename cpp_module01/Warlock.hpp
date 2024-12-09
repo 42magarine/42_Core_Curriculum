@@ -1,8 +1,11 @@
 #ifndef WARLOCK_H
 #define WARLOCK_H
 
-#include <string>
 #include <iostream>
+#include <string>
+#include <map>
+#include "ASpell.hpp"
+#include "ATarget.hpp"
 
 class Warlock {
     public:
@@ -17,8 +20,8 @@ class Warlock {
         void introduce() const;
 
         void learnSpell(ASpell* spell);
-        void forgetSpell(std::string spell);
-        void launchSpell(std::string spell, ATarget& target);
+        void forgetSpell(const std::string& spell_name);
+        void launchSpell(const std::string& spell_name, const ATarget& target);
 
     private:
         Warlock();
@@ -27,7 +30,7 @@ class Warlock {
 
         std::string _name;
         std::string _title;
-        
+        std::map<std::string, ASpell*> _spells;
 };
 
 #endif // WALOCK_H

@@ -2,7 +2,7 @@
 
 // int main() {
 //     Warlock bob;                            //Does not compile
-//     Warlock bob2("Bob", "the magnificent");  //Compiles
+//     Warlock bob("Bob", "the magnificent");  //Compiles
 //     Warlock jim("Jim", "the nauseating");   //Compiles
 //     bob = jim;                              //Does not compile
 //     Warlock jack(jim);                      //Does not compile

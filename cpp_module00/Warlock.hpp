@@ -1,8 +1,8 @@
 #ifndef WARLOCK_H
 #define WARLOCK_H
 
-#include <string>
 #include <iostream>
+#include <string>
 
 class Warlock {
     public:

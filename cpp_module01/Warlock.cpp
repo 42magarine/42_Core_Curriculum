@@ -6,6 +6,7 @@ Warlock::Warlock(const std::string& name, const std::string& title) : _name(name
 
 Warlock::~Warlock() {
     std::cout << _name << ": My job here is done!" << std::endl;
+    // for ()
 }
 
 const std::string& Warlock::getName() const{
@@ -22,4 +23,25 @@ void Warlock::setTitle(const std::string& title) {
 
 void Warlock::introduce() const {
     std::cout << _name << ": I am " << _name << ", " << _title << "!" << std::endl;
+}
+
+void Warlock::learnSpell(ASpell* spell) {
+    if (spell) {
+        _spells[spell->getName()] = spell->clone();
+    }
+}
+
+void Warlock::forgetSpell(const std::string& spell_name) {
+    std::map<std::string, ASpell*>::iterator it = _spells.find(spell_name);
+    if (it != _spells.end()) {
+        delete it->second;
+        _spells.erase(it);
+    }
+}
+
+void Warlock::launchSpell(const std::string& spell_name, const ATarget& target) {
+    std::map<std::string, ASpell*>::iterator it = _spells.find(spell_name);
+    if (it != _spells.end()) {
+        it->second->launch(target);
+    }
 }
