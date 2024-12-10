@@ -21,6 +21,5 @@ int main() {
     jack->introduce();
 
     delete jack;
-
-    return (0);
+    return 0;
 }

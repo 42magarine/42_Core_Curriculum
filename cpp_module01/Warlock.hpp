@@ -33,4 +33,4 @@ class Warlock {
         std::map<std::string, ASpell*> _spells;
 };
 
-#endif // WALOCK_H
+#endif // WARLOCK_H
