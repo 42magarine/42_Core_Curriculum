@@ -25,7 +25,7 @@ void TargetGenerator::forgetTargetType(const std::string& target_type) {
 ATarget* TargetGenerator::createTarget(const std::string& target_type) {
     std::map<std::string, ATarget*>::iterator it = _targets.find(target_type);
     if (it != _targets.end()) {
-        return it->second->clone();
+        return it->second;
     }
     return 0;
 }

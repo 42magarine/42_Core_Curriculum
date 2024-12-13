@@ -26,7 +26,6 @@ int main() {
     richard.launchSpell("Polymorph", *wall);
     richard.launchSpell("Fireball", *wall);
 
-    // delete wall;
     delete fireball;
     delete polymorph;
     return 0;

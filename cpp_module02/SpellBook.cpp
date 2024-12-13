@@ -25,7 +25,7 @@ void SpellBook::forgetSpell(const std::string& spell_name) {
 ASpell* SpellBook::createSpell(const std::string& spell_name) {
     std::map<std::string, ASpell*>::iterator it = _spells.find(spell_name);
     if (it != _spells.end()) {
-        return it->second->clone();
+        return it->second;
     }
     return 0;
 }
