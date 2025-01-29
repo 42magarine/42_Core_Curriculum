@@ -34,7 +34,7 @@ services:
     env_file: .env
     networks:
       - inception
-    restart: on-failure
+    # restart: on-failure
 
 networks:
   inception:
