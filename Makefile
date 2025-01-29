@@ -6,7 +6,7 @@
 #    By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/28 13:43:24 by mott              #+#    #+#              #
-#    Updated: 2025/01/28 18:43:49 by mott             ###   ########.fr        #
+#    Updated: 2025/01/29 15:50:39 by mott             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,6 +21,12 @@ up:
 
 down:
 	docker compose -f srcs/docker-compose.yml down -v
+
+start:
+	docker-compose -f ./srcs/docker-compose.yml start
+
+stop:
+	docker-compose -f ./srcs/docker-compose.yml stop
 
 ls:
 	@echo "$(YELLOW)"
@@ -40,4 +46,4 @@ mariadb:
 
 clean:
 	@echo "$(RED)"
-	docker system prune --volumes -f
+	docker system prune -af --volumes
