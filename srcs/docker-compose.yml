@@ -8,6 +8,7 @@ services:
       - "443:443"
     volumes:
       - ./data/wordpress:/var/www/html:ro
+    env_file: .env
     networks:
       - inception
     depends_on:
@@ -34,7 +35,7 @@ services:
     env_file: .env
     networks:
       - inception
-    # restart: on-failure
+    restart: on-failure
 
 networks:
   inception:
