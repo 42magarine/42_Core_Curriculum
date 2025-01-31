@@ -11,9 +11,11 @@ RUN apk add --no-cache \
 	php83-mysqli \
 	php83-openssl \
 	php83-pdo_mysql \
+	php83-phar \
 	php83-xml \
 	php83-zip
 
+# command line interface for WordPress
 RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar && \
     chmod +x wp-cli.phar && \
     mv wp-cli.phar /usr/local/bin/wp
@@ -24,6 +26,7 @@ COPY ./tools/wordpress-setup.sh /wordpress-setup.sh
 RUN chmod +x /wordpress-setup.sh
 
 WORKDIR /var/www/html
+# RUN chown -R nobody:nobody /var/www/html
 
 EXPOSE 9000
 

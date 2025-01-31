@@ -6,7 +6,7 @@
 #    By: mott <mott@student.42heilbronn.de>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/28 13:43:24 by mott              #+#    #+#              #
-#    Updated: 2025/01/29 15:50:39 by mott             ###   ########.fr        #
+#    Updated: 2025/01/31 16:26:50 by mott             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,3 +48,5 @@ clean:
 	@echo "$(RED)"
 	docker system prune -af --volumes
 
+fclean: clean
+	rm -rf srcs/data
