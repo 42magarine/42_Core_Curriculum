@@ -1,4 +1,4 @@
-version: "3.9"
+# version: "3.9"
 
 services:
   nginx:
@@ -12,7 +12,8 @@ services:
     networks:
       - inception
     depends_on:
-      - wordpress
+      wordpress:
+        condition: service_healthy
     restart: on-failure
 
   wordpress:
@@ -24,8 +25,14 @@ services:
     networks:
       - inception
     depends_on:
-      - mariadb
+      mariadb:
+        condition: service_healthy
     restart: on-failure
+    healthcheck:
+      test: ["CMD", "curl", "-f", "${WP_URL}/wp-login.php"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
   mariadb:
     container_name: mariadb
@@ -36,6 +43,11 @@ services:
     networks:
       - inception
     restart: on-failure
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "$DB_HOST", "-u", "$DB_USER", "-p$DB_USER_PASSWORD"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
 
 networks:
   inception:

@@ -26,7 +26,6 @@ COPY ./tools/wordpress-setup.sh /wordpress-setup.sh
 RUN chmod +x /wordpress-setup.sh
 
 WORKDIR /var/www/html
-# RUN chown -R nobody:nobody /var/www/html
 
 EXPOSE 9000
 

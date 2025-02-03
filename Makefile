@@ -35,6 +35,9 @@ ls:
 	docker compose -f srcs/docker-compose.yml images
 	@echo ""
 
+logs:
+	docker compose -f srcs/docker-compose.yml logs
+
 nginx:
 	docker compose -f srcs/docker-compose.yml exec nginx sh
 
