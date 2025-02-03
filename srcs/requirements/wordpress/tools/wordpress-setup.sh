@@ -5,7 +5,7 @@
 #     sleep 1
 # done
 
-chown -R nobody:nobody /var/www/html
+# chown -R nobody:nobody /var/www/html
 
 until mysql -h ${DB_HOST} -u ${DB_USER} -p${DB_PASSWORD} -e "SHOW DATABASES;" 2>/dev/null; do
     echo "Waiting for MariaDB..."

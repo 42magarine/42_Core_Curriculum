@@ -1,6 +1,7 @@
 #!/bin/sh
 
 mkdir -p /run/mysqld && chown -R mysql:mysql /run/mysqld
+chown -R nobody:nobody /var/www/html
 
 if [ ! -d "/var/lib/mysql/mysql" ]; then
     mariadb-install-db --user=mysql --datadir=/var/lib/mysql
@@ -19,4 +20,3 @@ EOF
 fi
 
 exec mysqld --user=mysql
-
