@@ -1,11 +1,5 @@
 #!/bin/sh
 
-# until mysql -h ${DB_HOST} -u ${DB_USER} -p${DB_PASSWORD} -e "SHOW DATABASES;" 2>/dev/null; do
-# until mysql -h $DB_HOST -u $DB_USER -p$DB_PASS -e "USE ${DB_NAME}" 2>/dev/null; do
-#     echo "Waiting for MariaDB..."
-#     sleep 3
-# done
-
 if [ ! -f /var/www/html/wp-config.php ]; then
     # This downloads the WordPress core files.
     wp core download --allow-root --path=/var/www/html

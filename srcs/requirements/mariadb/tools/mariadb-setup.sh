@@ -7,7 +7,6 @@ if [ ! -d "/var/lib/mysql/mysql" ]; then
 
     mysqld --user=mysql --bootstrap << EOF
 USE mysql;
-FLUSH PRIVILEGES;
 DELETE FROM mysql.user WHERE User='';
 DELETE FROM mysql.user WHERE User='root' AND Host NOT IN ('localhost', '127.0.0.1', '::1');
 ALTER USER 'root'@'localhost' IDENTIFIED BY '${DB_ROOT_PASSWORD}';
@@ -20,7 +19,12 @@ fi
 
 exec mysqld --user=mysql
 
-# mysql -u root -p
-# mysql -u root -p
-# USE Inception;
+# mysql -u root -p"${DB_ROOT_PASSWORD}"
+# mysql -u "${DB_USER}" -p"${DB_USER_PASSWORD}"
 # SHOW DATABASES;
+# USE Inception;
+
+# FLUSH PRIVILEGES;
+# DROP DATABASE IF EXISTS test;
+# DELETE FROM mysql.db WHERE Db='test' OR Db='test\\_%';
+# SELECT Host, User, Password FROM
