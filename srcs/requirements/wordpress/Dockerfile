@@ -1,3 +1,4 @@
+# penultimate stable version of Alpine
 FROM alpine:3.20
 
 RUN apk add --no-cache \
@@ -17,8 +18,8 @@ RUN apk add --no-cache \
 
 # command line interface for WordPress
 RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar && \
-    chmod +x wp-cli.phar && \
-    mv wp-cli.phar /usr/local/bin/wp
+	chmod +x wp-cli.phar && \
+	mv wp-cli.phar /usr/local/bin/wp
 
 COPY ./conf/www.conf /etc/php83/php-fpm.d/www.conf
 COPY ./tools/wordpress-setup.sh /wordpress-setup.sh

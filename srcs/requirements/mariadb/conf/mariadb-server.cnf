@@ -9,7 +9,6 @@
 [mysqld]
 #skip-networking
 bind-address=0.0.0.0
-skip-test-db
 
 # Galera-related settings
 [galera]

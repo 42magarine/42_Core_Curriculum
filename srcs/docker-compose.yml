@@ -7,7 +7,8 @@ services:
     ports:
       - "443:443"
     volumes:
-      - ./data/wordpress:/var/www/html:ro
+      - "${HOME}/data/wordpress:/var/www/html:ro"
+      # - ./data/wordpress:/var/www/html:ro
     env_file: .env
     networks:
       - inception
@@ -20,7 +21,8 @@ services:
     container_name: wordpress
     build: requirements/wordpress/.
     volumes:
-      - ./data/wordpress:/var/www/html
+      - "${HOME}/data/wordpress:/var/www/html"
+      # - ./data/wordpress:/var/www/html
     env_file: .env
     networks:
       - inception
@@ -40,6 +42,7 @@ services:
     container_name: mariadb
     build: requirements/mariadb/.
     volumes:
+      # - "${HOME}/data/mariadb:/var/lib/mysql"
       - ./data/mariadb:/var/lib/mysql
     env_file: .env
     networks:
@@ -47,9 +50,9 @@ services:
     restart: on-failure
     healthcheck:
       test: ["CMD", "mysqladmin", "ping", "-h", "$DB_HOST", "-u", "$DB_USER", "-p$DB_USER_PASSWORD"]
-      interval: 5s
-      timeout: 3s
-      retries: 10
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
 networks:
   inception:

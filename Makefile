@@ -52,4 +52,5 @@ clean:
 	docker system prune -af --volumes
 
 fclean: clean
-	rm -rf srcs/data
+	rm -rf ${HOME}/data
+# rm -rf srcs/data
