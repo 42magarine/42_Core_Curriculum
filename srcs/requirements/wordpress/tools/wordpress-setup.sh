@@ -27,8 +27,6 @@ if [ ! -f /var/www/html/wp-config.php ]; then
         # --allow-root
 
     wp theme activate twentytwentyfour --allow-root
-    # wp theme install bravada --allow-root --path=/var/www/html --activate
-    # wp theme status bravada --allow-root
 
     chown -R nobody:nobody /var/www/html
 fi

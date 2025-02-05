@@ -17,6 +17,7 @@ YELLOW	=	\x1b[33m
 BLUE	=	\x1b[34m
 
 up:
+	mkdir -p ${HOME}/data/mariadb ${HOME}/data/wordpress
 	docker compose -f srcs/docker-compose.yml up --build -d
 
 down:
@@ -53,4 +54,3 @@ clean:
 
 fclean: clean
 	rm -rf ${HOME}/data
-# rm -rf srcs/data

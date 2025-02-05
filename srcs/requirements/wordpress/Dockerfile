@@ -3,7 +3,7 @@ FROM alpine:3.20
 
 RUN apk add --no-cache \
 	curl \
-	mariadb-client \
+	# mariadb-client \
 	php83 \
 	php83-curl \
 	php83-fpm \

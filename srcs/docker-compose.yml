@@ -1,5 +1,3 @@
-# version: "3.9"
-
 services:
   nginx:
     container_name: nginx
@@ -8,7 +6,6 @@ services:
       - "443:443"
     volumes:
       - "${HOME}/data/wordpress:/var/www/html:ro"
-      # - ./data/wordpress:/var/www/html:ro
     env_file: .env
     networks:
       - inception
@@ -22,7 +19,6 @@ services:
     build: requirements/wordpress/.
     volumes:
       - "${HOME}/data/wordpress:/var/www/html"
-      # - ./data/wordpress:/var/www/html
     env_file: .env
     networks:
       - inception
@@ -32,8 +28,6 @@ services:
     restart: on-failure
     healthcheck:
       test: ["CMD", "sh", "-c", "ps aux | grep '[p]hp-fpm'"]
-      # test: ["CMD", "pgrep", "php-fpm"]
-      # test: ["CMD", "curl", "-f", "${WP_URL}/wp-login.php"]
       interval: 10s
       timeout: 5s
       retries: 5
@@ -42,8 +36,7 @@ services:
     container_name: mariadb
     build: requirements/mariadb/.
     volumes:
-      # - "${HOME}/data/mariadb:/var/lib/mysql"
-      - ./data/mariadb:/var/lib/mysql
+      - "${HOME}/data/mariadb:/var/lib/mysql"
     env_file: .env
     networks:
       - inception
