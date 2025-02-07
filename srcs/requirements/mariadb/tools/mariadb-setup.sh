@@ -3,7 +3,7 @@
 mkdir -p /run/mysqld && chown -R mysql:mysql /run/mysqld
 
 if [ ! -d "/var/lib/mysql/mysql" ]; then
-    mariadb-install-db --user=mysql --datadir=/var/lib/mysql
+    mariadb-install-db --user=mysql --datadir=/var/lib/mysql --skip-test-db
 
     mysqld --user=mysql --bootstrap << EOF
 USE mysql;

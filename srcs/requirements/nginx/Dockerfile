@@ -5,7 +5,7 @@ RUN apk add --no-cache \
 	nginx \
 	openssl
 
-RUN openssl req -x509 -nodes -newkey rsa:2048 \
+RUN openssl req -x509 -nodes -newkey rsa \
 	-keyout /etc/ssl/nginx.key \
 	-out /etc/ssl/nginx.crt \
 	-subj "/C=DE/O=42 Heilbronn/OU=Inception/CN=${SERVER_NAME}"

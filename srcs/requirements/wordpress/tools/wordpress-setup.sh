@@ -4,7 +4,7 @@ if [ ! -f /var/www/html/wp-config.php ]; then
     # This downloads the WordPress core files.
     wp core download --allow-root --path=/var/www/html
 
-    # This will generate the WordPress configuration file.
+    # This will generate the WordPress configuration file (wp-config.php).
     wp config create --allow-root \
         --dbname="${DB_NAME}" \
         --dbuser="${DB_USER}" \
