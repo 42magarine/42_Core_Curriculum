@@ -48,6 +48,9 @@ wordpress:
 mariadb:
 	docker compose -f srcs/docker-compose.yml exec mariadb sh
 
+ftp:
+	docker compose -f srcs/docker-compose.yml exec ftp-server sh
+
 clean:
 	@echo "$(RED)"
 	docker system prune -af --volumes

@@ -47,6 +47,32 @@ services:
       timeout: 5s
       retries: 5
 
+  redis:
+    container_name: redis
+    build: requirements/redis/.
+    networks:
+      - inception
+    restart: on-failure
+
+  ftp-server:
+    container_name: ftp-server
+    build: requirements/ftp-server
+    ports:
+      - "21:21"
+      - "4222:22"
+    # volumes:
+    #   - "${HOME}/data/wordpress:/var/www/html"
+    networks:
+      - inception
+    restart: on-failure
+
+  adminer:
+    container_name: adminer
+    build: requirements/adminer
+    networks:
+      - inception
+    restart: on-failure
+
 networks:
   inception:
     name: inception
