@@ -49,14 +49,14 @@ services:
 
   # redis:
   #   container_name: redis
-  #   build: requirements/redis/.
+  #   build: requirements/bonus/redis/.
   #   networks:
   #     - inception
   #   restart: on-failure
 
-  ftp-server:
-    container_name: ftp-server
-    build: requirements/ftp-server
+  ftp:
+    container_name: ftp
+    build: requirements/bonus/ftp/.
     ports:
       - "20:20"
       - "21:21"
@@ -67,9 +67,18 @@ services:
       - inception
     # restart: on-failure
 
+  # jekyll:
+  #   container_name: jekyll
+  #   build: requirements/bonus/jekyll/.
+  #   # volumes:
+  #   #   - "${HOME}/data/wordpress:/var/www/html"
+  #   networks:
+  #     - inception
+  #   restart: on-failure
+
   # adminer:
   #   container_name: adminer
-  #   build: requirements/adminer
+  #   build: requirements/bonus/adminer/.
   #   networks:
   #     - inception
   #   restart: on-failure

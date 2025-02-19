@@ -34,3 +34,5 @@ fi
 # This is the command that will keep WordPress up and running.
 # PHP FastCGI Process Manager (PHP-FPM)
 exec php-fpm83 -F
+
+wp config create --allow-root --dbname="${DB_NAME}" --dbuser="${DB_USER}" --dbpass="${DB_USER_PASSWORD}" --dbhost="${DB_HOST}"
