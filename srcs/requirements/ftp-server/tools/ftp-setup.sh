@@ -1,11 +1,18 @@
 #!/bin/sh
 
-mkdir -p var/www/html
+mkdir -p /var/run/vsftpd/empty
+chmod 555 /var/run/vsftpd/empty
 
-adduser -D -h /var/www/html -s /sbin/nologin ftpuser \
+# adduser -D -h /var/www/html -s /sbin/nologin ftpuser \
+adduser ftpuser --disabled-password
 
-chown -R ftpuser:ftpuser /var/www/html
+# echo "ftpuser:P@ssw0rd" | /usr/sbin/chpasswd \
+echo "ftpuser:P@ssw0rd" | chpasswd
 
-echo "ftpuser:P@ssw0rd42" | /usr/sbin/chpasswd \
+# mkdir -p var/www/html
+mkdir -p /home/ftpuser/data/wordpress
+
+# chown -R ftpuser:ftpuser /var/www/html
+chown -R ftpuser:ftpuser /home/ftpuser/data/wordpress
 
 exec "$@"
