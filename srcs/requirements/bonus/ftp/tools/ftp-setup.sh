@@ -15,4 +15,4 @@ mkdir -p /home/ftpuser/data/wordpress
 # chown -R ftpuser:ftpuser /var/www/html
 chown -R ftpuser:ftpuser /home/ftpuser/data/wordpress
 
-exec "$@"
+exec "/usr/sbin/vsftpd" "/etc/vsftpd/vsftpd.conf"

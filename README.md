@@ -1,10 +1,11 @@
 # 42_Inception
 
+# Standard configuration files #
 docker cp nginx:/etc/nginx/nginx.conf ./srcs/requirements/nginx/conf/.
 docker cp nginx:/etc/nginx/http.d/default.conf ./srcs/requirements/nginx/conf/.
-
 docker cp wordpress:/etc/php83/php-fpm.d/www.conf ./srcs/requirements/wordpress/conf/.
-docker cp ftp-server:/etc/vsftpd/vsftpd.conf ./srcs/requirements/ftp-server/conf/.
+docker cp ftp:/etc/vsftpd/vsftpd.conf ./srcs/requirements/ftp-server/conf/.
+
 
 sudo nano /etc/hosts
 127.0.0.1 mott.42.fr
@@ -20,8 +21,9 @@ sudo nano /etc/hosts
 
 # SELECT Host, User, Password FROM mysql.user;
 
-
-https://manpages.ubuntu.com/manpages/focal/en/man5/vsftpd.conf.5.html
+# FTP Server #
+/etc/vsftpd/vsftpd.conf
+https://manpages.ubuntu.com/manpages/noble/en/man5/vsftpd.conf.5.html
 
 
 

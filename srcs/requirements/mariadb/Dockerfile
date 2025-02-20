@@ -1,15 +1,19 @@
-# penultimate stable version of Alpine
+# Use the penultimate stable version of Alpine Linux
 FROM alpine:3.20
 
+# Install required packages
 RUN apk add --no-cache \
-	mariadb \
-	mariadb-client
+    mariadb \
+    mariadb-client
 
-COPY ./conf/mariadb-server.cnf /etc/my.cnf.d/mariadb-server.cnf
-COPY ./tools/mariadb-setup.sh /mariadb-setup.sh
+# Copy the configuration file
+COPY ./conf/mariadb-server.cnf /etc/my.cnf.d/
 
-RUN chmod +x /mariadb-setup.sh
+# Copy the setup script with execute permissions
+COPY --chmod=755 ./tools/mariadb-setup.sh /usr/local/bin/
 
+# Expose port
 EXPOSE 3306
 
-ENTRYPOINT ["/mariadb-setup.sh"]
+# Set the entrypoint script
+ENTRYPOINT ["/usr/local/bin/mariadb-setup.sh"]
