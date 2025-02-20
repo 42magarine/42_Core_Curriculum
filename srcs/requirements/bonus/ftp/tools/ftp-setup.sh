@@ -1,18 +1,18 @@
 #!/bin/sh
 
-mkdir -p /var/run/vsftpd/empty
-chmod 555 /var/run/vsftpd/empty
+if [ ! -d /var/run/vsftpd/empty ]; then
 
-# adduser -D -h /var/www/html -s /sbin/nologin ftpuser \
-adduser ftpuser --disabled-password
+    FTP_PASSWORD=$(cat /run/secrets/ftp_password | tr -d '\n')
 
-# echo "ftpuser:P@ssw0rd" | /usr/sbin/chpasswd \
-echo "ftpuser:P@ssw0rd" | chpasswd
+    mkdir -p /var/run/vsftpd/empty
+    chmod 555 /var/run/vsftpd/empty
 
-# mkdir -p var/www/html
-mkdir -p /home/ftpuser/data/wordpress
+    adduser --disabled-password $FTP_USER
+    echo "$FTP_USER:$FTP_PASSWORD" | chpasswd
+    chown -R $FTP_USER:$FTP_USER /home/$FTP_USER
 
-# chown -R ftpuser:ftpuser /var/www/html
-chown -R ftpuser:ftpuser /home/ftpuser/data/wordpress
+    sed -i "s|local_root=.*|local_root=/home/$FTP_USER|" /etc/vsftpd/vsftpd.conf
 
-exec "/usr/sbin/vsftpd" "/etc/vsftpd/vsftpd.conf"
+fi
+
+exec vsftpd /etc/vsftpd/vsftpd.conf

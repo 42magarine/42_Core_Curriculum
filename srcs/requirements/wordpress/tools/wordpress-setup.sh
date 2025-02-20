@@ -2,7 +2,7 @@
 
 if [ ! -f /var/www/html/wp-config.php ]; then
     # This downloads the WordPress core files.
-    wp core download --allow-root --path=/var/www/html
+    wp core download --allow-root --path=/var/www/html --version=6.7.1
 
     # This will generate the WordPress configuration file (wp-config.php).
     wp config create --allow-root \
@@ -34,5 +34,3 @@ fi
 # This is the command that will keep WordPress up and running.
 # PHP FastCGI Process Manager (PHP-FPM)
 exec php-fpm83 -F
-
-wp config create --allow-root --dbname="${DB_NAME}" --dbuser="${DB_USER}" --dbpass="${DB_USER_PASSWORD}" --dbhost="${DB_HOST}"

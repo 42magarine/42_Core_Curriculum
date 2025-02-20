@@ -17,11 +17,11 @@ YELLOW	=	\x1b[33m
 BLUE	=	\x1b[34m
 
 up:
-	mkdir -p ${HOME}/data/mariadb ${HOME}/data/wordpress
+	mkdir -p ${HOME}/data/mariadb ${HOME}/data/wordpress ${HOME}/data/jekyll
 	docker compose -f srcs/docker-compose.yml up --build -d
 
 down:
-	docker compose -f srcs/docker-compose.yml down -v
+	docker compose -f srcs/docker-compose.yml down
 
 start:
 	docker compose -f srcs/docker-compose.yml start
@@ -34,6 +34,8 @@ ls:
 	docker compose -f srcs/docker-compose.yml  ps -a
 	@echo ""
 	docker compose -f srcs/docker-compose.yml images
+	@echo ""
+	docker volume ls
 	@echo ""
 
 logs:
@@ -48,8 +50,14 @@ wordpress:
 mariadb:
 	docker compose -f srcs/docker-compose.yml exec mariadb sh
 
+adminer:
+	docker compose -f srcs/docker-compose.yml exec adminer sh
+
 ftp:
-	docker compose -f srcs/docker-compose.yml exec ftp-server sh
+	docker compose -f srcs/docker-compose.yml exec ftp sh
+
+jekyll:
+	docker compose -f srcs/docker-compose.yml exec jekyll sh
 
 clean:
 	@echo "$(RED)"
