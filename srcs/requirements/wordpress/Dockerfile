@@ -13,6 +13,8 @@ RUN apk add --no-cache \
     php83-openssl \
     php83-pdo_mysql \
     php83-phar \
+    php83-redis \
+    php83-tokenizer \
     php83-xml \
     php83-zip
 

@@ -10,7 +10,6 @@ if [ ! -f /var/www/html/wp-config.php ]; then
         --dbuser="${DB_USER}" \
         --dbpass="${DB_USER_PASSWORD}" \
         --dbhost="${DB_HOST}" \
-        # --force
 
     # This will then install WordPress.
     wp core install --allow-root \
@@ -24,10 +23,19 @@ if [ ! -f /var/www/html/wp-config.php ]; then
     wp user create "${WP_USER_NAME}" "${WP_USER_EMAIL}" \
         --user_pass="${WP_USER_PASSWORD}" \
         --role="${WP_USER_ROLE}"
-        # --allow-root
 
     wp theme activate twentytwentyfour --allow-root
 
+    # Install and configure Redis plugin
+    wp config set WP_REDIS_HOST redis --allow-root
+    wp config set WP_REDIS_PORT 6379 --allow-root
+    wp config set WP_CACHE true --allow-root --raw
+    wp config set WP_REDIS_CLIENT phpredis --allow-root
+    
+    wp plugin install redis-cache --allow-root --activate
+    wp redis enable --allow-root
+
+    # Set appropriate file ownership
     chown -R nobody:nobody /var/www/html
 fi
 

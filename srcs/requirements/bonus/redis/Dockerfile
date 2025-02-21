@@ -5,4 +5,11 @@ FROM alpine:3.20
 RUN apk add --no-cache \
     redis
 
-CMD ["tail", "-f"]
+# Copy the configuration file
+COPY ./conf/redis.conf /etc/
+
+# Expose port
+EXPOSE 6379
+
+# CMD ["tail", "-f"]
+CMD ["redis-server", "/etc/redis.conf"]
