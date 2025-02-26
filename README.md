@@ -160,3 +160,38 @@ Begründung der Reihenfolge
 
     Logging
         logging: Falls das Logging-Verhalten konfiguriert werden soll
+
+
+VM
+
+Settings:
+- Base Memory: 2048 MB
+- Processor(s): 2 CPU
+- Storage: 20 GB
+- Network: Bridged Adapter
+
+
+git --version
+sudo apt update && sudo apt install -y git
+
+sudo apt update && sudo apt install -y build-essential dkms
+Gehe in VirtualBox-Menü: "Geräte" → "Gasterweiterungen einlegen"
+sudo mount /dev/cdrom /mnt
+sudo /mnt/VBoxLinuxAdditions.run
+
+
+
+Install Docker Engine on Ubuntu
+
+    Install using the apt repository
+        https://docs.docker.com/engine/install/ubuntu/#install-using-the-repository
+
+    Manage Docker as a non-root user
+        https://docs.docker.com/engine/install/linux-postinstall/#manage-docker-as-a-non-root-user
+
+
+cat << EOF > .env
+...
+EOF
+
+echo "P@ssw0rd" > ftp_password.txt
