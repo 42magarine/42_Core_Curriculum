@@ -110,6 +110,19 @@ services:
     networks:
       - inception
 
+  portainer:
+    container_name: portainer
+    build: ./requirements/bonus/portainer/.
+    restart: on-failure
+    ports:
+      # - "8000:8000"
+      - "9000:9000"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - portainer_volume:/data
+    networks:
+      - inception
+
 volumes:
   wordpress_volume:
     driver_opts:
@@ -122,6 +135,12 @@ volumes:
       type: none
       o: bind
       device: ${HOME}/data/mariadb
+
+  portainer_volume:
+    driver_opts:
+      type: none
+      o: bind
+      device: ${HOME}/data/portainer
 
   jekyll_volume:
     driver_opts:
