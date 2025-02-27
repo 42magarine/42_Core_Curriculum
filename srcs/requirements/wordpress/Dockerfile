@@ -1,5 +1,5 @@
 # Use the penultimate stable version of Alpine Linux
-FROM alpine:3.20
+FROM alpine:3.20.6
 
 # Install required packages
 RUN apk add --no-cache \
@@ -36,4 +36,4 @@ WORKDIR /var/www/html
 EXPOSE 9000
 
 # Set the entrypoint script
-ENTRYPOINT ["/usr/local/bin/wordpress-setup.sh"]
+ENTRYPOINT [ "wordpress-setup.sh" ]

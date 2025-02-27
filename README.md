@@ -189,6 +189,8 @@ Install Docker Engine on Ubuntu
     Manage Docker as a non-root user
         https://docs.docker.com/engine/install/linux-postinstall/#manage-docker-as-a-non-root-user
 
+How to use secrets in Docker Compose
+https://docs.docker.com/compose/how-tos/use-secrets/
 
 cat << EOF > .env
 ...

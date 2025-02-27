@@ -1,5 +1,5 @@
 # Use the penultimate stable version of Alpine Linux
-FROM alpine:3.20
+FROM alpine:3.20.6
 
 # Install required packages
 RUN apk add --no-cache \
@@ -12,4 +12,4 @@ COPY ./conf/redis.conf /etc/
 EXPOSE 6379
 
 # CMD ["tail", "-f"]
-CMD ["redis-server", "/etc/redis.conf"]
+CMD [ "redis-server", "/etc/redis.conf" ]

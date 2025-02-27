@@ -1,5 +1,5 @@
 # Use the penultimate stable version of Alpine Linux
-FROM alpine:3.20
+FROM alpine:3.20.6
 
 # Install required packages
 RUN apk add --no-cache \
@@ -15,4 +15,4 @@ COPY --chmod=755 ./tools/ftp-setup.sh /usr/local/bin/
 EXPOSE 20 21 42000-42999
 
 # Set the entrypoint script
-ENTRYPOINT ["/usr/local/bin/ftp-setup.sh"]
+ENTRYPOINT [ "ftp-setup.sh" ]

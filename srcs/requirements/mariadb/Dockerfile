@@ -1,5 +1,5 @@
 # Use the penultimate stable version of Alpine Linux
-FROM alpine:3.20
+FROM alpine:3.20.6
 
 # Install required packages
 RUN apk add --no-cache \
@@ -16,4 +16,4 @@ COPY --chmod=755 ./tools/mariadb-setup.sh /usr/local/bin/
 EXPOSE 3306
 
 # Set the entrypoint script
-ENTRYPOINT ["/usr/local/bin/mariadb-setup.sh"]
+ENTRYPOINT [ "mariadb-setup.sh" ]

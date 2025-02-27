@@ -1,5 +1,5 @@
 # Use the penultimate stable version of Alpine Linux
-FROM alpine:3.20
+FROM alpine:3.20.6
 
 # Install required packages
 RUN apk add --no-cache \
@@ -25,4 +25,4 @@ RUN sed -i 's|listen = .*|listen = 9000|' /etc/php83/php-fpm.d/www.conf
 EXPOSE 9000
 
 # Start PHP-FPM in foreground mode
-CMD ["php-fpm83", "-F"]
+CMD [ "php-fpm83", "-F" ]

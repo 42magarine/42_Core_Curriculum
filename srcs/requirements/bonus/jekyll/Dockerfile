@@ -1,5 +1,8 @@
 # Use the penultimate stable version of Alpine Linux
-FROM alpine:3.20
+FROM alpine:3.20.6
 
 # Install required packages
 RUN apk add --no-cache \
+
+
+CMD [ "tail", "-f" ]
