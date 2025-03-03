@@ -23,8 +23,6 @@ services:
         condition: service_healthy
       redis:
         condition: service_healthy
-    environment:
-      - MARIADB_PASSWORD_FILE=/run/secrets/mariadb_password
     env_file: .env
     volumes:
       - wordpress_volume:/var/www/html
@@ -36,36 +34,32 @@ services:
       timeout: 5s
       retries: 5
     secrets:
-      - mariadb_password
+      - db_password
+      - wp_admin_password
+      - wp_user_password
 
   mariadb:
     container_name: mariadb
     build: ./requirements/mariadb/.
     restart: on-failure
-    # environment:
     env_file: .env
     volumes:
       - mariadb_volume:/var/lib/mysql
     networks:
       - inception
     healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "-h", "$DB_HOST", "-u", "$DB_USER", "-p$DB_USER_PASSWORD"]
+      test: ["CMD", "mysqladmin", "ping", "-h", "$DB_HOST", "-u", "$DB_USER", "-p$$(cat /run/secrets/db_password)"]
       interval: 10s
       timeout: 5s
       retries: 5
     secrets:
-      - mariadb_password
-      - mariadb_root_password
+      - db_password
+      - db_root_password
 
   redis:
     container_name: redis
     build: ./requirements/bonus/redis/.
     restart: on-failure
-    depends_on:
-      wordpress:
-        condition: service_healthy
-    # environment:
-    # env_file: .env
     networks:
       - inception
     healthcheck:
@@ -154,13 +148,13 @@ networks:
     driver: bridge
 
 secrets:
-  mariadb_password:
-    file: ../secrets/mariadb_password.txt
-  mariadb_root_password:
-    file: ../secrets/mariadb_root_password.txt
-  wordpress_password:
-    file: ../secrets/wordpress_password.txt
-  wordpress_root_password:
-    file: ../secrets/wordpress_root_password.txt
+  db_password:
+    file: ../secrets/db_password.txt
+  db_root_password:
+    file: ../secrets/db_root_password.txt
+  wp_admin_password:
+    file: ../secrets/wp_admin_password.txt
+  wp_user_password:
+    file: ../secrets/wp_user_password.txt
   ftp_password:
     file: ../secrets/ftp_password.txt
