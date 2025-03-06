@@ -5,6 +5,7 @@ FROM alpine:3.20.6
 RUN apk add --no-cache \
     curl \
     php83 \
+    php83-ctype \
     php83-curl \
     php83-fpm \
     php83-json \

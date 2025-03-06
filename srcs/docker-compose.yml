@@ -21,8 +21,8 @@ services:
     depends_on:
       mariadb:
         condition: service_healthy
-    #   redis:
-    #     condition: service_healthy
+      redis:
+        condition: service_healthy
     env_file: .env
     volumes:
       - wordpress_volume:/var/www/html
@@ -56,17 +56,17 @@ services:
       - db_password
       - db_root_password
 
-  # redis:
-  #   container_name: redis
-  #   build: ./requirements/bonus/redis/.
-  #   restart: on-failure
-  #   networks:
-  #     - inception
-  #   # healthcheck:
-  #   #   test: ["CMD", "redis-cli", "ping"]
-  #   #   interval: 10s
-  #   #   timeout: 5s
-  #   #   retries: 5
+  redis:
+    container_name: redis
+    build: ./requirements/bonus/redis/.
+    restart: on-failure
+    networks:
+      - inception
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
   # ftp:
   #   container_name: ftp
@@ -134,13 +134,13 @@ volumes:
   #   driver_opts:
   #     type: none
   #     o: bind
-  #     device: ${HOME}/data/jekyll
+  #     device: ${HOME}/data2/jekyll
 
   # portainer_volume:
   #   driver_opts:
   #     type: none
   #     o: bind
-  #     device: ${HOME}/data/portainer
+  #     device: ${HOME}/data2/portainer
 
 networks:
   inception:

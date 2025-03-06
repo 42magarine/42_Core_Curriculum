@@ -31,14 +31,19 @@ if [ ! -f /var/www/html/wp-config.php ]; then
     wp theme activate twentytwentyfour --allow-root
 
     # Install and configure Redis plugin
-    # wp config set WP_REDIS_HOST "$REDIS_HOST" --allow-root
-    # wp config set WP_REDIS_PORT "$REDIS_PORT" --allow-root
-    # wp config set WP_CACHE true --allow-root --raw
-    # wp config set WP_REDIS_CLIENT phpredis --allow-root
+    wp config set WP_REDIS_HOST "$REDIS_HOST" --allow-root
+    wp config set WP_REDIS_PORT "$REDIS_PORT" --allow-root
+    wp config set WP_CACHE true --allow-root --raw
+    wp config set WP_REDIS_CLIENT phpredis --allow-root
 
-    # wp plugin install redis-cache --allow-root --activate
-    # wp redis enable --allow-root
+    wp plugin install redis-cache --allow-root --activate
+    wp redis enable --allow-root
 
+    # Set debugging constants in wp-config.php
+    wp config set WP_DEBUG true --allow-root --raw
+    wp config set WP_DEBUG_LOG true --allow-root --raw
+    wp config set WP_DEBUG_DISPLAY false --allow-root --raw
+    
     # Set appropriate file ownership
     chown -R nobody:nobody /var/www/html
 fi
