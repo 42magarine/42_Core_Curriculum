@@ -8,7 +8,7 @@ if [ ! -d "/var/lib/mysql/mysql" ]; then
 
     mariadb-install-db --user=mysql --datadir=/var/lib/mysql --skip-test-db
 
-    mysqld --user=mysql --bootstrap << EOF
+    mariadbd --user=mysql --bootstrap << EOF
 USE mysql;
 FLUSH PRIVILEGES;
 ALTER USER 'root'@'localhost' IDENTIFIED BY '${DB_ROOT_PASSWORD}';
@@ -19,4 +19,4 @@ FLUSH PRIVILEGES;
 EOF
 fi
 
-exec mysqld --user=mysql
+exec mariadbd --user=mysql

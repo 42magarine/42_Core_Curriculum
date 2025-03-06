@@ -19,12 +19,12 @@ RUN apk add --no-cache \
     php83-zip
 
 # Download and install WP-CLI (WordPress command-line interface)
-RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar && \
-    chmod +x wp-cli.phar && \
-    mv wp-cli.phar /usr/local/bin/wp
+RUN curl -o /usr/local/bin/wp \
+        -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar && \
+    chmod +x /usr/local/bin/wp
 
 # Copy the configuration file
-# COPY ./conf/www.conf /etc/php83/php-fpm.d/
+COPY ./conf/www.conf /etc/php83/php-fpm.d/
 
 # Copy the setup script with execute permissions
 COPY --chmod=755 ./tools/wordpress-setup.sh /usr/local/bin/
@@ -36,6 +36,6 @@ WORKDIR /var/www/html
 EXPOSE 9000
 
 # Set the entrypoint script
-# ENTRYPOINT [ "wordpress-setup.sh" ]
+ENTRYPOINT [ "wordpress-setup.sh" ]
 
-CMD ["tail", "-f"]
+# CMD ["tail", "-f"]

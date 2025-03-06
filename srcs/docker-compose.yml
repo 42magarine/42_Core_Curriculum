@@ -1,42 +1,42 @@
 services:
-  # nginx:
-  #   container_name: nginx
-  #   build: ./requirements/nginx/.
-  #   restart: on-failure
-  #   # depends_on:
-  #   #   wordpress:
-  #   #     condition: service_healthy
-  #   env_file: .env
-  #   ports:
-  #     - "443:443"
-  #   volumes:
-  #     - wordpress_volume:/var/www/html:ro
-  #   networks:
-  #     - inception
+  nginx:
+    container_name: nginx
+    build: ./requirements/nginx/.
+    restart: on-failure
+    depends_on:
+      wordpress:
+        condition: service_healthy
+    env_file: .env
+    ports:
+      - "443:443"
+    volumes:
+      - wordpress_volume:/var/www/html:ro
+    networks:
+      - inception
 
-  # wordpress:
-  #   container_name: wordpress
-  #   build: ./requirements/wordpress/.
-  #   restart: on-failure
-  #   # depends_on:
-  #   #   mariadb:
-  #   #     condition: service_healthy
-  #   #   redis:
-  #   #     condition: service_healthy
-  #   env_file: .env
-  #   volumes:
-  #     - wordpress_volume:/var/www/html
-  #   networks:
-  #     - inception
-  #   # healthcheck:
-  #   #   test: ["CMD", "sh", "-c", "ps aux | grep '[p]hp-fpm'"]
-  #   #   interval: 10s
-  #   #   timeout: 5s
-  #   #   retries: 5
-  #   secrets:
-  #     - db_password
-  #     - wp_admin_password
-  #     - wp_user_password
+  wordpress:
+    container_name: wordpress
+    build: ./requirements/wordpress/.
+    restart: on-failure
+    depends_on:
+      mariadb:
+        condition: service_healthy
+    #   redis:
+    #     condition: service_healthy
+    env_file: .env
+    volumes:
+      - wordpress_volume:/var/www/html
+    networks:
+      - inception
+    healthcheck:
+      test: ["CMD", "sh", "-c", "ps aux | grep '[p]hp-fpm'"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    secrets:
+      - db_password
+      - wp_admin_password
+      - wp_user_password
 
   mariadb:
     container_name: mariadb
@@ -118,11 +118,11 @@ services:
   #     - inception
 
 volumes:
-  # wordpress_volume:
-  #   driver_opts:
-  #     type: none
-  #     o: bind
-  #     device: ${HOME}/data/wordpress
+  wordpress_volume:
+    driver_opts:
+      type: none
+      o: bind
+      device: ${HOME}/data/wordpress
 
   mariadb_volume:
     driver_opts:

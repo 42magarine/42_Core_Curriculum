@@ -1,19 +1,19 @@
 #!/bin/sh
 
-DB_PASSWORD=$(cat /run/secrets/db_password | tr -d '\n')
-WP_ADMIN_PASSWORD=$(cat /run/secrets/wp_admin_password | tr -d '\n')
-WP_USER_PASSWORD=$(cat /run/secrets/wp_user_password | tr -d '\n')
-
 if [ ! -f /var/www/html/wp-config.php ]; then
+    DB_PASSWORD=$(cat /run/secrets/db_password | tr -d '\n')
+    WP_ADMIN_PASSWORD=$(cat /run/secrets/wp_admin_password | tr -d '\n')
+    WP_USER_PASSWORD=$(cat /run/secrets/wp_user_password | tr -d '\n')
+
     # This downloads the WordPress core files.
     wp core download --allow-root --path=/var/www/html --version=6.7.1
 
     # This will generate the WordPress configuration file (wp-config.php).
     wp config create --allow-root \
+        --dbhost="$DB_HOST" \
         --dbname="$DB_NAME" \
         --dbuser="$DB_USER" \
-        --dbpass="$DB_PASSWORD" \
-        --dbhost="$DB_HOST"
+        --dbpass="$DB_PASSWORD"
 
     # This will then install WordPress.
     wp core install --allow-root \
@@ -31,13 +31,13 @@ if [ ! -f /var/www/html/wp-config.php ]; then
     wp theme activate twentytwentyfour --allow-root
 
     # Install and configure Redis plugin
-    wp config set WP_REDIS_HOST "$REDIS_HOST" --allow-root
-    wp config set WP_REDIS_PORT "$REDIS_PORT" --allow-root
-    wp config set WP_CACHE true --allow-root --raw
-    wp config set WP_REDIS_CLIENT phpredis --allow-root
+    # wp config set WP_REDIS_HOST "$REDIS_HOST" --allow-root
+    # wp config set WP_REDIS_PORT "$REDIS_PORT" --allow-root
+    # wp config set WP_CACHE true --allow-root --raw
+    # wp config set WP_REDIS_CLIENT phpredis --allow-root
 
-    wp plugin install redis-cache --allow-root --activate
-    wp redis enable --allow-root
+    # wp plugin install redis-cache --allow-root --activate
+    # wp redis enable --allow-root
 
     # Set appropriate file ownership
     chown -R nobody:nobody /var/www/html
