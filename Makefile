@@ -17,10 +17,10 @@ YELLOW	=	\033[33m
 BLUE	=	\033[34m
 
 up:
-	mkdir -p ${HOME}/data/mariadb \
-		${HOME}/data/wordpress \
-		${HOME}/data/portainer \
-		${HOME}/data/jekyll
+	mkdir -p ${HOME}/data/wordpress \
+		${HOME}/data/mariadb \
+		${HOME}/data/jekyll \
+		${HOME}/data/portainer
 	docker compose -f srcs/docker-compose.yml up --build --detach
 
 down start stop:
@@ -49,4 +49,4 @@ clean: down
 fclean: clean
 	docker volume rm --force $$(docker volume ls --quiet) 2>/dev/null || true
 	docker network rm --force $$(docker network ls --quiet) 2>/dev/null || true
-	rm -rf ${HOME}/data
+	sudo rm -rf ${HOME}/data

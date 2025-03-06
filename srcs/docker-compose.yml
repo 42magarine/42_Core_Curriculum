@@ -3,9 +3,9 @@ services:
     container_name: nginx
     build: ./requirements/nginx/.
     restart: on-failure
-    depends_on:
-      wordpress:
-        condition: service_healthy
+    # depends_on:
+    #   wordpress:
+    #     condition: service_healthy
     env_file: .env
     ports:
       - "443:443"
@@ -18,21 +18,21 @@ services:
     container_name: wordpress
     build: ./requirements/wordpress/.
     restart: on-failure
-    depends_on:
-      mariadb:
-        condition: service_healthy
-      redis:
-        condition: service_healthy
+    # depends_on:
+    #   mariadb:
+    #     condition: service_healthy
+    #   redis:
+    #     condition: service_healthy
     env_file: .env
     volumes:
       - wordpress_volume:/var/www/html
     networks:
       - inception
-    healthcheck:
-      test: ["CMD", "sh", "-c", "ps aux | grep '[p]hp-fpm'"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
+    # healthcheck:
+    #   test: ["CMD", "sh", "-c", "ps aux | grep '[p]hp-fpm'"]
+    #   interval: 10s
+    #   timeout: 5s
+    #   retries: 5
     secrets:
       - db_password
       - wp_admin_password
@@ -47,11 +47,11 @@ services:
       - mariadb_volume:/var/lib/mysql
     networks:
       - inception
-    healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "-h", "$DB_HOST", "-u", "$DB_USER", "-p$$(cat /run/secrets/db_password)"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
+    # healthcheck:
+    #   test: ["CMD", "mysqladmin", "ping", "-h", "$DB_HOST", "-u", "$DB_USER", "-p$$(cat /run/secrets/db_password)"]
+    #   interval: 10s
+    #   timeout: 5s
+    #   retries: 5
     secrets:
       - db_password
       - db_root_password
@@ -62,11 +62,11 @@ services:
     restart: on-failure
     networks:
       - inception
-    healthcheck:
-      test: ["CMD", "redis-cli", "ping"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
+    # healthcheck:
+    #   test: ["CMD", "redis-cli", "ping"]
+    #   interval: 10s
+    #   timeout: 5s
+    #   retries: 5
 
   ftp:
     container_name: ftp
@@ -90,7 +90,7 @@ services:
     build: ./requirements/bonus/jekyll/.
     restart: on-failure
     volumes:
-      - wordpress_volume:/var/www/html
+      - wordpress_volume:/jekyll
     networks:
       - inception
 
@@ -98,9 +98,9 @@ services:
     container_name: adminer
     build: ./requirements/bonus/adminer/.
     restart: on-failure
-    depends_on:
-      mariadb:
-        condition: service_healthy
+    # depends_on:
+    #   mariadb:
+    #     condition: service_healthy
     networks:
       - inception
 
@@ -130,17 +130,17 @@ volumes:
       o: bind
       device: ${HOME}/data/mariadb
 
-  portainer_volume:
-    driver_opts:
-      type: none
-      o: bind
-      device: ${HOME}/data/portainer
-
   jekyll_volume:
     driver_opts:
       type: none
       o: bind
       device: ${HOME}/data/jekyll
+
+  portainer_volume:
+    driver_opts:
+      type: none
+      o: bind
+      device: ${HOME}/data/portainer
 
 networks:
   inception:
