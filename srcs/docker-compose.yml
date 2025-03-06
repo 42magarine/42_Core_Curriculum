@@ -1,42 +1,42 @@
 services:
-  nginx:
-    container_name: nginx
-    build: ./requirements/nginx/.
-    restart: on-failure
-    # depends_on:
-    #   wordpress:
-    #     condition: service_healthy
-    env_file: .env
-    ports:
-      - "443:443"
-    volumes:
-      - wordpress_volume:/var/www/html:ro
-    networks:
-      - inception
+  # nginx:
+  #   container_name: nginx
+  #   build: ./requirements/nginx/.
+  #   restart: on-failure
+  #   # depends_on:
+  #   #   wordpress:
+  #   #     condition: service_healthy
+  #   env_file: .env
+  #   ports:
+  #     - "443:443"
+  #   volumes:
+  #     - wordpress_volume:/var/www/html:ro
+  #   networks:
+  #     - inception
 
-  wordpress:
-    container_name: wordpress
-    build: ./requirements/wordpress/.
-    restart: on-failure
-    # depends_on:
-    #   mariadb:
-    #     condition: service_healthy
-    #   redis:
-    #     condition: service_healthy
-    env_file: .env
-    volumes:
-      - wordpress_volume:/var/www/html
-    networks:
-      - inception
-    # healthcheck:
-    #   test: ["CMD", "sh", "-c", "ps aux | grep '[p]hp-fpm'"]
-    #   interval: 10s
-    #   timeout: 5s
-    #   retries: 5
-    secrets:
-      - db_password
-      - wp_admin_password
-      - wp_user_password
+  # wordpress:
+  #   container_name: wordpress
+  #   build: ./requirements/wordpress/.
+  #   restart: on-failure
+  #   # depends_on:
+  #   #   mariadb:
+  #   #     condition: service_healthy
+  #   #   redis:
+  #   #     condition: service_healthy
+  #   env_file: .env
+  #   volumes:
+  #     - wordpress_volume:/var/www/html
+  #   networks:
+  #     - inception
+  #   # healthcheck:
+  #   #   test: ["CMD", "sh", "-c", "ps aux | grep '[p]hp-fpm'"]
+  #   #   interval: 10s
+  #   #   timeout: 5s
+  #   #   retries: 5
+  #   secrets:
+  #     - db_password
+  #     - wp_admin_password
+  #     - wp_user_password
 
   mariadb:
     container_name: mariadb
@@ -47,82 +47,82 @@ services:
       - mariadb_volume:/var/lib/mysql
     networks:
       - inception
-    # healthcheck:
-    #   test: ["CMD", "mysqladmin", "ping", "-h", "$DB_HOST", "-u", "$DB_USER", "-p$$(cat /run/secrets/db_password)"]
-    #   interval: 10s
-    #   timeout: 5s
-    #   retries: 5
+    healthcheck:
+      test: ["CMD", "healthcheck.sh"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
     secrets:
       - db_password
       - db_root_password
 
-  redis:
-    container_name: redis
-    build: ./requirements/bonus/redis/.
-    restart: on-failure
-    networks:
-      - inception
-    # healthcheck:
-    #   test: ["CMD", "redis-cli", "ping"]
-    #   interval: 10s
-    #   timeout: 5s
-    #   retries: 5
+  # redis:
+  #   container_name: redis
+  #   build: ./requirements/bonus/redis/.
+  #   restart: on-failure
+  #   networks:
+  #     - inception
+  #   # healthcheck:
+  #   #   test: ["CMD", "redis-cli", "ping"]
+  #   #   interval: 10s
+  #   #   timeout: 5s
+  #   #   retries: 5
 
-  ftp:
-    container_name: ftp
-    build: ./requirements/bonus/ftp/.
-    restart: on-failure
-    environment:
-      - FTP_USER=${FTP_USER}
-    ports:
-      - "20:20"
-      - "21:21"
-      - "42000-42042:42000-42042"
-    volumes:
-      - wordpress_volume:/home/${FTP_USER}
-    networks:
-      - inception
-    secrets:
-      - ftp_password
+  # ftp:
+  #   container_name: ftp
+  #   build: ./requirements/bonus/ftp/.
+  #   restart: on-failure
+  #   environment:
+  #     - FTP_USER=${FTP_USER}
+  #   ports:
+  #     - "20:20"
+  #     - "21:21"
+  #     - "42000-42042:42000-42042"
+  #   volumes:
+  #     - wordpress_volume:/home/${FTP_USER}
+  #   networks:
+  #     - inception
+  #   secrets:
+  #     - ftp_password
 
-  jekyll:
-    container_name: jekyll
-    build: ./requirements/bonus/jekyll/.
-    restart: on-failure
-    volumes:
-      - wordpress_volume:/jekyll
-    networks:
-      - inception
+  # jekyll:
+  #   container_name: jekyll
+  #   build: ./requirements/bonus/jekyll/.
+  #   restart: on-failure
+  #   volumes:
+  #     - wordpress_volume:/jekyll
+  #   networks:
+  #     - inception
 
-  adminer:
-    container_name: adminer
-    build: ./requirements/bonus/adminer/.
-    restart: on-failure
-    # depends_on:
-    #   mariadb:
-    #     condition: service_healthy
-    networks:
-      - inception
+  # adminer:
+  #   container_name: adminer
+  #   build: ./requirements/bonus/adminer/.
+  #   restart: on-failure
+  #   # depends_on:
+  #   #   mariadb:
+  #   #     condition: service_healthy
+  #   networks:
+  #     - inception
 
-  portainer:
-    container_name: portainer
-    build: ./requirements/bonus/portainer/.
-    restart: on-failure
-    ports:
-      # - "8000:8000"
-      - "9000:9000"
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-      - portainer_volume:/data
-    networks:
-      - inception
+  # portainer:
+  #   container_name: portainer
+  #   build: ./requirements/bonus/portainer/.
+  #   restart: on-failure
+  #   ports:
+  #     # - "8000:8000"
+  #     - "9000:9000"
+  #   volumes:
+  #     - /var/run/docker.sock:/var/run/docker.sock
+  #     - portainer_volume:/data
+  #   networks:
+  #     - inception
 
 volumes:
-  wordpress_volume:
-    driver_opts:
-      type: none
-      o: bind
-      device: ${HOME}/data/wordpress
+  # wordpress_volume:
+  #   driver_opts:
+  #     type: none
+  #     o: bind
+  #     device: ${HOME}/data/wordpress
 
   mariadb_volume:
     driver_opts:
@@ -130,17 +130,17 @@ volumes:
       o: bind
       device: ${HOME}/data/mariadb
 
-  jekyll_volume:
-    driver_opts:
-      type: none
-      o: bind
-      device: ${HOME}/data/jekyll
+  # jekyll_volume:
+  #   driver_opts:
+  #     type: none
+  #     o: bind
+  #     device: ${HOME}/data/jekyll
 
-  portainer_volume:
-    driver_opts:
-      type: none
-      o: bind
-      device: ${HOME}/data/portainer
+  # portainer_volume:
+  #   driver_opts:
+  #     type: none
+  #     o: bind
+  #     device: ${HOME}/data/portainer
 
 networks:
   inception:

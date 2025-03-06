@@ -12,13 +12,13 @@ docker cp adminer:/etc/php83/php-fpm.d/www.conf ./srcs/requirements/bonus/admine
 
 
 
-# mysql -u root -p"${DB_ROOT_PASSWORD}"
-# mysql -u "${DB_USER}" -p"${DB_USER_PASSWORD}"
-# SHOW DATABASES;
-# USE Inception;
-# DROP DATABASE IF EXISTS test;
-# DELETE FROM mysql.db WHERE Db='test' OR Db='test\\_%';
-# SELECT Host, User, Password FROM mysql.user;
+mysql -u <user> -p<password>
+SHOW DATABASES;
+USE <database>;
+SHOW TABLES;
+# SELECT Host, Use
+desc <database>.<table>
+select <> from <database>.<table>
 
 
 
