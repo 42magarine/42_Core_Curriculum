@@ -7,7 +7,7 @@ RUN apk add --no-cache \
     mariadb-client
 
 # Copy the configuration file
-COPY ./conf/mariadb-server.cnf /etc/my.cnf.d/
+# COPY ./conf/mariadb-server.cnf /etc/my.cnf.d/
 
 # Copy the setup script with execute permissions
 COPY --chmod=755 ./tools/mariadb-setup.sh /usr/local/bin/
@@ -16,4 +16,6 @@ COPY --chmod=755 ./tools/mariadb-setup.sh /usr/local/bin/
 EXPOSE 3306
 
 # Set the entrypoint script
-ENTRYPOINT [ "mariadb-setup.sh" ]
+# ENTRYPOINT [ "mariadb-setup.sh" ]
+
+CMD ["tail", "-f"]

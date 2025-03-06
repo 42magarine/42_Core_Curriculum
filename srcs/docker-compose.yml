@@ -77,7 +77,7 @@ services:
     ports:
       - "20:20"
       - "21:21"
-      - "42000-42999:42000-42999"
+      - "42000-42042:42000-42042"
     volumes:
       - wordpress_volume:/home/${FTP_USER}
     networks:

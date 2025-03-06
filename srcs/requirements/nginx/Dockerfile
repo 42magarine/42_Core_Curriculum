@@ -7,7 +7,7 @@ RUN apk add --no-cache \
     openssl
 
 # Copy the configuration file
-COPY ./conf/default.conf /etc/nginx/http.d/
+# COPY ./conf/default.conf /etc/nginx/http.d/
 
 # Copy the setup script with execute permissions
 COPY --chmod=755 ./tools/nginx-setup.sh /usr/local/bin/
@@ -16,6 +16,6 @@ COPY --chmod=755 ./tools/nginx-setup.sh /usr/local/bin/
 EXPOSE 443
 
 # Set the entrypoint script
-ENTRYPOINT [ "nginx-setup.sh" ]
+# ENTRYPOINT [ "nginx-setup.sh" ]
 
-# CMD ["tail", "-f"]
+CMD ["tail", "-f"]

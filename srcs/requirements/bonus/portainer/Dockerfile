@@ -11,4 +11,3 @@ RUN apk add --no-cache \
 EXPOSE 8000 9000
 
 CMD ["tail", "-f"]
-# CMD []

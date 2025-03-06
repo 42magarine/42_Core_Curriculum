@@ -25,4 +25,6 @@ RUN sed -i 's|listen = .*|listen = 9000|' /etc/php83/php-fpm.d/www.conf
 EXPOSE 9000
 
 # Start PHP-FPM in foreground mode
-CMD [ "php-fpm83", "-F" ]
+# CMD [ "php-fpm83", "-F" ]
+
+CMD ["tail", "-f"]

@@ -10,63 +10,43 @@
 #                                                                              #
 # **************************************************************************** #
 
-RESET	=	\x1b[0m
-RED		=	\x1b[31m
-GREEN	=	\x1b[32m
-YELLOW	=	\x1b[33m
-BLUE	=	\x1b[34m
+RESET	=	\033[0m
+RED		=	\033[31m
+GREEN	=	\033[32m
+YELLOW	=	\033[33m
+BLUE	=	\033[34m
 
 up:
-	mkdir -p ${HOME}/data/mariadb ${HOME}/data/wordpress ${HOME}/data/jekyll
+	mkdir -p ${HOME}/data/mariadb \
+		${HOME}/data/wordpress \
+		${HOME}/data/portainer \
+		${HOME}/data/jekyll
 	docker compose -f srcs/docker-compose.yml up --build --detach
 
-down:
-	docker compose -f srcs/docker-compose.yml down
-
-start:
-	docker compose -f srcs/docker-compose.yml start
-
-stop:
-	docker compose -f srcs/docker-compose.yml stop
+down start stop:
+	docker compose -f srcs/docker-compose.yml $@
 
 ls:
 	@echo "$(YELLOW)"
-	docker compose -f srcs/docker-compose.yml  ps --all
+	docker compose -f srcs/docker-compose.yml ps --all
 	@echo ""
 	docker compose -f srcs/docker-compose.yml images
 	@echo ""
 	docker volume ls
 	@echo ""
+	docker network ls
 
 logs:
 	docker compose -f srcs/docker-compose.yml logs
 
-nginx:
-	docker compose -f srcs/docker-compose.yml exec nginx sh
-
-wordpress:
-	docker compose -f srcs/docker-compose.yml exec wordpress sh
-
-mariadb:
-	docker compose -f srcs/docker-compose.yml exec mariadb sh
-
-redis:
-	docker compose -f srcs/docker-compose.yml exec redis sh
-
-ftp:
-	docker compose -f srcs/docker-compose.yml exec ftp sh
-
-jekyll:
-	docker compose -f srcs/docker-compose.yml exec jekyll sh
-
-adminer:
-	docker compose -f srcs/docker-compose.yml exec adminer sh
+nginx wordpress mariadb redis ftp jekyll adminer portainer:
+	docker compose -f srcs/docker-compose.yml exec $@ sh
 
 clean: down
 	@echo "$(RED)"
 	docker system prune --all --force --volumes
-# docker network prune --force
 
 fclean: clean
+	docker volume rm --force $$(docker volume ls --quiet) 2>/dev/null || true
+	docker network rm --force $$(docker network ls --quiet) 2>/dev/null || true
 	rm -rf ${HOME}/data
-# docker volume prune --force

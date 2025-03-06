@@ -6,10 +6,11 @@ RUN apk add --no-cache \
     redis
 
 # Copy the configuration file
-COPY ./conf/redis.conf /etc/
+# COPY ./conf/redis.conf /etc/
 
 # Expose port
 EXPOSE 6379
 
-# CMD ["tail", "-f"]
-CMD [ "redis-server", "/etc/redis.conf" ]
+# CMD [ "redis-server", "/etc/redis.conf" ]
+
+CMD ["tail", "-f"]

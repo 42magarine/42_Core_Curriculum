@@ -4,5 +4,4 @@ FROM alpine:3.20.6
 # Install required packages
 RUN apk add --no-cache \
 
-
 CMD [ "tail", "-f" ]
