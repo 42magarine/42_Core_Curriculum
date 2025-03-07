@@ -93,15 +93,15 @@ services:
   #   networks:
   #     - inception
 
-  # adminer:
-  #   container_name: adminer
-  #   build: ./requirements/bonus/adminer/.
-  #   restart: on-failure
-  #   # depends_on:
-  #   #   mariadb:
-  #   #     condition: service_healthy
-  #   networks:
-  #     - inception
+  adminer:
+    container_name: adminer
+    build: ./requirements/bonus/adminer/.
+    restart: on-failure
+    depends_on:
+      mariadb:
+        condition: service_healthy
+    networks:
+      - inception
 
   # portainer:
   #   container_name: portainer

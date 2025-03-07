@@ -16,15 +16,15 @@ RUN apk add --no-cache \
 
 # Download Adminer
 RUN mkdir -p /var/www/html && \
-    curl -o /var/www/html/index.php https://www.adminer.org/latest.php
+    curl -L -o /var/www/html/index.php https://www.adminer.org/static/download/5.0.1/adminer-5.0.1.php
 
-# Configure PHP-FPM to listen on port 9000
-RUN sed -i 's|listen = .*|listen = 9000|' /etc/php83/php-fpm.d/www.conf
+# Copy the configuration file
+COPY ./conf/www.conf /etc/php83/php-fpm.d/
 
 # Expose port for communication with Nginx
 EXPOSE 9000
 
 # Start PHP-FPM in foreground mode
-# CMD [ "php-fpm83", "-F" ]
+CMD [ "php-fpm83", "-F" ]
 
-CMD ["tail", "-f"]
+# CMD ["tail", "-f"]
