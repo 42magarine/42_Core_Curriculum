@@ -1,13 +1,16 @@
 FROM alpine:3.20.6
 
-WORKDIR /portainer
-
 RUN apk add --no-cache \
     curl
 
-# RUN curl -fsSL https://github.com/portainer/portainer/releases/latest/download/portainer-ce-linux-amd64 -o /portainer/portainer \
-#     && chmod +x /portainer/portainer
+WORKDIR /usr/local/bin
 
-EXPOSE 8000 9000
+RUN curl -L -o portainer.tar.gz https://github.com/portainer/portainer/releases/download/2.27.1/portainer-2.27.1-linux-amd64.tar.gz && \
+    tar -xzf portainer.tar.gz && \
+    rm portainer.tar.gz
 
-CMD ["tail", "-f"]
+EXPOSE 9443
+
+ENTRYPOINT [ "./portainer/portainer" ]
+
+# CMD ["tail", "-f"]

@@ -68,21 +68,21 @@ services:
       timeout: 5s
       retries: 5
 
-  ftp:
-    container_name: ftp
-    build: ./requirements/bonus/ftp/.
-    restart: on-failure
-    env_file: .env
-    ports:
-      - "20:20"
-      - "21:21"
-      - "42000-42042:42000-42042"
-    volumes:
-      - wordpress_volume:/home/${FTP_USER}
-    networks:
-      - inception
-    secrets:
-      - ftp_password
+  # ftp:
+  #   container_name: ftp
+  #   build: ./requirements/bonus/ftp/.
+  #   restart: on-failure
+  #   env_file: .env
+  #   ports:
+  #     - "20:20"
+  #     - "21:21"
+  #     - "42000-42042:42000-42042"
+  #   volumes:
+  #     - wordpress_volume:/home/${FTP_USER}
+  #   networks:
+  #     - inception
+  #   secrets:
+  #     - ftp_password
 
   # jekyll:
   #   container_name: jekyll
@@ -103,18 +103,17 @@ services:
     networks:
       - inception
 
-  # portainer:
-  #   container_name: portainer
-  #   build: ./requirements/bonus/portainer/.
-  #   restart: on-failure
-  #   ports:
-  #     # - "8000:8000"
-  #     - "9000:9000"
-  #   volumes:
-  #     - /var/run/docker.sock:/var/run/docker.sock
-  #     - portainer_volume:/data
-  #   networks:
-  #     - inception
+  portainer:
+    container_name: portainer
+    build: ./requirements/bonus/portainer/.
+    restart: on-failure
+    ports:
+      - "9443:9443"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - portainer_volume:/data
+    networks:
+      - inception
 
 volumes:
   wordpress_volume:
@@ -133,13 +132,13 @@ volumes:
   #   driver_opts:
   #     type: none
   #     o: bind
-  #     device: ${HOME}/data2/jekyll
+  #     device: ${HOME}/data/jekyll
 
-  # portainer_volume:
-  #   driver_opts:
-  #     type: none
-  #     o: bind
-  #     device: ${HOME}/data2/portainer
+  portainer_volume:
+    driver_opts:
+      type: none
+      o: bind
+      device: ${HOME}/data/portainer
 
 networks:
   inception:
