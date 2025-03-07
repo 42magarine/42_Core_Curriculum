@@ -68,22 +68,21 @@ services:
       timeout: 5s
       retries: 5
 
-  # ftp:
-  #   container_name: ftp
-  #   build: ./requirements/bonus/ftp/.
-  #   restart: on-failure
-  #   environment:
-  #     - FTP_USER=${FTP_USER}
-  #   ports:
-  #     - "20:20"
-  #     - "21:21"
-  #     - "42000-42042:42000-42042"
-  #   volumes:
-  #     - wordpress_volume:/home/${FTP_USER}
-  #   networks:
-  #     - inception
-  #   secrets:
-  #     - ftp_password
+  ftp:
+    container_name: ftp
+    build: ./requirements/bonus/ftp/.
+    restart: on-failure
+    env_file: .env
+    ports:
+      - "20:20"
+      - "21:21"
+      - "42000-42042:42000-42042"
+    volumes:
+      - wordpress_volume:/home/${FTP_USER}
+    networks:
+      - inception
+    secrets:
+      - ftp_password
 
   # jekyll:
   #   container_name: jekyll

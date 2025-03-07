@@ -25,6 +25,20 @@ select <> from <database>.<table>
 # FTP Server #
 https://manpages.ubuntu.com/manpages/noble/en/man5/vsftpd.conf.5.html
 
+ftp magarine@magarine.42.fr 21
+
+ls
+pwd
+cd ordnername
+get datei.txt
+put datei.txt
+
+lcd /pfad/zum/ordner
+mkdir neuer_ordner
+delete datei.txt
+rmdir ordnername
+bye
+
 
 
 Der Name Redis entstand als Abkürzung für englisch remote dictionary server
