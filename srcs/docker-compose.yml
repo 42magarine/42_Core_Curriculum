@@ -68,30 +68,33 @@ services:
       timeout: 5s
       retries: 5
 
-  # ftp:
-  #   container_name: ftp
-  #   build: ./requirements/bonus/ftp/.
-  #   restart: on-failure
-  #   env_file: .env
-  #   ports:
-  #     - "20:20"
-  #     - "21:21"
-  #     - "42000-42042:42000-42042"
-  #   volumes:
-  #     - wordpress_volume:/home/${FTP_USER}
-  #   networks:
-  #     - inception
-  #   secrets:
-  #     - ftp_password
+  ftp:
+    container_name: ftp
+    build: ./requirements/bonus/ftp/.
+    restart: on-failure
+    depends_on:
+      wordpress:
+        condition: service_healthy
+    env_file: .env
+    ports:
+      - "20:20"
+      - "21:21"
+      - "42000-42042:42000-42042"
+    volumes:
+      - wordpress_volume:/home/${FTP_USER}
+    networks:
+      - inception
+    secrets:
+      - ftp_password
 
-  # jekyll:
-  #   container_name: jekyll
-  #   build: ./requirements/bonus/jekyll/.
-  #   restart: on-failure
-  #   volumes:
-  #     - wordpress_volume:/jekyll
-  #   networks:
-  #     - inception
+  jekyll:
+    container_name: jekyll
+    build: ./requirements/bonus/jekyll/.
+    restart: on-failure
+    volumes:
+      - wordpress_volume:/jekyll
+    networks:
+      - inception
 
   adminer:
     container_name: adminer
@@ -107,38 +110,40 @@ services:
     container_name: portainer
     build: ./requirements/bonus/portainer/.
     restart: on-failure
-    ports:
-      - "9443:9443"
+    # ports:
+    #   - "9443:9443"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - portainer_volume:/data
     networks:
       - inception
+    secrets:
+      - portainer_admin_password
 
 volumes:
   wordpress_volume:
     driver_opts:
       type: none
       o: bind
-      device: ${HOME}/data/wordpress
+      device: ${HOME}/data3/wordpress
 
   mariadb_volume:
     driver_opts:
       type: none
       o: bind
-      device: ${HOME}/data/mariadb
+      device: ${HOME}/data3/mariadb
 
-  # jekyll_volume:
-  #   driver_opts:
-  #     type: none
-  #     o: bind
-  #     device: ${HOME}/data/jekyll
+  jekyll_volume:
+    driver_opts:
+      type: none
+      o: bind
+      device: ${HOME}/data3/jekyll
 
   portainer_volume:
     driver_opts:
       type: none
       o: bind
-      device: ${HOME}/data/portainer
+      device: ${HOME}/data3/portainer
 
 networks:
   inception:
@@ -156,3 +161,5 @@ secrets:
     file: ../secrets/wp_user_password.txt
   ftp_password:
     file: ../secrets/ftp_password.txt
+  portainer_admin_password:
+    file: ../secrets/portainer_admin_password.txt
