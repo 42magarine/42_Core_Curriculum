@@ -16,11 +16,7 @@ GREEN	=	\033[32m
 YELLOW	=	\033[33m
 BLUE	=	\033[34m
 
-up:
-	mkdir -p ${HOME}/data3/wordpress \
-		${HOME}/data3/mariadb \
-		${HOME}/data3/jekyll \
-		${HOME}/data3/portainer
+up: mkdir
 # docker compose -f srcs/docker-compose.yml build --no-cache
 	docker compose -f srcs/docker-compose.yml build
 	docker compose -f srcs/docker-compose.yml up --detach
@@ -41,8 +37,14 @@ ls:
 logs:
 	docker compose -f srcs/docker-compose.yml logs
 
-nginx wordpress mariadb redis ftp jekyll adminer portainer:
+nginx wordpress mariadb redis ftp hugo adminer portainer:
 	docker compose -f srcs/docker-compose.yml exec $@ sh
+
+mkdir:
+	mkdir -p ${HOME}/data6/wordpress \
+		${HOME}/data6/mariadb \
+		${HOME}/data6/hugo \
+		${HOME}/data6/portainer
 
 clean: down
 	@echo "$(RED)"

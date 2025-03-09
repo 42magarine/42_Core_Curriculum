@@ -87,12 +87,12 @@ services:
     secrets:
       - ftp_password
 
-  jekyll:
-    container_name: jekyll
-    build: ./requirements/bonus/jekyll/.
-    restart: on-failure
+  hugo:
+    container_name: hugo
+    build: ./requirements/bonus/hugo/.
+    # restart: on-failure
     volumes:
-      - wordpress_volume:/jekyll
+      - hugo_volume:/hugo
     networks:
       - inception
 
@@ -125,25 +125,25 @@ volumes:
     driver_opts:
       type: none
       o: bind
-      device: ${HOME}/data3/wordpress
+      device: ${HOME}/data6/wordpress
 
   mariadb_volume:
     driver_opts:
       type: none
       o: bind
-      device: ${HOME}/data3/mariadb
+      device: ${HOME}/data6/mariadb
 
-  jekyll_volume:
+  hugo_volume:
     driver_opts:
       type: none
       o: bind
-      device: ${HOME}/data3/jekyll
+      device: ${HOME}/data6/hugo
 
   portainer_volume:
     driver_opts:
       type: none
       o: bind
-      device: ${HOME}/data3/portainer
+      device: ${HOME}/data6/portainer
 
 networks:
   inception:
