@@ -41,10 +41,10 @@ nginx wordpress mariadb redis ftp hugo adminer portainer:
 	docker compose -f srcs/docker-compose.yml exec $@ sh
 
 mkdir:
-	mkdir -p ${HOME}/data6/wordpress \
-		${HOME}/data6/mariadb \
-		${HOME}/data6/hugo \
-		${HOME}/data6/portainer
+	mkdir -p ${HOME}/data/wordpress \
+		${HOME}/data/mariadb \
+		${HOME}/data/hugo \
+		${HOME}/data/portainer
 
 clean: down
 	@echo "$(RED)"

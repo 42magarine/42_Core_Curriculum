@@ -6,6 +6,10 @@ services:
     depends_on:
       wordpress:
         condition: service_healthy
+      # hugo:
+      #   condition: service_healthy
+      portainer:
+        condition: service_healthy
     env_file: .env
     ports:
       - "443:443"
@@ -90,11 +94,16 @@ services:
   hugo:
     container_name: hugo
     build: ./requirements/bonus/hugo/.
-    # restart: on-failure
+    restart: on-failure
     volumes:
       - hugo_volume:/hugo
     networks:
       - inception
+    healthcheck:
+      test: ["CMD", "sh", "-c", "ps aux | grep '[h]ugo'"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
   adminer:
     container_name: adminer
@@ -110,13 +119,16 @@ services:
     container_name: portainer
     build: ./requirements/bonus/portainer/.
     restart: on-failure
-    # ports:
-    #   - "9443:9443"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - portainer_volume:/data
     networks:
       - inception
+    healthcheck:
+      test: ["CMD", "sh", "-c", "ps aux | grep '[p]ortainer'"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
     secrets:
       - portainer_admin_password
 
@@ -125,25 +137,25 @@ volumes:
     driver_opts:
       type: none
       o: bind
-      device: ${HOME}/data6/wordpress
+      device: ${HOME}/data/wordpress
 
   mariadb_volume:
     driver_opts:
       type: none
       o: bind
-      device: ${HOME}/data6/mariadb
+      device: ${HOME}/data/mariadb
 
   hugo_volume:
     driver_opts:
       type: none
       o: bind
-      device: ${HOME}/data6/hugo
+      device: ${HOME}/data/hugo
 
   portainer_volume:
     driver_opts:
       type: none
       o: bind
-      device: ${HOME}/data6/portainer
+      device: ${HOME}/data/portainer
 
 networks:
   inception:
