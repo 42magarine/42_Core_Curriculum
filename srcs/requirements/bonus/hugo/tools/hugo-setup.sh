@@ -9,8 +9,7 @@ if [ ! -f "/hugo/hugo.toml" ]; then
 
     mkdir -p /hugo/content/blog
     mv /tmp/_index.md /hugo/content/_index.md
-    mv /tmp/nginx.md /hugo/content/blog/nginx.md
-    mv /tmp/hugo.md /hugo/content/blog/hugo.md
+    mv /tmp/*.md /hugo/content/blog/
 fi
 
 exec hugo server --bind 0.0.0.0 --port 1313 --baseURL "https://$DOMAIN_NAME/hugo" --buildDrafts

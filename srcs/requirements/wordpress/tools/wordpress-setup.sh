@@ -10,14 +10,14 @@ if [ ! -f /var/www/html/wp-config.php ]; then
 
     # This will generate the WordPress configuration file (wp-config.php).
     wp config create --allow-root \
-        --dbhost="$DB_HOST" \
+        --dbhost=mariadb \
         --dbname="$DB_NAME" \
         --dbuser="$DB_USER" \
         --dbpass="$DB_PASSWORD"
 
     # This will then install WordPress.
     wp core install --allow-root \
-        --url="$WP_URL" \
+        --url="https://$DOMAIN_NAME" \
         --title="$WP_TITLE" \
         --admin_user="$WP_ADMIN_USER" \
         --admin_password="$WP_ADMIN_PASSWORD" \
@@ -31,8 +31,8 @@ if [ ! -f /var/www/html/wp-config.php ]; then
     wp theme activate twentytwentyfour --allow-root
 
     # Install and configure Redis plugin
-    wp config set WP_REDIS_HOST "$REDIS_HOST" --allow-root
-    wp config set WP_REDIS_PORT "$REDIS_PORT" --allow-root
+    wp config set WP_REDIS_HOST redis --allow-root
+    wp config set WP_REDIS_PORT 6379 --allow-root
     wp config set WP_CACHE true --allow-root --raw
     wp config set WP_REDIS_CLIENT phpredis --allow-root
 
@@ -43,7 +43,7 @@ if [ ! -f /var/www/html/wp-config.php ]; then
     wp config set WP_DEBUG true --allow-root --raw
     wp config set WP_DEBUG_LOG true --allow-root --raw
     wp config set WP_DEBUG_DISPLAY false --allow-root --raw
-    
+
     # Set appropriate file ownership
     chown -R nobody:nobody /var/www/html
 fi

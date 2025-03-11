@@ -8,6 +8,7 @@ RUN apk add --no-cache \
 
 # copy hugo config file and markdown files
 COPY ./conf/ /tmp/
+COPY ./md/ /tmp/
 
 COPY --chmod=755 ./tools/hugo-setup.sh /usr/local/bin/
 
