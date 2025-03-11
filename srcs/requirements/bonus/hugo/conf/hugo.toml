@@ -1,0 +1,14 @@
+baseURL = 'https://127.0.0.1'
+languageCode = 'en-us'
+title = '42 Inception'
+theme = 'hugo-simple'
+
+[[menu.main]]
+name = "Home"
+pageRef = "/"
+weight = 10
+
+[[menu.main]]
+name = "Blog"
+pageRef = "/blog"
+weight = 20

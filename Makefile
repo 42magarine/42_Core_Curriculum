@@ -17,7 +17,6 @@ YELLOW	=	\033[33m
 BLUE	=	\033[34m
 
 up: mkdir
-# docker compose -f srcs/docker-compose.yml build --no-cache
 	docker compose -f srcs/docker-compose.yml build
 	docker compose -f srcs/docker-compose.yml up --detach
 

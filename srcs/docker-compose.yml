@@ -6,8 +6,8 @@ services:
     depends_on:
       wordpress:
         condition: service_healthy
-      # hugo:
-      #   condition: service_healthy
+      hugo:
+        condition: service_healthy
       portainer:
         condition: service_healthy
     env_file: .env
@@ -95,6 +95,7 @@ services:
     container_name: hugo
     build: ./requirements/bonus/hugo/.
     restart: on-failure
+    env_file: .env
     volumes:
       - hugo_volume:/hugo
     networks:
