@@ -12,7 +12,6 @@ draft = true
     https://mariadb.org/
 
 
-
 #### Access / Common MariaDB Commands:
 Inside the Docker container, you can access MariaDB with the following command:
 
@@ -26,11 +25,8 @@ SELECT * FROM <database>.<table>;
 ```
 
 
-
 #### Configuration:
 * MariaDB config: `/etc/my.cnf.d/mariadb-server.cnf`
-
-
 
 
 #### Useful Links:

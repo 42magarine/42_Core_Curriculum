@@ -4,7 +4,6 @@ date = 2025-01-01T00:00:00Z
 draft = true
 +++
 
-
 ### Adminer Docker Container
 
 > Hugo is one of the most popular open-source static site generators.
@@ -12,12 +11,13 @@ draft = true
 
     https://gohugo.io/
 
+
 #### Access:
     https://www.$DOMAIN_NAME/hugo
 
+
 #### Configuration:
 * Hugo config: `/hugo/hugo.toml`
-
 
 
 #### Useful Links:

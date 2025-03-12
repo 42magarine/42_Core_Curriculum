@@ -16,14 +16,12 @@ draft = true
 #### Access:
     https://www.$DOMAIN_NAME/wp-login.php
 
-Username: `$WP_ADMIN_USER` or `$WP_USER_NAME`
-Password: `$WP_ADMIN_PASSWORD` or `$WP_USER_PASSWORD`
-
+* Username: `$WP_ADMIN_USER` or `$WP_USER_NAME`
+* Password: `$WP_ADMIN_PASSWORD` or `$WP_USER_PASSWORD`
 
 
 #### Configuration:
 * PHP-FPM config: `/etc/php83/php-fpm.d/www.conf`
-
 
 
 #### Useful Links:

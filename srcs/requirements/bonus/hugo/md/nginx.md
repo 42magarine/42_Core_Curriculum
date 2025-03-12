@@ -11,10 +11,8 @@ draft = true
     https://nginx.org/
 
 
-
 #### Access:
     https://www.$DOMAIN_NAME
-
 
 
 #### HTTPS:
@@ -22,18 +20,16 @@ draft = true
   is a cryptographic protocol designed to provide communications security over a computer network, such as the Internet.
 * The `openssl` command can be used to generate a self-signed certificate for HTTPS:
 ```sh
-  * openssl req         # generate a certificate request
+  * openssl req         # generates a certificate request
   * newkey rsa:2048     # generates a new private key using RSA with a key size of 2048 bits
-  * x509                # generate a self-signed certificate
+  * x509                # generates a self-signed certificate
   * noenc               # prevents the private key from being encrypted
-  * subj val            # sets the subject of the certificate
+  * subj                # sets the subject of the certificate
 ```
-
 
 
 #### Configuration:
 * Nginx config: `/etc/nginx/http.d/default.conf`
-
 
 
 #### Useful Links:

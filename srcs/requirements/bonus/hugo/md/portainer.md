@@ -6,7 +6,7 @@ draft = true
 
 ### Portainer Docker Container
 
-> Portainer is a universal container management platform that provides an easy and visual way to manage Docker containers.
+> Portainer is a container management platform that provides an easy and visual way to manage Docker containers.
 
     https://www.portainer.io/
 
@@ -14,5 +14,5 @@ draft = true
 #### Access:
     https://www.$DOMAIN_NAME/portainer
 
-* Username: admin
-* Password: $PORTAINER_ADMIN_PASSWORD
+* Username: `admin`
+* Password: `$PORTAINER_ADMIN_PASSWORD`
