@@ -18,13 +18,11 @@ RUN apk add --no-cache \
 RUN mkdir -p /var/www/html && \
     curl -L -o /var/www/html/index.php https://www.adminer.org/static/download/5.0.1/adminer-5.0.1.php
 
-# Copy the configuration file
+# Copy the PHP-FPM configuration file
 COPY ./conf/www.conf /etc/php83/php-fpm.d/
 
-# Expose port for communication with Nginx
+# Expose PHP-FPM port for Nginx
 EXPOSE 9000
 
-# Start PHP-FPM in foreground mode
+# Start PHP-FPM in the foreground mode
 CMD [ "php-fpm83", "-F" ]
-
-# CMD ["tail", "-f"]

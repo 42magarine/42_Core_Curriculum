@@ -4,20 +4,25 @@ date = 2025-01-01T00:00:00Z
 draft = true
 +++
 
+### Adminer Docker Container
 
-Try:
-https://www.$DOMAIN_NAME/adminer
+> **Adminer** is a database management tool for **MySQL/MariaDB**,
+> providing a simple web interface in a single PHP file.
 
-System: mySQL
-Server: mariadb
-Username:
-Password:
-Database:
+    https://www.adminer.org/
 
 
-Homepage:
-https://www.adminer.org/
+
+#### Access:
+    https://www.$DOMAIN_NAME/adminer
+
+* System: mySQL
+* Server: mariadb
+* Username: `root` or `$DB_USER`
+* Password: `$DB_ROOT_PASSWORD` or `$DB_PASSWORD`
+* Database: `$DB_NAME`
 
 
-Standard configuration files:
-/etc/php83/php-fpm.d/www.conf
+
+#### Configuration:
+* PHP-FPM config: `/etc/php83/php-fpm.d/www.conf`

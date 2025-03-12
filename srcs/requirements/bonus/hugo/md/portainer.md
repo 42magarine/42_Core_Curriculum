@@ -4,16 +4,15 @@ date = 2025-01-01T00:00:00Z
 draft = true
 +++
 
+### Portainer Docker Container
 
-Try:
-https://www.$DOMAIN_NAME/portainer
+> Portainer is a universal container management platform that provides an easy and visual way to manage Docker containers.
 
-Username:
-Password:
-
-
-Homepage:
-https://www.portainer.io/
+    https://www.portainer.io/
 
 
- why i think it is useful?
+#### Access:
+    https://www.$DOMAIN_NAME/portainer
+
+* Username: admin
+* Password: $PORTAINER_ADMIN_PASSWORD

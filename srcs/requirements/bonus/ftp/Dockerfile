@@ -1,20 +1,18 @@
 # Use the penultimate stable version of Alpine Linux
 FROM alpine:3.20.6
 
-# Install required packages
+# Install VSFTPD
 RUN apk add --no-cache \
     vsftpd
 
-# Copy the configuration file
+# Copy the VSFTPD configuration file
 COPY ./conf/vsftpd.conf /etc/vsftpd/
 
-# Copy the setup script with execute permissions
+# Copy the FTP setup script and set execution permissions
 COPY --chmod=755 ./tools/ftp-setup.sh /usr/local/bin/
 
-# Expose ports
+# Expose FTP control and passive mode ports
 EXPOSE 20 21 42000-42042
 
-# Set the entrypoint script
+# Set the entrypoint to execute the FTP setup script
 ENTRYPOINT [ "ftp-setup.sh" ]
-
-# CMD ["tail", "-f"]

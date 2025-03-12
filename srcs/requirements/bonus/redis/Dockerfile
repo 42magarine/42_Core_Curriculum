@@ -1,16 +1,15 @@
 # Use the penultimate stable version of Alpine Linux
 FROM alpine:3.20.6
 
-# Install required packages
+# Install Redis
 RUN apk add --no-cache \
     redis
 
-# Copy the configuration file
+# Copy the Redis configuration file
 COPY ./conf/redis.conf /etc/
 
-# Expose port
+# Expose the Redis default port
 EXPOSE 6379
 
+# Start Redis with the specified configuration file
 CMD [ "redis-server", "/etc/redis.conf" ]
-
-# CMD ["tail", "-f"]
