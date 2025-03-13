@@ -23,3 +23,4 @@ draft = true
 #### Useful Links:
 * [Install Hugo](https://gohugo.io/getting-started/quick-start/)
 * [Set up a Hugo site](https://www.giraffeacademy.com/static-site-generators/hugo/)
+* [Markdown Syntax Guide](https://maolonglong.github.io/hugo-simple/markdown-syntax/)
