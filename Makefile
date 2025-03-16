@@ -52,4 +52,8 @@ clean: down
 fclean: clean
 	docker volume rm --force $$(docker volume ls --quiet) 2>/dev/null || true
 	docker network rm --force $$(docker network ls --quiet) 2>/dev/null || true
-# sudo rm -rf ${HOME}/data
+	sudo rm -rf ${HOME}/data
+
+setup:
+	git clone git@github.com:42magarine/42_Inception.git ${HOME}/inception
+	cd ${HOME}/inception && ./setup.sh
