@@ -71,6 +71,19 @@ void print_error(char* error_message) {
     write(STDERR_FILENO, error_message, strlen(error_message));
 }
 
+void my_exit(void) {
+    t_client *temp;
+
+    while (g_client_list != NULL) {
+        temp = g_client_list;
+        g_client_list = g_client_list->next;
+        close(temp->fd);
+        free(temp->buffer);
+        free(temp);
+    }
+    exit(1);
+}
+
 void broadcast_message(int sender_fd, char *message) {
     t_client *temp = g_client_list;
 
@@ -86,7 +99,7 @@ void add_client(int fd) {
     t_client *client = malloc(sizeof(t_client));
     if (client == NULL) {
         print_error("Fatal error - malloc\n");
-        exit(1);
+        my_exit();
     }
 
     client->id = g_id_counter++;
@@ -96,8 +109,6 @@ void add_client(int fd) {
     g_client_list = client;
 
     FD_SET(fd, &g_aktive_fds);
-    if (fd > g_nfds)
-        g_nfds = fd;
 
     char message[50];
     sprintf(message, "server: client %d just arrived\n", client->id);
@@ -141,7 +152,7 @@ void handle_client_message(t_client *client, char *buffer) {
         extract_message = malloc(strlen(message) + 15 + 1);
         if (extract_message == NULL) {
             print_error("Fatal error - malloc\n");
-            exit (1);
+            my_exit();
         }
         sprintf(extract_message, "client %d: %s", client->id, message);
         broadcast_message(client->fd, extract_message);
@@ -157,19 +168,19 @@ int main(int argc, char** argv) {
 
     if (argc != 2) {
         print_error("Wrong number of arguments\n");
-        exit (1);
+        my_exit();
     }
 
     port = atoi(argv[1]);
     if (port == 0) {
         print_error("Fatal error - atoi\n");
-        exit (1);
+        my_exit();
     }
 
     server_fd = socket(AF_INET, SOCK_STREAM, 0);
     if (server_fd == -1) {
         print_error("Fatal error - socket\n");
-        exit (1);
+        my_exit();
     }
 
     memset(&server_addr, 0, sizeof(server_addr));
@@ -179,19 +190,24 @@ int main(int argc, char** argv) {
 
     if (bind(server_fd, (const struct sockaddr *)&server_addr, sizeof(server_addr)) == -1) {
         print_error("Fatal error - bind\n");
-        exit (1);
+        my_exit();
     }
 
     if (listen(server_fd, 10) == -1) {
         print_error("Fatal error - listen\n");
-        exit (1);
+        my_exit();
     }
 
     FD_ZERO(&g_aktive_fds);
     FD_SET(server_fd, &g_aktive_fds);
-    g_nfds = server_fd;
 
     while (true) {
+        g_nfds = server_fd;
+        for (t_client *temp = g_client_list; temp != NULL; temp = temp->next)
+        if (temp->fd > g_nfds) {
+            g_nfds = temp->fd;
+        }
+
         g_read_fds = g_aktive_fds;
         g_write_fds = g_aktive_fds;
 
@@ -204,7 +220,7 @@ int main(int argc, char** argv) {
             client_fd = accept(server_fd, (struct sockaddr *)&client_addr, &client_addr_size);
             if (client_fd == -1) {
                 print_error("Fatal error - accept\n");
-                exit (1);
+                my_exit();
             }
             add_client(client_fd);
         }
