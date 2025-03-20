@@ -64,8 +64,6 @@ typedef struct s_client {
 
 t_client* g_client_list = NULL;
 fd_set g_read_fds, g_write_fds, g_aktive_fds;
-int g_id_counter = 0;
-int g_nfds = 0;
 
 void print_error(char* error_message) {
     write(STDERR_FILENO, error_message, strlen(error_message));
@@ -96,13 +94,15 @@ void broadcast_message(int sender_fd, char *message) {
 }
 
 void add_client(int fd) {
+    static int id_counter = 0;
+
     t_client *client = malloc(sizeof(t_client));
     if (client == NULL) {
         print_error("Fatal error - malloc\n");
         my_exit();
     }
 
-    client->id = g_id_counter++;
+    client->id = id_counter++;
     client->fd = fd;
     client->buffer = NULL;
     client->next = g_client_list;
@@ -162,7 +162,7 @@ void handle_client_message(t_client *client, char *buffer) {
 }
 
 int main(int argc, char** argv) {
-    int server_fd, client_fd, port;
+    int server_fd, client_fd, port, nfds;
     struct sockaddr_in server_addr, client_addr;
     socklen_t client_addr_size = sizeof(client_addr);
 
@@ -202,10 +202,11 @@ int main(int argc, char** argv) {
     FD_SET(server_fd, &g_aktive_fds);
 
     while (true) {
-        g_nfds = server_fd;
-        for (t_client *temp = g_client_list; temp != NULL; temp = temp->next)
-        if (temp->fd > g_nfds) {
-            g_nfds = temp->fd;
+        nfds = server_fd;
+        for (t_client *temp = g_client_list; temp != NULL; temp = temp->next) {
+            if (temp->fd > nfds) {
+                nfds = temp->fd;
+            }
         }
 
         g_read_fds = g_aktive_fds;
