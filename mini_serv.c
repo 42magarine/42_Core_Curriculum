@@ -87,6 +87,7 @@ void broadcast_message(int sender_fd, char *message) {
 
     while (temp) {
         if (temp->fd != sender_fd && FD_ISSET(temp->fd, &g_write_fds)) {
+            // ssize_t send(int sockfd, const void buf[.size], size_t size, int flags);
             send(temp->fd, message, strlen(message), 0);
         }
         temp = temp->next;
@@ -98,7 +99,7 @@ void add_client(int fd) {
 
     t_client *client = malloc(sizeof(t_client));
     if (client == NULL) {
-        print_error("Fatal error - malloc\n");
+        print_error("Fatal error\n");
         my_exit();
     }
 
@@ -151,7 +152,7 @@ void handle_client_message(t_client *client, char *buffer) {
         char* extract_message;
         extract_message = malloc(strlen(message) + 15 + 1);
         if (extract_message == NULL) {
-            print_error("Fatal error - malloc\n");
+            print_error("Fatal error\n");
             my_exit();
         }
         sprintf(extract_message, "client %d: %s", client->id, message);
@@ -173,28 +174,46 @@ int main(int argc, char** argv) {
 
     port = atoi(argv[1]);
     if (port == 0) {
-        print_error("Fatal error - atoi\n");
+        print_error("Fatal error\n");
         my_exit();
     }
 
+    // int socket(int domain, int type, int protocol);
+    // AF_INET      IPv4 Internet protocols
+    // SOCK_STREAM  Provides sequenced, reliable, two-way, connection-based byte streams
     server_fd = socket(AF_INET, SOCK_STREAM, 0);
     if (server_fd == -1) {
-        print_error("Fatal error - socket\n");
+        print_error("Fatal error\n");
         my_exit();
     }
 
+    // struct sockaddr_in {
+    //     sa_family_t     sin_family;     /* AF_INET */
+    //     in_port_t       sin_port;       /* Port number */
+    //     struct in_addr  sin_addr;       /* IPv4 address */
+    // };
+    // sockaddr_in
+    // Describes an IPv4 Internet domain socket address.
+    // The sin_port and sin_addr members are stored in network byte order.
+    // 127.0.0.1 =
+    //  127 * (256^3) +
+    //    0 * (256^2) +
+    //    0 * (256^1) +
+    //    1 * (256^0) = 2130706433 (decimal) = 0x7F000001 (hex)
     memset(&server_addr, 0, sizeof(server_addr));
     server_addr.sin_family = AF_INET;
-    server_addr.sin_addr.s_addr = htonl(INADDR_LOOPBACK);
-    server_addr.sin_port = htons(port);
+    server_addr.sin_addr.s_addr = htonl(INADDR_LOOPBACK);   // host to network long
+    server_addr.sin_port = htons(port);                     // host to network short
 
+    // int bind(int sockfd, const struct sockaddr *addr, socklen_t addrlen);
     if (bind(server_fd, (const struct sockaddr *)&server_addr, sizeof(server_addr)) == -1) {
-        print_error("Fatal error - bind\n");
+        print_error("Fatal error\n");
         my_exit();
     }
 
+    // int listen(int sockfd, int backlog);
     if (listen(server_fd, 10) == -1) {
-        print_error("Fatal error - listen\n");
+        print_error("Fatal error\n");
         my_exit();
     }
 
@@ -212,15 +231,17 @@ int main(int argc, char** argv) {
         g_read_fds = g_aktive_fds;
         g_write_fds = g_aktive_fds;
 
-        if (select(g_nfds + 1, &g_read_fds, &g_write_fds, NULL, NULL) == -1) {
+        // int select(int nfds, fd_set *readfds, fd_set *writefds, fd_set *exceptfds, struct timeval *timeout);
+        if (select(nfds + 1, &g_read_fds, &g_write_fds, NULL, NULL) == -1) {
             continue;
         }
 
         if (FD_ISSET(server_fd, &g_read_fds) != 0) {
             memset(&client_addr, 0, sizeof(client_addr));
+            // int accept(int sockfd, struct sockaddr *addr, socklen_t *addrlen);
             client_fd = accept(server_fd, (struct sockaddr *)&client_addr, &client_addr_size);
             if (client_fd == -1) {
-                print_error("Fatal error - accept\n");
+                print_error("Fatal error\n");
                 my_exit();
             }
             add_client(client_fd);
