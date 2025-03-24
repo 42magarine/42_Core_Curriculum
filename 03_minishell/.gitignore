@@ -1,0 +1,91 @@
+# Prerequisites
+*.d
+
+# Object files
+*.o
+*.ko
+*.obj
+*.elf
+
+# Linker output
+*.ilk
+*.map
+*.exp
+
+# Precompiled Headers
+*.gch
+*.pch
+
+# Libraries
+*.lib
+*.a
+*.la
+*.lo
+
+# Shared objects (inc. Windows DLLs)
+*.dll
+*.so
+*.so.*
+*.dylib
+
+# Executables
+*.exe
+*.app
+*.i*86
+*.x86_64
+*.hex
+
+# Debug files
+*.dSYM/
+*.su
+*.idb
+*.pdb
+
+# Kernel Module Compile Results
+*.mod*
+*.cmd
+.tmp_versions/
+modules.order
+Module.symvers
+Mkfile.old
+dkms.conf
+
+# my own
+.DS_Store
+.vscode
+examples
+minishell
+a
+b
+c
+d
+existing_file.txt
+file
+file_$USER
+file_fwahl
+file1
+file01
+file2
+file02
+file3
+file03
+out
+out0
+out1
+out2
+out3
+outfile01
+outfile02
+output_file.txt
+outfile with spaces
+testfile_hello_dot_star_world.txt
+testfile_js_files.txt
+testfile_py_files.txt
+testfile_unique_log_fields.txt
+existent_file
+testfile_a_star.txt
+testfile_b_star.txt
+testfile_c_star_sorted.txt
+testfile_file_a_star_b.txt
+testfile_txt_count.txt
+test2
