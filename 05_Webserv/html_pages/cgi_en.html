@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CGI Test</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .cookie-info {
+            background-color: #f5f5f5;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 5px;
+        }
+
+        .cookie-display {
+            font-family: monospace;
+            margin: 10px 0;
+        }
+
+        .visit-counter {
+            font-weight: bold;
+            color: #2c3e50;
+        }
+    </style>
+    <script>
+        function displayCookies() {
+            const cookieInfo = document.getElementById('currentCookies');
+            cookieInfo.textContent = 'Current Cookies: ' + document.cookie;
+        }
+
+        window.onload = function() {
+            displayCookies();
+            // Update cookie display every second to show changes
+            setInterval(displayCookies, 1000);
+        }
+    </script>
+</head>
+<body>
+    <div class="switch-lang">
+        <a href="cgi_de.html" class="button">Switch to English version</a>
+    </div>
+
+    <!-- Cookie Information Display -->
+    <div class="content cookie-info">
+        <h3>Cookie Information</h3>
+        <div id="currentCookies" class="cookie-display">Loading cookies...</div>
+    </div>
+
+    <!-- GET Form with Cookie Test -->
+    <div class="content">
+        <h3>GET Request with Cookie Test</h3>
+        <form action="/cgi-bin/php_script.php" method="get">
+            <label for="number1">Number 1:</label>
+            <input type="number" id="number1" name="number1" required>
+            <label for="number2">Number 2:</label>
+            <input type="number" id="number2" name="number2" required>
+            <input type="submit" value="Senden GET Request">
+            <input type="hidden" name="setCookie" value="true">
+        </form>
+    </div>
+
+    <!-- POST Form with Cookie Test -->
+    <div class="content">
+        <h3>POST Request with Cookie Test</h3>
+        <form action="/cgi-bin/php_script.php" method="post">
+            <label for="post_number1">Number 1:</label>
+            <input type="number" id="post_number1" name="number1" required>
+            <label for="post_number2">Number 2:</label>
+            <input type="number" id="post_number2" name="number2" required>
+            <input type="submit" value="Senden POST Request">
+            <input type="hidden" name="setCookie" value="true">
+        </form>
+    </div>
+
+    <!-- Cookie Test Controls -->
+    <div class="content">
+        <h3>Cookie Test Options</h3>
+        <form id="cookieTest" onsubmit="return false;">
+            <label for="cookieName">Cookie Name:</label>
+            <input type="text" id="cookieName" value="testCookie">
+            <label for="cookieValue">Cookie Value:</label>
+            <input type="text" id="cookieValue">
+            <button onclick="document.cookie = document.getElementById('cookieName').value + '=' + document.getElementById('cookieValue').value + '; path=/'; displayCookies();">
+                Set Test Cookie
+            </button>
+        </form>
+    </div>
+
+    <div class="content">
+        <div class="links">
+            <a href="index_de.html" class="button">Back to home</a>
+        </div>
+    </div>
+</body>
+</html>

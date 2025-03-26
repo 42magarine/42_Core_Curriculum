@@ -1,0 +1,117 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+body {
+	font-family: system-ui, -apple-system, sans-serif; /* Set font for the body */
+	background: linear-gradient(135deg, #f5e8d4 0%, #e3d8c3 100%); /* Light beige gradient background */
+	min-height: 100vh; /* Full height for body */
+	display: flex; /* Use flexbox for centering */
+	flex-direction: column;
+	align-items: center; /* Center vertically */
+	justify-content: center; /* Center horizontally */
+	padding: 2rem; /* Padding around the body */
+	gap: 1rem; /
+}
+
+.switch-lang {
+	position: absolute;
+	top: 15px;
+	right: 15px;
+}
+
+.content {
+	background: #fffaf3; /* Light beige background for the content box */
+	padding: 2rem; /* Padding inside the content box */
+	border-radius: 12px; /* Rounded corners */
+	box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
+	max-width: 500px; /* Maximum width of the content box */
+	width: 100%; /* Full width responsive */
+	text-align: center; /* Center text inside the content box */
+}
+
+.contributors {
+	font-weight: normal;
+	margin-top: 10px;
+}
+
+.links {
+	display: flex; /* Use flexbox for layout */
+	flex-direction: column; /* Stack links vertically */
+	align-items: center; /* Center links horizontally */
+	margin-top: 20px; /* Space above the links section */
+}
+
+.button {
+	margin: 5px 0; /* Space between buttons */
+	padding: 10px 15px; /* Padding inside the button */
+	background-color: #d1bfa3; /* Beige background for buttons */
+	color: white; /* Text color */
+	text-decoration: none; /* Remove underline from links */
+	border-radius: 5px; /* Rounded corners for buttons */
+	transition: background 0.3s; /* Smooth background change on hover */
+}
+
+.button:hover {
+	background-color: #bda489; /* Darker beige on hover */
+}
+
+label {
+	display: block; /* Block display for labels */
+	font-size: 1rem; /* Font size for labels */
+	color: #5a4632; /* Dark beige/brown text color */
+	margin-bottom: 0.5rem; /* Space below each label */
+}
+
+input[type="text"],
+textarea {
+	width: 100%; /* Full width for inputs */
+	padding: 0.5rem; /* Padding inside inputs */
+	margin-bottom: 1rem; /* Space below each input */
+	border: 1px solid #d1bfa3; /* Soft beige border */
+	border-radius: 6px; /* Rounded corners */
+	font-size: 1rem; /* Font size for inputs */
+	background-color: #faf3e7; /* Light beige background for inputs */
+}
+
+input[type="number"],
+textarea {
+	width: 100%; /* Full width for inputs */
+	padding: 0.5rem; /* Padding inside inputs */
+	margin-bottom: 1rem; /* Space below each input */
+	border: 1px solid #d1bfa3; /* Soft beige border */
+	border-radius: 6px; /* Rounded corners */
+	font-size: 1rem; /* Font size for inputs */
+	background-color: #faf3e7; /* Light beige background for inputs */
+}
+
+input[type="submit"] {
+	display: inline-block; /* Inline block display */
+	width: 100%; /* Full width for submit button */
+	padding: 0.75rem; /* Padding inside submit button */
+	background: #d1bfa3; /* Beige background for submit button */
+	color: white; /* Text color */
+	border: none; /* No border */
+	border-radius: 6px; /* Rounded corners */
+	font-size: 1rem; /* Font size */
+	cursor: pointer; /* Pointer cursor on hover */
+	transition: background 0.2s; /* Smooth background change on hover */
+}
+
+input[type="submit"]:hover {
+	background: #bda489; /* Darker beige on hover */
+}
+
+#fileList li {
+	display: flex;
+	justify-content: center; /* Centers the content horizontally */
+	align-items: center; /* Vertically aligns the content */
+	gap: 10px; /* Adds space between the file name and the delete button */
+  }
+
+  #fileList li span {
+	flex-grow: 1; /* Allows the file name to take up available space */
+	text-align: center; /* Centers the file name */
+  }

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>403 - Forbidden</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            background: linear-gradient(135deg, #fff5f5 0%, #fecaca 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .error-container {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+            text-align: center;
+            max-width: 500px;
+            width: 100%;
+        }
+
+        .status-code {
+            font-size: 4rem;
+            font-weight: 700;
+            color: #7f1d1d;
+            margin-bottom: 0.5rem;
+        }
+
+        .status-text {
+            font-size: 1.5rem;
+            color: #9f1239;
+            margin-bottom: 1.5rem;
+        }
+
+        .description {
+            color: #b91c1c;
+            line-height: 1.6;
+            margin-bottom: 2rem;
+        }
+
+        .back-button {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            background: #dc2626;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            transition: background 0.2s;
+        }
+
+        .back-button:hover {
+            background: #b91c1c;
+        }
+
+        .icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: #dc2626;
+        }
+    </style>
+</head>
+<body>
+    <div class="error-container">
+        <div class="icon">⚠</div>
+        <div class="status-code">403</div>
+        <div class="status-text">Forbidden</div>
+        <p class="description">
+            You don't have permission to access this resource. Please contact the administrator if you believe this is an error.
+        </p>
+        <a href="/" class="back-button">Back to Home</a>
+    </div>
+</body>
+</html>

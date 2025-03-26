@@ -1,0 +1,85 @@
+curl - https://curl.se/docs/manpage.html
+
+-A, --user-agent <name>
+-F, --form <name=content>
+-H, --header <header/@file>
+-X, --request <method>
+-b, --cookie <data|filename>
+-d, --data <data>
+	content-type application/x-www-form-urlencoded
+-v, --verbose
+--resolve <[+]host:port:addr[,addr]...>
+	<domain>:<port>:<ip-address>
+
+
+
+siege -b -c100 -t1m http://127.0.0.1:8080/
+
+1. GET-Request
+
+	curl -X GET -v http://localhost:8080
+	curl -X GET -v http://127.0.0.1:8080
+	curl -X GET -v --resolve www.42webserv.de:8080:127.0.0.1 http://www.42webserv.de:8080
+
+	curl -X GET -v http://localhost:8081 // sollte nicht gehen
+	curl -X GET -v http://127.0.0.2:8081
+	curl -X GET -v --resolve www.43webserv.de:8081:127.0.0.2 http://www.43webserv.de:8081
+
+	curl -X GET -v "http://localhost:8080/index_de.html?name=42&message=Hello"
+
+2. POST-Methode
+
+	curl -X POST -v -d "name=42&message=Hello" http://localhost:8080
+
+	curl -X POST -v -F "file=/Users/fwahl/test.txt" http://localhost:8080/uploads
+	curl -X POST -v -H "Expect:" -F "file=@/Users/fwahl/test.txt" http://localhost:8080/uploads
+
+	curl -O -v http://127.0.0.1:8080/uploads/file.txt
+
+3. DELETE-Methode
+
+	curl -X DELETE -v http://localhost:8080/uploads/delete.me
+	curl -X DELETE -v http://localhost:8080/delete.me
+
+4. CGI
+
+	curl -X GET -v "http://127.0.0.1:8080/cgi-bin/php_script.php?name=42&message=Hello"
+	curl -X POST -v -d "name=42&message=Hello" http://127.0.0.1:8080/cgi-bin/php_script.php
+
+	curl -X GET -v "http://127.0.0.1:8080/cgi-bin/py_script.py?name=42&message=Hello"
+	curl -X POST -v -d "name=42&message=Hello" http://127.0.0.1:8080/cgi-bin/py_script.py
+
+5. ERROR
+
+	// error 301 , go to config file and comment in route/andir
+	curl -i -v http://127.0.0.1:8080/andir
+
+	// 400 BAD REQUEST with missing or invalid boundary in content-type
+	curl -X POST -v http://localhost:8080/uploads -H "Content-Type: multipart/form-data" -F "file=@test.txt"
+
+	// 403 -- comment out default_file in server hostname 127.0.0.2
+	curl -i -v http://127.0.0.2:8081/
+
+	// 404
+	curl -X GET -v "http://127.0.0.1:8080/nonexistent"
+	curl -X GET -v "http://127.0.0.1:8080/cgi-bin/nonexistent.php"
+
+	// 405 remove DELETE from default route beforehand
+	curl -X DELETE -v http://localhost:8080/index_de.html
+
+	// 409 Conflict with trying to upload a file that already exists, just test on the website
+	curl -X POST -v -F "file=@/Users/mott/Desktop/42_logo.png" http://localhost:8080/uploads
+	curl -X POST -v -F "file=@/Users/mott/Desktop/42_logo.png" http://localhost:8080/uploads
+
+	// 413 body size im config file runter setzen
+	curl -X POST -v http://127.0.0.1:8080 --data "BODY IS HERE write something shorter or longer than body limit"
+
+	// 500 zweimal loeschen
+	curl -X DELETE -v http://localhost:8080/uploads/delete.me
+	curl -X DELETE -v  http://localhost:8080/uploads/delete.me
+
+	// 501
+	curl -X PUT -v "http://127.0.0.1:8080/"
+
+	// 508 siehe configfile andir <-> diffdir
+	curl -X GET -v "http://127.0.0.1:8080/andir"
