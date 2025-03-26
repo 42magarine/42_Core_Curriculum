@@ -1,0 +1,178 @@
+services:
+  nginx:
+    container_name: nginx
+    build: ./requirements/nginx/.
+    restart: on-failure
+    depends_on:
+      wordpress:
+        condition: service_healthy
+      hugo:
+        condition: service_healthy
+      portainer:
+        condition: service_healthy
+    env_file: .env
+    ports:
+      - "443:443"
+    volumes:
+      - wordpress_volume:/var/www/html:ro
+    networks:
+      - inception
+
+  wordpress:
+    container_name: wordpress
+    build: ./requirements/wordpress/.
+    restart: on-failure
+    depends_on:
+      mariadb:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    env_file: .env
+    volumes:
+      - wordpress_volume:/var/www/html
+    networks:
+      - inception
+    healthcheck:
+      test: ["CMD", "sh", "-c", "ps aux | grep '[p]hp-fpm'"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    secrets:
+      - db_password
+      - wp_admin_password
+      - wp_user_password
+
+  mariadb:
+    container_name: mariadb
+    build: ./requirements/mariadb/.
+    restart: on-failure
+    env_file: .env
+    volumes:
+      - mariadb_volume:/var/lib/mysql
+    networks:
+      - inception
+    healthcheck:
+      test: ["CMD", "healthcheck.sh"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    secrets:
+      - db_password
+      - db_root_password
+
+  redis:
+    container_name: redis
+    build: ./requirements/bonus/redis/.
+    restart: on-failure
+    networks:
+      - inception
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  ftp:
+    container_name: ftp
+    build: ./requirements/bonus/ftp/.
+    restart: on-failure
+    depends_on:
+      wordpress:
+        condition: service_healthy
+    env_file: .env
+    ports:
+      - "20:20"
+      - "21:21"
+      - "42000-42042:42000-42042"
+    volumes:
+      - wordpress_volume:/home/${FTP_USER}
+    networks:
+      - inception
+    secrets:
+      - ftp_password
+
+  hugo:
+    container_name: hugo
+    build: ./requirements/bonus/hugo/.
+    restart: on-failure
+    env_file: .env
+    volumes:
+      - hugo_volume:/hugo
+    networks:
+      - inception
+    healthcheck:
+      test: ["CMD", "sh", "-c", "ps aux | grep '[h]ugo'"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  adminer:
+    container_name: adminer
+    build: ./requirements/bonus/adminer/.
+    restart: on-failure
+    depends_on:
+      mariadb:
+        condition: service_healthy
+    networks:
+      - inception
+
+  portainer:
+    container_name: portainer
+    build: ./requirements/bonus/portainer/.
+    restart: on-failure
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - portainer_volume:/data
+    networks:
+      - inception
+    healthcheck:
+      test: ["CMD", "sh", "-c", "ps aux | grep '[p]ortainer'"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    secrets:
+      - portainer_admin_password
+
+volumes:
+  wordpress_volume:
+    driver_opts:
+      type: none
+      o: bind
+      device: ${HOME}/data/wordpress
+
+  mariadb_volume:
+    driver_opts:
+      type: none
+      o: bind
+      device: ${HOME}/data/mariadb
+
+  hugo_volume:
+    driver_opts:
+      type: none
+      o: bind
+      device: ${HOME}/data/hugo
+
+  portainer_volume:
+    driver_opts:
+      type: none
+      o: bind
+      device: ${HOME}/data/portainer
+
+networks:
+  inception:
+    name: inception
+    driver: bridge
+
+secrets:
+  db_password:
+    file: ../secrets/db_password.txt
+  db_root_password:
+    file: ../secrets/db_root_password.txt
+  wp_admin_password:
+    file: ../secrets/wp_admin_password.txt
+  wp_user_password:
+    file: ../secrets/wp_user_password.txt
+  ftp_password:
+    file: ../secrets/ftp_password.txt
+  portainer_admin_password:
+    file: ../secrets/portainer_admin_password.txt
